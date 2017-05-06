@@ -3,21 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://hexiu.github.io/about/</loc>
+    <loc>https://hexiu.github.io/about/</loc>
   </url>
   
   <url>
-    <loc>http://hexiu.github.io/categories/</loc>
+    <loc>https://hexiu.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hexiu.github.io/</loc>
+    <loc>https://hexiu.github.io/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hexiu.github.io/tags/</loc>
+    <loc>https://hexiu.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
