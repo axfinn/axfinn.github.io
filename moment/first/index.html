@@ -292,7 +292,7 @@
     
     
       
-        <li><a href="https://hexiu.github.io/series/example"><i class="fas fa-bookmark pr-1" aria-hidden="true"></i>Example</a></li>
+        <li><a href="https://hexiu.github.io/series/vscode"><i class="fas fa-bookmark pr-1" aria-hidden="true"></i>vscode</a></li>
       
     
   </ul>
@@ -311,7 +311,7 @@
   </ul>
   
     <div class="view">
-      <img src="http://download.jaxiu.cn/2019-08-21-16-18-15.png" />
+      <img src="https://download.jaxiu.cn/2019-08-22-16-13-00.png" />
     </div>
   
 
@@ -445,6 +445,15 @@
 
 <h5 id="七牛云账号注册">七牛云账号注册</h5>
 
+<ul>
+<li>打开 <a href="https://www.qiniu.com">七牛云官网</a> ，注册七牛云用户</li>
+<li>进入控制台</li>
+<li>点击对象存储</li>
+<li>初始化一个空间，后续vscode 默认上传的图片在这里</li>
+<li>打开个人中心的密钥管理初始化一对密钥，这是api上传使用的凭证。</li>
+<li>拿着这些信息，以及七牛云分配的域名配置vscode的七牛云插件 （*此处的插件配置是页面化的*）</li>
+</ul>
+
 <h5 id="vscode-插件安装">vscode 插件安装</h5>
 
 <ul>
@@ -454,9 +463,18 @@
 
 <h5 id="vscode-插件配置">vscode 插件配置</h5>
 
+<ul>
+<li>此处参考七牛云账号注册模块</li>
+</ul>
+
 <h4 id="markdown-使用测试">markdown 使用测试</h4>
 
-<p>测试</p>
+<ul>
+<li>使用Vscode书写markdown，然后去复制一个图片粘贴到粘贴版，在vscode中按快捷键  : <code>Ctrl + Alt + V</code></li>
+<li>文件上传成功的截图</li>
+<li>这里可能会有上传失败的问题，可以看以下github下的issues</li>
+<li>使用issues中的打包版本替换原有的版本（一般的vscode插件放在 ~/.vscode下）</li>
+</ul>
 
           </div>
 
