@@ -3,37 +3,72 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hexiu.github.io/tags/blog/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hexiu.github.io/blog/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hexiu.github.io/categories/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hexiu.github.io/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/tags/linux/</loc>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hexiu.github.io/categories/sci/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hexiu.github.io/series/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hexiu.github.io/tags/</loc>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/series/vscode/</loc>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/tags/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2020-10-28T22:19:37+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/blog/2020-10/vue/</loc>
+    <lastmod>2020-10-28T22:11:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/moment/first/</loc>
+    <lastmod>2019-08-22T16:41:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/moment/</loc>
+    <lastmod>2019-08-22T16:41:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/tags/blog/</loc>
     <lastmod>2019-08-21T15:30:35+08:00</lastmod>
   </url>
   
@@ -43,13 +78,18 @@
   </url>
   
   <url>
-    <loc>https://hexiu.github.io/series/vscode/</loc>
+    <loc>https://hexiu.github.io/blog/2019-08/%E7%8E%A9%E8%BD%ACvscode/</loc>
     <lastmod>2019-08-21T15:30:35+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hexiu.github.io/blog/2019-08/%E7%8E%A9%E8%BD%ACvscode/</loc>
-    <lastmod>2019-08-21T15:30:35+08:00</lastmod>
+    <loc>https://hexiu.github.io/post/first/</loc>
+    <lastmod>2019-07-24T20:55:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hexiu.github.io/post/</loc>
+    <lastmod>2019-07-24T20:55:28+08:00</lastmod>
   </url>
   
   <url>
