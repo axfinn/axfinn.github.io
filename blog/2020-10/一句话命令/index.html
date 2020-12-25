@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hexiu.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/" />
 <meta property="article:published_time" content="2020-10-28T22:19:37+08:00" />
-<meta property="article:modified_time" content="2020-10-28T22:19:37+08:00" />
+<meta property="article:modified_time" content="2020-10-28T22:19:37+08:00" /><meta property="og:see_also" content="https://hexiu.github.io/blog/2019-08/%E7%8E%A9%E8%BD%ACvscode/" />
 
 
 
@@ -219,7 +219,7 @@
              
         <div class="mt-2" style="font-size: 1rem; color: white;">
             
-              <a href="https://github.com/hexiu" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+              <a href="//github.com/hexiu" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
             
             
               <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><i class="fab fa-linkedin pr-1" aria-hidden="true"></i></a>
@@ -315,22 +315,13 @@
 
 
           <div class="post-content markdown">
-            
-
-<h2 id="常用一句话命令">常用一句话命令</h2>
-
+            <h2 id="常用一句话命令">常用一句话命令</h2>
 <h3 id="网络">网络</h3>
-
 <p>监听端口：<code>netstat -tnple</code> ，如果没有安装软件包 <code>net-tools</code></p>
-
 <h3 id="linux系统排查">linux系统排查</h3>
-
 <h3 id="快速下载">快速下载</h3>
-
 <h3 id="数据库">数据库</h3>
-
 <p>数据库备份：</p>
-
 <pre><code>备份脚本：
 
 #!/bin//bash
@@ -343,19 +334,12 @@ mysqldump --opt -uroot  -p'P@ssw0rd' -h'h2.jaxiu.cn' $DATA_DATABASE &gt; $DATA_D
 
 一句话 docker 命令：
 docker run -ti --name  mysql_dump -v /root/x/scripts/mysql_backup.sh:/mysql_backup.sh -v /root/x/scripts/backup:/backup:rw mysql:5.7.16  ./mysql_backup.sh
-</code></pre>
-
-<p>删除已有历史备份</p>
-
+</code></pre><p>删除已有历史备份</p>
 <pre><code>find $DATA_DIR/ -type f -name &quot;*.sql&quot; -mtime +7 -exec rm -rf {} \;
-</code></pre>
-
-<p>数据库查询一句话命令</p>
-
+</code></pre><p>数据库查询一句话命令</p>
 <pre><code>单引号引起来的起来的是命令
 docker run -ti --name mysql_t mysql:5.7.16 ' mysql -u root -proot -h 10.105.40.49 -e &quot;show databases&quot;'  ; docker stop mysql_t;docker rm mysql_t;
 </code></pre>
-
           </div>
 
           
@@ -397,6 +381,13 @@ docker run -ti --name mysql_t mysql:5.7.16 ' mysql -u root -proot -h 10.105.40.4
             </div>
             
             <div class="col-md-6 text-right" >
+              
+                <a href=https://hexiu.github.io/blog/2020-12/qa/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>Qa</span>
+                  </div>
+                </a>
               
             </div>
           </div>
@@ -584,7 +575,7 @@ docker run -ti --name mysql_t mysql:5.7.16 ' mysql -u root -proot -h 10.105.40.4
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="https://github.com/hexiu " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+      <a href="//github.com/hexiu " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
     
     
       <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><i class="fab fa-linkedin-in mr-3" aria-hidden="true"></i></a>

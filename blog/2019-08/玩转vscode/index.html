@@ -219,7 +219,7 @@
              
         <div class="mt-2" style="font-size: 1rem; color: white;">
             
-              <a href="https://github.com/hexiu" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+              <a href="//github.com/hexiu" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
             
             
               <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><i class="fab fa-linkedin pr-1" aria-hidden="true"></i></a>
@@ -319,165 +319,135 @@
 
 
           <div class="post-content markdown">
-            
-
-<h1 id="ubuntu玩转vscode">ubuntu玩转vscode</h1>
-
+            <h1 id="ubuntu玩转vscode">ubuntu玩转vscode</h1>
 <blockquote>
 <p>主要内容：ubuntu 使用vscode实现日常的各种需求，如何写书？golang编程，大幅度提升自己的效率</p>
 </blockquote>
-
 <h2 id="vscode之golang编程">vscode之golang编程</h2>
-
 <h3 id="ubuntu之基础构建">ubuntu之基础构建</h3>
-
 <h4 id="基础软件设施安装">基础软件设施安装</h4>
-
 <h5 id="shell-篇">shell 篇</h5>
-
 <ul>
 <li>一句话安装zsh <code>sudo apt-get install git zsh wget -y; sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;</code></li>
 </ul>
-
 <h5 id="编程篇">编程篇</h5>
-
 <ul>
 <li>vscode 官网下载安装，使用自带的应用市场安装，可能会不能使用中文输入法</li>
 </ul>
-
 <h5 id="golang-idc">golang IDC</h5>
-
 <ul>
 <li>golang.org 下载最新的golang 版本</li>
 <li>安装目录一般将基础环境放在/opt下</li>
 <li>创建gopath ，编辑 ~/.zshrc ，设置环境变量<code>GOROOT, GOPATH, PATH指定GOROOT，GOPATH , 配置环境变量 GO111MODULE=on, 开启 go mod</code>，机器重启</li>
 </ul>
-
 <h3 id="vscode-插件">vscode 插件</h3>
-
 <h4 id="插件选择">插件选择</h4>
-
 <ul>
 <li>go</li>
 <li>koroFileHeader</li>
 </ul>
-
 <h4 id="插件配置">插件配置</h4>
-
-<pre><code class="language-json">{
-    &quot;go.goroot&quot;: &quot;GOROOT&quot;,
-    &quot;go.gopath&quot;: &quot;GOPATH&quot;,
-    &quot;go.inferGopath&quot;: true,
-    &quot;go.autocompleteUnimportedPackages&quot;: true,
-    &quot;go.gocodePackageLookupMode&quot;: &quot;go&quot;,
-    &quot;go.gotoSymbol.includeImports&quot;: true,
-    &quot;go.useCodeSnippetsOnFunctionSuggest&quot;: true,
-    &quot;go.useCodeSnippetsOnFunctionSuggestWithoutType&quot;: true,
-    &quot;go.docsTool&quot;: &quot;gogetdoc&quot;,
-    &quot;go.useLanguageServer&quot;: true,
-    &quot;go.alternateTools&quot;: {
-        &quot;go-langserver&quot;: &quot;gopls&quot;,
-    },
-    &quot;go.languageServerExperimentalFeatures&quot;: {
-    &quot;format&quot;: true,
-    &quot;autoComplete&quot;: true,
-    &quot;gopls&quot;: {
-        &quot;enablePlaceholders&quot;: true,
-    },
-},
-&quot;fileheader.customMade&quot;: {
-    &quot;Author&quot;: &quot;jaxiu&quot;,
-    &quot;GitHub&quot;: &quot;https://github.com/hexiu&quot;,
-    &quot;Date&quot;: &quot;Do not edit&quot;, // 文件创建时间(不变)
-    &quot;LastEditors&quot;: &quot;jaxiu&quot;, // 文件最后编辑者
-    &quot;LastEditTime&quot;: &quot;Do not edit&quot; // 文件最后编辑时间
-},
-&quot;fileheader.configObj&quot;: {
-    &quot;beforeAnnotation&quot;: {
-        &quot;py&quot;: &quot;#!/usr/bin/env python\n# coding:UTF-8&quot;, // py文件默认，可修改
-        &quot;sh&quot;: &quot;#!/bin/bash\n# &quot; // sh文件默认，可修改
-    },
-    &quot;language&quot;: {
-        &quot;languagetest&quot;: {
-        &quot;head&quot;: &quot;/$$&quot;,
-        &quot;middle&quot;: &quot; $ @&quot;,
-        &quot;end&quot;: &quot; $/&quot;
-    },
-    &quot;sh&quot;: {
-        &quot;head&quot;: &quot;##&quot;,
-        &quot;middle&quot;: &quot; # @&quot;,
-        &quot;end&quot;: &quot;##&quot;
-    },
-    &quot;py&quot;: {
-        &quot;head&quot;: &quot;'''&quot;,
-        &quot;middle&quot;: &quot; @&quot;,
-        &quot;end&quot;: &quot;'''&quot;
-    },
-    &quot;go&quot;: {
-        &quot;head&quot;: &quot;///&quot;,
-        &quot;middle&quot;: &quot; // @&quot;,
-        &quot;end&quot;: &quot;//&quot;
-    },
-    &quot;java&quot;: {
-        &quot;head&quot;: &quot;/**&quot;,
-        &quot;middle&quot;: &quot; * @&quot;,
-        &quot;end&quot;: &quot; */&quot;
-    }
-    },
-    &quot;autoAdd&quot;: false, // 自动添加头部注释开启才能自动添加
-    &quot;autoAlready&quot;: false, // 默认开启:只让支持的语言，自动添加头部注释. false:所有文件自动添加头部注释
-    },
-    &quot;http.proxy&quot;: &quot;http://domain:12345&quot;,
-    &quot;go.coverOnTestPackage&quot;: false,
-    &quot;files.autoSave&quot;: &quot;afterDelay&quot;,
-    &quot;editor.formatOnSave&quot;: true,
-    &quot;window.zoomLevel&quot;: 1,
-    &quot;[go]&quot;: {
-    },
-}
-</code></pre>
-
-<p>通过以上的配置，vscode 已经完全可以驾驭golang编程</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;go.goroot&#34;</span><span class="p">:</span> <span class="s2">&#34;GOROOT&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;go.gopath&#34;</span><span class="p">:</span> <span class="s2">&#34;GOPATH&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;go.inferGopath&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.autocompleteUnimportedPackages&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.gocodePackageLookupMode&#34;</span><span class="p">:</span> <span class="s2">&#34;go&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;go.gotoSymbol.includeImports&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.useCodeSnippetsOnFunctionSuggest&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.useCodeSnippetsOnFunctionSuggestWithoutType&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.docsTool&#34;</span><span class="p">:</span> <span class="s2">&#34;gogetdoc&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;go.useLanguageServer&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;go.alternateTools&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;go-langserver&#34;</span><span class="p">:</span> <span class="s2">&#34;gopls&#34;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;go.languageServerExperimentalFeatures&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;autoComplete&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;gopls&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;enablePlaceholders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">},</span>
+<span class="nt">&#34;fileheader.customMade&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;Author&#34;</span><span class="p">:</span> <span class="s2">&#34;jaxiu&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;GitHub&#34;</span><span class="p">:</span> <span class="s2">&#34;https://github.com/hexiu&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Date&#34;</span><span class="p">:</span> <span class="s2">&#34;Do not edit&#34;</span><span class="p">,</span> <span class="err">//</span> <span class="err">文件创建时间(不变)</span>
+    <span class="nt">&#34;LastEditors&#34;</span><span class="p">:</span> <span class="s2">&#34;jaxiu&#34;</span><span class="p">,</span> <span class="err">//</span> <span class="err">文件最后编辑者</span>
+    <span class="nt">&#34;LastEditTime&#34;</span><span class="p">:</span> <span class="s2">&#34;Do not edit&#34;</span> <span class="err">//</span> <span class="err">文件最后编辑时间</span>
+<span class="p">},</span>
+<span class="nt">&#34;fileheader.configObj&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;beforeAnnotation&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;py&#34;</span><span class="p">:</span> <span class="s2">&#34;#!/usr/bin/env python\n# coding:UTF-8&#34;</span><span class="p">,</span> <span class="err">//</span> <span class="err">py文件默认，可修改</span>
+        <span class="nt">&#34;sh&#34;</span><span class="p">:</span> <span class="s2">&#34;#!/bin/bash\n# &#34;</span> <span class="err">//</span> <span class="err">sh文件默认，可修改</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;language&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;languagetest&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="s2">&#34;/$$&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;middle&#34;</span><span class="p">:</span> <span class="s2">&#34; $ @&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;end&#34;</span><span class="p">:</span> <span class="s2">&#34; $/&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;sh&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="s2">&#34;##&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;middle&#34;</span><span class="p">:</span> <span class="s2">&#34; # @&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;end&#34;</span><span class="p">:</span> <span class="s2">&#34;##&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;py&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#39;&#39;&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;middle&#34;</span><span class="p">:</span> <span class="s2">&#34; @&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;end&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#39;&#39;&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="s2">&#34;///&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;middle&#34;</span><span class="p">:</span> <span class="s2">&#34; // @&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;end&#34;</span><span class="p">:</span> <span class="s2">&#34;//&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;head&#34;</span><span class="p">:</span> <span class="s2">&#34;/**&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;middle&#34;</span><span class="p">:</span> <span class="s2">&#34; * @&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;end&#34;</span><span class="p">:</span> <span class="s2">&#34; */&#34;</span>
+    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;autoAdd&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="err">//</span> <span class="err">自动添加头部注释开启才能自动添加</span>
+    <span class="nt">&#34;autoAlready&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="err">//</span> <span class="err">默认开启:只让支持的语言，自动添加头部注释.</span> <span class="err">false:所有文件自动添加头部注释</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;http.proxy&#34;</span><span class="p">:</span> <span class="s2">&#34;http://domain:12345&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;go.coverOnTestPackage&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;files.autoSave&#34;</span><span class="p">:</span> <span class="s2">&#34;afterDelay&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;editor.formatOnSave&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;window.zoomLevel&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;[go]&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div><p>通过以上的配置，vscode 已经完全可以驾驭golang编程</p>
 <h3 id="vscode-之-markdown高级用法">vscode 之 markdown高级用法</h3>
-
 <h4 id="基础环境构建">基础环境构建</h4>
-
 <h5 id="七牛云账号注册">七牛云账号注册</h5>
-
 <ul>
 <li>打开 <a href="https://www.qiniu.com">七牛云官网</a> ，注册七牛云用户</li>
 <li>进入控制台</li>
 <li>点击对象存储</li>
 <li>初始化一个空间，后续vscode 默认上传的图片在这里</li>
 <li>打开个人中心的密钥管理初始化一对密钥，这是api上传使用的凭证。</li>
-<li>拿着这些信息，以及七牛云分配的域名配置vscode的七牛云插件 （*此处的插件配置是页面化的*）</li>
+<li>拿着这些信息，以及七牛云分配的域名配置vscode的七牛云插件 （<em>此处的插件配置是页面化的</em>）</li>
 </ul>
-
 <h5 id="vscode-插件安装">vscode 插件安装</h5>
-
 <ul>
 <li>markdownlint</li>
 <li>paste image to qiniu</li>
 </ul>
-
 <h5 id="vscode-插件配置">vscode 插件配置</h5>
-
 <ul>
 <li>此处参考七牛云账号注册模块</li>
 </ul>
-
 <h4 id="markdown-使用测试">markdown 使用测试</h4>
-
 <ul>
 <li>使用Vscode书写markdown，然后去复制一个图片粘贴到粘贴版，在vscode中按快捷键  : <code>Ctrl + Alt + V</code></li>
 <li>文件上传成功的截图</li>
 <li>这里可能会有上传失败的问题，可以看以下github下的issues</li>
-
-<li><h1 id="使用issues中的打包版本替换原有的版本-一般的vscode插件放在-vscode下">使用issues中的打包版本替换原有的版本（一般的vscode插件放在 ~/.vscode下）</h1>
-
-<p>API</p>
-
+<li>使用issues中的打包版本替换原有的版本（一般的vscode插件放在 ~/.vscode下）
+=======
+API</li>
+</ul>
 <pre><code>├── admin.sh                     # 进程的start|stop|status|restart控制文件
 ├── conf                         # 配置文件统一存放目录
 │   ├── config.yaml              # 配置文件
@@ -537,13 +507,11 @@
 │   ├── util.go
 │   └── util_test.go
 └── vendor                         # vendor目录用来管理依赖包
-├── github.com
-├── golang.org
-├── gopkg.in
-└── vendor.json
-</code></pre></li>
-</ul>
-
+    ├── github.com
+    ├── golang.org
+    ├── gopkg.in
+    └── vendor.json
+</code></pre>
           </div>
 
           
@@ -928,28 +896,6 @@
 							
 						
 				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#%e4%bd%bf%e7%94%a8issues%e4%b8%ad%e7%9a%84%e6%89%93%e5%8c%85%e7%89%88%e6%9c%ac%e6%9b%bf%e6%8d%a2%e5%8e%9f%e6%9c%89%e7%9a%84%e7%89%88%e6%9c%ac-%e4%b8%80%e8%88%ac%e7%9a%84vscode%e6%8f%92%e4%bb%b6%e6%94%be%e5%9c%a8-vscode%e4%b8%8b">
-												 使用issues中的打包版本替换原有的版本（一般的vscode插件放在 ~/.vscode下）
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
 
 				</ul>
 			</div>
@@ -976,7 +922,7 @@
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="https://github.com/hexiu " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+      <a href="//github.com/hexiu " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
     
     
       <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><i class="fab fa-linkedin-in mr-3" aria-hidden="true"></i></a>

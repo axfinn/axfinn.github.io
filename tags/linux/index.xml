@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linux on Jaxiu Blog</title>
@@ -6,11 +6,7 @@
     <description>Recent content in linux on Jaxiu Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 28 Oct 2020 22:19:37 +0800</lastBuildDate>
-    
-	<atom:link href="https://hexiu.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 28 Oct 2020 22:19:37 +0800</lastBuildDate><atom:link href="https://hexiu.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一句话命令</title>
       <link>https://hexiu.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/</link>
