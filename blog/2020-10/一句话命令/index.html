@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hexiu.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/" />
 <meta property="article:published_time" content="2020-10-28T22:19:37+08:00" />
-<meta property="article:modified_time" content="2020-10-28T22:19:37+08:00" /><meta property="og:see_also" content="https://hexiu.github.io/blog/2019-08/%E7%8E%A9%E8%BD%ACvscode/" />
+<meta property="article:modified_time" content="2020-10-28T22:19:37+08:00" />
 
 
 
@@ -339,6 +339,8 @@ docker run -ti --name  mysql_dump -v /root/x/scripts/mysql_backup.sh:/mysql_back
 </code></pre><p>数据库查询一句话命令</p>
 <pre><code>单引号引起来的起来的是命令
 docker run -ti --name mysql_t mysql:5.7.16 ' mysql -u root -proot -h 10.105.40.49 -e &quot;show databases&quot;'  ; docker stop mysql_t;docker rm mysql_t;
+</code></pre><p>一句话命令开启http访问当前页面</p>
+<pre><code> docker run -dti --name nginx_t -v /tmp/test:/usr/share/nginx/html -p 8080:80 nginx
 </code></pre>
           </div>
 
@@ -609,14 +611,14 @@ docker run -ti --name mysql_t mysql:5.7.16 ' mysql -u root -proot -h 10.105.40.4
     
 
     
-
   </div>
   
 
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2020 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  2016 - 2021 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>     <a href="https://beian.miit.gov.cn/"><img class="icon flag mr-3" src="">备案号：陕ICP备16000646号-1</a>
+    </span>
   </div>
   
 
