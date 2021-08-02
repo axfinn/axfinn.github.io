@@ -6,7 +6,16 @@
     <description>Recent content on Jaxiu Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 25 Dec 2020 14:56:46 +0800</lastBuildDate><atom:link href="https://hexiu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Aug 2021 11:09:57 +0800</lastBuildDate><atom:link href="https://hexiu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>简易的文件中转站</title>
+      <link>https://hexiu.github.io/blog/2021-08/%E7%AE%80%E6%98%93%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E8%BD%AC%E7%AB%99/</link>
+      <pubDate>Mon, 02 Aug 2021 11:09:57 +0800</pubDate>
+      
+      <guid>https://hexiu.github.io/blog/2021-08/%E7%AE%80%E6%98%93%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E8%BD%AC%E7%AB%99/</guid>
+      <description>This is an example of adding an intro picture to the post.</description>
+    </item>
+    
     <item>
       <title>Qa</title>
       <link>https://hexiu.github.io/blog/2020-12/qa/</link>
