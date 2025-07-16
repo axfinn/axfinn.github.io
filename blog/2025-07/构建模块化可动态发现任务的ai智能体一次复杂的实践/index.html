@@ -74,6 +74,8 @@
     <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
   
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
 </head>
 
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
@@ -327,22 +329,26 @@
 <p>为了防止智能体陷入死循环或无限执行，我们内置了强大的安全和流程控制机制。通过关键的决策节点判断是否继续执行，并设置了最大循环次数和动态发现次数的上限，确保了流程一定能稳定、可控地结束。</p>
 <h2 id="智能体工作流程">智能体工作流程</h2>
 <p>整个工作流程通过一系列精心设计的节点模块串联而成，形成一个高效的处理链条。</p>
-<pre><code class="language-mermaid" data-lang="mermaid">graph TD
-    A[01_Start] --&gt; B[02_用户问题理解优化]
-    B --&gt; C[03_拆解用户问题生成TODO任务]
-    C --&gt; D[04_任务列表处理]
-    D --&gt; E[05_获取一个任务]
-    E --&gt; F{有可用任务?}
-    F -- Yes --&gt; G[06_任务执行]
-    G --&gt; H[07_结果review]
-    H --&gt; I[07.5_动态任务发现]
-    I --&gt; J[07.6_任务列表更新]
-    J --&gt; K[08_已完成的任务处理]
-    K --&gt; L[09_是否继续]
-    L -- Yes --&gt; E
-    L -- No --&gt; M[11_完成汇总]
-    F -- No --&gt; M
-</code></pre><h2 id="演进之路从手动拼装到自动化生成">演进之路：从手动拼装到自动化生成</h2>
+<div class="mermaid">
+
+graph TD
+    A[01_Start] --> B[02_用户问题理解优化]
+    B --> C[03_拆解用户问题生成TODO任务]
+    C --> D[04_任务列表处理]
+    D --> E[05_获取一个任务]
+    E --> F{有可用任务?}
+    F -- Yes --> G[06_任务执行]
+    G --> H[07_结果review]
+    H --> I[07.5_动态任务发现]
+    I --> J[07.6_任务列表更新]
+    J --> K[08_已完成的任务处理]
+    K --> L[09_是否继续]
+    L -- Yes --> E
+    L -- No --> M[11_完成汇总]
+    F -- No --> M
+
+</div>
+<h2 id="演进之路从手动拼装到自动化生成">演进之路：从手动拼装到自动化生成</h2>
 <p>智能体的配置是一个包含14个节点和15个边关系的复杂JSON文件。在项目初期，我们通过一个Python脚本（<code>assemble_agent_prod.py</code>）手动维护节点列表并进行组装。这种方式不仅效率低下，而且极易出错。</p>
 <h3 id="痛点与挑战">痛点与挑战</h3>
 <p>在v2.14版本迭代中，我们遇到了一个棘手的问题：由于平台对 <code>jsonArray</code> 类型的Schema有特殊的简化格式要求，我们按照标准JSON Schema进行的修改导致了大规模的兼容性错误。我们连续发布了多个紧急修复版本（v2.14.1 - v2.14.4）才完全解决，这个过程凸显了手动管理的脆弱性。</p>
@@ -475,12 +481,6 @@ python3 generate_config.py
     <span>  2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
-
-
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
-
-
 
 </footer>
 
