@@ -390,11 +390,7 @@ graph TD
 <li><strong>内置校验</strong>：该工具在生成过程中，会自动进行 JSON 格式验证、节点 ID 唯一性检查和边关系引用完整性检查，从源头保证配置的正确性。</li>
 </ul>
 <p>现在，更新智能体配置只需修改对应的节点文件，然后运行一个命令即可，极大地提升了开发效率和配置的稳定性。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 进入节点模块目录</span>
-<span class="nb">cd</span> 节点模块/
-<span class="c1"># 一键生成最新配置</span>
-python3 generate_config.py
-</code></pre></div><h3 id="挑战二markdown-渲染器的过度保护">挑战二：Markdown 渲染器的“过度保护”</h3>
+<h3 id="挑战二markdown-渲染器的过度保护">挑战二：Markdown 渲染器的“过度保护”</h3>
 <p>在博客中展示流程图时，我们遇到了一个意想不到的问题：Mermaid 图表代码无法正确渲染，而是以纯文本形式显示。经过排查，我们发现 Hugo 的 Markdown 渲染器在处理代码块时，会对其中的 HTML 特殊字符进行转义，导致 Mermaid.js 无法识别原始的图表语法。</p>
 <h3 id="解决方案拥抱-hugo-shortcode-与-safehtml">解决方案：拥抱 Hugo Shortcode 与 <code>safeHTML</code></h3>
 <p>为了绕过 Markdown 渲染器的转义问题，我们采用了 Hugo 的 <strong>Shortcode</strong> 机制：</p>
