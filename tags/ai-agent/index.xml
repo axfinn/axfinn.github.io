@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Agent on axfinn 的个人博客</title>
+    <link>https://axfinn.github.io/tags/ai-agent/</link>
+    <description>Recent content in AI Agent on axfinn 的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Wed, 16 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://axfinn.github.io/tags/ai-agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>构建智能客服大脑：一个链式处理AI Agent的实践与思考</title>
+      <link>https://axfinn.github.io/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86ai-agent%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%9D%E8%80%83/</link>
+      <pubDate>Wed, 16 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://axfinn.github.io/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86ai-agent%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%9D%E8%80%83/</guid>
+      <description>挑战：复杂客户投诉处理的痛点 在互联网服务的日常运营中，客户投诉是不可避免的一环。然而，许多投诉并非简单问题，尤其当它们涉及复杂的系统交互时，例如用户反馈“直播卡顿，需要查看日志并进行全链路分析”。这类问题往往需要： 多源信息收集：从日志系统、监控平台、用户行为数据等多个渠道获取信息。 跨系统关联分析：根据一个关键标识（如 trace_id），关联不同服务间的调用链路。 动态决策与任务分解：根据初步分析结果</description>
+    </item>
+    
+  </channel>
+</rss>
