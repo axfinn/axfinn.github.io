@@ -378,22 +378,26 @@ graph TD
     F -- No --> M
 
 </div>
-<h2 id="工程实践从手动拼装到自动化构建">工程实践：从手动拼装到自动化构建</h2>
-<p>智能体的配置是一个包含数十个节点和连接关系的复杂 JSON 文件。在项目初期，我们面临着巨大的挑战：</p>
+<h2 id="工程实践从挑战到解决方案的演进">工程实践：从挑战到解决方案的演进</h2>
+<p>智能体的配置是一个包含数十个节点和连接关系的复杂 JSON 文件。在项目初期，我们遇到了诸多挑战，并逐步探索出了一系列解决方案。</p>
 <h3 id="挑战一手动配置的脆弱性与兼容性陷阱">挑战一：手动配置的脆弱性与兼容性陷阱</h3>
-<p>最初，我们通过脚本手动组装节点配置。然而，平台对 <code>jsonArray</code> 等特定数据类型的 Schema 有着严格且非标准的简化格式要求。我们曾因按照标准 JSON Schema 进行修改，导致大规模的兼容性错误，不得不紧急回滚并修复。这种手动维护方式不仅效率低下，而且极易因细微的格式差异导致系统崩溃。</p>
-<h3 id="解决方案模块化配置与自动化生成">解决方案：模块化配置与自动化生成</h3>
-<p>为了彻底解决手动配置的痛点，我们引入了<strong>模块化配置</strong>的理念，并开发了 <code>generate_config.py</code> 自动化工具：</p>
+<p><strong>问题：</strong> 最初，我们通过脚本手动组装节点配置。然而，平台对 <code>jsonArray</code> 等特定数据类型的 Schema 有着严格且非标准的简化格式要求。我们曾因按照标准 JSON Schema 进行修改，导致大规模的兼容性错误，不得不紧急回滚并修复。这种手动维护方式不仅效率低下，而且极易因细微的格式差异导致系统崩溃。</p>
+<p><strong>解决方案：模块化配置与自动化生成</strong>
+为了彻底解决手动配置的痛点，我们引入了<strong>模块化配置</strong>的理念，并开发了 <code>generate_config.py</code> 自动化工具。
+<strong>思路：</strong> 将复杂配置拆分为独立、可管理的单元，并通过自动化工具进行组装和校验，从而提升配置的健壮性和可维护性。
+<strong>实现：</strong></p>
 <ul>
 <li><strong>独立节点文件</strong>：每个智能体节点都被拆分为独立的 JSON 文件，便于独立维护、版本控制和协作开发。</li>
 <li><strong>自动化组装</strong>：<code>generate_config.py</code> 脚本能够自动扫描所有节点文件，并将其合并成一个完整的智能体配置 JSON。</li>
 <li><strong>内置校验</strong>：该工具在生成过程中，会自动进行 JSON 格式验证、节点 ID 唯一性检查和边关系引用完整性检查，从源头保证配置的正确性。</li>
 </ul>
-<p>现在，更新智能体配置只需修改对应的节点文件，然后运行一个命令即可，极大地提升了开发效率和配置的稳定性。</p>
+<p>通过这种方式，更新智能体配置变得高效且稳定，只需修改对应的节点文件，即可通过自动化流程生成最新配置。</p>
 <h3 id="挑战二markdown-渲染器的过度保护">挑战二：Markdown 渲染器的“过度保护”</h3>
-<p>在博客中展示流程图时，我们遇到了一个意想不到的问题：Mermaid 图表代码无法正确渲染，而是以纯文本形式显示。经过排查，我们发现 Hugo 的 Markdown 渲染器在处理代码块时，会对其中的 HTML 特殊字符进行转义，导致 Mermaid.js 无法识别原始的图表语法。</p>
-<h3 id="解决方案拥抱-hugo-shortcode-与-safehtml">解决方案：拥抱 Hugo Shortcode 与 <code>safeHTML</code></h3>
-<p>为了绕过 Markdown 渲染器的转义问题，我们采用了 Hugo 的 <strong>Shortcode</strong> 机制：</p>
+<p><strong>问题：</strong> 在博客中展示流程图时，我们遇到了一个意想不到的问题：Mermaid 图表代码无法正确渲染，而是以纯文本形式显示。经过排查，我们发现 Hugo 的 Markdown 渲染器在处理代码块时，会对其中的 HTML 特殊字符进行转义，导致 Mermaid.js 无法识别原始的图表语法。</p>
+<p>**解决方案：拥抱 Hugo Shortcode 与 <code>safeHTML</code>
+为了绕过 Markdown 渲染器的转义问题，我们采用了 Hugo 的 <strong>Shortcode</strong> 机制。
+<strong>思路：</strong> 利用 Hugo Shortcode 的强大能力，直接控制内容的渲染方式，避免 Markdown 渲染器的默认转义行为。
+<strong>实现：</strong></p>
 <ul>
 <li><strong>自定义 Shortcode</strong>：我们创建了一个 <code>mermaid.html</code> Shortcode，它直接将 Mermaid 代码包裹在 <code>&lt;div class=&quot;mermaid&quot;&gt;</code> 标签中。</li>
 <li><strong><code>safeHTML</code> 过滤器</strong>：在 Shortcode 内部，我们使用 <code>{{ .Inner | safeHTML }}</code> 过滤器，明确告诉 Hugo 不要对 Shortcode 内部的内容进行 HTML 转义，确保 Mermaid 代码以原始形式输出。</li>
