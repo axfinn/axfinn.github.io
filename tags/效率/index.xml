@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>效率 on axfinn 的个人博客</title>
+    <link>https://axfinn.github.io/tags/%E6%95%88%E7%8E%87/</link>
+    <description>Recent content in 效率 on axfinn 的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Wed, 16 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://axfinn.github.io/tags/%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>打造你的专属数字工作台：My Tool Dashboard 的设计与实践</title>
+      <link>https://axfinn.github.io/blog/2025-07/%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%95%B0%E5%AD%97%E5%B7%A5%E4%BD%9C%E5%8F%B0my-tool-dashboard-%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Wed, 16 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://axfinn.github.io/blog/2025-07/%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%95%B0%E5%AD%97%E5%B7%A5%E4%BD%9C%E5%8F%B0my-tool-dashboard-%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</guid>
+      <description>挑战：散乱的数字工具与低效的工作流 在数字化的今天，我们每个人都离不开各种在线工具：文档协作、代码托管、设计资源、数据分析……然而，随着工具数量的增长，我们常常面临以下痛点： 工具分散：常用的工具散落在浏览器收藏夹、各种笔记应用中，查找和访问效率低下。 界面单调：传统的导航页或浏览器主页功能单一，缺乏个性化和互动性，无法激发使用兴趣。 缺乏统一管理：难以集中管理和快速切换不同类别的工具，导致工作流碎片化。</description>
+    </item>
+    
+  </channel>
+</rss>
