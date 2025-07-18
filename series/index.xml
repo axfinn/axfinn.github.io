@@ -4,7 +4,8 @@
     <title>Series on axfinn 的个人博客</title>
     <link>https://axfinn.github.io/series/</link>
     <description>Recent content in Series on axfinn 的个人博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zn-Hans</language><atom:link href="https://axfinn.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <atom:link href="https://axfinn.github.io/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
