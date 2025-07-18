@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>项目分析 on jaxiu He</title>
-    <link>https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90/</link>
-    <description>Recent content in 项目分析 on jaxiu He</description>
+    <title>服务端 on jaxiu He</title>
+    <link>https://axfinn.github.io/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF/</link>
+    <description>Recent content in 服务端 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Thu, 18 Jul 2024 15:30:00 +0800</lastBuildDate>
-    <atom:link href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://axfinn.github.io/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NPS 服务端核心解析：架构与流量管理</title>
       <link>https://axfinn.github.io/blog/2024-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/</link>
       <pubDate>Thu, 18 Jul 2024 15:30:00 +0800</pubDate>
       <guid>https://axfinn.github.io/blog/2024-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/</guid>
       <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在 NPS 项目概述中，我们对这款强大的内网穿透工具进行了宏观的介绍。本篇文章将深入 NPS 的服务端（Server）核心，从 &lt;code&gt;nps/server/server.go&lt;/code&gt; 文件入手，详细剖析其架构设计、任务管理、流量处理以及系统监控等关键功能。理解 &lt;code&gt;server.go&lt;/code&gt; 的运作机制，是掌握 NPS 核心原理的基石。&lt;/p&gt;&#xA;&lt;h2 id=&#34;servergo服务端的大脑&#34;&gt;&lt;code&gt;server.go&lt;/code&gt;：服务端的“大脑”&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;server.go&lt;/code&gt; 文件是 NPS 服务端的启动入口和主要协调者。它负责初始化各项服务、管理客户端连接、调度隧道任务以及收集系统运行状态。&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心组件概览&#34;&gt;核心组件概览&lt;/h3&gt;&#xA;&lt;p&gt;在 &lt;code&gt;server.go&lt;/code&gt; 中，我们可以看到几个关键的全局变量和结构：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Bridge *bridge.Bridge&lt;/code&gt;：这是服务端与客户端之间通信的核心桥梁。它负责维护客户端连接、处理客户端发送的指令以及转发数据。&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;RunList sync.Map&lt;/code&gt;：一个并发安全的 Map，用于存储当前正在运行的所有隧道（&lt;code&gt;proxy.Service&lt;/code&gt; 实例）。通过 &lt;code&gt;sync.Map&lt;/code&gt;，NPS 能够高效地管理和访问多个并发的隧道服务。&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;once sync.Once&lt;/code&gt;：用于确保某些初始化操作（如 &lt;code&gt;flowSession&lt;/code&gt;）只执行一次。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;初始化与任务加载&#34;&gt;初始化与任务加载&lt;/h3&gt;&#xA;&lt;p&gt;服务端的启动从初始化开始：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>NPS 项目概述：内网穿透利器</title>
-      <link>https://axfinn.github.io/blog/2024-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/</link>
-      <pubDate>Thu, 18 Jul 2024 15:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/blog/2024-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/</guid>
-      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。&lt;/p&gt;&#xA;&lt;h2 id=&#34;什么是-nps&#34;&gt;什么是 NPS？&lt;/h2&gt;&#xA;&lt;p&gt;NPS 是一款轻量级、高性能、功能强大的&lt;strong&gt;内网穿透&lt;/strong&gt;代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
