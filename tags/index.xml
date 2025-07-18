@@ -127,5 +127,33 @@
       <guid>https://axfinn.github.io/tags/%E6%99%BA%E8%83%BD%E4%BD%93/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Qa</title>
+      <link>https://axfinn.github.io/tags/qa/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/qa/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sci</title>
+      <link>https://axfinn.github.io/tags/sci/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/sci/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vscode</title>
+      <link>https://axfinn.github.io/tags/vscode/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/vscode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vue</title>
+      <link>https://axfinn.github.io/tags/vue/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/vue/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

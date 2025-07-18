@@ -279,6 +279,8 @@
 
   
 
+  
+
 
 
 
@@ -302,7 +304,7 @@
             
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF">
-                <span>技术 (4)</span>
+                <span>技术 (5)</span>
               </a>
             </li>           
           
@@ -389,6 +391,8 @@
 
   
 
+  
+
 
 
 
@@ -430,6 +434,18 @@
             <li><a href="https://axfinn.github.io/tags/blog" role="button"><span>blog (1)</span></a></li>
           
         
+            <li><a href="https://axfinn.github.io/tags/qa" role="button"><span>qa (1)</span></a></li>
+          
+        
+            <li><a href="https://axfinn.github.io/tags/sci" role="button"><span>sci (1)</span></a></li>
+          
+        
+            <li><a href="https://axfinn.github.io/tags/vscode" role="button"><span>vscode (1)</span></a></li>
+          
+        
+            <li><a href="https://axfinn.github.io/tags/vue" role="button"><span>vue (1)</span></a></li>
+          
+        
             <li><a href="https://axfinn.github.io/tags/vue3" role="button"><span>vue3 (1)</span></a></li>
           
         
@@ -455,9 +471,6 @@
           
         
             <li><a href="https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1" role="button"><span>系统设计 (1)</span></a></li>
-          
-        
-            <li><a href="https://axfinn.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96" role="button"><span>自动化 (1)</span></a></li>
           
         
       </div>
@@ -493,7 +506,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  5 posts
+                  6 posts
                 </div>
               
             </div>
@@ -637,6 +650,79 @@
       
     
       <li><a href="https://axfinn.github.io/tags/ai" role="button">AI </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
+
+          
+              <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">一句话命令</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Oct 28, 2020</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>One minute read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      常用一句话命令 网络 监听端口：netstat -tnple ，如果没有安装软件包 net-tools
+LINUX系统排查 快速下载 数据库 数据库备份：
+备份脚本：
+#!/bin//bash # export NOW=&#34;$(date &#43;&#34;%Y-%m-%d&#34;)&#34; export DATA_DIR=backup export DATA_DATABASE=dress mysqldump --opt -uroot -p&#39;P@ssw0rd&#39; -h&#39;h2.jaxiu.cn&#39; $DATA_DATABASE &gt; $DATA_DIR/${DATA_DATABASE}_$NOW.sql 一句话 docker 命令： docker run -ti --name mysql_dump -v /root/x/scripts/mysql_backup.sh:/mysql_backup.sh -v /root/x/scripts/backup:/backup:rw mysql:5.7.16 ./mysql_backup.sh
+删除已有历史备份
+find $DATA_DIR/ -type f -name &#34;*.sql&#34; -mtime &#43;7 -exec rm -rf {} \;
+数据库查询一句话命令
+单引号引起来的起来的是命令 docker run -ti --name mysql_t mysql:5.7.16 &#39; mysql -u root -proot -h 10.105.40.49 -e &#34;show databases&#34;&#39; ; docker stop mysql_t;docker rm mysql_t;
+一句话命令开启http访问当前页面
+docker run -dti --name nginx_t -v /tmp/test:/usr/share/nginx/html -p 8080:80 nginx
+linux 快捷命令......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/sci" role="button">Sci </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/vscode" role="button">Vscode </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/vue" role="button">Vue </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/qa" role="button">Qa </a></li>
       
     
   </div>
