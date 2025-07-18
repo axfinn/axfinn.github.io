@@ -37,6 +37,13 @@
       <description>This is an example of adding an intro picture to the post.</description>
     </item>
     <item>
+      <title>NPS 客户端核心解析：连接管理与流量转发</title>
+      <link>https://axfinn.github.io/blog/2024-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/</link>
+      <pubDate>Thu, 18 Jul 2024 17:45:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2024-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在 NPS 系列文章的前几篇中，我们详细剖析了 NPS 服务端的各个模块和代理实现。本篇文章将转向 NPS 的 &lt;strong&gt;客户端（Client）&lt;/strong&gt; 模块，深入分析 &lt;code&gt;nps/client/client.go&lt;/code&gt; 文件。这个文件是 NPS 客户端的“大脑”，负责与服务端建立连接、管理隧道、处理不同类型的流量以及维护客户端的生命周期。理解客户端的运作机制，是掌握 NPS 完整内网穿透流程的关键。&lt;/p&gt;&#xA;&lt;h2 id=&#34;clientgo客户端的大脑&#34;&gt;&lt;code&gt;client.go&lt;/code&gt;：客户端的“大脑”&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;client.go&lt;/code&gt; 文件定义了 &lt;code&gt;TRPClient&lt;/code&gt; 结构体，它是 NPS 客户端的核心。它负责客户端的启动、与服务端的通信、隧道管理以及流量转发。&lt;/p&gt;&#xA;&lt;h3 id=&#34;trpclient-结构体&#34;&gt;&lt;code&gt;TRPClient&lt;/code&gt; 结构体&lt;/h3&gt;&#xA;&lt;p&gt;&lt;code&gt;TRPClient&lt;/code&gt; 结构体包含了客户端运行所需的所有关键信息：&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>NPS 代理实现：HTTP/HTTPS 域名解析与高级功能</title>
       <link>https://axfinn.github.io/blog/2024-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0http/https-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/</link>
       <pubDate>Thu, 18 Jul 2024 17:30:00 +0800</pubDate>
