@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="jaxiu He">
+  <meta name="description" content="引言
+在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及 TCP 隧道、HTTP 代理和 SOCKS5 代理的实现。本篇文章将深入 NPS 的另一个高级代理模式——P2P 代理。我们将通过分析 nps/server/proxy/p2p.go 文件，揭示 NPS 如何利用 UDP 打洞技术，实现客户端之间的直接连接，从而在某些场景下提供更高效、更低延迟的内网穿透服务。
+P2P 代理的优势与挑战
+传统的内网穿透通常依赖于服务器进行数据中转，这会引入额外的延迟和带宽消耗。P2P（Peer-to-Peer）代理的目标是让内网中的两个客户端能够直接建立连接，绕过服务器中转，从而实现更高效的数据传输。">
+  
+  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0p2p-%E5%8D%8F%E8%AE%AE%E4%B8%8E-udp-%E6%89%93%E6%B4%9E/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="NPS 代理实现：P2P 协议与 UDP 打洞">
+  <meta property="og:description" content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及 TCP 隧道、HTTP 代理和 SOCKS5 代理的实现。本篇文章将深入 NPS 的另一个高级代理模式——P2P 代理。我们将通过分析 nps/server/proxy/p2p.go 文件，揭示 NPS 如何利用 UDP 打洞技术，实现客户端之间的直接连接，从而在某些场景下提供更高效、更低延迟的内网穿透服务。
+P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行数据中转，这会引入额外的延迟和带宽消耗。P2P（Peer-to-Peer）代理的目标是让内网中的两个客户端能够直接建立连接，绕过服务器中转，从而实现更高效的数据传输。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T16:30:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T16:30:00+08:00">
+    <meta property="article:tag" content="NPS">
+    <meta property="article:tag" content="P2P">
+    <meta property="article:tag" content="UDP打洞">
+    <meta property="article:tag" content="Go语言">
+    <meta property="article:tag" content="网络穿透">
+
+
+  <title>
+  
+       NPS 代理实现：P2P 协议与 UDP 打洞 | jaxiu He 
+  
+  </title>
+
+  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0p2p-%E5%8D%8F%E8%AE%AE%E4%B8%8E-udp-%E6%89%93%E6%B4%9E/">
+
+  
+  
+
+  
+  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://axfinn.github.io/img/logo.png"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://axfinn.github.io/">
+          
+        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+      
+
+        
+        <div class="carousel-item">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://axfinn.github.io/">
+          
+            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://axfinn.github.io/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+      
+        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">NPS 代理实现：P2P 协议与 UDP 打洞</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Jul 18, 2025</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>4 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <h2 id="引言">引言</h2>
+<p>在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及 TCP 隧道、HTTP 代理和 SOCKS5 代理的实现。本篇文章将深入 NPS 的另一个高级代理模式——<strong>P2P 代理</strong>。我们将通过分析 <code>nps/server/proxy/p2p.go</code> 文件，揭示 NPS 如何利用 UDP 打洞技术，实现客户端之间的直接连接，从而在某些场景下提供更高效、更低延迟的内网穿透服务。</p>
+<h2 id="p2p-代理的优势与挑战">P2P 代理的优势与挑战</h2>
+<p>传统的内网穿透通常依赖于服务器进行数据中转，这会引入额外的延迟和带宽消耗。P2P（Peer-to-Peer）代理的目标是让内网中的两个客户端能够直接建立连接，绕过服务器中转，从而实现更高效的数据传输。</p>
+<p><strong>优势：</strong></p>
+<ul>
+<li><strong>降低延迟</strong>：数据直接在客户端之间传输，减少了服务器中转带来的延迟。</li>
+<li><strong>节省带宽</strong>：服务器不再需要承担所有数据中转的带宽消耗。</li>
+<li><strong>提高效率</strong>：在某些场景下，P2P 连接可以提供更高的传输效率。</li>
+</ul>
+<p><strong>挑战：</strong></p>
+<ul>
+<li><strong>NAT 穿越</strong>：大多数客户端都位于 NAT（网络地址转换）设备之后，直接建立连接需要解决复杂的 NAT 穿越问题，其中 UDP 打洞是常用的技术。</li>
+<li><strong>防火墙</strong>：防火墙可能会阻止 P2P 连接的建立。</li>
+</ul>
+<h2 id="p2pgop2p-代理的实现"><code>p2p.go</code>：P2P 代理的实现</h2>
+<p><code>p2p.go</code> 文件定义了 <code>P2PServer</code> 结构体，它是 NPS 实现 P2P 代理的核心。</p>
+<h3 id="p2pserver-结构体"><code>P2PServer</code> 结构体</h3>
+<p><code>P2PServer</code> 结构体包含了 P2P 代理所需的关键信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">P2PServer</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BaseServer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p2pPort</span>  <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p2p</span>      <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">p2p</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">listener</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPConn</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">p2p</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">visitorAddr</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">providerAddr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>BaseServer</code>：继承了 <code>base.go</code> 中定义的通用功能。</li>
+<li><code>p2pPort int</code>：P2P 服务监听的 UDP 端口。</li>
+<li><code>p2p map[string]*p2p</code>：一个 Map，用于存储 P2P 连接的会话信息。键是 P2P 连接的密码（<code>arr[0]</code>），值是 <code>p2p</code> 结构体，其中包含了访问者 (<code>visitorAddr</code>) 和提供者 (<code>providerAddr</code>) 的 UDP 地址。</li>
+<li><code>listener *net.UDPConn</code>：P2P 服务监听的 UDP 连接。</li>
+</ul>
+<p><code>NewP2PServer()</code> 函数用于创建并初始化一个 <code>P2PServer</code> 实例。</p>
+<h3 id="start-方法启动-p2p-udp-监听"><code>Start()</code> 方法：启动 P2P UDP 监听</h3>
+<p><code>P2PServer</code> 的 <code>Start()</code> 方法负责启动 UDP 监听，并为每个接收到的 UDP 数据包调用 <code>handleP2P()</code> 方法进行处理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">P2PServer</span>) <span style="color:#a6e22e">Start</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Info</span>(<span style="color:#e6db74">&#34;start p2p server port&#34;</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2pPort</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">ListenUDP</span>(<span style="color:#e6db74">&#34;udp&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>{<span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">ParseIP</span>(<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>), <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2pPort</span>, <span style="color:#e6db74">&#34;&#34;</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">BufPoolUdp</span>.<span style="color:#a6e22e">Get</span>().([]<span style="color:#66d9ef">byte</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">ReadFromUDP</span>(<span style="color:#a6e22e">buf</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#e6db74">&#34;use of closed network connection&#34;</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">handleP2P</span>(<span style="color:#a6e22e">addr</span>, string(<span style="color:#a6e22e">buf</span>[:<span style="color:#a6e22e">n</span>])) <span style="color:#75715e">// 为每个 UDP 数据包启动一个 goroutine 处理</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>NPS 会在指定的 <code>p2pPort</code> 上监听 UDP 连接。</li>
+<li>每个接收到的 UDP 数据包都会在一个新的 goroutine 中由 <code>handleP2P()</code> 函数处理，以实现并发处理。</li>
+</ul>
+<h3 id="handlep2pp2p-连接的建立与打洞"><code>handleP2P()</code>：P2P 连接的建立与打洞</h3>
+<p><code>handleP2P()</code> 方法是 P2P 连接建立的核心逻辑，它通过交换客户端的 UDP 地址信息来实现 UDP 打洞：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">P2PServer</span>) <span style="color:#a6e22e">handleP2P</span>(<span style="color:#a6e22e">addr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>, <span style="color:#a6e22e">str</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">p2p</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ok</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">str</span>, <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CONN_DATA_SEQ</span>) <span style="color:#75715e">// 解析 UDP 数据包内容</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">arr</span>) &lt; <span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// arr[0] 是 P2P 连接的密码，arr[1] 是角色 (visitor 或 provider)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">ok</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>[<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]]; !<span style="color:#a6e22e">ok</span> { <span style="color:#75715e">// 如果是新的 P2P 会话</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span> = new(<span style="color:#a6e22e">p2p</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>[<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]] = <span style="color:#a6e22e">v</span> <span style="color:#75715e">// 存储新的 P2P 会话</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Trace</span>(<span style="color:#e6db74">&#34;new p2p connection ,role %s , password %s ,local address %s&#34;</span>, <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">addr</span>.<span style="color:#a6e22e">String</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">WORK_P2P_VISITOR</span> { <span style="color:#75715e">// 如果是访问者 (Visitor)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span> = <span style="color:#a6e22e">addr</span> <span style="color:#75715e">// 记录访问者的 UDP 地址</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">20</span>; <span style="color:#a6e22e">i</span> &gt; <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> { <span style="color:#75715e">// 尝试 20 次</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#75715e">// 如果提供者 (Provider) 的地址已经收到</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 互相发送对方的地址，进行 UDP 打洞</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">WriteTo</span>([]byte(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span>.<span style="color:#a6e22e">String</span>()), <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">WriteTo</span>([]byte(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span>.<span style="color:#a6e22e">String</span>()), <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span> <span style="color:#75715e">// 打洞成功，退出循环</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>) <span style="color:#75715e">// 等待 1 秒</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        delete(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>, <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e">// 打洞完成后，从 Map 中删除该会话</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">// 如果是提供者 (Provider)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span> = <span style="color:#a6e22e">addr</span> <span style="color:#75715e">// 记录提供者的 UDP 地址</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>UDP 打洞原理：</strong></p>
+<ol>
+<li><strong>客户端连接 P2P 服务器</strong>：当两个内网客户端（一个作为 <code>visitor</code>，一个作为 <code>provider</code>）都想建立 P2P 连接时，它们会首先向 NPS 的 P2P 服务器发送 UDP 数据包，并附带一个共享的“密码”和自己的角色。</li>
+<li><strong>服务器记录地址</strong>：P2P 服务器会记录 <code>visitor</code> 和 <code>provider</code> 的公网 IP 和端口（经过 NAT 转换后的地址）。</li>
+<li><strong>交换地址</strong>：当服务器同时收到 <code>visitor</code> 和 <code>provider</code> 的地址后，它会将 <code>provider</code> 的地址发送给 <code>visitor</code>，同时将 <code>visitor</code> 的地址发送给 <code>provider</code>。</li>
+<li><strong>客户端尝试连接</strong>：<code>visitor</code> 和 <code>provider</code> 收到对方的地址后，会尝试直接向对方的公网 IP 和端口发送 UDP 数据包。由于 NAT 设备通常会为主动发出的 UDP 连接在外部打开一个临时端口，当双方同时向对方的公网地址发送数据时，就有可能成功穿透 NAT，建立直接的 UDP 连接。</li>
+<li><strong>打洞成功</strong>：一旦 UDP 打洞成功，后续的数据就可以直接在两个客户端之间传输，而无需经过 NPS 服务器中转。</li>
+</ol>
+<p><strong>代码细节：</strong></p>
+<ul>
+<li><code>common.CONN_DATA_SEQ</code>：用于分隔 P2P 数据包中的密码和角色信息。</li>
+<li><code>common.WORK_P2P_VISITOR</code>：表示客户端的角色是访问者。</li>
+<li><code>time.Sleep(time.Second)</code>：在 <code>visitor</code> 端，会等待一段时间，以确保 <code>provider</code> 的地址已经到达服务器。</li>
+<li><code>delete(s.p2p, arr[0])</code>：一旦打洞成功，P2P 会话信息就会从服务器的 Map 中删除，因为服务器的任务已经完成。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p><code>nps/server/proxy/p2p.go</code> 文件展示了 NPS 如何利用 UDP 打洞技术实现 P2P 代理。通过 P2P 服务器作为中介，交换客户端的公网地址信息，NPS 能够帮助内网中的客户端建立直接的 UDP 连接，从而在某些场景下提供更高效、更低延迟的内网穿透服务。这种机制对于需要实时交互的应用（如游戏、音视频通话）具有重要意义。</p>
+<p>在下一篇文章中，我们将继续探索 NPS 的其他代理模式，例如 UDP 代理。</p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/p2p" role="button">P2P </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/udp%E6%89%93%E6%B4%9E" role="button">UDP打洞 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E7%A9%BF%E9%80%8F" role="button">网络穿透 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0socks5-%E5%8D%8F%E8%AE%AE%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>NPS 代理实现：SOCKS5 协议深度解析</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>NPS 代理实现：UDP 代理与数据转发</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+
+
+
+  
+  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

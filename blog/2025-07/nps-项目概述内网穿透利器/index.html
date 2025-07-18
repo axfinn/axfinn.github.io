@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="jaxiu He">
+  <meta name="description" content="引言
+在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。
+什么是 NPS？
+NPS 是一款轻量级、高性能、功能强大的内网穿透代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。">
+  
+  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="NPS 项目概述：内网穿透利器">
+  <meta property="og:description" content="引言 在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。
+什么是 NPS？ NPS 是一款轻量级、高性能、功能强大的内网穿透代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T15:00:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T15:00:00+08:00">
+    <meta property="article:tag" content="NPS">
+    <meta property="article:tag" content="内网穿透">
+    <meta property="article:tag" content="代理">
+    <meta property="article:tag" content="网络">
+
+
+  <title>
+  
+       NPS 项目概述：内网穿透利器 | jaxiu He 
+  
+  </title>
+
+  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/">
+
+  
+  
+
+  
+  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://axfinn.github.io/img/logo.png"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://axfinn.github.io/">
+          
+        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+      
+
+        
+        <div class="carousel-item">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://axfinn.github.io/">
+          
+            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://axfinn.github.io/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+      
+        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">NPS 项目概述：内网穿透利器</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Jul 18, 2025</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>4 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <h2 id="引言">引言</h2>
+<p>在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。</p>
+<h2 id="什么是-nps">什么是 NPS？</h2>
+<p>NPS 是一款轻量级、高性能、功能强大的<strong>内网穿透</strong>代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。</p>
+<h2 id="核心功能与支持协议">核心功能与支持协议</h2>
+<p>NPS 的核心在于其全面的协议支持和灵活的流量转发能力：</p>
+<ul>
+<li><strong>TCP/UDP 流量转发</strong>：NPS 支持 TCP 和 UDP 流量的转发，这意味着它可以支持几乎所有基于这两种协议的上层应用。例如：
+<ul>
+<li><strong>访问内网网站</strong>：将内网的 Web 服务映射到公网。</li>
+<li><strong>本地支付接口调试</strong>：在本地开发环境中调试需要公网回调的支付接口。</li>
+<li><strong>SSH 访问</strong>：从外部网络安全地连接到内网的 Linux 服务器。</li>
+<li><strong>远程桌面</strong>：实现对内网 Windows 或其他操作系统的远程控制。</li>
+<li><strong>内网 DNS 解析</strong>：解决外部网络对内网 DNS 的访问问题。</li>
+</ul>
+</li>
+<li><strong>内网 HTTP 代理</strong>：允许用户在外网通过 HTTP 代理的方式访问内网的网站或服务。</li>
+<li><strong>内网 SOCKS5 代理</strong>：提供一个 SOCKS5 代理服务，使得用户可以像在内网一样访问各种内网资源或设备，常用于搭建内网穿透 SS。</li>
+<li><strong>P2P 支持</strong>：支持点对点连接，进一步提升穿透的灵活性和效率。</li>
+</ul>
+<h2 id="nps-的主要特点">NPS 的主要特点</h2>
+<p>NPS 之所以成为内网穿透领域的佼佼者，得益于其以下显著特点：</p>
+<ul>
+<li><strong>协议支持全面</strong>：兼容几乎所有常用协议，包括 TCP、UDP、HTTP(S)、SOCKS5、P2P、HTTP 代理等，满足多样化的穿透需求。</li>
+<li><strong>全平台兼容</strong>：支持 Linux、Windows、macOS、群晖等主流操作系统，并提供一键安装为系统服务的功能，部署便捷。</li>
+<li><strong>控制全面</strong>：同时支持服务端和客户端的精细化控制，方便用户进行统一管理和配置。</li>
+<li><strong>HTTPS 集成</strong>：支持将后端代理和 Web 服务转换为 HTTPS，并支持多证书管理，确保数据传输的安全性。</li>
+<li><strong>操作简单</strong>：通过功能强大的 Web 管理端，用户只需简单的配置即可完成大部分操作，降低了使用门槛。</li>
+<li><strong>展示信息全面</strong>：Web 界面提供流量、系统信息、即时带宽、客户端版本等详细数据，帮助用户实时监控服务状态。</li>
+<li><strong>扩展功能强大</strong>：内置缓存、压缩、加密、流量限制、带宽限制、端口复用等高级功能，满足更复杂的应用场景。</li>
+<li><strong>域名解析功能</strong>：具备自定义 Header、404 页面配置、Host 修改、站点保护、URL 路由、泛解析等功能，为域名代理模式提供强大支持。</li>
+<li><strong>服务端支持多用户和用户注册功能</strong>：方便团队协作和多用户管理。</li>
+</ul>
+<h2 id="应用场景">应用场景</h2>
+<p>NPS 的多功能性使其在众多场景中都能发挥重要作用：</p>
+<ul>
+<li><strong>微信公众号/小程序开发</strong>：通过域名代理模式，将本地开发环境暴露到公网，方便微信服务器回调。</li>
+<li><strong>远程访问内网机器</strong>：通过 TCP 代理模式，实现从外网 SSH 连接内网服务器，或进行远程桌面操作。</li>
+<li><strong>内网 DNS/UDP 服务访问</strong>：通过 UDP 代理模式，解决外网访问内网 DNS 或其他 UDP 服务的问题。</li>
+<li><strong>外网 HTTP 代理访问内网站点</strong>：通过 HTTP 代理模式，在外网安全访问内网的 Web 应用。</li>
+<li><strong>搭建内网穿透 SOCKS5 代理</strong>：在外网如同使用内网 VPN 一样访问内网资源或设备。</li>
+</ul>
+<h2 id="快速上手概览">快速上手概览</h2>
+<p>NPS 的部署和使用流程相对简单：</p>
+<ol>
+<li><strong>安装</strong>：从官方 Releases 页面下载对应系统版本的服务端和客户端程序。</li>
+<li><strong>服务端启动</strong>：解压后执行安装命令，NPS 默认使用 80、443（域名解析）、8080（Web 管理）和 8024（网桥）端口。启动后通过 <code>服务端IP:8080</code> 访问 Web 管理界面，默认账号密码为 <code>admin/123</code>（请务必修改）。</li>
+<li><strong>客户端连接</strong>：在 Web 管理界面创建客户端，复制启动命令，然后在客户端机器上执行即可连接。</li>
+<li><strong>配置服务</strong>：客户端连接后，即可在 Web 界面配置各种穿透服务。</li>
+</ol>
+<h2 id="总结与展望">总结与展望</h2>
+<p>NPS 作为一款功能全面、易于使用的内网穿透代理服务器，为开发者和系统管理员提供了强大的工具。其灵活的协议支持和丰富的扩展功能，使其能够应对各种复杂的网络穿透需求。通过 NPS，用户可以更便捷、更安全地访问和管理内网资源，极大地提升了工作效率和便利性。</p>
+<p>在后续的文章中，我们将深入 NPS 的各个模块，从代码层面详细剖析其实现原理和设计思想。</p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E4%BB%A3%E7%90%86" role="button">代理 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C" role="button">网络 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://axfinn.github.io/blog/2025-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>NPS 服务端核心解析：架构与流量管理</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+
+
+
+  
+  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="jaxiu He">
+  <meta name="description" content="引言
+在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。
+HTTPS 代理的需求与挑战
+HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：
+
+SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者直接将加密流量转发给目标服务器。
+SNI 支持：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户端在 SSL/TLS 握手时会通过 SNI 扩展告知服务器其要访问的域名。代理服务器需要根据 SNI 信息选择正确的证书。
+证书管理：代理服务器需要能够管理和加载多个域名的 SSL/TLS 证书。
+
+https.go：HTTPS 代理的实现
+https.go 文件定义了 HttpsServer 结构体，它是 NPS 实现 HTTPS 代理的核心。">
+  
+  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="NPS 代理实现：HTTPS 代理与 SNI 证书管理">
+  <meta property="og:description" content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。
+HTTPS 代理的需求与挑战 HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：
+SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者直接将加密流量转发给目标服务器。 SNI 支持：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户端在 SSL/TLS 握手时会通过 SNI 扩展告知服务器其要访问的域名。代理服务器需要根据 SNI 信息选择正确的证书。 证书管理：代理服务器需要能够管理和加载多个域名的 SSL/TLS 证书。 https.go：HTTPS 代理的实现 https.go 文件定义了 HttpsServer 结构体，它是 NPS 实现 HTTPS 代理的核心。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T17:15:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T17:15:00+08:00">
+    <meta property="article:tag" content="NPS">
+    <meta property="article:tag" content="HTTPS代理">
+    <meta property="article:tag" content="SNI">
+    <meta property="article:tag" content="SSL/TLS">
+    <meta property="article:tag" content="Go语言">
+    <meta property="article:tag" content="网络安全">
+
+
+  <title>
+  
+       NPS 代理实现：HTTPS 代理与 SNI 证书管理 | jaxiu He 
+  
+  </title>
+
+  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/">
+
+  
+  
+
+  
+  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://axfinn.github.io/img/logo.png"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://axfinn.github.io/">
+          
+        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+      
+
+        
+        <div class="carousel-item">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://axfinn.github.io/">
+          
+            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://axfinn.github.io/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+      
+        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">NPS 代理实现：HTTPS 代理与 SNI 证书管理</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Jul 18, 2025</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>5 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <h2 id="引言">引言</h2>
+<p>在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 <strong>HTTPS 代理</strong>实现。我们将通过分析 <code>nps/server/proxy/https.go</code> 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。</p>
+<h2 id="https-代理的需求与挑战">HTTPS 代理的需求与挑战</h2>
+<p>HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：</p>
+<ul>
+<li><strong>SSL/TLS 握手</strong>：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者直接将加密流量转发给目标服务器。</li>
+<li><strong>SNI 支持</strong>：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户端在 SSL/TLS 握手时会通过 SNI 扩展告知服务器其要访问的域名。代理服务器需要根据 SNI 信息选择正确的证书。</li>
+<li><strong>证书管理</strong>：代理服务器需要能够管理和加载多个域名的 SSL/TLS 证书。</li>
+</ul>
+<h2 id="httpsgohttps-代理的实现"><code>https.go</code>：HTTPS 代理的实现</h2>
+<p><code>https.go</code> 文件定义了 <code>HttpsServer</code> 结构体，它是 NPS 实现 HTTPS 代理的核心。</p>
+<h3 id="httpsserver-结构体"><code>HttpsServer</code> 结构体</h3>
+<p><code>HttpsServer</code> 结构体继承了 <code>httpServer</code>（虽然在 <code>https.go</code> 中没有直接定义 <code>httpServer</code>，但从代码逻辑看，它应该是一个包含 <code>BaseServer</code> 和一些 HTTP 相关功能的结构体），并增加了 HTTPS 特有的字段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HttpsServer</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">httpServer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">listener</span>         <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Listener</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">httpsListenerMap</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Map</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">hostIdCertMap</span>    <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Map</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>httpServer</code>：继承了处理 HTTP 请求的通用逻辑。</li>
+<li><code>listener net.Listener</code>：用于监听传入 HTTPS 连接的网络监听器。</li>
+<li><code>httpsListenerMap sync.Map</code>：一个并发安全的 Map，用于存储不同域名的 <code>HttpsListener</code> 实例。键通常是域名，值是 <code>*HttpsListener</code>。</li>
+<li><code>hostIdCertMap sync.Map</code>：一个并发安全的 Map，用于存储主机 ID 与其对应的证书文件路径或内容。用于管理和更新证书。</li>
+</ul>
+<p><code>NewHttpsServer()</code> 函数用于创建并初始化一个 <code>HttpsServer</code> 实例。</p>
+<h3 id="start-方法启动-https-监听与-sni-处理"><code>Start()</code> 方法：启动 HTTPS 监听与 SNI 处理</h3>
+<p><code>HttpsServer</code> 的 <code>Start()</code> 方法负责启动 HTTPS 监听，并为每个传入连接进行 SNI 解析和证书选择：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">https</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">HttpsServer</span>) <span style="color:#a6e22e">Start</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Accept</span>(<span style="color:#a6e22e">https</span>.<span style="color:#a6e22e">listener</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">serverName</span>, <span style="color:#a6e22e">rb</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">GetServerNameFromClientHello</span>(<span style="color:#a6e22e">c</span>) <span style="color:#75715e">// 从 ClientHello 中获取 SNI</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">buildHttpsRequest</span>(<span style="color:#a6e22e">serverName</span>) <span style="color:#75715e">// 构建一个模拟的 HTTP 请求</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">host</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">GetDb</span>().<span style="color:#a6e22e">GetInfoByHost</span>(<span style="color:#a6e22e">serverName</span>, <span style="color:#a6e22e">r</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Debug</span>(<span style="color:#e6db74">&#34;the url %s can&#39;t be parsed!,remote addr %s&#34;</span>, <span style="color:#a6e22e">serverName</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">RemoteAddr</span>().<span style="color:#a6e22e">String</span>())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">CertFilePath</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">KeyFilePath</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Debug</span>(<span style="color:#e6db74">&#34;加载客户端本地证书&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">https</span>.<span style="color:#a6e22e">handleHttps2</span>(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">serverName</span>, <span style="color:#a6e22e">rb</span>, <span style="color:#a6e22e">r</span>) <span style="color:#75715e">// 使用客户端本地证书</span>
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Debug</span>(<span style="color:#e6db74">&#34;使用上传证书&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 判断是路径还是证书内容</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">CertFilePath</span>, <span style="color:#e6db74">&#34;-----BEGIN&#34;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">KeyFilePath</span>, <span style="color:#e6db74">&#34;-----BEGIN&#34;</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Debug</span>(<span style="color:#e6db74">&#34;通过上传文件加载证书&#34;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">https</span>.<span style="color:#a6e22e">cert</span>(<span style="color:#a6e22e">host</span>, <span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">rb</span>, <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">CertFilePath</span>, <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">KeyFilePath</span>) <span style="color:#75715e">// 使用上传的证书内容</span>
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Debug</span>(<span style="color:#e6db74">&#34;通过路径加载证书&#34;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 检查证书文件是否存在，并读取内容</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">https</span>.<span style="color:#a6e22e">cert</span>(<span style="color:#a6e22e">host</span>, <span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">rb</span>, string(<span style="color:#a6e22e">cert</span>), string(<span style="color:#a6e22e">key</span>)) <span style="color:#75715e">// 使用上传的证书文件</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>核心流程：</strong></p>
+<ol>
+<li><strong>获取 SNI</strong>：<code>GetServerNameFromClientHello(c)</code> 是一个关键函数，它通过读取客户端发送的 SSL/TLS <code>ClientHello</code> 消息，从中解析出 SNI 域名 (<code>serverName</code>) 和原始的字节流 (<code>rb</code>)。</li>
+<li><strong>查找主机配置</strong>：根据 <code>serverName</code> 从数据库中查找对应的主机配置 (<code>file.Host</code>)。</li>
+<li><strong>证书选择</strong>：
+<ul>
+<li>如果主机配置中没有指定证书路径 (<code>CertFilePath</code> 和 <code>KeyFilePath</code>)，则表示使用客户端本地证书（通常是直接转发加密流量）。</li>
+<li>如果主机配置中指定了证书，NPS 会判断证书是直接上传的内容还是文件路径。</li>
+<li><strong><code>https.cert()</code></strong>：这个函数负责加载或更新证书，并为该证书创建一个 <code>HttpsListener</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="httpslistener动态创建的-https-监听器"><code>HttpsListener</code>：动态创建的 HTTPS 监听器</h3>
+<p><code>HttpsListener</code> 是一个自定义的 <code>net.Listener</code> 实现，它允许 NPS 动态地为不同的域名创建和管理 HTTPS 监听器。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HttpsListener</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">acceptConn</span>     <span style="color:#66d9ef">chan</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Conn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">parentListener</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Listener</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>acceptConn chan *conn.Conn</code>：一个通道，用于接收来自 <code>HttpsServer</code> 的连接。</li>
+<li><code>parentListener net.Listener</code>：底层的 TCP 监听器。</li>
+</ul>
+<p><code>NewHttpsListener()</code> 用于创建 <code>HttpsListener</code> 实例。</p>
+<h3 id="cert证书管理与动态-https-服务"><code>cert()</code>：证书管理与动态 HTTPS 服务</h3>
+<p><code>cert()</code> 函数是 NPS 实现多证书管理和动态 HTTPS 服务的核心：</p>
+<ol>
+<li><strong>证书缓存与更新</strong>：它会检查 <code>hostIdCertMap</code> 中是否已经存在该主机的证书。
+<ul>
+<li>如果证书已存在且未更改，则直接复用已有的 <code>HttpsListener</code>。</li>
+<li>如果证书已更改，则会关闭旧的 <code>HttpsListener</code>，创建新的 <code>HttpsListener</code>，并更新 Map。</li>
+<li>如果是第一次加载证书，则创建新的 <code>HttpsListener</code>。</li>
+</ul>
+</li>
+<li><strong>创建 <code>HttpsListener</code></strong>：通过 <code>NewHttpsListener()</code> 创建一个 <code>HttpsListener</code> 实例。</li>
+<li><strong>启动 HTTPS 服务</strong>：调用 <code>https.NewHttps(l, certFileUrl, keyFileUrl)</code> 在新的 <code>HttpsListener</code> 上启动 HTTPS 服务。</li>
+<li><strong>将连接传递给 <code>HttpsListener</code></strong>：将原始的客户端连接 (<code>c</code>) 和其原始字节流 (<code>rb</code>) 封装为 <code>conn.Conn</code>，并通过 <code>l.acceptConn &lt;- acceptConn</code> 发送给对应的 <code>HttpsListener</code>。<code>HttpsListener</code> 会负责后续的 SSL/TLS 握手和数据处理。</li>
+</ol>
+<h3 id="handlehttps2-和-handlehttpshttps-流量转发"><code>handleHttps2()</code> 和 <code>handleHttps()</code>：HTTPS 流量转发</h3>
+<p>这两个函数（<code>handleHttps2</code> 和 <code>handleHttps</code>，虽然 <code>handleHttps</code> 在当前代码中被注释掉了，但其逻辑类似）负责将 HTTPS 流量转发给目标服务：</p>
+<ol>
+<li><strong>流量和连接数检查</strong>：检查客户端的流量和连接数是否超出限制。</li>
+<li><strong>认证检查</strong>：对请求进行认证。</li>
+<li><strong>获取目标地址</strong>：从主机配置中获取目标地址。</li>
+<li><strong>调用 <code>https.DealClient()</code></strong>：最终都通过 <code>BaseServer</code> 的 <code>DealClient()</code> 方法来建立与目标服务的连接并进行数据转发。</li>
+</ol>
+<h3 id="getservernamefromclienthellosni-解析"><code>GetServerNameFromClientHello()</code>：SNI 解析</h3>
+<p>这个辅助函数负责从客户端的 SSL/TLS <code>ClientHello</code> 消息中解析出 SNI 域名。它通过解析 TLS 协议的字节流来实现。</p>
+<h3 id="buildhttpsrequest构建模拟-http-请求"><code>buildHttpsRequest()</code>：构建模拟 HTTP 请求</h3>
+<p>这个辅助函数用于根据 SNI 域名构建一个模拟的 <code>http.Request</code>，以便在 <code>file.GetDb().GetInfoByHost()</code> 中查找对应的主机配置。</p>
+<h2 id="总结">总结</h2>
+<p><code>nps/server/proxy/https.go</code> 文件展示了 NPS 如何实现强大的 HTTPS 代理功能。其核心在于对 SNI 的支持和动态证书管理。通过解析 <code>ClientHello</code> 消息获取 SNI 域名，NPS 能够根据不同的域名选择和加载对应的 SSL/TLS 证书，并在 <code>HttpsListener</code> 上启动独立的 HTTPS 服务。这使得 NPS 能够在一个端口上代理多个 HTTPS 网站，极大地提升了其在复杂网络环境中的应用能力。</p>
+<p>在下一篇文章中，我们将继续探索 NPS 的其他代理模式，例如 HTTP/HTTPS 域名解析。</p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/https%E4%BB%A3%E7%90%86" role="button">HTTPS代理 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/sni" role="button">SNI </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/ssl/tls" role="button">SSL/TLS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8" role="button">网络安全 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>NPS 代理实现：WebSocket 代理与 HTTP 反向代理</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0http/https-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>NPS 代理实现：HTTP/HTTPS 域名解析与高级功能</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+
+
+
+  
+  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

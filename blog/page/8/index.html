@@ -624,34 +624,26 @@
           
               <div class="post-wrapper white-bg post-card">
   
-  <a href="https://axfinn.github.io/blog/2020-10/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/">
+  <a href="https://axfinn.github.io/blog/2025-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">一句话命令</div>
+      <div class="px-4 post-heading">NPS 项目概述：内网穿透利器</div>
       <ul class="post-meta li-x mt-1">
         
-          <li>Oct 28, 2020</li>
+          <li>Jul 18, 2025</li>
         
     
         
           <li class="middot"></li>
-          <li>One minute read</li>
+          <li>4 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      常用一句话命令 网络 监听端口：netstat -tnple ，如果没有安装软件包 net-tools
-LINUX系统排查 快速下载 数据库 数据库备份：
-备份脚本：
-#!/bin//bash # export NOW=&#34;$(date &#43;&#34;%Y-%m-%d&#34;)&#34; export DATA_DIR=backup export DATA_DATABASE=dress mysqldump --opt -uroot -p&#39;P@ssw0rd&#39; -h&#39;h2.jaxiu.cn&#39; $DATA_DATABASE &gt; $DATA_DIR/${DATA_DATABASE}_$NOW.sql 一句话 docker 命令： docker run -ti --name mysql_dump -v /root/x/scripts/mysql_backup.sh:/mysql_backup.sh -v /root/x/scripts/backup:/backup:rw mysql:5.7.16 ./mysql_backup.sh
-删除已有历史备份
-find $DATA_DIR/ -type f -name &#34;*.sql&#34; -mtime &#43;7 -exec rm -rf {} \;
-数据库查询一句话命令
-单引号引起来的起来的是命令 docker run -ti --name mysql_t mysql:5.7.16 &#39; mysql -u root -proot -h 10.105.40.49 -e &#34;show databases&#34;&#39; ; docker stop mysql_t;docker rm mysql_t;
-一句话命令开启http访问当前页面
-docker run -dti --name nginx_t -v /tmp/test:/usr/share/nginx/html -p 8080:80 nginx
-linux 快捷命令......
+      引言 在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。
+什么是 NPS？ NPS 是一款轻量级、高性能、功能强大的内网穿透代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。
+......
     
   </a>
 
@@ -662,6 +654,8 @@ linux 快捷命令......
       
         
           <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
         
       
       
@@ -674,16 +668,16 @@ linux 快捷命令......
   <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/sci" role="button">Sci </a></li>
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/vscode" role="button">Vscode </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/vue" role="button">Vue </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E4%BB%A3%E7%90%86" role="button">代理 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/qa" role="button">Qa </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C" role="button">网络 </a></li>
       
     
   </div>
