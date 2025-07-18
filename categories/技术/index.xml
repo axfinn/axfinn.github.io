@@ -6,8 +6,36 @@
     <description>Recent content in 技术 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 16 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Jul 2025 19:15:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NPS 全景解析（完结）：揭秘功能强大的 Web 管理界面</title>
+      <link>https://axfinn.github.io/blog/2025-07/nps-%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90%E5%AE%8C%E7%BB%93%E6%8F%AD%E7%A7%98%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E7%9A%84-web-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/</link>
+      <pubDate>Fri, 18 Jul 2025 19:15:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/nps-%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90%E5%AE%8C%E7%BB%93%E6%8F%AD%E7%A7%98%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E7%9A%84-web-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;一个工具的强大与否，不仅取决于其核心功能的性能与稳定，也取决于其易用性。NPS 之所以广受欢迎，除了其强大的穿透能力外，一个直观、功能全面的 Web 管理界面功不可没。用户无需编辑复杂的配置文件，只需在浏览器上进行简单的点击操作，就能完成客户端管理、隧道配置、域名绑定等所有操作。在本系列文章的最后一篇，我们将深入 &lt;code&gt;nps/web&lt;/code&gt; 目录，揭秘这个基于 Beego 框架构建的 Web 管理界面是如何与 NPS 核心服务无缝集成，为用户提供流畅体验的。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;技术选型beego-框架&#34;&gt;技术选型：Beego 框架&lt;/h2&gt;&#xA;&lt;p&gt;NPS 的 Web 后端采用了 &lt;a href=&#34;https://github.com/beego/beego&#34;&gt;Beego&lt;/a&gt;，一个用 Go 语言编写的高性能 Web 框架。Beego 遵循 MVC（Model-View-Controller）设计模式，提供了路由、模板引擎、ORM、Session 管理等一整套 Web 开发所需的功能，这使得开发者可以快速构建起一个功能完善的 Web 应用。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NPS 核心探秘：配置加载与数据持久化</title>
+      <link>https://axfinn.github.io/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E6%8E%A2%E7%A7%98%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/</link>
+      <pubDate>Fri, 18 Jul 2025 19:10:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E6%8E%A2%E7%A7%98%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;一个稳定可靠的服务，离不开健全的配置管理和数据持久化机制。NPS 作为一个需要长期运行的内网穿透服务器，必须能够加载启动配置、在运行时动态修改配置，并在服务重启后恢复所有任务和客户端信息。这一切都由 &lt;code&gt;nps/file&lt;/code&gt; 目录下的代码实现。本篇文章将深入这一模块，剖析 NPS 是如何通过简单的 JSON 文件，构建出一个轻量级且高效的“数据库”，并实现对客户端、隧道、主机等所有配置的增删改查和持久化存储。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;filegonps-的数据中枢&#34;&gt;&lt;code&gt;file.go&lt;/code&gt;：NPS 的数据中枢&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;nps/file&lt;/code&gt; 目录的核心是 &lt;code&gt;file.go&lt;/code&gt; 文件，它定义了 NPS 的数据模型和所有数据操作的接口。NPS 并未采用传统的关系型数据库或 NoSQL 数据库，而是选择使用 JSON 文件作为其数据存储后端，这使得 NPS 非常轻量、易于部署和迁移。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NPS 客户端深度解析：健康检查与动态注册</title>
+      <link>https://axfinn.github.io/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/</link>
+      <pubDate>Fri, 18 Jul 2025 19:05:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（&lt;code&gt;client.go&lt;/code&gt;）和控制模块（&lt;code&gt;control.go&lt;/code&gt;）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：&lt;code&gt;nps/client/health.go&lt;/code&gt; 和 &lt;code&gt;nps/client/register.go&lt;/code&gt;，探讨 NPS 是如何实现对后端服务的健康检查以及支持客户端动态注册的。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NPS 核心组件：深入剖析 Bridge 模块</title>
+      <link>https://axfinn.github.io/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-bridge-%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Fri, 18 Jul 2025 19:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-bridge-%E6%A8%A1%E5%9D%97/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在 NPS 的服务端架构中，&lt;code&gt;proxy&lt;/code&gt; 模块负责监听公网端口并处理各种协议的流量，而 &lt;code&gt;client&lt;/code&gt; 模块则在内网中连接本地服务。那么，当一个公网请求到达 &lt;code&gt;proxy&lt;/code&gt; 模块后，它是如何精确地找到对应的内网客户端，并与之建立一条数据通道的呢？答案就是 &lt;strong&gt;&lt;code&gt;Bridge&lt;/code&gt; 模块&lt;/strong&gt;。&lt;code&gt;Bridge&lt;/code&gt; 是 NPS 服务端的核心枢纽，它负责维护所有客户端的长连接，并在此之上建立控制和数据隧道，是整个 NPS 体系的“交通总指挥”。&lt;/p&gt;&#xA;&lt;h2 id=&#34;bridge-结构体通信枢纽的核心&#34;&gt;&lt;code&gt;Bridge&lt;/code&gt; 结构体：通信枢纽的核心&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;bridge.go&lt;/code&gt; 文件首先定义了 &lt;code&gt;Bridge&lt;/code&gt; 结构体，它包含了 &lt;code&gt;Bridge&lt;/code&gt; 模块运行所需的所有关键信息：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>打造你的专属数字工作台：My Tool Dashboard 的设计与实践</title>
       <link>https://axfinn.github.io/blog/2025-07/%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%95%B0%E5%AD%97%E5%B7%A5%E4%BD%9C%E5%8F%B0my-tool-dashboard-%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
