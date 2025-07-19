@@ -313,6 +313,8 @@
 
   
 
+  
+
 
 
 
@@ -336,7 +338,7 @@
             
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF">
-                <span>技术 (21)</span>
+                <span>技术 (22)</span>
               </a>
             </li>           
           
@@ -421,6 +423,8 @@
 
     
           
+
+  
 
   
 
@@ -579,7 +583,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  22 posts
+                  23 posts
                 </div>
               
             </div>
@@ -620,6 +624,76 @@
       </li>
     </ul>
           </div>
+
+          
+              <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">NPS 代理实现：WebSocket 代理与 HTTP 反向代理</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>5 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      引言 在 NPS 系列文章的前几篇中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理、P2P 代理和 UDP 代理）。本篇文章将深入 NPS 的 WebSocket 代理和 HTTP 反向代理实现。我们将通过分析 nps/server/proxy/websocket.go 文件，揭示 NPS 如何处理这两种特殊的 HTTP 流量，实现更灵活的网络穿透。
+WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器之间的全双工通信通道，常用于实时应用，如聊天、在线游戏、股票行情等。传统的 HTTP 代理无法直接处理 WebSocket 协议的升级和持续连接。 HTTP 反向代理：将客户端的 HTTP 请求转发到后端服务器，并返回后端服务器的响应。它通常用于负载均衡、SSL 卸载、缓存和安全防护等。 websocket.go：WebSocket 与 HTTP 反向代理的实现 websocket.go 文件主要定义了 HttpReverseProxy 和 ReverseProxy 两个结构体，它们共同协作来处理 HTTP 反向代理和 WebSocket 连接。
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/websocket" role="button">WebSocket </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/http%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" role="button">HTTP反向代理 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1" role="button">网络通信 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
           
               <div class="post-wrapper white-bg post-card">
@@ -751,76 +825,6 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
       
     
       <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E7%A9%BF%E9%80%8F" role="button">网络穿透 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-          
-              <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0socks5-%E5%8D%8F%E8%AE%AE%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">NPS 代理实现：SOCKS5 协议深度解析</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 18, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>5 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      引言 在 NPS 系列文章的前几篇中，我们已经对 NPS 的整体架构、服务端核心以及 TCP 隧道和 HTTP 代理的实现有了初步了解。本篇文章将深入 NPS 的另一个重要代理模式——SOCKS5 代理。我们将通过分析 nps/server/proxy/socks5.go 文件，详细剖析 SOCKS5 协议在 NPS 中的实现细节，包括认证机制、请求处理以及 UDP 转发。
-SOCKS5 协议简介 SOCKS5 是一种网络代理协议，它允许客户端通过代理服务器间接访问其他服务器。与 HTTP 代理不同，SOCKS5 是一种更底层的协议，它不关心应用层协议（如 HTTP、FTP），而是直接转发 TCP 或 UDP 数据包。这使得 SOCKS5 代理更加通用，可以用于各种网络应用。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/socks5" role="button">SOCKS5 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E4%BB%A3%E7%90%86%E5%8D%8F%E8%AE%AE" role="button">代理协议 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8" role="button">网络安全 </a></li>
       
     
   </div>
