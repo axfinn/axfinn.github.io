@@ -474,7 +474,7 @@ git reset &ndash;mixed <!-- raw HTML omitted --> # 移动 HEAD 指针，并清�
 </span></span></code></pre></div><p>通常，<code>origin</code> 是默认的远程仓库名称。</p>
 <h3 id="53-从远程仓库拉取">5.3 从远程仓库拉取</h3>
 <p>获取远程仓库的最新更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin <span style="color:#75715e"># 从远程仓库下载最新���据，但不合并到本地分支</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin <span style="color:#75715e"># 从远程仓库下载最新数据，但不合并到本地分支</span>
 </span></span><span style="display:flex;"><span>git pull origin &lt;branch-name&gt; <span style="color:#75715e"># 下载最新数据并合并到当前分支 (等同于 fetch + merge)</span>
 </span></span></code></pre></div><p><code>git pull</code> 经常用于同步远程 <code>main</code> 或 <code>master</code> 分支的最新代码。</p>
 <h3 id="54-推送到远程仓库">5.4 推送到远程仓库</h3>
