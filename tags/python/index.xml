@@ -6,14 +6,14 @@
     <description>Recent content in Python on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 19 Jul 2025 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>深入剖析：一个轻量级酒店管理系统</title>
-      <link>https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Sat, 19 Jul 2025 10:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;今天，我将深入分析一个名为 &lt;code&gt;hotel&lt;/code&gt; 的轻量级酒店管理系统。这个项目虽然代码量不大，但功能齐全，涵盖了房间、租客、交易和统计等核心模块。它采用 Python 的 Flask 框架构建，并使用 SQLite 作为数据库，非常适合用于学习和二次开发。此外，项目还贴心地提供了 Dockerfile 和部署脚本，让我们能轻松地将其容器化并一键部署。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术栈&#34;&gt;技术栈&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;后端框架&lt;/strong&gt;: &lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据库&lt;/strong&gt;: &lt;a href=&#34;https://www.sqlite.org/index.html&#34;&gt;SQLite&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;图像处理&lt;/strong&gt;: &lt;a href=&#34;https://python-pillow.org/&#34;&gt;Pillow&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;容器化&lt;/strong&gt;: &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心功能&#34;&gt;核心功能&lt;/h2&gt;&#xA;&lt;p&gt;该系统的主要功能模块划分清晰，逻辑一目了然。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-房间管理&#34;&gt;1. 房间管理&lt;/h3&gt;&#xA;&lt;p&gt;系统允许管理员添加、编辑和查看所有房间的信息。每个房间都包含丰富的属性，例如：&lt;/p&gt;</description>
+      <title>从零到一：用 Flask &#43; SQLite 打造一个轻量级酒店管理系统（前后端详解）</title>
+      <link>https://axfinn.github.io/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E7%94%A8-flask--sqlite-%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E7%94%A8-flask--sqlite-%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;对于许多编程初学者来说，理论知识和实际项目之间总有一道鸿沟。今天，我将带领大家跨越这道鸿沟，通过一个真实的项目——&lt;code&gt;hotel&lt;/code&gt; 轻量级酒店管理系统，来学习如何将技术应用到实践中。&lt;/p&gt;&#xA;&lt;p&gt;这个项目非常适合初学者，它功能完整、代码清晰，并且覆盖了 Web 开发的方方面面：从后端逻辑、数据库设计，到前端页面渲染和用户交互。最棒的是，它还支持 Docker 一键部署！&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;项目地址&lt;/strong&gt;: &lt;a href=&#34;git@github.com:axfinn/hotel.git&#34;&gt;git@github.com:axfinn/hotel.git&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我将从环境搭建开始，详细剖析前后端代码，让你不仅能看懂，更能学会如何构建一个属于自己的 Web 应用。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

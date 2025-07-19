@@ -6,15 +6,8 @@
     <description>Recent content in 项目分析 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 19 Jul 2025 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 18 Jul 2025 19:15:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>深入剖析：一个轻量级酒店管理系统</title>
-      <link>https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Sat, 19 Jul 2025 10:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;今天，我将深入分析一个名为 &lt;code&gt;hotel&lt;/code&gt; 的轻量级酒店管理系统。这个项目虽然代码量不大，但功能齐全，涵盖了房间、租客、交易和统计等核心模块。它采用 Python 的 Flask 框架构建，并使用 SQLite 作为数据库，非常适合用于学习和二次开发。此外，项目还贴心地提供了 Dockerfile 和部署脚本，让我们能轻松地将其容器化并一键部署。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术栈&#34;&gt;技术栈&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;后端框架&lt;/strong&gt;: &lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据库&lt;/strong&gt;: &lt;a href=&#34;https://www.sqlite.org/index.html&#34;&gt;SQLite&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;图像处理&lt;/strong&gt;: &lt;a href=&#34;https://python-pillow.org/&#34;&gt;Pillow&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;容器化&lt;/strong&gt;: &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心功能&#34;&gt;核心功能&lt;/h2&gt;&#xA;&lt;p&gt;该系统的主要功能模块划分清晰，逻辑一目了然。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-房间管理&#34;&gt;1. 房间管理&lt;/h3&gt;&#xA;&lt;p&gt;系统允许管理员添加、编辑和查看所有房间的信息。每个房间都包含丰富的属性，例如：&lt;/p&gt;</description>
-    </item>
     <item>
       <title>NPS 全景解析（完结）：揭秘功能强大的 Web 管理界面</title>
       <link>https://axfinn.github.io/blog/2025-07/nps-%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90%E5%AE%8C%E7%BB%93%E6%8F%AD%E7%A7%98%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E7%9A%84-web-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/</link>
