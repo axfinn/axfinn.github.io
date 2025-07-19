@@ -143,11 +143,24 @@ GitHub Pages: GitHub 提供的免费静态网站托管服务。它与 Git 无缝
           
         </ul>
 
+        
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
+              <div class="dropdown-wrapper">
+                <ul id="search-results" class="dropdown-menu" style="display: block;"></ul>
+              </div>
+            </form>
+          </li>
+        </ul>
+
       </div>
 
     </div>
   </nav>
   
+  <script src="https://axfinn.github.io/js/search.js"></script>
  
       
  
@@ -305,7 +318,7 @@ GitHub Pages: GitHub 提供的免费静态网站托管服务。它与 Git 无缝
 
     
       <li class="middot"></li>
-      <li>3 minutes read</li>
+      <li>4 minutes read</li>
     
   </ul>
   
@@ -465,6 +478,24 @@ GitHub Pages: GitHub 提供的免费静态网站托管服务。它与 Git 无缝
 </span></span></code></pre></div></li>
 </ol>
 <p>几分钟后，访问 <code>https://your-username.github.io</code>，你就能看到成功上线的个人博客了！</p>
+<h2 id="实例分析axfinn_blogs">实例分析：axfinn_blogs</h2>
+<p>本文档所在的博客项目 <code>axfinn_blogs</code> 就是一个很好的实例。你可以通过它的<a href="https://github.com/axfinn/axfinn_blogs">源码仓库</a>来学习和参考。</p>
+<h3 id="关键配置-configtoml">关键配置 (<code>config.toml</code>)</h3>
+<p><code>axfinn_blogs</code> 的 <code>config.toml</code> 文件包含了一些有趣的配置：</p>
+<ul>
+<li><strong>永久链接格式</strong>: 通过 <code>[permalinks]</code> 设置，将博客文章的 URL 格式定义为 <code>/:year-:month/:slug/</code>，更具可读性。</li>
+<li><strong>分类系统</strong>: 定义了 <code>tags</code>, <code>series</code>, <code>categories</code> 三种分类方式。</li>
+<li><strong>自定义菜单</strong>: 配置了“博客”、“动态”、“关于”等导航菜单。</li>
+<li><strong>JSON 输出</strong>: 通过 <code>[outputs]</code> 配置，将首页内容输出为 JSON 格式，这通常用于站内搜索功能。</li>
+</ul>
+<h3 id="自动化发布脚本-publishsh">自动化发布脚本 (<code>publish.sh</code>)</h3>
+<p><code>axfinn_blogs</code> 使用了一个更完善的 <code>publish.sh</code> 脚本，它有几个特点：</p>
+<ul>
+<li><strong>目标目录</strong>: 脚本通过 <code>DEPLOY_DIR=&quot;../axfinn.github.io&quot;</code> 变量，直接指定了发布的目标目录，而不是在 <code>public</code> 目录中操作 Git。</li>
+<li><strong>增量更新</strong>: 脚本先删除目标目录的旧文件，再复制新生成的文件，确保了部署的纯净性。</li>
+<li><strong>统一的提交信息</strong>: 脚本使用 <code>chore: Publish site updates at $(date +'%Y-%m-%d %H:%M:%S')</code> 作为固定的提交信息，方便追踪发布历史。</li>
+</ul>
+<p>这个真实的项目案例可以帮助你更好地理解 Hugo 的配置和自动化部署的实践。</p>
 <h2 id="总结">总结</h2>
 <p>通过本教程，你已经成功搭建并发布了自己的个人博客。现在，你可以专注于内容创作，并通过 <code>hugo new</code> 创建新文章，然后运行 <code>./publish.sh</code> 来一键更新你的博客。祝你写作愉快！</p>
 
