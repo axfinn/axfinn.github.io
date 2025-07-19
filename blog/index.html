@@ -332,6 +332,8 @@
 
   
 
+  
+
 
 
 
@@ -355,7 +357,7 @@
             
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF">
-                <span>技术 (24)</span>
+                <span>技术 (25)</span>
               </a>
             </li>           
           
@@ -372,8 +374,8 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://axfinn.github.io/categories/ai">
-                <span>Ai (2)</span>
+              <a href="https://axfinn.github.io/categories/%E6%95%99%E7%A8%8B">
+                <span>教程 (3)</span>
               </a>
             </li>           
           
@@ -381,8 +383,8 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://axfinn.github.io/categories/%E6%95%99%E7%A8%8B">
-                <span>教程 (2)</span>
+              <a href="https://axfinn.github.io/categories/ai">
+                <span>Ai (2)</span>
               </a>
             </li>           
           
@@ -500,6 +502,8 @@
 
   
 
+  
+
 
 
 
@@ -529,13 +533,13 @@
             <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (4)</span></a></li>
           
         
+            <li><a href="https://axfinn.github.io/tags/%E6%95%99%E7%A8%8B" role="button"><span>教程 (4)</span></a></li>
+          
+        
             <li><a href="https://axfinn.github.io/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF" role="button"><span>服务端 (4)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button"><span>客户端 (3)</span></a></li>
-          
-        
-            <li><a href="https://axfinn.github.io/tags/%E6%95%99%E7%A8%8B" role="button"><span>教程 (3)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84" role="button"><span>架构 (3)</span></a></li>
@@ -613,7 +617,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  25 posts
+                  26 posts
                 </div>
               
             </div>
@@ -818,9 +822,9 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
           
               <div class="post-wrapper white-bg post-card">
   
-  <a href="https://axfinn.github.io/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E4%BD%BF%E7%94%A8-hugo-%E5%92%8C-github-pages-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+  <a href="https://axfinn.github.io/blog/2025-07/git-learning-and-usage-guide/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">从零到一：使用 Hugo 和 GitHub Pages 搭建个人博客</div>
+      <div class="px-4 post-heading">Git 学习与详细使用指南</div>
       <ul class="post-meta li-x mt-1">
         
           <li>Jul 19, 2025</li>
@@ -828,15 +832,17 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
     
         
           <li class="middot"></li>
-          <li>4 minutes read</li>
+          <li>6 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      前言 拥有一个个人博客是分享知识、记录学习和展示作品的绝佳方式。本文将详细介绍如何使用强大的静态网站生成器 Hugo 和免费的 GitHub Pages 服务，从零开始搭建一个属于你自己的、功能完善且高度可定制的个人博客。
-为什么选择 Hugo 和 GitHub Pages？ Hugo: Go 语言编写的静态网站生成器，以其惊人的构建速度和灵活性而闻名。它拥有丰富的主题和强大的功能，让你可以专注于内容创作。 GitHub Pages: GitHub 提供的免费静态网站托管服务。它与 Git 无缝集成，非常适合托管个人博客、项目文档等。 准备工作 在开始之前，请确保你的电脑上已经安装了以下软件：
+      Git 学习与详细使用指南 Git 是目前世界上最流行、最先进的分布式版本控制系统。它能够高效地管理项目代码，记录每一次修改，并允许多人协作开发。无论你是个人开发者还是团队成员，掌握 Git 都是一项必备技能。
+本文将从 Git 的基本概念入手，逐步深入到常用命令、分支管理、远程协作，并提供一些高级技巧和参考资源，帮助你全面掌握 Git。
+1. Git 基础概念 在深入学习 Git 命令之前，理解以下核心概念至关重要：
+版本控制系统 (VCS): 记录文件内容变化，以便将来查阅特定版本修订情况的系统。 分布式版本控制系统 (DVCS): 每个开发者都拥有完整的代码仓库副本，无需依赖中央服务器即可进行大部分操作。 仓库 (Repository): 存储项目所有文件和历史记录的��方。分为本地仓库和远程仓库。 工作区 (Working Directory): 你在电脑上实际操作的目录，包含项目文件。 暂存区 (Staging Area / Index): 一个临时区域，用于存放你即将提交（commit）的更改。你可以选择性地将工作区的修改添加到暂存区。 提交 (Commit): 将暂存区的更改永久保存到本地仓库的历史记录中。每次提交都会生成一个唯一的 SHA-1 值作为标识。 分支 (Branch): Git 中最强大的功能之一。它允许你在不影响主线开发的情况下，独立地进行新功能开发或 bug 修复。每个分支都是一个独立的开发线。 HEAD: 指向当前所在分支的指针。 2. Git 安装与配置 2.1 安装 Git macOS: brew install git Linux (Debian/Ubuntu): sudo apt-get install git Windows: 从 Git 官方网站 下载安装包。 安装完成后，在终端输入 git --version 验证是否成功。
 ......
     
   </a>
@@ -849,6 +855,8 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
         
           <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
         
+          <li><a href="https://axfinn.github.io/categories/%E6%95%99%E7%A8%8B"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 教程 </a></li>
+        
       
       
     </div>
@@ -860,16 +868,16 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
   <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/hugo" role="button">Hugo </a></li>
+      <li><a href="https://axfinn.github.io/tags/git" role="button">Git </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/github-pages" role="button">GitHub Pages </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA" role="button">博客搭建 </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6" role="button">版本控制 </a></li>
       
     
       <li><a href="https://axfinn.github.io/tags/%E6%95%99%E7%A8%8B" role="button">教程 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7" role="button">开发工具 </a></li>
       
     
   </div>
