@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="jaxiu He">
+  <meta name="description" content="前言
+今天，我将深入分析一个名为 hotel 的轻量级酒店管理系统。这个项目虽然代码量不大，但功能齐全，涵盖了房间、租客、交易和统计等核心模块。它采用 Python 的 Flask 框架构建，并使用 SQLite 作为数据库，非常适合用于学习和二次开发。此外，项目还贴心地提供了 Dockerfile 和部署脚本，让我们能轻松地将其容器化并一键部署。
+技术栈
+
+后端框架: Flask
+数据库: SQLite
+图像处理: Pillow
+容器化: Docker
+
+核心功能
+该系统的主要功能模块划分清晰，逻辑一目了然。
+1. 房间管理
+系统允许管理员添加、编辑和查看所有房间的信息。每个房间都包含丰富的属性，例如：">
+  
+  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="深入剖析：一个轻量级酒店管理系统">
+  <meta property="og:description" content="前言 今天，我将深入分析一个名为 hotel 的轻量级酒店管理系统。这个项目虽然代码量不大，但功能齐全，涵盖了房间、租客、交易和统计等核心模块。它采用 Python 的 Flask 框架构建，并使用 SQLite 作为数据库，非常适合用于学习和二次开发。此外，项目还贴心地提供了 Dockerfile 和部署脚本，让我们能轻松地将其容器化并一键部署。
+技术栈 后端框架: Flask 数据库: SQLite 图像处理: Pillow 容器化: Docker 核心功能 该系统的主要功能模块划分清晰，逻辑一目了然。
+1. 房间管理 系统允许管理员添加、编辑和查看所有房间的信息。每个房间都包含丰富的属性，例如：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-19T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-07-19T10:00:00+08:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Flask">
+    <meta property="article:tag" content="SQLite">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="项目分析">
+    <meta property="article:tag" content="系统设计">
+
+
+  <title>
+  
+       深入剖析：一个轻量级酒店管理系统 | jaxiu He 
+  
+  </title>
+
+  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%85%92%E5%BA%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+  
+  
+
+  
+  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://axfinn.github.io/img/logo.png"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://axfinn.github.io/">
+          
+        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+            </li>
+          
+          
+        </ul>
+
+        
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
+              <div class="dropdown-wrapper">
+                <ul id="search-results" class="dropdown-menu" style="display: block;"></ul>
+              </div>
+            </form>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+  <script src="https://axfinn.github.io/js/search.js"></script>
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+      
+
+        
+        <div class="carousel-item">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://axfinn.github.io/">
+          
+            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://axfinn.github.io/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+      
+        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">深入剖析：一个轻量级酒店管理系统</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Jul 19, 2025</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>3 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <h2 id="前言">前言</h2>
+<p>今天，我将深入分析一个名为 <code>hotel</code> 的轻量级酒店管理系统。这个项目虽然代码量不大，但功能齐全，涵盖了房间、租客、交易和统计等核心模块。它采用 Python 的 Flask 框架构建，并使用 SQLite 作为数据库，非常适合用于学习和二次开发。此外，项目还贴心地提供了 Dockerfile 和部署脚本，让我们能轻松地将其容器化并一键部署。</p>
+<h2 id="技术栈">技术栈</h2>
+<ul>
+<li><strong>后端框架</strong>: <a href="https://flask.palletsprojects.com/">Flask</a></li>
+<li><strong>数据库</strong>: <a href="https://www.sqlite.org/index.html">SQLite</a></li>
+<li><strong>图像处理</strong>: <a href="https://python-pillow.org/">Pillow</a></li>
+<li><strong>容器化</strong>: <a href="https://www.docker.com/">Docker</a></li>
+</ul>
+<h2 id="核心功能">核心功能</h2>
+<p>该系统的主要功能模块划分清晰，逻辑一目了然。</p>
+<h3 id="1-房间管理">1. 房间管理</h3>
+<p>系统允许管理员添加、编辑和查看所有房间的信息。每个房间都包含丰富的属性，例如：</p>
+<ul>
+<li>楼层和房号</li>
+<li>配套设施（独立卫浴、空调、���窗）</li>
+<li>房间类型（大床房、双床房）</li>
+<li>租赁类型（长租/短租）</li>
+<li>标准价格</li>
+<li>房间照片</li>
+</ul>
+<p>通过这些属性，可以轻松地对房源进行分类和筛选。</p>
+<h3 id="2-租客管理">2. 租客管理</h3>
+<p>这是系统的核心功能之一。当有租客入住时，可以执行“入住登记”操作，记录以下信息：</p>
+<ul>
+<li>租客姓名和联系电话</li>
+<li>租期（开始日期和结束日期）</li>
+<li>租赁类型（长租/短租/续租）</li>
+<li>实际租金</li>
+<li>身份证照片（上传后会自动压缩，节省存储空间）</li>
+</ul>
+<p>系统会自动更新房间状态为“已入住”，并关联租客信息。</p>
+<h3 id="3-交易与财务管理">3. 交易与财务管理</h3>
+<p>系统内置了一个简单的交易记录功能，可以方便地管理押金和租金：</p>
+<ul>
+<li><strong>押金记录</strong>: 在办理入住时，可以一并录入押金金额。</li>
+<li><strong>交易查询</strong>: 可以查看每个房间下的所有交易记录，包括交易类型（租金、押金）、金额、日期和描述。</li>
+<li><strong>收入统计</strong>: 系统还提供了一个统计页面，可以按房间和按月份两个维度，清晰地展示总收入情况，为酒店的经营决策提供数据支持。</li>
+</ul>
+<h3 id="4-部署与运维">4. 部署与运维</h3>
+<p>项目提供了 <code>Dockerfile</code> 和 <code>run.sh</code> 部署脚本，极大地简化了部署流程。<code>run.sh</code> 脚本的功能十分完善，包括：</p>
+<ul>
+<li><strong>自动备份</strong>: 在每次启动前，自动备份当前的应用代码和数据。</li>
+<li><strong>数据库初始化</strong>: 检查并创建 SQLite 数据库文件。</li>
+<li><strong>一键式 Docker 部署</strong>: 自动停止旧容器、构建新镜像并启动新容器，实现了快速的持续集成和部署。</li>
+</ul>
+<h2 id="代码亮点">代码亮点</h2>
+<p>在 <code>app.py</code> 中，有几个值得我们学习和借鉴的设计。</p>
+<h3 id="数据库初始化-init_db">数据库初始化 (<code>init_db</code>)</h3>
+<p>应用在启动时会调用 <code>init_db</code> 函数，该函数通过 <code>CREATE TABLE IF NOT EXISTS</code> 语句来确保数据表（房间、租客、交易）的存在。这种方式既简单又可靠，避免了手动初始化数据库的麻烦。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init_db</span>():
+</span></span><span style="display:flex;"><span>    conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;hotel.db&#39;</span>)
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建房间表</span>
+</span></span><span style="display:flex;"><span>    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        CREATE TABLE IF NOT EXISTS rooms (...)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建租客表</span>
+</span></span><span style="display:flex;"><span>    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        CREATE TABLE IF NOT EXISTS tenants (...)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建交易表</span>
+</span></span><span style="display:flex;"><span>    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        CREATE TABLE IF NOT EXISTS transactions (...)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>commit()
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><h3 id="图片压缩">图片压缩</h3>
+<p>在添加房间或登记入住时，系统允许上传房间照片和身份证照片。为了优化存储，系统使用了 <code>Pillow</code> 库在保存图片前进行压缩，将图片质量设置为40%，有效减小了文件体积。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 处理房间照片上传</span>
+</span></span><span style="display:flex;"><span>room_image <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>files[<span style="color:#e6db74">&#39;room_image&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> room_image <span style="color:#f92672">and</span> allowed_file(room_image<span style="color:#f92672">.</span>filename):
+</span></span><span style="display:flex;"><span>    room_image_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;ROOM_UPLOAD_FOLDER&#39;</span>], room_image_filename)
+</span></span><span style="display:flex;"><span>    room_image<span style="color:#f92672">.</span>save(room_image_path)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 压缩图片</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> Image<span style="color:#f92672">.</span>open(room_image_path) <span style="color:#66d9ef">as</span> img:
+</span></span><span style="display:flex;"><span>        img<span style="color:#f92672">.</span>save(room_image_path, quality<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>)
+</span></span></code></pre></div><h3 id="续租逻辑处理">续租逻辑处理</h3>
+<p>在 <code>check_in</code> 函数中，系统通过判断当前房间的租期是否已结束，来智能地区分“新入住”和“续租”。如果是续租，结束日期会自动在原有基础上进行累加，这个细节处理得非常巧妙。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 检查房间时间信息，是否冲突，冲突就改为续租 </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> room[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span> <span style="color:#f92672">and</span> room[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">&gt;</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>):
+</span></span><span style="display:flex;"><span>    lease_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;续租&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 计算时间差 </span>
+</span></span><span style="display:flex;"><span>    datesub <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(rent_end_date, <span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">-</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(rent_start_date, <span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 结束时间加上 前端传的两个时间(rent_start_date,rent_end_date)的时间差</span>
+</span></span><span style="display:flex;"><span>    rent_end_date <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(room[<span style="color:#ae81ff">12</span>], <span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> datesub
+</span></span><span style="display:flex;"><span>    rent_end_date <span style="color:#f92672">=</span> rent_end_date<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><h2 id="总结">总结</h2>
+<p><code>hotel</code> 是一个麻雀虽小五脏俱全的项目。它不仅是一个功能完备的酒店管理系统，更是一���优秀的 Flask Web 开发学习案例。通过对它的分析，我们可以学习到 Web 应用开发的全过程，从数据库设计、后端逻辑编写，到前端页面渲染（虽然我们没有深入分析 <code>templates</code>），再到最终的容器化部署。</p>
+<p>如果你是 Python Web 开发的初学者，或者正在寻找一个合适的项目进行二次开发，<code>hotel</code> 无疑是一个不错的选择。</p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/python" role="button">Python </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/flask" role="button">Flask </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/sqlite" role="button">SQLite </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/docker" role="button">Docker </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90" role="button">项目分析 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1" role="button">系统设计 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://axfinn.github.io/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E4%BD%BF%E7%94%A8-hugo-%E5%92%8C-github-pages-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>从零到一：使用 Hugo 和 GitHub Pages 搭建个人博客</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+
+
+
+  
+  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>
