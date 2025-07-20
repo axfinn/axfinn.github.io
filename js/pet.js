@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentX = parseFloat(localStorage.getItem('petX')) || 50;
     let currentY = parseFloat(localStorage.getItem('petY')) || 50;
     let isHidden = localStorage.getItem('petHidden') === 'true';
+    // Force pet to be visible on load, unless explicitly hidden by user
+    if (localStorage.getItem('petHidden') === null) {
+        isHidden = false;
+    }
+
     let animationFrameId;
     let isDragging = false;
     let offsetX, offsetY;
@@ -36,7 +41,42 @@ document.addEventListener('DOMContentLoaded', function() {
         "你是不是在看我？",
         "我是一只爱学习的小宠物！",
         "有什么新鲜事吗？",
-        "我喜欢这里的一切！"
+        "我喜欢这里的一切！",
+        "很高兴能在这里陪伴你！",
+        "有什么需要我帮忙的吗？",
+        "我是一只很乖的小宠物哦！",
+        "你今天学习了什么新知识？",
+        "我喜欢听你讲故事！",
+        "我们一起探索这个世界吧！",
+        "我在这里等你哦！",
+        "祝你今天有个好心情！",
+        "别忘了给我点个赞哦！",
+        "我是一只充满好奇心的小宠物！",
+        "你有什么梦想吗？",
+        "我喜欢和你在一起的时光！",
+        "我们是最好的朋友！",
+        "我喜欢阳光，你呢？",
+        "我喜欢雨天，你呢？",
+        "我喜欢雪天，你呢？",
+        "我喜欢晴天，你呢？",
+        "我喜欢阴天，你呢？",
+        "我喜欢风，你呢？",
+        "我喜欢云，你呢？",
+        "我喜欢星星，你呢？",
+        "我喜欢月亮，你呢？",
+        "我喜欢太阳，你呢？",
+        "我喜欢大自然，你呢？",
+        "我喜欢读书，你呢？",
+        "我喜欢音乐，你呢？",
+        "我喜欢电影，你呢？",
+        "我喜欢旅行，你呢？",
+        "我喜欢美食，你呢？",
+        "我喜欢睡觉，你呢？",
+        "我喜欢玩耍，你呢？",
+        "我喜欢思考，你呢？",
+        "我喜欢学习，你呢？",
+        "我喜欢生活，你呢？",
+        "我喜欢你，你呢？"
     ];
 
     function savePetPosition() {
