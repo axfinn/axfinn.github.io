@@ -5,11 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentX = parseFloat(localStorage.getItem('petX')) || 50;
     let currentY = parseFloat(localStorage.getItem('petY')) || 50;
-    let isHidden = (localStorage.getItem('petHidden') === 'true');
-    // If petHidden is not explicitly set in localStorage, default to visible
-    if (localStorage.getItem('petHidden') === null) {
-        isHidden = false;
-    }
+    let isHidden = false; // Always visible on page load
 
     let animationFrameId;
     let isDragging = false;
@@ -221,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial position and visibility
     pet.style.left = currentX + 'px';
     pet.style.top = currentY + 'px';
-    savePetVisibility(); // Apply initial visibility
+    
 
     // Start animation if not hidden
     if (!isHidden) {
