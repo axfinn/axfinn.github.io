@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isHidden && !isDragging) {
             showSpeechBubble(getRandomMessage());
         }
-    }, 15000); // Every 15 seconds
+    }, 5000); // Every 5 seconds
 
     // Pet speaks when clicked
     pet.addEventListener('click', (e) => {
@@ -309,4 +309,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial cursor style
     pet.style.cursor = 'grab';
+
+    // Pet speaks immediately on page load
+    if (!isHidden) {
+        showSpeechBubble(getRandomMessage());
+    }
 });
