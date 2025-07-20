@@ -1217,7 +1217,7 @@ toc-nav  scrollspy
     right: 20px;
     width: 100px;
     height: 100px;
-    cursor: pointer;
+    cursor: grab;
     z-index: 9999;
     transition: left 0.5s ease-out, top 0.5s ease-out; /* Smooth movement */
 }
@@ -1264,4 +1264,31 @@ toc-nav  scrollspy
     border-style: solid;
     border-color: #fff transparent transparent transparent;
     margin-top: 1px; /* To cover the border triangle */
+}
+
+#pet-toggle-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease-in-out;
+}
+
+#blog-pet:hover #pet-toggle-button {
+    opacity: 1; /* Show on hover */
+}
+
+#blog-pet.hidden {
+    display: none;
 }
