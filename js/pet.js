@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentX = parseFloat(localStorage.getItem('petX')) || 50;
     let currentY = parseFloat(localStorage.getItem('petY')) || 50;
     let isHidden = localStorage.getItem('petHidden') === 'true';
-    let targetX = currentX;
-    let targetY = currentY;
     let animationFrameId;
     let isDragging = false;
     let offsetX, offsetY;
@@ -28,27 +26,41 @@ document.addEventListener('DOMContentLoaded', function() {
         "有什么问题可以问我哦，虽然我只会说这些话。",
         "咕噜咕噜~",
         "喵呜~",
-        "汪汪！"
+        "汪汪！",
+        "今天天气真好！",
+        "你喜欢我的新家吗？",
+        "我正在思考人生的意义...",
+        "嘘，别吵，我在听风的声音。",
+        "要不要一起玩？",
+        "我有点困了，打个盹先。",
+        "你是不是在看我？",
+        "我是一只爱学习的小宠物！",
+        "有什么新鲜事吗？",
+        "我喜欢这里的一切！"
     ];
 
     function savePetPosition() {
         localStorage.setItem('petX', currentX);
         localStorage.setItem('petY', currentY);
+        console.log('Pet position saved:', currentX, currentY);
     }
 
     function savePetVisibility() {
         localStorage.setItem('petHidden', isHidden);
-        pet.style.display = isHidden ? 'none' : 'block';
+        pet.classList.toggle('hidden', isHidden); // Use classList for transitions
+        console.log('Pet visibility saved:', isHidden ? 'hidden' : 'visible');
     }
 
     function showSpeechBubble(message) {
         speechBubble.textContent = message;
         speechBubble.style.opacity = '1';
         speechBubble.style.transform = 'scale(1)';
+        console.log('Pet says:', message);
         clearTimeout(speechBubble.timer);
         speechBubble.timer = setTimeout(() => {
             speechBubble.style.opacity = '0';
             speechBubble.style.transform = 'scale(0.8)';
+            console.log('Speech bubble hidden.');
         }, 3000);
     }
 
@@ -57,13 +69,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function setRandomTarget() {
-        targetX = Math.random() * (window.innerWidth - pet.offsetWidth);
-        targetY = Math.random() * (window.innerHeight - pet.offsetHeight);
+        // Ensure pet stays within viewport boundaries
+        const maxX = window.innerWidth - pet.offsetWidth;
+        const maxY = window.innerHeight - pet.offsetHeight;
+        targetX = Math.random() * maxX;
+        targetY = Math.random() * maxY;
+        console.log('New random target:', targetX, targetY);
     }
 
     function animatePet() {
-        if (isDragging || isHidden) {
-            animationFrameId = requestAnimationFrame(animatePet);
+        if (isHidden || isDragging) {
+            // If hidden or dragging, stop the animation loop
+            cancelAnimationFrame(animationFrameId);
+            console.log('Animation stopped: Pet is hidden or being dragged.');
             return;
         }
 
@@ -82,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animationFrameId = requestAnimationFrame(animatePet);
     }
 
-    // Initialize pet position and visibility
+    // Initial position and visibility
     pet.style.left = currentX + 'px';
     pet.style.top = currentY + 'px';
     savePetVisibility(); // Apply initial visibility
@@ -104,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pet.addEventListener('click', (e) => {
         if (e.target.id !== 'pet-toggle-button') {
             showSpeechBubble("你点我啦！" + getRandomMessage());
+            console.log('Pet clicked.');
         }
     });
 
@@ -111,12 +130,14 @@ document.addEventListener('DOMContentLoaded', function() {
     pet.addEventListener('mouseenter', () => {
         if (!isHidden && !isDragging) {
             showSpeechBubble("你好！");
+            console.log('Pet hovered.');
         }
     });
 
     pet.addEventListener('mouseleave', () => {
         speechBubble.style.opacity = '0';
         speechBubble.style.transform = 'scale(0.8)';
+        console.log('Mouse left pet area.');
     });
 
     // Drag functionality
@@ -127,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
         offsetX = e.clientX - pet.getBoundingClientRect().left;
         offsetY = e.clientY - pet.getBoundingClientRect().top;
         pet.style.cursor = 'grabbing';
+        console.log('Drag started.');
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -147,8 +169,12 @@ document.addEventListener('DOMContentLoaded', function() {
             isDragging = false;
             savePetPosition(); // Save new position
             pet.style.cursor = 'grab';
-            setRandomTarget(); // Set new target from current position
-            animatePet(); // Resume animation
+            // Only resume animation if not hidden
+            if (!isHidden) {
+                setRandomTarget(); // Set new target from current position
+                animatePet(); // Resume animation
+            }
+            console.log('Drag ended.');
         }
     });
 
@@ -160,8 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isHidden) {
             setRandomTarget();
             animatePet();
+            console.log('Pet shown.');
         } else {
             cancelAnimationFrame(animationFrameId);
+            console.log('Pet hidden.');
         }
     });
 
