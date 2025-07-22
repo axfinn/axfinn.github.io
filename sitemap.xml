@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://axfinn.github.io/</loc>
+    <lastmod>2025-07-23T10:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://axfinn.github.io/blog/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
@@ -24,9 +27,6 @@
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/blog/2025-07/hotel-project-remote-deployment-guide/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/jinja2/</loc>
@@ -367,9 +367,6 @@
   </url><url>
     <loc>https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2025-07-18T15:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/moment/</loc>
-    <lastmod>2024-07-18T14:50:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/about/</loc>
     <lastmod>2024-07-18T14:45:00+08:00</lastmod>
