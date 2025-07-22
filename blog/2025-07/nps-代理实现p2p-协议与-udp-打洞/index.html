@@ -344,17 +344,17 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
 <p><code>p2p.go</code> 文件定义了 <code>P2PServer</code> 结构体，它是 NPS 实现 P2P 代理的核心。</p>
 <h3 id="p2pserver-结构体"><code>P2PServer</code> 结构体</h3>
 <p><code>P2PServer</code> 结构体包含了 P2P 代理所需的关键信息：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">P2PServer</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">BaseServer</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p2pPort</span>  <span class="kt">int</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p2p</span>      <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">p2p</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">listener</span> <span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPConn</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">p2p</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">visitorAddr</span>  <span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">providerAddr</span> <span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">P2PServer</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BaseServer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p2pPort</span>  <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p2p</span>      <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">p2p</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">listener</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPConn</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">p2p</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">visitorAddr</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">providerAddr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><code>BaseServer</code>：继承了 <code>base.go</code> 中定义的通用功能。</li>
 <li><code>p2pPort int</code>：P2P 服务监听的 UDP 端口。</li>
@@ -364,64 +364,64 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
 <p><code>NewP2PServer()</code> 函数用于创建并初始化一个 <code>P2PServer</code> 实例。</p>
 <h3 id="start-方法启动-p2p-udp-监听"><code>Start()</code> 方法：启动 P2P UDP 监听</h3>
 <p><code>P2PServer</code> 的 <code>Start()</code> 方法负责启动 UDP 监听，并为每个接收到的 UDP 数据包调用 <code>handleP2P()</code> 方法进行处理：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">P2PServer</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;start p2p server port&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">p2pPort</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ListenUDP</span><span class="p">(</span><span class="s">&#34;udp&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span><span class="p">{</span><span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="s">&#34;0.0.0.0&#34;</span><span class="p">),</span> <span class="nx">s</span><span class="p">.</span><span class="nx">p2pPort</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">buf</span> <span class="o">:=</span> <span class="nx">common</span><span class="p">.</span><span class="nx">BufPoolUdp</span><span class="p">.</span><span class="nf">Get</span><span class="p">().([]</span><span class="kt">byte</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">n</span><span class="p">,</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">.</span><span class="nf">ReadFromUDP</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span> <span class="s">&#34;use of closed network connection&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">break</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nx">s</span><span class="p">.</span><span class="nf">handleP2P</span><span class="p">(</span><span class="nx">addr</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">]))</span> <span class="c1">// 为每个 UDP 数据包启动一个 goroutine 处理</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">P2PServer</span>) <span style="color:#a6e22e">Start</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Info</span>(<span style="color:#e6db74">&#34;start p2p server port&#34;</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2pPort</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">ListenUDP</span>(<span style="color:#e6db74">&#34;udp&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>{<span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">ParseIP</span>(<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>), <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2pPort</span>, <span style="color:#e6db74">&#34;&#34;</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">BufPoolUdp</span>.<span style="color:#a6e22e">Get</span>().([]<span style="color:#66d9ef">byte</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">ReadFromUDP</span>(<span style="color:#a6e22e">buf</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#e6db74">&#34;use of closed network connection&#34;</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">handleP2P</span>(<span style="color:#a6e22e">addr</span>, string(<span style="color:#a6e22e">buf</span>[:<span style="color:#a6e22e">n</span>])) <span style="color:#75715e">// 为每个 UDP 数据包启动一个 goroutine 处理</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>NPS 会在指定的 <code>p2pPort</code> 上监听 UDP 连接。</li>
 <li>每个接收到的 UDP 数据包都会在一个新的 goroutine 中由 <code>handleP2P()</code> 函数处理，以实现并发处理。</li>
 </ul>
 <h3 id="handlep2pp2p-连接的建立与打洞"><code>handleP2P()</code>：P2P 连接的建立与打洞</h3>
 <p><code>handleP2P()</code> 方法是 P2P 连接建立的核心逻辑，它通过交换客户端的 UDP 地址信息来实现 UDP 打洞：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">P2PServer</span><span class="p">)</span> <span class="nf">handleP2P</span><span class="p">(</span><span class="nx">addr</span> <span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span><span class="p">,</span> <span class="nx">str</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">v</span>  <span class="o">*</span><span class="nx">p2p</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">ok</span> <span class="kt">bool</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">arr</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Split</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">CONN_DATA_SEQ</span><span class="p">)</span> <span class="c1">// 解析 UDP 数据包内容</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">2</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// arr[0] 是 P2P 连接的密码，arr[1] 是角色 (visitor 或 provider)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">ok</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">p2p</span><span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]];</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span> <span class="c1">// 如果是新的 P2P 会话</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">v</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">p2p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nx">p2p</span><span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="p">=</span> <span class="nx">v</span> <span class="c1">// 存储新的 P2P 会话</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;new p2p connection ,role %s , password %s ,local address %s&#34;</span><span class="p">,</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">addr</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_P2P_VISITOR</span> <span class="p">{</span> <span class="c1">// 如果是访问者 (Visitor)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">v</span><span class="p">.</span><span class="nx">visitorAddr</span> <span class="p">=</span> <span class="nx">addr</span> <span class="c1">// 记录访问者的 UDP 地址</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">20</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span> <span class="p">{</span> <span class="c1">// 尝试 20 次</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">providerAddr</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 如果提供者 (Provider) 的地址已经收到</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 互相发送对方的地址，进行 UDP 打洞</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">.</span><span class="nf">WriteTo</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">providerAddr</span><span class="p">.</span><span class="nf">String</span><span class="p">()),</span> <span class="nx">v</span><span class="p">.</span><span class="nx">visitorAddr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">.</span><span class="nf">WriteTo</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">v</span><span class="p">.</span><span class="nx">visitorAddr</span><span class="p">.</span><span class="nf">String</span><span class="p">()),</span> <span class="nx">v</span><span class="p">.</span><span class="nx">providerAddr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="k">break</span> <span class="c1">// 打洞成功，退出循环</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span> <span class="c1">// 等待 1 秒</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">delete</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">p2p</span><span class="p">,</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">// 打洞完成后，从 Map 中删除该会话</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// 如果是提供者 (Provider)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">v</span><span class="p">.</span><span class="nx">providerAddr</span> <span class="p">=</span> <span class="nx">addr</span> <span class="c1">// 记录提供者的 UDP 地址</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">P2PServer</span>) <span style="color:#a6e22e">handleP2P</span>(<span style="color:#a6e22e">addr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">UDPAddr</span>, <span style="color:#a6e22e">str</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">p2p</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ok</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">str</span>, <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">CONN_DATA_SEQ</span>) <span style="color:#75715e">// 解析 UDP 数据包内容</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">arr</span>) &lt; <span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// arr[0] 是 P2P 连接的密码，arr[1] 是角色 (visitor 或 provider)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">ok</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>[<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]]; !<span style="color:#a6e22e">ok</span> { <span style="color:#75715e">// 如果是新的 P2P 会话</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span> = new(<span style="color:#a6e22e">p2p</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>[<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]] = <span style="color:#a6e22e">v</span> <span style="color:#75715e">// 存储新的 P2P 会话</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">logs</span>.<span style="color:#a6e22e">Trace</span>(<span style="color:#e6db74">&#34;new p2p connection ,role %s , password %s ,local address %s&#34;</span>, <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">addr</span>.<span style="color:#a6e22e">String</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">common</span>.<span style="color:#a6e22e">WORK_P2P_VISITOR</span> { <span style="color:#75715e">// 如果是访问者 (Visitor)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span> = <span style="color:#a6e22e">addr</span> <span style="color:#75715e">// 记录访问者的 UDP 地址</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">20</span>; <span style="color:#a6e22e">i</span> &gt; <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> { <span style="color:#75715e">// 尝试 20 次</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#75715e">// 如果提供者 (Provider) 的地址已经收到</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 互相发送对方的地址，进行 UDP 打洞</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">WriteTo</span>([]byte(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span>.<span style="color:#a6e22e">String</span>()), <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">listener</span>.<span style="color:#a6e22e">WriteTo</span>([]byte(<span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">visitorAddr</span>.<span style="color:#a6e22e">String</span>()), <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span> <span style="color:#75715e">// 打洞成功，退出循环</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>) <span style="color:#75715e">// 等待 1 秒</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        delete(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">p2p</span>, <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e">// 打洞完成后，从 Map 中删除该会话</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">// 如果是提供者 (Provider)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">providerAddr</span> = <span style="color:#a6e22e">addr</span> <span style="color:#75715e">// 记录提供者的 UDP 地址</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><strong>UDP 打洞原理：</strong></p>
 <ol>
 <li><strong>客户端连接 P2P 服务器</strong>：当两个内网客户端（一个作为 <code>visitor</code>，一个作为 <code>provider</code>）都想建立 P2P 连接时，它们会首先向 NPS 的 P2P 服务器发送 UDP 数据包，并附带一个共享的“密码”和自己的角色。</li>
