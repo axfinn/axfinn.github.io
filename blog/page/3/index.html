@@ -363,6 +363,8 @@
 
   
 
+  
+
 
 
 
@@ -468,6 +470,15 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97">
                 <span>开发指南 (1)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5">
+                <span>技术实践 (1)</span>
               </a>
             </li>           
           
@@ -594,6 +605,8 @@
 
   
 
+  
+
 
 
 
@@ -620,7 +633,7 @@
             <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button"><span>go语言 (15)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/qwen-code" role="button"><span>qwen code (8)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/qwen-code" role="button"><span>qwen code (9)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (4)</span></a></li>
@@ -653,6 +666,9 @@
             <li><a href="https://axfinn.github.io/tags/docker" role="button"><span>docker (2)</span></a></li>
           
         
+            <li><a href="https://axfinn.github.io/tags/hugo" role="button"><span>hugo (2)</span></a></li>
+          
+        
             <li><a href="https://axfinn.github.io/tags/llm" role="button"><span>llm (2)</span></a></li>
           
         
@@ -671,9 +687,6 @@
             <li><a href="https://axfinn.github.io/tags/%E5%89%8D%E7%AB%AF" role="button"><span>前端 (2)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97" role="button"><span>开发指南 (2)</span></a></li>
-          
-        
       </div>
     </div>
 
@@ -681,11 +694,38 @@
   
 
           
+  
 
 
 
 
 
+
+
+  <hr>
+  
+    <div class="post-meta">
+      <div class="mb-2">
+        <a href="https://axfinn.github.io/series/">
+          <span class="font-weight-bold text-uppercase post-meta">
+            <i class="fas fa-bookmark pr-1" aria-hidden="true"></i> 
+            Recommend Series
+          </span>
+        </a>
+      </div>
+     
+      <div class="post-meta" >
+        
+          
+          
+            <li class="py-1"><a href="https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5"><span>Qwen Code实践 (1)</span></a></li>
+          
+        
+      </div>
+    
+      
+    </div>
+  
 
   
         </div>
@@ -707,7 +747,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  34 posts
+                  35 posts
                 </div>
               
             </div>
@@ -892,27 +932,26 @@ path (string, required): 要列出的目录的绝对路径 ignore (array, option
             
                 <div class="post-wrapper white-bg post-card">
   
-  <a href="https://axfinn.github.io/blog/2025-07/flask-sqlite-hotel-system-tutorial/">
+  <a href="https://axfinn.github.io/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">从零到一：用 Flask &#43; SQLite 打造一个轻量级酒店管理系统（前后端详解）</div>
+      <div class="px-4 post-heading">使用Qwen Code快速实现动态背景图功能</div>
       <ul class="post-meta li-x mt-1">
         
-          <li>Jul 19, 2025</li>
+          <li>Jul 23, 2025</li>
         
     
         
           <li class="middot"></li>
-          <li>5 minutes read</li>
+          <li>6 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      前言 对于许多编程初学者来说，理论知识和实际项目之间总有一道鸿沟。今天，我将带领大家跨越这道鸿沟，通过一个真实的项目——hotel 轻量级酒店管理系统，来学习如何将技术应用到实践中。
-这个项目非常适合初学者，它功能完整、代码清晰，并且覆盖了 Web 开发的方方面面：从后端逻辑、数据库设计，到前端页面渲染和用户交互。最棒的是，它还支持 Docker 一键部署！
-项目地址: git@github.com:axfinn/hotel.git
-我将从环境搭建开始，详细剖析前后端代码，让你不仅能看懂，更能学会如何构建一个属于自己的 Web 应用。
+      在现代网站设计中，动态背景图已成为提升用户体验的重要元素之一。本文将详细介绍如何使用Qwen Code智能助手快速实现一个功能丰富的动态背景图系统。
+需求分析 在开始编码之前，我们需要明确要实现的功能：
+背景图片自动轮换（使用外部图片服务） 可配置的轮换间隔时间 可调节的过渡动画时间 手动切换上一张/下一张背景图 控制面板，可展开/收起进行设置 实时状态显示 使用Qwen Code实现过程 1. 项目分析 首先，我们让Qwen Code分析项目结构，了解Hugo网站的组织方式：
 ......
     
   </a>
@@ -923,11 +962,13 @@ path (string, required): 要列出的目录的绝对路径 ignore (array, option
     <div>
       
         
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%95%99%E7%A8%8B"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 教程 </a></li>
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术实践 </a></li>
         
       
+      
+        
+          <li><a href="https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5"><i class="fas fa-bookmark pr-1" aria-hidden="true"></i>Qwen Code实践</a></li>
+        
       
     </div>
    
@@ -938,34 +979,19 @@ path (string, required): 要列出的目录的绝对路径 ignore (array, option
   <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/python" role="button">Python </a></li>
+      <li><a href="https://axfinn.github.io/tags/qwen-code" role="button">Qwen Code </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/flask" role="button">Flask </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91" role="button">前端开发 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/sqlite" role="button">SQLite </a></li>
+      <li><a href="https://axfinn.github.io/tags/hugo" role="button">Hugo </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/docker" role="button">Docker </a></li>
+      <li><a href="https://axfinn.github.io/tags/javascript" role="button">JavaScript </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90" role="button">项目分析 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1" role="button">系统设计 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%89%8D%E7%AB%AF" role="button">前端 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/jinja2" role="button">Jinja2 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/bootstrap" role="button">Bootstrap </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E6%95%99%E7%A8%8B" role="button">教程 </a></li>
+      <li><a href="https://axfinn.github.io/tags/%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF" role="button">动态背景 </a></li>
       
     
   </div>

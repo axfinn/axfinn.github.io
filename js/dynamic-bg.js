@@ -325,6 +325,15 @@ document.addEventListener('DOMContentLoaded', function() {
       backgrounds = window.dynamicBackgrounds;
     }
     
+    // If no backgrounds provided, use default external images
+    if (backgrounds.length === 0) {
+      backgrounds = [
+        'https://picsum.photos/1920/1080?random=1',
+        'https://picsum.photos/1920/1080?random=2',
+        'https://picsum.photos/1920/1080?random=3'
+      ];
+    }
+    
     // Initialize with settings
     DynamicBG.init({
       interval: 10000, // 10 seconds
