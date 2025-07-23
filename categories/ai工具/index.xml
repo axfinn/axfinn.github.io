@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI工具 on jaxiu He</title>
+    <link>https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in AI工具 on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Wed, 23 Jul 2025 15:00:00 +0800</lastBuildDate>
+    <atom:link href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qwen Code 项目概览</title>
+      <link>https://axfinn.github.io/blog/2025-07/qwen-code-project-overview/</link>
+      <pubDate>Wed, 23 Jul 2025 15:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/qwen-code-project-overview/</guid>
+      <description>&lt;h1 id=&#34;qwen-code-项目概览&#34;&gt;Qwen Code 项目概览&lt;/h1&gt;&#xA;&lt;h2 id=&#34;什么是-qwen-code&#34;&gt;什么是 Qwen Code？&lt;/h2&gt;&#xA;&lt;p&gt;Qwen Code 是一个基于 Gemini CLI 改造的命令行 AI 工作流工具，专为 Qwen3-Coder 模型优化，具有增强的解析器和工具支持。该项目的主要目标是为开发者提供一个强大的命令行界面，让他们能够利用 AI 的能力来完成各种编程任务。&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心特性&#34;&gt;核心特性&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;超越上下文限制的代码理解和编辑&lt;/strong&gt;：Qwen Code 可以处理大型代码库，不受传统模型上下文长度的限制。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;工作流自动化&lt;/strong&gt;：支持复杂的开发任务自动化，提高开发效率。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;增强的解析器&lt;/strong&gt;：改进了对代码结构的理解能力，能够更准确地解析和处理代码。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;丰富的工具集&lt;/strong&gt;：提供多种工具，包括文件系统访问、网络搜索、多文件处理等。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;安装要求&#34;&gt;安装要求&lt;/h3&gt;&#xA;&lt;p&gt;Qwen Code 需要 Node.js 20+ 版本。可以通过 npm 或从源代码安装：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

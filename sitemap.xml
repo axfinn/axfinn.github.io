@@ -2,13 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://axfinn.github.io/blog/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
+    <loc>https://axfinn.github.io/tags/ai/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://axfinn.github.io/tags/bootstrap/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
+    <loc>https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/blog/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/categories/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/cli/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/qwen-code/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/blog/2025-07/qwen-code-project-overview/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2025-07-23T15:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/bootstrap/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/docker/</loc>
@@ -26,9 +53,6 @@
     <loc>https://axfinn.github.io/blog/2025-07/hotel-project-remote-deployment-guide/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://axfinn.github.io/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://axfinn.github.io/tags/jinja2/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
@@ -38,19 +62,10 @@
     <loc>https://axfinn.github.io/tags/sqlite/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://axfinn.github.io/tags/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://axfinn.github.io/blog/2025-07/flask-sqlite-hotel-system-tutorial/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2025-07-19T11:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2025-07-19T11:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/categories/%E6%95%99%E7%A8%8B/</loc>
@@ -150,9 +165,6 @@
     <lastmod>2025-07-18T19:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/categories/ai/</loc>
-    <lastmod>2025-07-18T18:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/tags/ai/</loc>
     <lastmod>2025-07-18T18:30:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/ai-agent/</loc>
