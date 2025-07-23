@@ -370,89 +370,89 @@ Windows: 从 Git 官方网站 下载安装包。
 <p>安装完成后，在终端输入 <code>git --version</code> 验证是否成功。</p>
 <h3 id="22-配置用户信息">2.2 配置用户信息</h3>
 <p>首次使用 Git，需要配置你的用户名和邮箱，这些信息会记录在你的每次提交中。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global user.name <span style="color:#e6db74">&#34;Your Name&#34;</span>
-</span></span><span style="display:flex;"><span>git config --global user.email <span style="color:#e6db74">&#34;your_email@example.com&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config --global user.name <span class="s2">&#34;Your Name&#34;</span>
+</span></span><span class="line"><span class="cl">git config --global user.email <span class="s2">&#34;your_email@example.com&#34;</span>
 </span></span></code></pre></div><p><code>--global</code> 参数表示全局配置，对所有 Git 仓库生效。如果只想对当前仓库生效，移除 <code>--global</code> 即可。</p>
 <h3 id="23-配置默认编辑器-可选">2.3 配置默认编辑器 (可选)</h3>
 <p>Git 在需要输入提交信息时会启动一个文本编辑器。你可以配置自己喜欢的编辑器：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global core.editor <span style="color:#e6db74">&#34;vim&#34;</span> <span style="color:#75715e"># 例如设置为 Vim</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># git config --global core.editor &#34;code --wait&#34; # 例如设置为 VS Code</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config --global core.editor <span class="s2">&#34;vim&#34;</span> <span class="c1"># 例如设置为 Vim</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># git config --global core.editor &#34;code --wait&#34; # 例如设置为 VS Code</span>
 </span></span></code></pre></div><h2 id="3-git-基本操作">3. Git 基本操作</h2>
 <h3 id="31-初始化仓库">3.1 初始化仓库</h3>
 <p>在一个新项目目录中，将其转换为 Git 仓库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd my-new-project
-</span></span><span style="display:flex;"><span>git init
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> my-new-project
+</span></span><span class="line"><span class="cl">git init
 </span></span></code></pre></div><p>这会在当前目录创建一个 <code>.git</code> 隐藏文件夹，用于存储 Git 仓库的所有信息。</p>
 <h3 id="32-添加文件到暂存区">3.2 添加文件到暂存区</h3>
 <p>将工作区的修改添加到暂存区，准备提交：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add &lt;file&gt; <span style="color:#75715e"># 添加指定文件</span>
-</span></span><span style="display:flex;"><span>git add .      <span style="color:#75715e"># 添加当前目录所有修改过的文件（包括新增、修改、删除）</span>
-</span></span><span style="display:flex;"><span>git add -u     <span style="color:#75715e"># 添加已跟踪文件的修改和删除，不包括新增文件</span>
-</span></span><span style="display:flex;"><span>git add -A     <span style="color:#75715e"># 添加所有修改（包括新增、修改、删除），等同于 git add .</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;file&gt; <span class="c1"># 添加指定文件</span>
+</span></span><span class="line"><span class="cl">git add .      <span class="c1"># 添加当前目录所有修改过的文件（包括新增、修改、删除）</span>
+</span></span><span class="line"><span class="cl">git add -u     <span class="c1"># 添加已跟踪文件的修改和删除，不包括新增文件</span>
+</span></span><span class="line"><span class="cl">git add -A     <span class="c1"># 添加所有修改（包括新增、修改、删除），等同于 git add .</span>
 </span></span></code></pre></div><h3 id="33-提交更改">3.3 提交更改</h3>
 <p>将暂存区的更改提交到本地仓库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Your commit message&#34;</span> <span style="color:#75715e"># 提交并附带简短信息</span>
-</span></span><span style="display:flex;"><span>git commit <span style="color:#75715e"># 提交，会打开配置的编辑器让你输入详细信息</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Your commit message&#34;</span> <span class="c1"># 提交并附带简短信息</span>
+</span></span><span class="line"><span class="cl">git commit <span class="c1"># 提交，会打开配置的编辑器让你输入详细信息</span>
 </span></span></code></pre></div><p>提交信息应该清晰、简洁地描述本次提交做了什么。</p>
 <h3 id="34-查看状态">3.4 查看状态</h3>
 <p>查看工作区和暂存区的状态：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git status
 </span></span></code></pre></div><p>它会告诉你哪些文件已修改、哪些已暂存、哪些是未跟踪文件。</p>
 <h3 id="35-查看提交历史">3.5 查看提交历史</h3>
 <p>查看仓库的提交历史记录：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log <span style="color:#75715e"># 查看所有提交历史</span>
-</span></span><span style="display:flex;"><span>git log --oneline <span style="color:#75715e"># 简洁模式，每条提交一行</span>
-</span></span><span style="display:flex;"><span>git log --graph --oneline --all <span style="color:#75715e"># 查看所有分支的图形化历史</span>
-</span></span><span style="display:flex;"><span>git log -p &lt;file&gt; <span style="color:#75715e"># 查看某个文件的修改历史及具体内容差异</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log <span class="c1"># 查看所有提交历史</span>
+</span></span><span class="line"><span class="cl">git log --oneline <span class="c1"># 简洁模式，每条提交一行</span>
+</span></span><span class="line"><span class="cl">git log --graph --oneline --all <span class="c1"># 查看所有分支的图形化历史</span>
+</span></span><span class="line"><span class="cl">git log -p &lt;file&gt; <span class="c1"># 查看某个文件的修改历史及具体内容差异</span>
 </span></span></code></pre></div><h3 id="36-撤销操作">3.6 撤销操作</h3>
 <ul>
 <li><strong>撤销工作区的修改</strong> (未 <code>git add</code>)：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"></code></pre></div></li>
 </ul>
-<p>git checkout &ndash; <!-- raw HTML omitted --> # 丢弃某个文件的所有本地修改
-git restore <!-- raw HTML omitted --> # Git 2.23+ 推荐使用
+<p>git checkout &ndash; <file> # 丢弃某个文件的所有本地修改
+git restore <file> # Git 2.23+ 推荐使用
 ```</p>
 <ul>
 <li><strong>撤销暂存区的修改</strong> (已 <code>git add</code> 但未 <code>git commit</code>)：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"></code></pre></div></li>
 </ul>
-<p>git reset HEAD <!-- raw HTML omitted --> # 将文件从暂存区移回工作区
-git restore &ndash;staged <!-- raw HTML omitted --> # Git 2.23+ 推荐使用
+<p>git reset HEAD <file> # 将文件从暂存区移回工作区
+git restore &ndash;staged <file> # Git 2.23+ 推荐使用
 ```</p>
 <ul>
 <li><strong>撤销已提交的修改</strong> (已 <code>git commit</code>)：
 <ul>
 <li><strong>回退到某个版本</strong> (会创建新的提交，推荐用于已推送的提交)：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"></code></pre></div></li>
 </ul>
 </li>
 </ul>
-<p>git revert <!-- raw HTML omitted --> # 撤销指定提交，并生成一个新的提交来抵消之前的更改
+<p>git revert <commit-hash> # 撤销指定提交，并生成一个新的提交来抵消之前的更改
 <code>*   **重置到某个版本** (会修改历史，慎用，尤其是在已推送的公共分支上)：</code>bash
-git reset &ndash;hard <!-- raw HTML omitted --> # 彻底丢弃指定提交之后的所有更改
-git reset &ndash;soft <!-- raw HTML omitted --> # 移动 HEAD 指针，但保留更改在暂存区
-git reset &ndash;mixed <!-- raw HTML omitted --> # 移动 HEAD 指针，并清空暂存区，保留更改在工作区 (默认)
+git reset &ndash;hard <commit-hash> # 彻底丢弃指定提交之后的所有更改
+git reset &ndash;soft <commit-hash> # 移动 HEAD 指针，但保留更改在暂存区
+git reset &ndash;mixed <commit-hash> # 移动 HEAD 指针，并清空暂存区，保留更改在工作区 (默认)
 ```</p>
 <h2 id="4-git-分支管理">4. Git 分支管理</h2>
 <p>分支是 Git 的灵魂，它让并行开发变得简单高效。</p>
 <h3 id="41-查看分支">4.1 查看分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch <span style="color:#75715e"># 列出所有本地分支，当前分支会用 * 标记</span>
-</span></span><span style="display:flex;"><span>git branch -a <span style="color:#75715e"># 列出所有本地和远程分支</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch <span class="c1"># 列出所有本地分支，当前分支会用 * 标记</span>
+</span></span><span class="line"><span class="cl">git branch -a <span class="c1"># 列出所有本地和远程分支</span>
 </span></span></code></pre></div><h3 id="42-创建分支">4.2 创建分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch &lt;new-branch-name&gt; <span style="color:#75715e"># 创建新分支，但仍停留在当前分支</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch &lt;new-branch-name&gt; <span class="c1"># 创建新分支，但仍停留在当前分支</span>
 </span></span></code></pre></div><h3 id="43-切换分支">4.3 切换分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout &lt;branch-name&gt; <span style="color:#75715e"># 切换到指定分支</span>
-</span></span><span style="display:flex;"><span>git switch &lt;branch-name&gt; <span style="color:#75715e"># Git 2.23+ 推荐使用</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout &lt;branch-name&gt; <span class="c1"># 切换到指定分支</span>
+</span></span><span class="line"><span class="cl">git switch &lt;branch-name&gt; <span class="c1"># Git 2.23+ 推荐使用</span>
 </span></span></code></pre></div><h3 id="44-创建并切换分支">4.4 创建并切换分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b &lt;new-branch-name&gt; <span style="color:#75715e"># 创建并立即切换到新分支</span>
-</span></span><span style="display:flex;"><span>git switch -c &lt;new-branch-name&gt; <span style="color:#75715e"># Git 2.23+ 推荐使用</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout -b &lt;new-branch-name&gt; <span class="c1"># 创建并立即切换到新分支</span>
+</span></span><span class="line"><span class="cl">git switch -c &lt;new-branch-name&gt; <span class="c1"># Git 2.23+ 推荐使用</span>
 </span></span></code></pre></div><h3 id="45-合并分支">4.5 合并分支</h3>
 <p>将一个分支的更改合并到当前分支：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;source-branch&gt; <span style="color:#75715e"># 将 source-branch 合并到当前分支</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git merge &lt;source-branch&gt; <span class="c1"># 将 source-branch 合并到当前分支</span>
 </span></span></code></pre></div><p>合并时可能会遇到冲突 (Conflict)，需要手动解决。</p>
 <h3 id="46-删除分支">4.6 删除分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d &lt;branch-name&gt; <span style="color:#75715e"># 删除已合并的分支</span>
-</span></span><span style="display:flex;"><span>git branch -D &lt;branch-name&gt; <span style="color:#75715e"># 强制删除未合并的分支 (慎用)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -d &lt;branch-name&gt; <span class="c1"># 删除已合并的分支</span>
+</span></span><span class="line"><span class="cl">git branch -D &lt;branch-name&gt; <span class="c1"># 强制删除未合并的分支 (慎用)</span>
 </span></span></code></pre></div><h3 id="47-解决合并冲突">4.7 解决合并冲突</h3>
 <p>当两个分支对同一文件的同一部分进行了不同的修改时，会发生冲突。Git 会在文件中标记冲突区域：</p>
 <pre tabindex="0"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
@@ -461,46 +461,46 @@ git reset &ndash;mixed <!-- raw HTML omitted --> # 移动 HEAD 指针，并清�
 // 合并分支的修改
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch-name&gt;
 </code></pre><p>你需要手动编辑文件，选择保留哪些内容，然后删除冲突标记。解决冲突后，执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add &lt;conflicted-file&gt; <span style="color:#75715e"># 将解决后的文件添加到暂存区</span>
-</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Resolve merge conflict&#34;</span> <span style="color:#75715e"># 提交合并结果</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;conflicted-file&gt; <span class="c1"># 将解决后的文件添加到暂存区</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Resolve merge conflict&#34;</span> <span class="c1"># 提交合并结果</span>
 </span></span></code></pre></div><h2 id="5-git-远程协作">5. Git 远程协作</h2>
 <p>Git 的强大之处在于其分布式特性，可以方便地与远程仓库协作。</p>
 <h3 id="51-查看远程仓库">5.1 查看远程仓库</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote <span style="color:#75715e"># 列出所有远程仓库名称 (通常是 origin)</span>
-</span></span><span style="display:flex;"><span>git remote -v <span style="color:#75715e"># 列出所有远程仓库的详细信息 (URL)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git remote <span class="c1"># 列出所有远程仓库名称 (通常是 origin)</span>
+</span></span><span class="line"><span class="cl">git remote -v <span class="c1"># 列出所有远程仓库的详细信息 (URL)</span>
 </span></span></code></pre></div><h3 id="52-添加远程仓库">5.2 添加远程仓库</h3>
 <p>将本地仓库关联到远程仓库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add origin &lt;remote-repository-url&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git remote add origin &lt;remote-repository-url&gt;
 </span></span></code></pre></div><p>通常，<code>origin</code> 是默认的远程仓库名称。</p>
 <h3 id="53-从远程仓库拉取">5.3 从远程仓库拉取</h3>
 <p>获取远程仓库的最新更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin <span style="color:#75715e"># 从远程仓库下载最新数据，但不合并到本地分支</span>
-</span></span><span style="display:flex;"><span>git pull origin &lt;branch-name&gt; <span style="color:#75715e"># 下载最新数据并合并到当前分支 (等同于 fetch + merge)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git fetch origin <span class="c1"># 从远程仓库下载最新数据，但不合并到本地分支</span>
+</span></span><span class="line"><span class="cl">git pull origin &lt;branch-name&gt; <span class="c1"># 下载最新数据并合并到当前分支 (等同于 fetch + merge)</span>
 </span></span></code></pre></div><p><code>git pull</code> 经常用于同步远程 <code>main</code> 或 <code>master</code> 分支的最新代码。</p>
 <h3 id="54-推送到远程仓库">5.4 推送到远程仓库</h3>
 <p>将本地提交推送到远程仓库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin &lt;branch-name&gt; <span style="color:#75715e"># 将本地分支推送到远程仓库</span>
-</span></span><span style="display:flex;"><span>git push -u origin &lt;branch-name&gt; <span style="color:#75715e"># 首次推送时，设置本地分支与远程分支的关联</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push origin &lt;branch-name&gt; <span class="c1"># 将本地分支推送到远程仓库</span>
+</span></span><span class="line"><span class="cl">git push -u origin &lt;branch-name&gt; <span class="c1"># 首次推送时，设置本地分支与远程分支的关联</span>
 </span></span></code></pre></div><h3 id="55-克隆远程仓库">5.5 克隆远程仓库</h3>
 <p>从远程仓库完整地复制一份到本地：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;remote-repository-url&gt; <span style="color:#75715e"># 克隆整个仓库，包括所有历史记录和分支</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone &lt;remote-repository-url&gt; <span class="c1"># 克隆整个仓库，包括所有历史记录和分支</span>
 </span></span></code></pre></div><h2 id="6-git-高级技巧-可选">6. Git 高级技巧 (可选)</h2>
 <h3 id="61-rebase-变基">6.1 Rebase (变基)</h3>
 <p><code>rebase</code> 可以将一系列提交“移动”到另一个基底上，使提交历史更线性、更整洁。但它会改写历史，<strong>切勿对已推送到公共仓库的提交进行 rebase</strong>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase &lt;base-branch&gt; <span style="color:#75715e"># 将当前分支的提交“嫁接”到 base-branch 的最新提交之后</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rebase &lt;base-branch&gt; <span class="c1"># 将当前分支的提交“嫁接”到 base-branch 的最新提交之后</span>
 </span></span></code></pre></div><h3 id="62-stash-暂存">6.2 Stash (暂存)</h3>
 <p>当你正在进行一项工作，但需要临时切换到另一个任务时，可以使用 <code>stash</code> 暂存当前工作区的修改，稍后再恢复。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git stash save <span style="color:#e6db74">&#34;message&#34;</span> <span style="color:#75715e"># 暂存当前工作区和暂存区的修改</span>
-</span></span><span style="display:flex;"><span>git stash list <span style="color:#75715e"># 查看所有暂存列表</span>
-</span></span><span style="display:flex;"><span>git stash pop <span style="color:#75715e"># 恢复最近一次暂存的修改并删除该暂存</span>
-</span></span><span style="display:flex;"><span>git stash apply <span style="color:#75715e"># 恢复最近一次暂存的修改但不删除该暂存</span>
-</span></span><span style="display:flex;"><span>git stash drop <span style="color:#75715e"># 删除最近一次暂存</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git stash save <span class="s2">&#34;message&#34;</span> <span class="c1"># 暂存当前工作区和暂存区的修改</span>
+</span></span><span class="line"><span class="cl">git stash list <span class="c1"># 查看所有暂存列表</span>
+</span></span><span class="line"><span class="cl">git stash pop <span class="c1"># 恢复最近一次暂存的修改并删除该暂存</span>
+</span></span><span class="line"><span class="cl">git stash apply <span class="c1"># 恢复最近一次暂存的修改但不删除该暂存</span>
+</span></span><span class="line"><span class="cl">git stash drop <span class="c1"># 删除最近一次暂存</span>
 </span></span></code></pre></div><h3 id="63-tag-标签">6.3 Tag (标签)</h3>
 <p>标签用于标记重要的版本发布点，例如 <code>v1.0.0</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag &lt;tag-name&gt; <span style="color:#75715e"># 创建轻量标签</span>
-</span></span><span style="display:flex;"><span>git tag -a &lt;tag-name&gt; -m <span style="color:#e6db74">&#34;message&#34;</span> <span style="color:#75715e"># 创建附注标签 (推荐)</span>
-</span></span><span style="display:flex;"><span>git push origin &lt;tag-name&gt; <span style="color:#75715e"># 推送单个标签</span>
-</span></span><span style="display:flex;"><span>git push origin --tags <span style="color:#75715e"># 推送所有标签</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag &lt;tag-name&gt; <span class="c1"># 创建轻量标签</span>
+</span></span><span class="line"><span class="cl">git tag -a &lt;tag-name&gt; -m <span class="s2">&#34;message&#34;</span> <span class="c1"># 创建附注标签 (推荐)</span>
+</span></span><span class="line"><span class="cl">git push origin &lt;tag-name&gt; <span class="c1"># 推送单个标签</span>
+</span></span><span class="line"><span class="cl">git push origin --tags <span class="c1"># 推送所有标签</span>
 </span></span></code></pre></div><h3 id="64-gitignore">6.4 Gitignore</h3>
 <p><code>.gitignore</code> 文件用于指定 Git 应该忽略的文件或目录，例如编译生成的文件、日志文件、依赖包等。</p>
 <p>示例 <code>.gitignore</code> 内容：</p>

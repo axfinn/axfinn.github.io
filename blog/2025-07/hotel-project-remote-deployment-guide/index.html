@@ -353,23 +353,23 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
 <p>请按照以下步骤在您的远程服务器上部署 <code>hotel</code> 项目：</p>
 <h3 id="1-连接到您的远程服务器">1. 连接到您的远程服务器</h3>
 <p>使用 SSH 连接到您的远程服务器：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh your_username@your_server_ip
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh your_username@your_server_ip
 </span></span></code></pre></div><h3 id="2-克隆仓库">2. 克隆仓库</h3>
 <p>导航到您希望部署的目录（例如，<code>/opt/apps/</code>），然后克隆 <code>hotel</code> 项目仓库：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /opt/apps/ <span style="color:#75715e"># 或您偏好的目录</span>
-</span></span><span style="display:flex;"><span>git clone git@github.com:axfinn/hotel.git
-</span></span><span style="display:flex;"><span>cd hotel
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /opt/apps/ <span class="c1"># 或您偏好的目录</span>
+</span></span><span class="line"><span class="cl">git clone git@github.com:axfinn/hotel.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> hotel
 </span></span></code></pre></div><h3 id="3-构建-docker-镜像">3. 构建 Docker 镜像</h3>
 <p>项目根目录下的 <code>Dockerfile</code> 定义了如何构建应用程序的 Docker 镜像。使用以下命令构建镜像：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t hotel-app .
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t hotel-app .
 </span></span></code></pre></div><p>此命令将从当前目录的 <code>Dockerfile</code> 构建一个名为 <code>hotel-app</code> 的镜像。</p>
 <h3 id="4-运行-docker-容器">4. 运行 Docker 容器</h3>
 <p>镜像构建完成后，您可以在 Docker 容器中运行应用程序。关键在于将应用程序的端口（5000）映射到您主机上的一个端口（例如 80 或 8000），并挂载一个卷用于数据持久化存储。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name hotel-instance <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 80:5000 <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -v /path/on/host/for/data:/app/hotel.db <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  hotel-app
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name hotel-instance <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 80:5000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -v /path/on/host/for/data:/app/hotel.db <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  hotel-app
 </span></span></code></pre></div><p><strong>参数说明：</strong></p>
 <ul>
 <li><code>-d</code>: 在分离模式（后台）运行容器。</li>
@@ -383,7 +383,7 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
 <ul>
 <li>
 <p><strong>检查容器状态</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker ps
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps
 </span></span></code></pre></div><p>您应该看到 <code>hotel-instance</code> 被列出，状态为 <code>Up</code>。</p>
 </li>
 <li>
