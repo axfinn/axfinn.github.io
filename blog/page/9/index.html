@@ -357,8 +357,6 @@
 
   
 
-  
-
 
 
 
@@ -428,15 +426,6 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">
                 <span>架构设计 (2)</span>
-              </a>
-            </li>           
-          
-            
-              <li class="middot"></li>
-            
-            <li class="py-1">
-              <a href="https://axfinn.github.io/categories/blog">
-                <span>Blog (1)</span>
               </a>
             </li>           
           
@@ -521,8 +510,6 @@
 
     
           
-
-  
 
   
 
@@ -703,7 +690,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  34 posts
+                  33 posts
                 </div>
               
             </div>
@@ -743,90 +730,10 @@
         <a href="https://axfinn.github.io/blog/page/10/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://axfinn.github.io/blog/page/12/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="https://axfinn.github.io/blog/page/11/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
             </div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0http/https-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">NPS 代理实现：HTTP/HTTPS 域名解析与高级功能</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 18, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>4 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      引言 在 NPS 系列文章中，我们已经深入探讨了 NPS 的多种代理模式。本篇文章将聚焦于 NPS 的 HTTP/HTTPS 域名解析功能，这是 NPS 实现 Web 服务穿透的核心。我们将通过分析 nps/server/proxy/http.go 文件，揭示 NPS 如何处理 HTTP 和 HTTPS 请求，并实现缓存、认证、动态后端切换等高级功能。
-HTTP/HTTPS 域名解析的需求 在实际应用中，我们经常需要将内网的 Web 服务通过域名暴露到公网。这涉及到：
-域名到内网 IP 的映射：根据请求的域名，将流量转发到内网中对应的 Web 服务器。 HTTP/HTTPS 协议处理：NPS 需要能够处理标准的 HTTP 请求，以及加密的 HTTPS 请求。 高级功能：为了提升性能、安全性和灵活性，通常还需要支持缓存、认证、负载均衡、自动 HTTPS 等功能。 http.go：HTTP/HTTPS 域名解析的实现 http.go 文件定义了 httpServer 结构体，它是 NPS 实现 HTTP/HTTPS 域名解析的核心。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/http" role="button">HTTP </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/https" role="button">HTTPS </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90" role="button">域名解析 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" role="button">反向代理 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E7%BC%93%E5%AD%98" role="button">缓存 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E8%AE%A4%E8%AF%81" role="button">认证 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -962,6 +869,76 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
       
     
       <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1" role="button">网络通信 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">NPS 代理实现：UDP 代理与数据转发</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种 TCP 相关的代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理）和 P2P 代理。本篇文章将聚焦于 NPS 的 UDP 代理实现。我们将通过分析 nps/server/proxy/udp.go 文件，揭示 NPS 如何处理 UDP 流量，实现内网 UDP 服务的穿透。
+UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接的传输协议，常用于对实时性要求较高、允许少量丢包的应用，如 DNS 查询、在线游戏、音视频通话等。由于 UDP 的无连接特性，其代理实现与 TCP 代理有所不同，主要挑战在于：
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/udp%E4%BB%A3%E7%90%86" role="button">UDP代理 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE" role="button">网络协议 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
       
     
   </div>
