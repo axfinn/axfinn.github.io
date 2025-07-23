@@ -359,7 +359,7 @@ path (string, required): 要列出的目录的绝对路径 ignore (array, option
 
     
       <li class="middot"></li>
-      <li>3 minutes read</li>
+      <li>4 minutes read</li>
     
   </ul>
   
@@ -511,7 +511,36 @@ graph TD
 </span></span><span class="line"><span class="cl">  <span class="nx">new_string</span><span class="o">:</span> <span class="s2">&#34;production&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">expected_replacements</span><span class="o">:</span> <span class="mi">3</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
-</span></span></code></pre></div><h2 id="网络工具">网络工具</h2>
+</span></span></code></pre></div><p>文件系统工具的使用流程可以用下图表示：</p>
+<div class="mermaid">
+
+graph LR
+    A[AI模型] --> B{需要文件操作?}
+    B -->|是| C[选择合适的工具]
+    C --> D[list_directory]
+    C --> E[read_file]
+    C --> F[write_file]
+    C --> G[glob]
+    C --> H[search_file_content]
+    C --> I[replace]
+    
+    D --> J[获取目录结构]
+    E --> K[读取文件内容]
+    F --> L[写入文件内容]
+    G --> M[查找文件]
+    H --> N[搜索文件内容]
+    I --> O[替换文件内容]
+    
+    J --> P[返回结果给AI]
+    K --> P
+    L --> P
+    M --> P
+    N --> P
+    O --> P
+    P --> A
+
+</div>
+<h2 id="网络工具">网络工具</h2>
 <h3 id="google_web_search网络搜索工具"><code>google_web_search</code>：网络搜索工具</h3>
 <p>参数：</p>
 <ul>
@@ -569,6 +598,27 @@ graph TD
 <li><strong>沙箱机制</strong>：在隔离环境中执行潜在危险操作</li>
 <li><strong>权限控制</strong>：限制对文件系统和网络的访问</li>
 </ol>
+<p>安全机制的架构可以用下图表示：</p>
+<div class="mermaid">
+
+graph TD
+    A[工具执行请求] --> B[权限检查]
+    B --> C{权限是否足够?}
+    C -->|否| D[拒绝执行]
+    C -->|是| E[确认提示]
+    E --> F{用户是否确认?}
+    F -->|否| D
+    F -->|是| G[沙箱环境检查]
+    G --> H{是否需要沙箱?}
+    H -->|否| I[直接执行]
+    H -->|是| J[创建沙箱环境]
+    J --> K[在沙箱中执行]
+    K --> L[清理沙箱环境]
+    L --> M[返回执行结果]
+    I --> M
+    M --> N[AI模型]
+
+</div>
 <h2 id="总结">总结</h2>
 <p>Qwen Code 的工具集为开发者提供了强大的能力，可以与本地环境进行深度交互。通过这些工具，AI 可以帮助开发者完成复杂的编程任务，提高工作效率。在使用这些工具时，安全机制确保了用户环境的安全性。</p>
 
@@ -619,6 +669,13 @@ graph TD
             </div>
             
             <div class="col-md-6 text-right" >
+              
+                <a href=https://axfinn.github.io/blog/2025-07/qwen-code-cli-usage/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>Qwen Code CLI 使用详解</span>
+                  </div>
+                </a>
               
             </div>
           </div>

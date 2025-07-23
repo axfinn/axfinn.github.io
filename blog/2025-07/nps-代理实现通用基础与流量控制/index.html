@@ -325,7 +325,7 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 
     
       <li class="middot"></li>
-      <li>4 minutes read</li>
+      <li>5 minutes read</li>
     
   </ul>
   
@@ -357,6 +357,43 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 </span></span></code></pre></div><p>这个接口定义了与 <code>bridge</code> 模块（服务端与客户端通信的桥梁）交互的方法。<code>SendLinkInfo</code> 方法负责将客户端的连接信息 (<code>link</code>) 和隧道信息 (<code>t</code>) 发送给 <code>bridge</code>，并从 <code>bridge</code> 获取到与目标服务建立的连接 (<code>target net.Conn</code>)。这表明 <code>proxy</code> 模块本身并不直接与客户端通信，而是通过 <code>bridge</code> 模块进行抽象和解耦。</p>
 </li>
 </ul>
+<p>NPS 代理服务的核心接口可以用下图表示：</p>
+<div class="mermaid">
+
+classDiagram
+    class Service {
+        <<interface>>
+        +Start() error
+        +Close() error
+    }
+    
+    class NetBridge {
+        <<interface>>
+        +SendLinkInfo(clientId int, link *conn.Link, t *file.Tunnel) (target net.Conn, err error)
+    }
+    
+    class BaseServer {
+        -id int
+        -bridge NetBridge
+        -task *file.Tunnel
+        -errorContent []byte
+        -sync.Mutex
+        +FlowAdd(in, out int64)
+        +FlowAddHost(host *file.Host, in, out int64)
+        +CheckFlowAndConnNum(client *file.Client)
+        +auth(r *http.Request, c *conn.Conn, u, p string)
+        +IsGlobalBlackIp(ipPort string)
+        +DealClient()
+    }
+    
+    Service <|-- TcpProxy
+    Service <|-- UdpProxy
+    Service <|-- HttpProxy
+    Service <|-- Socks5Proxy
+    NetBridge <|.. BridgeModule
+    BaseServer ..> NetBridge
+
+</div>
 <h3 id="baseserver通用代理服务结构体"><code>BaseServer</code>：通用代理服务结构体</h3>
 <p><code>BaseServer</code> 是一个嵌入在具体代理服务结构体中的基础结构体，它包含了所有代理服务通用的属性和方法：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">BaseServer</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -398,6 +435,34 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 </ul>
 </li>
 </ul>
+<p>流量统计与控制的流程可以用下图表示：</p>
+<div class="mermaid">
+
+flowchart TD
+    A[客户端连接] --> B[检查黑名单]
+    B --> C{是否在黑名单中?}
+    C -->|是| D[关闭连接]
+    C -->|否| E[构建conn.Link]
+    E --> F[通过bridge获取目标连接]
+    F --> G{是否成功获取?}
+    G -->|否| H[返回错误]
+    G -->|是| I[开始数据拷贝]
+    I --> J[流量统计]
+    J --> K[累加隧道流量]
+    K --> L[累加主机流量]
+    L --> M[检查流量限制]
+    M --> N{是否超限?}
+    N -->|是| O[断开连接]
+    N -->|否| P[继续数据传输]
+    
+    J --> Q[加锁保护]
+    K --> Q
+    L --> Q
+    M --> Q
+    Q --> R[解锁]
+    R --> S[完成数据传输]
+
+</div>
 <h3 id="安全与认证">安全与认证</h3>
 <p><code>base.go</code> 也包含了基本的安全检查和认证逻辑：</p>
 <ul>
@@ -428,6 +493,29 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 <li><strong>通过 <code>bridge</code> 获取目标连接</strong>：调用 <code>s.bridge.SendLinkInfo(client.Id, link, s.task)</code> 将 <code>link</code> 信息发送给 <code>bridge</code> 模块。<code>bridge</code> 模块会负责与客户端建立实际的隧道连接，并返回一个与目标服务建立的 <code>net.Conn</code>。</li>
 <li><strong>数据拷贝</strong>：如果成功获取到目标连接，则调用 <code>conn.CopyWaitGroup(target, c.Conn, ...)</code> 开始在客户端连接 (<code>c.Conn</code>) 和目标连接 (<code>target</code>) 之间进行双向数据拷贝。<code>CopyWaitGroup</code> 会处理加密、压缩、流量限制等逻辑。</li>
 </ol>
+<p><code>DealClient()</code> 的处理流程可以用下图表示：</p>
+<div class="mermaid">
+
+sequenceDiagram
+    participant Client
+    participant BaseServer
+    participant Bridge
+    participant Target
+    
+    Client->>BaseServer: 发起连接请求
+    BaseServer->>BaseServer: 黑名单检查
+    BaseServer->>BaseServer: 构建conn.Link
+    BaseServer->>Bridge: SendLinkInfo
+    Bridge->>Client: 建立隧道连接
+    Bridge->>Target: 建立目标连接
+    Bridge-->>BaseServer: 返回目标连接
+    BaseServer->>BaseServer: 数据拷贝准备
+    BaseServer->>Client: 开始数据传输
+    BaseServer->>Target: 开始数据传输
+    BaseServer->>BaseServer: 流量统计
+    BaseServer->>BaseServer: 连接数检查
+
+</div>
 <h2 id="总结">总结</h2>
 <p><code>nps/server/proxy/base.go</code> 为 NPS 的所有代理服务提供了坚实的基础。它通过定义统一的接口、提供通用的 <code>BaseServer</code> 结构体，并封装了流量统计、安全检查和连接处理等核心功能，极大地简化了不同代理模式的实现。理解 <code>base.go</code> 的设计，有助于我们更好地理解 NPS 模块化和可扩展的架构。</p>
 <p>在下一篇文章中，我们将开始深入具体的代理模式实现，首先从最基础的 TCP 代理 (<code>tcp.go</code>) 开始。</p>

@@ -6,8 +6,36 @@
     <description>Recent content in Tags on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 15:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Jul 2025 16:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CLI</title>
+      <link>https://axfinn.github.io/tags/cli/</link>
+      <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/cli/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Qwen Code</title>
+      <link>https://axfinn.github.io/tags/qwen-code/</link>
+      <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/qwen-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>使用指南</title>
+      <link>https://axfinn.github.io/tags/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>开发工具</title>
+      <link>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI</title>
       <link>https://axfinn.github.io/tags/ai/</link>
@@ -16,31 +44,10 @@
       <description></description>
     </item>
     <item>
-      <title>Qwen Code</title>
-      <link>https://axfinn.github.io/tags/qwen-code/</link>
-      <pubDate>Wed, 23 Jul 2025 15:30:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/qwen-code/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>工具集</title>
       <link>https://axfinn.github.io/tags/%E5%B7%A5%E5%85%B7%E9%9B%86/</link>
       <pubDate>Wed, 23 Jul 2025 15:30:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/%E5%B7%A5%E5%85%B7%E9%9B%86/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>开发工具</title>
-      <link>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Wed, 23 Jul 2025 15:30:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CLI</title>
-      <link>https://axfinn.github.io/tags/cli/</link>
-      <pubDate>Wed, 23 Jul 2025 15:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/cli/</guid>
       <description></description>
     </item>
     <item>

@@ -9,7 +9,7 @@
   <meta name="author" content="jaxiu He">
   <meta name="description" content="引言
 在 NPS 项目概述中，我们对这款强大的内网穿透工具进行了宏观的介绍。本篇文章将深入 NPS 的服务端（Server）核心，从 nps/server/server.go 文件入手，详细剖析其架构设计、任务管理、流量处理以及系统监控等关键功能。理解 server.go 的运作机制，是掌握 NPS 核心原理的基石。
-server.go：服务端的“大脑”
+server.go：服务端的&quot;大脑&quot;
 server.go 文件是 NPS 服务端的启动入口和主要协调者。它负责初始化各项服务、管理客户端连接、调度隧道任务以及收集系统运行状态。
 核心组件概览
 在 server.go 中，我们可以看到几个关键的全局变量和结构：
@@ -18,16 +18,15 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
 RunList sync.Map：一个并发安全的 Map，用于存储当前正在运行的所有隧道（proxy.Service 实例）。通过 sync.Map，NPS 能够高效地管理和访问多个并发的隧道服务。
 once sync.Once：用于确保某些初始化操作（如 flowSession）只执行一次。
 
-初始化与任务加载
-服务端的启动从初始化开始：">
+NPS 服务端核心组件架构可以用下图表示：">
   
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 服务端核心解析：架构与流量管理">
   <meta property="og:description" content="引言 在 NPS 项目概述中，我们对这款强大的内网穿透工具进行了宏观的介绍。本篇文章将深入 NPS 的服务端（Server）核心，从 nps/server/server.go 文件入手，详细剖析其架构设计、任务管理、流量处理以及系统监控等关键功能。理解 server.go 的运作机制，是掌握 NPS 核心原理的基石。
-server.go：服务端的“大脑” server.go 文件是 NPS 服务端的启动入口和主要协调者。它负责初始化各项服务、管理客户端连接、调度隧道任务以及收集系统运行状态。
+server.go：服务端的&#34;大脑&#34; server.go 文件是 NPS 服务端的启动入口和主要协调者。它负责初始化各项服务、管理客户端连接、调度隧道任务以及收集系统运行状态。
 核心组件概览 在 server.go 中，我们可以看到几个关键的全局变量和结构：
-Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁。它负责维护客户端连接、处理客户端发送的指令以及转发数据。 RunList sync.Map：一个并发安全的 Map，用于存储当前正在运行的所有隧道（proxy.Service 实例）。通过 sync.Map，NPS 能够高效地管理和访问多个并发的隧道服务。 once sync.Once：用于确保某些初始化操作（如 flowSession）只执行一次。 初始化与任务加载 服务端的启动从初始化开始：">
+Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁。它负责维护客户端连接、处理客户端发送的指令以及转发数据。 RunList sync.Map：一个并发安全的 Map，用于存储当前正在运行的所有隧道（proxy.Service 实例）。通过 sync.Map，NPS 能够高效地管理和访问多个并发的隧道服务。 once sync.Once：用于确保某些初始化操作（如 flowSession）只执行一次。 NPS 服务端核心组件架构可以用下图表示：">
   <meta property="og:locale" content="zn_Hans">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -336,7 +335,7 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
 
     
       <li class="middot"></li>
-      <li>5 minutes read</li>
+      <li>6 minutes read</li>
     
   </ul>
   
@@ -347,7 +346,7 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
           <div class="post-content markdown">
             <h2 id="引言">引言</h2>
 <p>在 NPS 项目概述中，我们对这款强大的内网穿透工具进行了宏观的介绍。本篇文章将深入 NPS 的服务端（Server）核心，从 <code>nps/server/server.go</code> 文件入手，详细剖析其架构设计、任务管理、流量处理以及系统监控等关键功能。理解 <code>server.go</code> 的运作机制，是掌握 NPS 核心原理的基石。</p>
-<h2 id="servergo服务端的大脑"><code>server.go</code>：服务端的“大脑”</h2>
+<h2 id="servergo服务端的大脑"><code>server.go</code>：服务端的&quot;大脑&quot;</h2>
 <p><code>server.go</code> 文件是 NPS 服务端的启动入口和主要协调者。它负责初始化各项服务、管理客户端连接、调度隧道任务以及收集系统运行状态。</p>
 <h3 id="核心组件概览">核心组件概览</h3>
 <p>在 <code>server.go</code> 中，我们可以看到几个关键的全局变量和结构：</p>
@@ -356,6 +355,27 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
 <li><code>RunList sync.Map</code>：一个并发安全的 Map，用于存储当前正在运行的所有隧道（<code>proxy.Service</code> 实例）。通过 <code>sync.Map</code>，NPS 能够高效地管理和访问多个并发的隧道服务。</li>
 <li><code>once sync.Once</code>：用于确保某些初始化操作（如 <code>flowSession</code>）只执行一次。</li>
 </ul>
+<p>NPS 服务端核心组件架构可以用下图表示：</p>
+<div class="mermaid">
+
+graph TD
+    A[server.go] --> B[Bridge]
+    A --> C[RunList]
+    A --> D[once]
+    
+    B --> B1[客户端连接管理]
+    B --> B2[指令处理]
+    B --> B3[数据转发]
+    
+    C --> C1[TCP隧道服务]
+    C --> C2[UDP隧道服务]
+    C --> C3[HTTP代理服务]
+    C --> C4[SOCKS5服务]
+    C --> C5[Web管理服务]
+    
+    D --> D1[流量数据持久化]
+
+</div>
 <h3 id="初始化与任务加载">初始化与任务加载</h3>
 <p>服务端的启动从初始化开始：</p>
 <ul>
@@ -374,8 +394,32 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
 <li><strong><code>Bridge.OpenTask</code></strong>：当有新的隧道任务需要启动时，从该通道接收任务并调用 <code>AddTask()</code>。</li>
 <li><strong><code>Bridge.CloseTask</code></strong>：当有隧道任务需要停止时，从该通道接收任务 ID 并调用 <code>StopServer()</code>。</li>
 <li><strong><code>Bridge.CloseClient</code></strong>：当客户端断开连接或需要被移除时，从该通道接收客户端 ID，并调用 <code>DelTunnelAndHostByClientId()</code> 删除该客户端关联的所有隧道和主机。</li>
-<li><strong><code>Bridge.SecretChan</code></strong>：处理特殊的“秘密连接”。如果连接的密码与某个启用状态的隧道匹配，则会启动一个 <code>proxy.NewBaseServer</code> 来处理该连接。</li>
+<li><strong><code>Bridge.SecretChan</code></strong>：处理特殊的&quot;秘密连接&quot;。如果连接的密码与某个启用状态的隧道匹配，则会启动一个 <code>proxy.NewBaseServer</code> 来处理该连接。</li>
 </ul>
+<p><code>DealBridgeTask()</code> 的处理流程可以用下图表示：</p>
+<div class="mermaid">
+
+flowchart TD
+    A[DealBridgeTask循环] --> B{事件类型?}
+    B -->|OpenTask| C[接收新任务]
+    C --> D[调用AddTask启动隧道]
+    B -->|CloseTask| E[接收关闭任务ID]
+    E --> F[调用StopServer停止隧道]
+    B -->|CloseClient| G[接收客户端ID]
+    G --> H[调用DelTunnelAndHostByClientId]
+    B -->|SecretChan| I[接收秘密连接]
+    I --> J{密码匹配?}
+    J -->|是| K[启动proxy.NewBaseServer]
+    J -->|否| L[忽略连接]
+    
+    D --> M[更新RunList]
+    F --> M
+    H --> M
+    K --> M
+    L --> M
+    M --> A
+
+</div>
 <h3 id="服务端启动流程startnewserver">服务端启动流程：<code>StartNewServer()</code></h3>
 <p><code>StartNewServer()</code> 是 NPS 服务端的主启动函数，它负责协调各项服务的启动：</p>
 <ol>
@@ -386,6 +430,25 @@ Bridge *bridge.Bridge：这是服务端与客户端之间通信的核心桥梁�
 <li><strong>启动客户端流量处理</strong>：启动 <code>dealClientFlow()</code> goroutine，定期处理客户端的流量数据。</li>
 <li><strong>启动主代理服务</strong>：根据传入的隧道配置 (<code>cnf.Mode</code>)，通过 <code>NewMode()</code> 函数实例化对应的 <code>proxy.Service</code>，并在独立的 goroutine 中启动它。这个 <code>proxy.Service</code> 实例会被存储在 <code>RunList</code> 中。</li>
 </ol>
+<p>服务端启动流程可以用下图表示：</p>
+<div class="mermaid">
+
+graph TD
+    A[StartNewServer] --> B[初始化Bridge]
+    B --> C[启动Bridge监听]
+    C --> D[启动P2P服务]
+    D --> E[启动任务处理协程]
+    E --> F[启动客户端流量处理]
+    F --> G[启动主代理服务]
+    G --> H[存储到RunList]
+    H --> I[服务端启动完成]
+    
+    C --> C1[goroutine: Bridge.StartTunnel]
+    E --> E1[goroutine: DealBridgeTask]
+    F --> F1[goroutine: dealClientFlow]
+    G --> G1[goroutine: proxy.Service]
+
+</div>
 <h3 id="代理模式工厂newmode">代理模式工厂：<code>NewMode()</code></h3>
 <p><code>NewMode()</code> 函数是 NPS 服务端实现多协议支持的关键。它根据隧道配置中的 <code>Mode</code> 字段，返回不同的 <code>proxy.Service</code> 实现，每种实现对应一种代理模式：</p>
 <ul>
