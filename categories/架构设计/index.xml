@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>架构设计 on jaxiu He</title>
+    <link>https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+    <description>Recent content in 架构设计 on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Wed, 23 Jul 2025 15:55:00 +0800</lastBuildDate>
+    <atom:link href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qwen Code 实现框架深度解析</title>
+      <link>https://axfinn.github.io/blog/2025-07/qwen-code-implementation-framework/</link>
+      <pubDate>Wed, 23 Jul 2025 15:55:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/qwen-code-implementation-framework/</guid>
+      <description>&lt;h1 id=&#34;qwen-code-实现框架深度解析&#34;&gt;Qwen Code 实现框架深度解析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。&lt;/p&gt;&#xA;&lt;h2 id=&#34;整体架构&#34;&gt;整体架构&lt;/h2&gt;&#xA;&lt;p&gt;Qwen Code 的整体架构可以分为以下几个主要层次：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;用户接口层&lt;/strong&gt;：提供命令行交互界面&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;核心逻辑层&lt;/strong&gt;：处理用户请求和 AI 模型交互&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;工具执行层&lt;/strong&gt;：执行各种本地操作工具&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;模型接口层&lt;/strong&gt;：与 Qwen 模型进行通信&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;安全管理层&lt;/strong&gt;：确保操作的安全性&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;┌─────────────────────────────────────┐&#xA;│           用户接口层                 │&#xA;│         (CLI 界面)                  │&#xA;├─────────────────────────────────────┤&#xA;│           核心逻辑层                 │&#xA;│    (请求处理、响应生成)              │&#xA;├─────────────────────────────────────┤&#xA;│          工具执行层                  │&#xA;│  (文件系统、网络、命令执行等工具)     │&#xA;├─────────────────────────────────────┤&#xA;│          模型接口层                  │&#xA;│      (与 Qwen 模型通信)              │&#xA;├─────────────────────────────────────┤&#xA;│          安全管理层                  │&#xA;│    (权限控制、沙箱隔离等)            │&#xA;└─────────────────────────────────────┘&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了更直观地理解整体架构，我们可以用 Mermaid 绘制一个架构图：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Qwen Code 项目框架详解</title>
+      <link>https://axfinn.github.io/blog/2025-07/qwen-code-project-structure/</link>
+      <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/qwen-code-project-structure/</guid>
+      <description>&lt;h1 id=&#34;qwen-code-项目框架详解&#34;&gt;Qwen Code 项目框架详解&lt;/h1&gt;&#xA;&lt;h2 id=&#34;项目概述&#34;&gt;项目概述&lt;/h2&gt;&#xA;&lt;p&gt;Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。&lt;/p&gt;&#xA;&lt;h2 id=&#34;项目结构&#34;&gt;项目结构&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;qwen-code/&#xA;├── .github/                  # GitHub 相关配置&#xA;│   └── workflows/            # CI/CD 工作流&#xA;├── docs/                     # 项目文档&#xA;│   ├── tools/                # 工具文档&#xA;│   └── ...                   # 其他文档&#xA;├── examples/                 # 使用示例&#xA;├── integration-tests/        # 集成测试&#xA;├── packages/                 # 核心包&#xA;│   ├── cli/                  # CLI 工具&#xA;│   ├── core/                 # 核心功能&#xA;│   └── ...                   # 其他包&#xA;├── scripts/                  # 构建和辅助脚本&#xA;├── tests/                    # 单元测试&#xA;├── .eslintrc.js              # ESLint 配置&#xA;├── .gitignore                # Git 忽略文件&#xA;├── .npmrc                    # npm 配置&#xA;├── Dockerfile                # Docker 配置&#xA;├── Makefile                  # Makefile 脚本&#xA;├── README.md                 # 项目说明&#xA;├── package.json              # 项目配置&#xA;└── tsconfig.json             # TypeScript 配置&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了更直观地理解项目结构，我们可以用 Mermaid 绘制一个图表：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
