@@ -84,6 +84,10 @@
   
   
 
+  
+  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
+  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+
 </head>
 
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
@@ -357,6 +361,8 @@
 
   
 
+  
+
 
 
 
@@ -426,6 +432,15 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">
                 <span>架构设计 (2)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://axfinn.github.io/categories/blog">
+                <span>Blog (1)</span>
               </a>
             </li>           
           
@@ -510,6 +525,8 @@
 
     
           
+
+  
 
   
 
@@ -690,7 +707,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  33 posts
+                  34 posts
                 </div>
               
             </div>
@@ -712,9 +729,6 @@
         <a href="https://axfinn.github.io/blog/page/9/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://axfinn.github.io/blog/page/7/" aria-label="Page 7" class="page-link" role="button">7</a>
-      </li>
-      <li class="page-item">
         <a href="https://axfinn.github.io/blog/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
       </li>
       <li class="page-item">
@@ -727,13 +741,86 @@
         <a href="https://axfinn.github.io/blog/page/11/" aria-label="Page 11" class="page-link" role="button">11</a>
       </li>
       <li class="page-item">
+        <a href="https://axfinn.github.io/blog/page/12/" aria-label="Page 12" class="page-link" role="button">12</a>
+      </li>
+      <li class="page-item">
         <a href="https://axfinn.github.io/blog/page/11/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://axfinn.github.io/blog/page/11/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="https://axfinn.github.io/blog/page/12/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">NPS 代理实现：UDP 代理与数据转发</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种 TCP 相关的代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理）和 P2P 代理。本篇文章将聚焦于 NPS 的 UDP 代理实现。我们将通过分析 nps/server/proxy/udp.go 文件，揭示 NPS 如何处理 UDP 流量，实现内网 UDP 服务的穿透。
+UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接的传输协议，常用于对实时性要求较高、允许少量丢包的应用，如 DNS 查询、在线游戏、音视频通话等。由于 UDP 的无连接特性，其代理实现与 TCP 代理有所不同，主要挑战在于：
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/udp%E4%BB%A3%E7%90%86" role="button">UDP代理 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE" role="button">网络协议 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -865,78 +952,6 @@ SOCKS5 协议简介 SOCKS5 是一种网络代理协议，它允许客户端通�
       
     
       <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8" role="button">网络安全 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0tcp-%E9%9A%A7%E9%81%93%E4%B8%8E-http-%E4%BB%A3%E7%90%86/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">NPS 代理实现：TCP 隧道与 HTTP 代理</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 18, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>4 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      引言 在上一篇文章中，我们深入探讨了 nps/server/proxy/base.go 中定义的通用代理基础和流量控制机制。本篇文章将聚焦于 NPS 最常用也是最基础的两种代理模式：TCP 隧道和 HTTP 代理。我们将通过分析 nps/server/proxy/tcp.go 文件，揭示这两种模式的具体实现细节。
-tcp.go：TCP 隧道与 HTTP 代理的实现 tcp.go 文件主要定义了 TunnelModeServer 结构体，它是实现 TCP 隧道和 HTTP 代理的核心。此外，该文件还包含了 WebServer 结构体，用于启动 NPS 的 Web 管理界面。
-TunnelModeServer：通用隧道模式服务器 TunnelModeServer 结构体继承了 BaseServer，并增加了两个特定于隧道模式的字段：
-type TunnelModeServer struct { BaseServer process process listener net.Listener } BaseServer：继承了 base.go 中定义的通用功能，如流量统计、安全检查等。 process process：这是一个函数类型 type process func(c *conn.Conn, s *TunnelModeServer) error，它定义了如何处理传入的客户端连接。不同的代理模式会传入不同的 process 函数。 listener net.Listener：用于监听传入连接的网络监听器。 NewTunnelModeServer() 函数用于创建并初始化一个 TunnelModeServer 实例。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/tcp%E4%BB%A3%E7%90%86" role="button">TCP代理 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/http%E4%BB%A3%E7%90%86" role="button">HTTP代理 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
       
     
   </div>

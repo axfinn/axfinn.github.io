@@ -85,6 +85,10 @@
   
   
 
+  
+  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
+  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+
 </head>
 
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
@@ -165,6 +169,16 @@
 
 
 
+<script>
+  window.dynamicBackgrounds = [
+    
+    "https:\/\/axfinn.github.io\/img\/header-slides/raw_1515691746.jpg",
+    
+    "https:\/\/axfinn.github.io\/img\/header-slides/raw_1515847341.jpg"
+    
+  ];
+</script>
+
 
 <div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" >  
 
@@ -228,6 +242,42 @@
     
 
   
+  </div>
+  
+  
+  
+  <div class="dynamic-bg-control-panel">
+    <div class="dynamic-bg-control-toggle" id="dynamicBgControlToggle">
+      <i class="fas fa-cog"></i>
+    </div>
+    <div class="dynamic-bg-control-content collapsed" id="dynamicBgControlContent">
+      <div class="dynamic-bg-control-header">
+        <h3 class="dynamic-bg-control-title">背景控制</h3>
+        <button class="dynamic-bg-control-close" id="dynamicBgControlClose">&times;</button>
+      </div>
+      <div class="dynamic-bg-control-group">
+        <label class="dynamic-bg-control-label">轮换间隔 (秒)</label>
+        <input type="number" class="dynamic-bg-control-input" id="dynamicBgInterval" min="1" max="60" value="10">
+      </div>
+      <div class="dynamic-bg-control-group">
+        <label class="dynamic-bg-control-label">过渡时间 (毫秒)</label>
+        <input type="number" class="dynamic-bg-control-input" id="dynamicBgTransition" min="100" max="5000" value="1000">
+      </div>
+      <div class="dynamic-bg-control-checkbox">
+        <input type="checkbox" id="dynamicBgAutoSwitch" checked>
+        <label for="dynamicBgAutoSwitch">自动轮换</label>
+      </div>
+      <div class="dynamic-bg-control-buttons">
+        <button class="dynamic-bg-control-button secondary" id="dynamicBgPrevBtn">上一张</button>
+        <button class="dynamic-bg-control-button secondary" id="dynamicBgNextBtn">下一张</button>
+      </div>
+      <div class="dynamic-bg-control-buttons">
+        <button class="dynamic-bg-control-button primary" id="dynamicBgApplyBtn">应用设置</button>
+      </div>
+      <div class="dynamic-bg-control-status" id="dynamicBgStatus">
+        状态: 运行中
+      </div>
+    </div>
   </div>
   
 
