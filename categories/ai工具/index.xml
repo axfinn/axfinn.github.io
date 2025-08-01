@@ -6,8 +6,15 @@
     <description>Recent content in AI工具 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 15:45:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Aug 2025 18:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DeepChat 项目概览：多模型AI对话平台介绍</title>
+      <link>https://axfinn.github.io/blog/2025-08/deepchat-project-overview/</link>
+      <pubDate>Fri, 01 Aug 2025 18:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-08/deepchat-project-overview/</guid>
+      <description>&lt;h1 id=&#34;deepchat-项目概览多模型ai对话平台介绍&#34;&gt;DeepChat 项目概览：多模型AI对话平台介绍&lt;/h1&gt;&#xA;&lt;h2 id=&#34;什么是-deepchat&#34;&gt;什么是 DeepChat？&lt;/h2&gt;&#xA;&lt;p&gt;DeepChat 是一个功能丰富的开源 AI 聊天平台，支持多种云端和本地大语言模型，具备强大的搜索增强和工具调用能力。作为一个跨平台的 AI 助手应用程序，DeepChat 不仅支持基本的聊天功能，还提供了诸如搜索增强、工具调用和多模态交互等高级功能，让 AI 能力更加触手可及和高效。&lt;/p&gt;&#xA;&lt;p&gt;无论您是使用 OpenAI、Gemini、Anthropic 等云 API，还是本地部署的 Ollama 模型，DeepChat 都能提供流畅的用户体验。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Qwen Code CLI 使用详解</title>
       <link>https://axfinn.github.io/blog/2025-07/qwen-code-cli-usage/</link>

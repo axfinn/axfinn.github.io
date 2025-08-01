@@ -6,8 +6,50 @@
     <description>Recent content in Tags on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 30 Jul 2025 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Aug 2025 18:30:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>https://axfinn.github.io/tags/ai/</link>
+      <pubDate>Fri, 01 Aug 2025 18:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DeepChat</title>
+      <link>https://axfinn.github.io/tags/deepchat/</link>
+      <pubDate>Fri, 01 Aug 2025 18:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/deepchat/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Electron</title>
+      <link>https://axfinn.github.io/tags/electron/</link>
+      <pubDate>Fri, 01 Aug 2025 18:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/electron/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>多平台</title>
+      <link>https://axfinn.github.io/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Fri, 01 Aug 2025 18:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>架构设计</title>
+      <link>https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Fri, 01 Aug 2025 18:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>开源项目</title>
+      <link>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Fri, 01 Aug 2025 18:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+      <description></description>
+    </item>
     <item>
       <title>NPS</title>
       <link>https://axfinn.github.io/tags/nps/</link>
@@ -20,13 +62,6 @@
       <link>https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</link>
       <pubDate>Wed, 30 Jul 2025 10:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>开源项目</title>
-      <link>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
-      <pubDate>Wed, 30 Jul 2025 10:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     <item>
@@ -121,13 +156,6 @@
       <description></description>
     </item>
     <item>
-      <title>架构设计</title>
-      <link>https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Wed, 23 Jul 2025 15:55:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>项目结构</title>
       <link>https://axfinn.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/</link>
       <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
@@ -153,13 +181,6 @@
       <link>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Wed, 23 Jul 2025 15:45:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AI</title>
-      <link>https://axfinn.github.io/tags/ai/</link>
-      <pubDate>Wed, 23 Jul 2025 15:30:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/ai/</guid>
       <description></description>
     </item>
     <item>
