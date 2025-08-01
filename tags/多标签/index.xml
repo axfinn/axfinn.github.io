@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多标签 on jaxiu He</title>
+    <link>https://axfinn.github.io/tags/%E5%A4%9A%E6%A0%87%E7%AD%BE/</link>
+    <description>Recent content in 多标签 on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Fri, 01 Aug 2025 18:15:00 +0800</lastBuildDate>
+    <atom:link href="https://axfinn.github.io/tags/%E5%A4%9A%E6%A0%87%E7%AD%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DeepChat 多窗口多标签架构深度解析</title>
+      <link>https://axfinn.github.io/blog/2025-08/deepchat-multi-window-tabs-architecture/</link>
+      <pubDate>Fri, 01 Aug 2025 18:15:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-08/deepchat-multi-window-tabs-architecture/</guid>
+      <description>&lt;h1 id=&#34;deepchat-多窗口多标签架构深度解析&#34;&gt;DeepChat 多窗口多标签架构深度解析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;现代桌面应用程序普遍采用多窗口多标签的设计模式，以提升用户的工作效率和使用体验。DeepChat 作为一个功能丰富的 AI 聊天平台，实现了先进的多窗口多标签架构，支持跨窗口的标签页拖拽、独立会话管理等功能。本文将深入解析 DeepChat 的多窗口多标签架构设计，揭示其背后的技术实现原理。&lt;/p&gt;&#xA;&lt;h2 id=&#34;传统-electron-多窗口实现&#34;&gt;传统 Electron 多窗口实现&lt;/h2&gt;&#xA;&lt;p&gt;在传统的 Electron 应用中，创建多个窗口通常有两种方式：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;BrowserWindow 方式&lt;/strong&gt; - 每个窗口都是独立的 BrowserWindow 实例&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;BrowserView 方式&lt;/strong&gt; - 在主窗口中使用 BrowserView 实现标签页效果&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;这两种方式各有优缺点：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
