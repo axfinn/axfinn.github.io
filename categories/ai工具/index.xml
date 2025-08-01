@@ -6,20 +6,41 @@
     <description>Recent content in AI工具 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 01 Aug 2025 18:20:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 31 Jul 2025 20:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>DeepChat 搜索增强功能实现分析</title>
+      <link>https://axfinn.github.io/blog/2025-07/deepchat-search-enhancement/</link>
+      <pubDate>Thu, 31 Jul 2025 20:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/deepchat-search-enhancement/</guid>
+      <description>&lt;h1 id=&#34;deepchat-搜索增强功能实现分析&#34;&gt;DeepChat 搜索增强功能实现分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在当今信息爆炸的时代，单纯的 AI 模型已经不能满足用户对实时、准确信息的需求。DeepChat 通过强大的搜索增强功能，将 AI 的智能与搜索引擎的实时信息相结合，为用户提供更加准确和及时的回答。本文将深入分析 DeepChat 的搜索增强功能实现机制。&lt;/p&gt;&#xA;&lt;h2 id=&#34;搜索增强的核心价值&#34;&gt;搜索增强的核心价值&lt;/h2&gt;&#xA;&lt;h3 id=&#34;为什么需要搜索增强&#34;&gt;为什么需要搜索增强？&lt;/h3&gt;&#xA;&lt;p&gt;传统的 AI 模型存在以下局限性：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;知识截止时间&lt;/strong&gt; - 大多数模型的知识截止到训练数据的时间点&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;实时信息缺失&lt;/strong&gt; - 无法获取最新的新闻、股价、天气等实时信息&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;事实准确性&lt;/strong&gt; - 模型可能会产生&amp;quot;幻觉&amp;quot;，提供不准确的信息&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;个性化限制&lt;/strong&gt; - 无法访问用户的私人数据和特定环境信息&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;搜索增强功能通过将 AI 与搜索引擎结合，有效解决了这些问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DeepChat MCP 支持深度剖析</title>
+      <link>https://axfinn.github.io/blog/2025-07/deepchat-mcp-support/</link>
+      <pubDate>Thu, 31 Jul 2025 19:30:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/deepchat-mcp-support/</guid>
+      <description>&lt;h1 id=&#34;deepchat-mcp-支持深度剖析&#34;&gt;DeepChat MCP 支持深度剖析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;Model Context Protocol (MCP) 是一种新兴的协议，旨在为 AI 模型提供访问外部资源、执行工具和获取提示的标准方法。DeepChat 作为先进的 AI 聊天平台，深度集成了 MCP 支持，使其能够扩展 AI 的能力，实现代码执行、网络访问等高级功能。本文将深入分析 DeepChat 中 MCP 的实现原理和应用。&lt;/p&gt;&#xA;&lt;h2 id=&#34;mcp-协议概述&#34;&gt;MCP 协议概述&lt;/h2&gt;&#xA;&lt;h3 id=&#34;什么是-mcp&#34;&gt;什么是 MCP？&lt;/h3&gt;&#xA;&lt;p&gt;Model Context Protocol (MCP) 是一种标准化协议，允许 AI 模型安全地与外部系统交互。它定义了三种核心能力：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Resources（资源）&lt;/strong&gt; - 访问外部数据和文件&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Prompts（提示）&lt;/strong&gt; - 获取和使用预定义的提示模板&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Tools（工具）&lt;/strong&gt; - 执行特定功能，如代码运行、网络请求等&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;mcp-的核心价值&#34;&gt;MCP 的核心价值&lt;/h3&gt;&#xA;&lt;p&gt;MCP 的引入解决了 AI 应用中的几个关键问题：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DeepChat 多模型支持机制详解</title>
+      <link>https://axfinn.github.io/blog/2025-07/deepchat-multi-model-support/</link>
+      <pubDate>Thu, 31 Jul 2025 19:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/deepchat-multi-model-support/</guid>
+      <description>&lt;h1 id=&#34;deepchat-多模型支持机制详解&#34;&gt;DeepChat 多模型支持机制详解&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。&lt;/p&gt;&#xA;&lt;h2 id=&#34;统一接口设计与实现&#34;&gt;统一接口设计与实现&lt;/h2&gt;&#xA;&lt;h3 id=&#34;抽象层设计&#34;&gt;抽象层设计&lt;/h3&gt;&#xA;&lt;p&gt;DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配器。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;┌─────────────────────────────────────────────────────────────┐&#xA;│                    统一接口架构                             │&#xA;├─────────────────────────────────────────────────────────────┤&#xA;│                    ┌──────────────┐                         │&#xA;│                    │  统一接口     │                         │&#xA;│                    │ (API抽象层)   │                         │&#xA;│                    └──────────────┘                         │&#xA;│                            │                                │&#xA;│          ┌─────────────────┼─────────────────┐              │&#xA;│          │                 │                 │              │&#xA;│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │&#xA;│  │ OpenAI 适配器 │  │ Gemini 适配器 │  │ Ollama 适配器 │       │&#xA;│  └──────────────┘  └──────────────┘  └──────────────┘       │&#xA;│          │                 │                 │              │&#xA;│    ┌─────▼─────┐    ┌─────▼─────┐     ┌─────▼─────┐         │&#xA;│    │ OpenAI API│    │Gemini API │     │ Ollama API│         │&#xA;│    └───────────┘    └───────────┘     └───────────┘         │&#xA;└─────────────────────────────────────────────────────────────┘&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;核心接口定义&#34;&gt;核心接口定义&lt;/h3&gt;&#xA;&lt;p&gt;DeepChat 定义了统一的模型接口，所有模型适配器都需要实现这些接口：&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>DeepChat MCP 支持实现详解：打造强大的 AI 工具生态系统</title>
-      <link>https://axfinn.github.io/blog/2025-08/deepchat-mcp-implementation/</link>
-      <pubDate>Fri, 01 Aug 2025 18:20:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/blog/2025-08/deepchat-mcp-implementation/</guid>
+      <link>https://axfinn.github.io/blog/2025-07/deepchat-mcp-implementation/</link>
+      <pubDate>Thu, 31 Jul 2025 18:20:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/deepchat-mcp-implementation/</guid>
       <description>&lt;h1 id=&#34;deepchat-mcp-支持实现详解打造强大的-ai-工具生态系统&#34;&gt;DeepChat MCP 支持实现详解：打造强大的 AI 工具生态系统&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;随着大语言模型（LLM）的发展，单纯的文本生成能力已经无法满足复杂应用场景的需求。Model Context Protocol（MCP）作为一种新兴的标准化协议，为 LLM 提供了访问外部工具和资源的能力，极大地扩展了 AI 应用的可能性。DeepChat 作为先进的 AI 聊天平台，对 MCP 协议提供了完整而深入的支持，本文将详细解析 DeepChat 中 MCP 的实现机制。&lt;/p&gt;&#xA;&lt;h2 id=&#34;mcp-协议简介&#34;&gt;MCP 协议简介&lt;/h2&gt;&#xA;&lt;p&gt;Model Context Protocol（MCP）是一个开放协议，旨在标准化 LLM 与外部工具、资源和提示之间的交互方式。MCP 定义了三种核心能力：&lt;/p&gt;</description>
     </item>
     <item>
       <title>DeepChat 项目概览：多模型AI对话平台介绍</title>
-      <link>https://axfinn.github.io/blog/2025-08/deepchat-project-overview/</link>
-      <pubDate>Fri, 01 Aug 2025 18:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/blog/2025-08/deepchat-project-overview/</guid>
+      <link>https://axfinn.github.io/blog/2025-07/deepchat-project-overview/</link>
+      <pubDate>Thu, 31 Jul 2025 18:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-07/deepchat-project-overview/</guid>
       <description>&lt;h1 id=&#34;deepchat-项目概览多模型ai对话平台介绍&#34;&gt;DeepChat 项目概览：多模型AI对话平台介绍&lt;/h1&gt;&#xA;&lt;h2 id=&#34;什么是-deepchat&#34;&gt;什么是 DeepChat？&lt;/h2&gt;&#xA;&lt;p&gt;DeepChat 是一个功能丰富的开源 AI 聊天平台，支持多种云端和本地大语言模型，具备强大的搜索增强和工具调用能力。作为一个跨平台的 AI 助手应用程序，DeepChat 不仅支持基本的聊天功能，还提供了诸如搜索增强、工具调用和多模态交互等高级功能，让 AI 能力更加触手可及和高效。&lt;/p&gt;&#xA;&lt;p&gt;无论您是使用 OpenAI、Gemini、Anthropic 等云 API，还是本地部署的 Ollama 模型，DeepChat 都能提供流畅的用户体验。&lt;/p&gt;</description>
     </item>
     <item>
