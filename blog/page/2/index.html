@@ -450,7 +450,7 @@
             
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">
-                <span>架构设计 (9)</span>
+                <span>架构设计 (10)</span>
               </a>
             </li>           
           
@@ -476,15 +476,6 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">
-                <span>源码解析 (3)</span>
-              </a>
-            </li>           
-          
-            
-              <li class="middot"></li>
-            
-            <li class="py-1">
               <a href="https://axfinn.github.io/categories/ai">
                 <span>Ai (2)</span>
               </a>
@@ -496,6 +487,15 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5">
                 <span>技术实践 (2)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">
+                <span>源码解析 (2)</span>
               </a>
             </li>           
           
@@ -930,7 +930,7 @@
   
   <a href="https://axfinn.github.io/blog/2025-08/todoing-team-collaboration-and-permissions/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">todoIng 团队协作与权限管理深度解析</div>
+      <div class="px-4 post-heading">todoIng 团队协作与权限管理架构设计</div>
       <ul class="post-meta li-x mt-1">
         
           <li>Aug 2, 2025</li>
@@ -945,7 +945,7 @@
     
 
     
-      todoIng 团队协作与权限管理深度解析 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。
+      todoIng 团队协作与权限管理架构设计 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。
 团队协作的重要性 在现代工作中，很少有任务是完全独立完成的。大多数项目都需要团队成员之间的协作，这就要求任务管理系统具备强大的团队协作功能：
 任务分配：能够将任务分配给特定的团队成员 进度共享：团队成员可以实时查看任务进度 沟通协作：在任务上下文中进行讨论和沟通 权限控制：确保每个成员只能访问和操作自己有权限的内容 系统设计思路 todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模型，并结合了项目组的概念来组织团队成员和任务。
 ......
@@ -1001,7 +1001,7 @@
   
   <a href="https://axfinn.github.io/blog/2025-08/todoing-git-style-history-tracking/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">todoIng Git 风格历史追踪系统实现解析</div>
+      <div class="px-4 post-heading">todoIng Git 风格历史追踪系统设计与架构</div>
       <ul class="post-meta li-x mt-1">
         
           <li>Aug 2, 2025</li>
@@ -1009,14 +1009,14 @@
     
         
           <li class="middot"></li>
-          <li>5 minutes read</li>
+          <li>6 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      todoIng Git 风格历史追踪系统实现解析 在前面的文章中，我们介绍了 todoIng 项目的核心模块实现。今天，我们将深入探讨 todoIng 最具特色的功能——Git 风格的任务历史追踪系统。这个功能使得 todoIng 与其他任务管理工具区别开来，为用户提供了前所未有的任务管理体验。
+      todoIng Git 风格历史追踪系统设计与架构 在前面的文章中，我们介绍了 todoIng 项目的核心模块设计。今天，我们将深入探讨 todoIng 最具特色的功能——Git 风格的任务历史追踪系统。这个功能使得 todoIng 与其他任务管理工具区别开来，为用户提供了前所未有的任务管理体验。
 为什么需要任务历史追踪？ 在传统的任务管理工具中，我们只能看到任务的当前状态，而无法了解任务是如何一步步演进的。这导致了以下几个问题：
 缺乏上下文：无法了解任务状态变更的原因和背景 责任不明确：不清楚是谁在什么时候做了什么变更 无法回溯：当任务状态出现异常时，无法回溯到之前的正确状态 分析困难：难以分析任务完成的效率和模式 为了解决这些问题，todoIng 引入了 Git 风格的任务历史追踪系统，为每个任务维护完整的变更历史。
 ......
@@ -1072,7 +1072,7 @@
   
   <a href="https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">todoIng 核心模块实现详解</div>
+      <div class="px-4 post-heading">todoIng 核心模块设计与架构</div>
       <ul class="post-meta li-x mt-1">
         
           <li>Aug 1, 2025</li>
@@ -1080,16 +1080,16 @@
     
         
           <li class="middot"></li>
-          <li>4 minutes read</li>
+          <li>5 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      todoIng 核心模块实现详解 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。
-项目架构概览 todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js &#43; Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。
-todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── config/ # 配置文件 │ │ ├── middleware/ # 中间件 │ │ ├── models/ # 数据模型 │ │ ├── routes/ # 路由 │ │ └── app.js # 应用入口 │ └── package.json ├── frontend/ # 前端应用 │ ├── src/ │ │ ├── app/ # 应用配置 │ │ ├── components/ # 组件 │ │ ├── features/ # 功能模块 │ │ ├── pages/ # 页面 │ │ └── App.tsx # 应用根组件 │ └── package.json └── docker-compose.yml # Docker 配置 用户认证系统实现 用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。
+      todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
+项目架构概览 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：
+技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易于维护和重构 下面是 todoIng 的整体架构图：
 ......
     
   </a>
@@ -1102,7 +1102,7 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
         
           <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
         
-          <li><a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
+          <li><a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 架构设计 </a></li>
         
       
       

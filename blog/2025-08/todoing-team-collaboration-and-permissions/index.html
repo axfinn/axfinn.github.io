@@ -7,7 +7,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="todoIng 团队协作与权限管理深度解析
+  <meta name="description" content="todoIng 团队协作与权限管理架构设计
 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。
 团队协作的重要性
 在现代工作中，很少有任务是完全独立完成的。大多数项目都需要团队成员之间的协作，这就要求任务管理系统具备强大的团队协作功能：
@@ -22,8 +22,8 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
   
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-team-collaboration-and-permissions/">
   <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="todoIng 团队协作与权限管理深度解析">
-  <meta property="og:description" content="todoIng 团队协作与权限管理深度解析 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。
+  <meta property="og:title" content="todoIng 团队协作与权限管理架构设计">
+  <meta property="og:description" content="todoIng 团队协作与权限管理架构设计 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。
 团队协作的重要性 在现代工作中，很少有任务是完全独立完成的。大多数项目都需要团队成员之间的协作，这就要求任务管理系统具备强大的团队协作功能：
 任务分配：能够将任务分配给特定的团队成员 进度共享：团队成员可以实时查看任务进度 沟通协作：在任务上下文中进行讨论和沟通 权限控制：确保每个成员只能访问和操作自己有权限的内容 系统设计思路 todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模型，并结合了项目组的概念来组织团队成员和任务。">
   <meta property="og:locale" content="zn_Hans">
@@ -40,7 +40,7 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 
   <title>
   
-       todoIng 团队协作与权限管理深度解析 | jaxiu He 
+       todoIng 团队协作与权限管理架构设计 | jaxiu He 
   
   </title>
 
@@ -329,7 +329,7 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
     
   </ul>
 
-  <div class="px-4 post-heading">todoIng 团队协作与权限管理深度解析</div>
+  <div class="px-4 post-heading">todoIng 团队协作与权限管理架构设计</div>
 
   <ul class="post-meta li-x mt-1">
     
@@ -347,7 +347,7 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 
 
           <div class="post-content markdown">
-            <h1 id="todoing-团队协作与权限管理深度解析">todoIng 团队协作与权限管理深度解析</h1>
+            <h1 id="todoing-团队协作与权限管理架构设计">todoIng 团队协作与权限管理架构设计</h1>
 <p>在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。</p>
 <h2 id="团队协作的重要性">团队协作的重要性</h2>
 <p>在现代工作中，很少有任务是完全独立完成的。大多数项目都需要团队成员之间的协作，这就要求任务管理系统具备强大的团队协作功能：</p>
@@ -359,617 +359,255 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 </ol>
 <h2 id="系统设计思路">系统设计思路</h2>
 <p>todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模型，并结合了项目组的概念来组织团队成员和任务。</p>
-<h3 id="数据模型设计">数据模型设计</h3>
-<h4 id="团队模型">团队模型</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/models/Team.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">teamSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">owner</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">members</span><span class="o">:</span> <span class="p">[{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">role</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;member&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;member&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">joinedAt</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}],</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">createdAt</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">updatedAt</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="nx">teamSchema</span><span class="p">);</span>
-</span></span></code></pre></div><h4 id="项目组模型">项目组模型</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/models/Project.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">projectSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">team</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">owner</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">members</span><span class="o">:</span> <span class="p">[{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">role</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;member&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;member&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}],</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">visibility</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;public&#39;</span><span class="p">,</span> <span class="s1">&#39;private&#39;</span><span class="p">,</span> <span class="s1">&#39;team&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;private&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">createdAt</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">updatedAt</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Project&#39;</span><span class="p">,</span> <span class="nx">projectSchema</span><span class="p">);</span>
-</span></span></code></pre></div><h4 id="任务与团队关联">任务与团队关联</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/models/Task.js (扩展)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">taskSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// ... 之前的字段 ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
-</span></span><span class="line"><span class="cl">  <span class="c1">// 团队相关字段
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">team</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;Team&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">project</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;Project&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="c1">// 任务可见性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">visibility</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;private&#39;</span><span class="p">,</span> <span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;private&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="c1">// 协作者列表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">collaborators</span><span class="o">:</span> <span class="p">[{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">permissions</span><span class="o">:</span> <span class="p">[{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;assign&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}]</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">timestamps</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><h2 id="权限管理系统实现">权限管理系统实现</h2>
-<p>todoIng 的权限管理系统采用了多层权限控制机制，确保系统的安全性和灵活性。</p>
-<h3 id="权限层级">权限层级</h3>
+<h3 id="rbac-权限模型">RBAC 权限模型</h3>
+<p>基于角色的访问控制（Role-Based Access Control, RBAC）是一种权限管理模型，它通过角色来关联用户和权限。在 todoIng 中，我们采用了多层级的 RBAC 模型：</p>
+<pre tabindex="0"><code>graph TD
+    A[用户] --&gt; B{角色分配}
+    B --&gt; C[系统角色]
+    B --&gt; D[团队角色]
+    B --&gt; E[项目角色]
+    B --&gt; F[任务角色]
+    
+    C --&gt; G[系统管理员]
+    C --&gt; H[普通用户]
+    
+    D --&gt; I[团队拥有者]
+    D --&gt; J[团队管理员]
+    D --&gt; K[团队成员]
+    
+    E --&gt; L[项目拥有者]
+    E --&gt; M[项目管理员]
+    E --&gt; N[项目成员]
+    
+    F --&gt; O[任务创建者]
+    F --&gt; P[任务分配者]
+    F --&gt; Q[任务协作者]
+</code></pre><p>这种多层级的权限模型具有以下优势：</p>
 <ol>
-<li><strong>系统级权限</strong>：控制用户能否创建团队、项目等</li>
-<li><strong>团队级权限</strong>：控制用户在团队中的操作权限</li>
-<li><strong>项目级权限</strong>：控制用户在项目中的操作权限</li>
-<li><strong>任务级权限</strong>：控制用户对特定任务的操作权限</li>
+<li><strong>灵活性</strong>：不同层级可以设置不同的权限粒度</li>
+<li><strong>可扩展性</strong>：可以轻松添加新的角色和权限类型</li>
+<li><strong>易管理性</strong>：通过角色而非用户来管理权限，简化了权限管理</li>
 </ol>
-<h3 id="权限检查中间件">权限检查中间件</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/middleware/permission.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">Team</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/Team&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Project</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/Project&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/Task&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 检查团队权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">checkTeamPermission</span> <span class="o">=</span> <span class="p">(</span><span class="nx">requiredPermission</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">teamId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">teamId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">team</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;团队不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查用户是否是团队成员
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">member</span> <span class="o">=</span> <span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">member</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;您不是该团队的成员&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nx">getTeamPermissions</span><span class="p">(</span><span class="nx">member</span><span class="p">.</span><span class="nx">role</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">requiredPermission</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;权限不足&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="nx">req</span><span class="p">.</span><span class="nx">team</span> <span class="o">=</span> <span class="nx">team</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取团队角色权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">getTeamPermissions</span> <span class="o">=</span> <span class="p">(</span><span class="nx">role</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">owner</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-members&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-projects&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">admin</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-members&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-projects&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">member</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">permissions</span><span class="p">[</span><span class="nx">role</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 检查项目权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">checkProjectPermission</span> <span class="o">=</span> <span class="p">(</span><span class="nx">requiredPermission</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">projectId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">project</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Project</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">projectId</span><span class="p">).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">project</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;项目不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查项目可见性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">project</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">===</span> <span class="s1">&#39;private&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">member</span> <span class="o">=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">member</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;您无权访问此项目&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nx">getProjectPermissions</span><span class="p">(</span><span class="nx">member</span><span class="p">.</span><span class="nx">role</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">requiredPermission</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;权限不足&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="nx">req</span><span class="p">.</span><span class="nx">project</span> <span class="o">=</span> <span class="nx">project</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取项目角色权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">getProjectPermissions</span> <span class="o">=</span> <span class="p">(</span><span class="nx">role</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">owner</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-members&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-tasks&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">admin</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-members&#39;</span><span class="p">,</span> <span class="s1">&#39;manage-tasks&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">member</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;edit&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">permissions</span><span class="p">[</span><span class="nx">role</span><span class="p">]</span> <span class="o">||</span> <span class="p">[];</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 检查任务权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">checkTaskPermission</span> <span class="o">=</span> <span class="p">(</span><span class="nx">requiredPermission</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">taskId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Task</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">taskId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;createdBy&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;assignee&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;任务不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 任务创建者拥有所有权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">createdBy</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">req</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查分配者权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">assignee</span> <span class="o">&amp;&amp;</span> <span class="nx">task</span><span class="p">.</span><span class="nx">assignee</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">req</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查协作者权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">collaborator</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="nx">collaborators</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">c</span> <span class="p">=&gt;</span> 
-</span></span><span class="line"><span class="cl">        <span class="nx">c</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">      <span class="p">);</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">collaborator</span> <span class="o">&amp;&amp;</span> <span class="nx">collaborator</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">requiredPermission</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">req</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查项目权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">project</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">projectMember</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="nx">project</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> 
-</span></span><span class="line"><span class="cl">          <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">);</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">projectMember</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nx">getProjectPermissions</span><span class="p">(</span><span class="nx">projectMember</span><span class="p">.</span><span class="nx">role</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">requiredPermission</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">req</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="c1">// 检查团队权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">team</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">teamMember</span> <span class="o">=</span> <span class="nx">task</span><span class="p">.</span><span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> 
-</span></span><span class="line"><span class="cl">          <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">);</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">teamMember</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="kr">const</span> <span class="nx">permissions</span> <span class="o">=</span> <span class="nx">getTeamPermissions</span><span class="p">(</span><span class="nx">teamMember</span><span class="p">.</span><span class="nx">role</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">requiredPermission</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">req</span><span class="p">.</span><span class="nx">task</span> <span class="o">=</span> <span class="nx">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">          <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;权限不足&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">checkTeamPermission</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">checkProjectPermission</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">checkTaskPermission</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h2 id="团队管理接口实现">团队管理接口实现</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/routes/teams.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Team</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/Team&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../middleware/auth&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">checkTeamPermission</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../middleware/permission&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 创建团队
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Team</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">name</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">description</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">owner</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">members</span><span class="o">:</span> <span class="p">[{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">user</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">role</span><span class="o">:</span> <span class="s1">&#39;owner&#39;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">team</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="nx">team</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取用户所属团队
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">teams</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;members.user&#39;</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">teams</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取团队详情
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:teamId&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="nx">checkTeamPermission</span><span class="p">(</span><span class="s1">&#39;view&#39;</span><span class="p">),</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 填充成员信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">teamId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;members.user&#39;</span><span class="p">,</span> <span class="s1">&#39;username email&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">team</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 更新团队信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:teamId&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="nx">checkTeamPermission</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">),</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">teamId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">updatedAt</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="p">},</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="k">new</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;members.user&#39;</span><span class="p">,</span> <span class="s1">&#39;username email&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">team</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 添加团队成员
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/:teamId/members&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="nx">checkTeamPermission</span><span class="p">(</span><span class="s1">&#39;manage-members&#39;</span><span class="p">),</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">userId</span><span class="p">,</span> <span class="nx">role</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">teamId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">teamId</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">teamId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">team</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;团队不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查用户是否已经是成员
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">existingMember</span> <span class="o">=</span> <span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">existingMember</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;用户已经是团队成员&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">user</span><span class="o">:</span> <span class="nx">userId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">role</span><span class="o">:</span> <span class="nx">role</span> <span class="o">||</span> <span class="s1">&#39;member&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">team</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 填充用户信息后返回
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">updatedTeam</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">teamId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;members.user&#39;</span><span class="p">,</span> <span class="s1">&#39;username email&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">updatedTeam</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 移除团队成员
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/:teamId/members/:userId&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="nx">checkTeamPermission</span><span class="p">(</span><span class="s1">&#39;manage-members&#39;</span><span class="p">),</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">teamId</span><span class="p">,</span> <span class="nx">userId</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 不能移除自己（除非是owner）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;不能移除自己&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">team</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">teamId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">team</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;团队不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">team</span><span class="p">.</span><span class="nx">members</span> <span class="o">=</span> <span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">m</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">userId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">team</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">updatedTeam</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Team</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">teamId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;members.user&#39;</span><span class="p">,</span> <span class="s1">&#39;username email&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">updatedTeam</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span><span class="p">;</span>
-</span></span></code></pre></div><h2 id="前端实现">前端实现</h2>
-<p>前端通过专门的团队管理界面来支持团队协作功能：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="c1">// frontend/src/pages/TeamManagementPage.tsx
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">useDispatch</span><span class="p">,</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react-redux&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">fetchTeams</span><span class="p">,</span> <span class="nx">createTeam</span><span class="p">,</span> <span class="nx">addTeamMember</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../features/teams/teamSlice&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">TeamManagementPage</span>: <span class="kt">React.FC</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">teams</span><span class="p">,</span> <span class="nx">loading</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">teams</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">showCreateForm</span><span class="p">,</span> <span class="nx">setShowCreateForm</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">teamName</span><span class="p">,</span> <span class="nx">setTeamName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">teamDescription</span><span class="p">,</span> <span class="nx">setTeamDescription</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchTeams</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span> <span class="p">[</span><span class="nx">dispatch</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">handleCreateTeam</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span>: <span class="kt">React.FormEvent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">createTeam</span><span class="p">({</span> <span class="nx">name</span>: <span class="kt">teamName</span><span class="p">,</span> <span class="nx">description</span>: <span class="kt">teamDescription</span> <span class="p">}));</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTeamName</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTeamDescription</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setShowCreateForm</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">loading</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">加载中</span><span class="p">...&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="err">错误</span><span class="o">:</span> <span class="p">{</span><span class="nx">error</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-management&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;page-header&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="err">团队管理</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> 
-</span></span><span class="line"><span class="cl">          <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-primary&#34;</span>
-</span></span><span class="line"><span class="cl">          <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setShowCreateForm</span><span class="p">(</span><span class="o">!</span><span class="nx">showCreateForm</span><span class="p">)}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">{</span><span class="nx">showCreateForm</span> <span class="o">?</span> <span class="s1">&#39;取消&#39;</span> <span class="o">:</span> <span class="s1">&#39;创建团队&#39;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">showCreateForm</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleCreateTeam</span><span class="p">}</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;create-team-form&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span><span class="err">团队名称</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">input</span>
-</span></span><span class="line"><span class="cl">              <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">teamName</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">              <span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTeamName</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
-</span></span><span class="line"><span class="cl">              <span class="na">required</span>
-</span></span><span class="line"><span class="cl">            <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span><span class="err">团队描述</span><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">textarea</span>
-</span></span><span class="line"><span class="cl">              <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">teamDescription</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">              <span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTeamDescription</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-success&#34;</span><span class="p">&gt;</span><span class="err">创建</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;teams-list&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="nx">teams</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">team</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">team</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-card&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-header&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;{</span><span class="nx">team</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-role&#34;</span><span class="p">&gt;{</span><span class="nx">getRoleDisplayName</span><span class="p">(</span><span class="nx">team</span><span class="p">.</span><span class="nx">role</span><span class="p">)}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">team</span><span class="p">.</span><span class="nx">description</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-members&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span><span class="err">成员</span> <span class="p">({</span><span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">length</span><span class="p">})&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;members-list&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span><span class="nx">team</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">member</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">member</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;member-item&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;{</span><span class="nx">member</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;member-role&#34;</span><span class="p">&gt;{</span><span class="nx">getRoleDisplayName</span><span class="p">(</span><span class="nx">member</span><span class="p">.</span><span class="nx">role</span><span class="p">)}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">))}</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;team-actions&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-secondary&#34;</span><span class="p">&gt;</span><span class="err">管理团队</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">))}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getRoleDisplayName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">role</span>: <span class="kt">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">roleMap</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;owner&#39;</span><span class="o">:</span> <span class="s1">&#39;拥有者&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;admin&#39;</span><span class="o">:</span> <span class="s1">&#39;管理员&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;member&#39;</span><span class="o">:</span> <span class="s1">&#39;成员&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">roleMap</span><span class="p">[</span><span class="nx">role</span><span class="p">]</span> <span class="o">||</span> <span class="nx">role</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">TeamManagementPage</span><span class="p">;</span>
-</span></span></code></pre></div><h2 id="权限控制在任务管理中的应用">权限控制在任务管理中的应用</h2>
-<p>在任务管理界面中，根据用户权限动态显示操作按钮：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="c1">// frontend/src/components/TaskActions.tsx
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">React</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">TaskActionsProps</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">task</span>: <span class="kt">any</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">userRole</span>: <span class="kt">string</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">userPermissions</span>: <span class="kt">string</span><span class="p">[];</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onEdit</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onDelete</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onAssign</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">TaskActions</span>: <span class="kt">React.FC</span><span class="p">&lt;</span><span class="nt">TaskActionsProps</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">task</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">userRole</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">userPermissions</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onEdit</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onDelete</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">onAssign</span>
-</span></span><span class="line"><span class="cl"><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// 检查用户是否有特定权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">hasPermission</span> <span class="o">=</span> <span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">userPermissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;task-actions&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">hasPermission</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-secondary&#34;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onEdit</span><span class="p">}&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="err">编辑</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">hasPermission</span><span class="p">(</span><span class="s1">&#39;assign&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-info&#34;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onAssign</span><span class="p">}&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="err">分配</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="nx">hasPermission</span><span class="p">(</span><span class="s1">&#39;delete&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-danger&#34;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onDelete</span><span class="p">}&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="err">删除</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">)}</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="cm">/* 协作者可以添加的额外操作 */</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-outline&#34;</span><span class="p">&gt;</span><span class="err">添加评论</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="o">=</span><span class="s">&#34;btn btn-outline&#34;</span><span class="p">&gt;</span><span class="err">添加附件</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">TaskActions</span><span class="p">;</span>
-</span></span></code></pre></div><h2 id="总结">总结</h2>
-<p>通过实现完善的团队协作和权限管理系统，todoIng 能够满足不同规模团队的任务管理需求。系统采用多层权限控制机制，既保证了安全性，又提供了足够的灵活性。</p>
+<h3 id="组织结构设计">组织结构设计</h3>
+<p>todoIng 采用了团队-项目-任务的三层组织结构：</p>
+<pre tabindex="0"><code>graph TD
+    A[组织] --&gt; B[团队1]
+    A --&gt; C[团队2]
+    A --&gt; D[团队3]
+    
+    B --&gt; E[项目A]
+    B --&gt; F[项目B]
+    
+    E --&gt; G[任务1]
+    E --&gt; H[任务2]
+    E --&gt; I[任务3]
+    
+    F --&gt; J[任务4]
+    F --&gt; K[任务5]
+</code></pre><p>这种结构的优势：</p>
+<ol>
+<li><strong>清晰的归属关系</strong>：每个任务都明确归属于特定的项目和团队</li>
+<li><strong>权限继承</strong>：下层资源自动继承上层的访问权限</li>
+<li><strong>管理便利</strong>：可以按团队或项目维度进行管理和统计</li>
+</ol>
+<h2 id="核心架构设计">核心架构设计</h2>
+<h3 id="权限检查机制">权限检查机制</h3>
+<p>系统采用多层权限检查机制，确保每次操作都经过严格的权限验证：</p>
+<pre tabindex="0"><code>flowchart LR
+    A[用户请求] --&gt; B{身份验证}
+    B --&gt;|有效| C[权限检查]
+    B --&gt;|无效| D[拒绝访问]
+    C --&gt; E{任务权限}
+    C --&gt; F{项目权限}
+    C --&gt; G{团队权限}
+    E --&gt; H[允许操作]
+    F --&gt; H
+    G --&gt; H
+    H --&gt; I[执行操作]
+</code></pre><p>权限检查的优先级顺序：</p>
+<ol>
+<li><strong>任务级权限</strong>：最高优先级，任务创建者和直接协作者拥有最高权限</li>
+<li><strong>项目级权限</strong>：项目成员根据角色拥有相应权限</li>
+<li><strong>团队级权限</strong>：团队成员根据角色拥有相应权限</li>
+<li><strong>系统级权限</strong>：系统管理员拥有超级权限</li>
+</ol>
+<h3 id="数据模型架构">数据模型架构</h3>
+<p>权限系统的核心数据模型采用分层设计：</p>
+<pre tabindex="0"><code>erDiagram
+    USER ||--o{ TEAM_MEMBERSHIP : has
+    TEAM ||--o{ TEAM_MEMBERSHIP : includes
+    TEAM ||--o{ PROJECT : owns
+    PROJECT ||--o{ PROJECT_MEMBERSHIP : has
+    USER ||--o{ PROJECT_MEMBERSHIP : participates
+    PROJECT ||--o{ TASK : contains
+    TASK ||--o{ TASK_COLLABORATORS : collaborates
+    USER ||--o{ TASK_COLLABORATORS : collaborates
+    
+    USER {
+        string id
+        string username
+        string email
+    }
+    
+    TEAM {
+        string id
+        string name
+        string description
+    }
+    
+    TEAM_MEMBERSHIP {
+        string userId
+        string teamId
+        string role
+        date joinedAt
+    }
+    
+    PROJECT {
+        string id
+        string name
+        string description
+        string visibility
+    }
+    
+    PROJECT_MEMBERSHIP {
+        string userId
+        string projectId
+        string role
+    }
+    
+    TASK {
+        string id
+        string title
+        string description
+        string status
+        string visibility
+    }
+    
+    TASK_COLLABORATORS {
+        string userId
+        string taskId
+        string[] permissions
+    }
+</code></pre><h2 id="权限控制策略">权限控制策略</h2>
+<h3 id="细粒度权限控制">细粒度权限控制</h3>
+<p>todoIng 支持对任务操作的细粒度权限控制：</p>
+<ol>
+<li><strong>查看权限</strong>（view）：允许用户查看任务信息</li>
+<li><strong>编辑权限</strong>（edit）：允许用户修改任务信息</li>
+<li><strong>分配权限</strong>（assign）：允许用户将任务分配给他人</li>
+<li><strong>删除权限</strong>（delete）：允许用户删除任务</li>
+</ol>
+<p>这种细粒度的权限控制使得系统可以精确地控制用户对资源的访问。</p>
+<h3 id="可视性控制">可视性控制</h3>
+<p>系统支持多种可视性设置：</p>
+<ol>
+<li><strong>私有</strong>（private）：仅创建者和协作者可以访问</li>
+<li><strong>团队</strong>（team）：团队内所有成员可以访问</li>
+<li><strong>公开</strong>（public）：所有系统用户都可以访问</li>
+</ol>
+<p>可视性控制与权限控制相结合，提供了灵活的访问控制机制。</p>
+<h2 id="团队协作机制">团队协作机制</h2>
+<h3 id="协作模式设计">协作模式设计</h3>
+<p>todoIng 支持多种团队协作模式：</p>
+<pre tabindex="0"><code>graph TD
+    A[协作模式] --&gt; B[任务分配]
+    A --&gt; C[协作者添加]
+    A --&gt; D[评论讨论]
+    A --&gt; E[文件共享]
+    A --&gt; F[进度同步]
+    
+    B --&gt; G[明确责任人]
+    C --&gt; H[多人协作]
+    D --&gt; I[上下文沟通]
+    E --&gt; J[资源共享]
+    F --&gt; K[状态透明]
+</code></pre><h3 id="通知与沟通">通知与沟通</h3>
+<p>系统内置了通知机制，确保团队成员及时了解任务变更：</p>
+<pre tabindex="0"><code>graph LR
+    A[任务变更] --&gt; B{事件检测}
+    B --&gt; C[通知生成]
+    C --&gt; D[渠道分发]
+    D --&gt; E[邮件通知]
+    D --&gt; F[站内通知]
+    D --&gt; G[即时消息]
+</code></pre><h2 id="可扩展性设计">可扩展性设计</h2>
+<h3 id="插件化权限系统">插件化权限系统</h3>
+<p>权限系统采用插件化设计，支持扩展：</p>
+<pre tabindex="0"><code>graph TB
+    A[todoIng核心] --&gt; B[权限核心]
+    B --&gt; C[基础权限]
+    B --&gt; D[插件接口]
+    D --&gt; E[LDAP集成]
+    D --&gt; F[OAuth集成]
+    D --&gt; G[单点登录]
+</code></pre><h3 id="第三方集成">第三方集成</h3>
+<p>系统支持与第三方认证系统的集成：</p>
+<ol>
+<li><strong>LDAP/AD 集成</strong>：企业用户可以直接使用现有的认证系统</li>
+<li><strong>OAuth 集成</strong>：支持 Google、GitHub 等第三方登录</li>
+<li><strong>单点登录</strong>（SSO）：支持企业级单点登录解决方案</li>
+</ol>
+<h2 id="性能优化策略">性能优化策略</h2>
+<h3 id="权限缓存">权限缓存</h3>
+<p>为了提高权限检查的性能，系统采用了多级缓存策略：</p>
+<pre tabindex="0"><code>graph LR
+    A[权限检查] --&gt; B{内存缓存}
+    B --&gt;|命中| C[返回结果]
+    B --&gt;|未命中| D[数据库查询]
+    D --&gt; E[更新缓存]
+    E --&gt; C
+</code></pre><h3 id="数据库索引优化">数据库索引优化</h3>
+<p>针对权限相关的查询操作，系统建立了专门的数据库索引：</p>
+<ol>
+<li><strong>用户角色索引</strong>：加速用户角色查询</li>
+<li><strong>资源权限索引</strong>：加速资源权限查询</li>
+<li><strong>团队成员索引</strong>：加速团队成员查询</li>
+</ol>
+<h2 id="安全性设计">安全性设计</h2>
+<h3 id="数据隔离">数据隔离</h3>
+<p>系统通过以下方式确保数据隔离：</p>
+<ol>
+<li><strong>数据库层面隔离</strong>：不同租户的数据存储在不同的数据库中</li>
+<li><strong>应用层面隔离</strong>：通过权限检查确保用户只能访问授权数据</li>
+<li><strong>网络层面隔离</strong>：通过防火墙规则限制数据访问</li>
+</ol>
+<h3 id="审计日志">审计日志</h3>
+<p>系统记录所有权限相关的操作，便于审计和问题排查：</p>
+<ol>
+<li><strong>登录日志</strong>：记录用户登录和登出时间</li>
+<li><strong>权限变更日志</strong>：记录权限分配和修改操作</li>
+<li><strong>敏感操作日志</strong>：记录删除、修改等敏感操作</li>
+</ol>
+<h2 id="未来发展方向">未来发展方向</h2>
+<h3 id="1-智能权限管理">1. 智能权限管理</h3>
+<p>计划引入机器学习技术，实现智能权限管理：</p>
+<ol>
+<li><strong>权限推荐</strong>：根据用户行为推荐合适的权限设置</li>
+<li><strong>异常检测</strong>：自动检测异常的权限使用模式</li>
+<li><strong>自动化权限分配</strong>：基于用户角色和项目需求自动分配权限</li>
+</ol>
+<h3 id="2-更丰富的协作功能">2. 更丰富的协作功能</h3>
+<p>扩展团队协作功能：</p>
+<ol>
+<li><strong>实时协作</strong>：支持多人实时编辑任务信息</li>
+<li><strong>视频会议集成</strong>：集成视频会议功能，便于远程协作</li>
+<li><strong>项目模板</strong>：提供项目模板，便于快速创建标准化项目</li>
+</ol>
+<h3 id="3-企业级功能">3. 企业级功能</h3>
+<p>为满足企业用户需求，计划添加以下功能：</p>
+<ol>
+<li><strong>合规性报告</strong>：生成符合企业合规要求的权限报告</li>
+<li><strong>权限审批流程</strong>：支持权限申请和审批流程</li>
+<li><strong>多租户支持</strong>：支持多租户架构，满足大型企业需求</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>通过精心设计的团队协作和权限管理系统，todoIng 能够满足不同规模团队的任务管理需求。系统采用多层权限控制机制，既保证了安全性，又提供了足够的灵活性。</p>
 <p>关键特性包括：</p>
 <ol>
-<li><strong>基于角色的权限控制</strong>：通过 owner、admin、member 三种角色实现细粒度权限管理</li>
-<li><strong>多层级权限体系</strong>：系统级、团队级、项目级、任务级四层权限控制</li>
-<li><strong>灵活的团队管理</strong>：支持创建团队、添加成员、分配角色等操作</li>
-<li><strong>任务协作机制</strong>：支持任务分配、协作者添加等功能</li>
-<li><strong>前端权限展示</strong>：根据用户权限动态显示操作界面</li>
+<li><strong>基于角色的权限控制</strong>：通过多层级 RBAC 实现细粒度权限管理</li>
+<li><strong>灵活的组织结构</strong>：支持团队-项目-任务的三层组织结构</li>
+<li><strong>多维度权限检查</strong>：从任务、项目、团队到系统级别的多层权限验证</li>
+<li><strong>可扩展的架构</strong>：支持插件化扩展和第三方系统集成</li>
 </ol>
 <p>这套系统使得 todoIng 不仅适用于个人任务管理，也能很好地支持团队协作场景。在下一篇文章中，我们将介绍 todoIng 的 AI 报告生成功能，展示如何利用人工智能技术提升工作效率。</p>
 
@@ -1016,7 +654,7 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
                 <a href=https://axfinn.github.io/blog/2025-08/todoing-git-style-history-tracking/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
-                    <span>todoIng Git 风格历史追踪系统实现解析</span>
+                    <span>todoIng Git 风格历史追踪系统设计与架构</span>
                   </div>
                 </a>
               
@@ -1027,7 +665,7 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
                 <a href=https://axfinn.github.io/blog/2025-08/todoing-ai-report-generation/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
-                    <span>todoIng AI 报告生成：智能提升工作效率</span>
+                    <span>todoIng AI 报告生成系统设计与智能应用</span>
                   </div>
                 </a>
               

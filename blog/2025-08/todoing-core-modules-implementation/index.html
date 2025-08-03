@@ -7,37 +7,24 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="todoIng 核心模块实现详解
-在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。
+  <meta name="description" content="todoIng 核心模块设计与架构
+在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
 项目架构概览
-todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js &#43; Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。
-todoIng/
-├── backend/           # 后端服务
-│   ├── src/
-│   │   ├── config/    # 配置文件
-│   │   ├── middleware/ # 中间件
-│   │   ├── models/    # 数据模型
-│   │   ├── routes/    # 路由
-│   │   └── app.js     # 应用入口
-│   └── package.json
-├── frontend/          # 前端应用
-│   ├── src/
-│   │   ├── app/       # 应用配置
-│   │   ├── components/ # 组件
-│   │   ├── features/  # 功能模块
-│   │   ├── pages/     # 页面
-│   │   └── App.tsx    # 应用根组件
-│   └── package.json
-└── docker-compose.yml # Docker 配置
-用户认证系统实现
-用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。">
+todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：
+
+技术栈独立：前端和后端可以使用最适合各自领域的技术栈
+开发效率：前后端团队可以并行开发，互不干扰
+可扩展性：前后端可以独立扩展和部署
+维护性：代码结构清晰，易于维护和重构
+
+下面是 todoIng 的整体架构图：">
   
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/">
   <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="todoIng 核心模块实现详解">
-  <meta property="og:description" content="todoIng 核心模块实现详解 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。
-项目架构概览 todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js &#43; Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。
-todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── config/ # 配置文件 │ │ ├── middleware/ # 中间件 │ │ ├── models/ # 数据模型 │ │ ├── routes/ # 路由 │ │ └── app.js # 应用入口 │ └── package.json ├── frontend/ # 前端应用 │ ├── src/ │ │ ├── app/ # 应用配置 │ │ ├── components/ # 组件 │ │ ├── features/ # 功能模块 │ │ ├── pages/ # 页面 │ │ └── App.tsx # 应用根组件 │ └── package.json └── docker-compose.yml # Docker 配置 用户认证系统实现 用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。">
+  <meta property="og:title" content="todoIng 核心模块设计与架构">
+  <meta property="og:description" content="todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
+项目架构概览 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：
+技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易于维护和重构 下面是 todoIng 的整体架构图：">
   <meta property="og:locale" content="zn_Hans">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -53,7 +40,7 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
 
   <title>
   
-       todoIng 核心模块实现详解 | jaxiu He 
+       todoIng 核心模块设计与架构 | jaxiu He 
   
   </title>
 
@@ -336,13 +323,13 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
       
         <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
+        <li><a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 架构设计 </a></li>
       
     
     
   </ul>
 
-  <div class="px-4 post-heading">todoIng 核心模块实现详解</div>
+  <div class="px-4 post-heading">todoIng 核心模块设计与架构</div>
 
   <ul class="post-meta li-x mt-1">
     
@@ -351,7 +338,7 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
 
     
       <li class="middot"></li>
-      <li>4 minutes read</li>
+      <li>5 minutes read</li>
     
   </ul>
   
@@ -360,434 +347,199 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
 
 
           <div class="post-content markdown">
-            <h1 id="todoing-核心模块实现详解">todoIng 核心模块实现详解</h1>
-<p>在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。</p>
+            <h1 id="todoing-核心模块设计与架构">todoIng 核心模块设计与架构</h1>
+<p>在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。</p>
 <h2 id="项目架构概览">项目架构概览</h2>
-<p>todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js + Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。</p>
-<pre tabindex="0"><code>todoIng/
-├── backend/           # 后端服务
-│   ├── src/
-│   │   ├── config/    # 配置文件
-│   │   ├── middleware/ # 中间件
-│   │   ├── models/    # 数据模型
-│   │   ├── routes/    # 路由
-│   │   └── app.js     # 应用入口
-│   └── package.json
-├── frontend/          # 前端应用
-│   ├── src/
-│   │   ├── app/       # 应用配置
-│   │   ├── components/ # 组件
-│   │   ├── features/  # 功能模块
-│   │   ├── pages/     # 页面
-│   │   └── App.tsx    # 应用根组件
-│   └── package.json
-└── docker-compose.yml # Docker 配置
-</code></pre><h2 id="用户认证系统实现">用户认证系统实现</h2>
-<p>用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。</p>
-<h3 id="后端实现">后端实现</h3>
-<h4 id="用户模型设计">用户模型设计</h4>
-<p>用户模型是认证系统的核心，定义了用户的基本信息和安全相关字段：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/models/User.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bcryptjs&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">userSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">username</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">unique</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">email</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">unique</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">password</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">timestamps</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 密码加密中间件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">userSchema</span><span class="p">.</span><span class="nx">pre</span><span class="p">(</span><span class="s1">&#39;save&#39;</span><span class="p">,</span> <span class="kr">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isModified</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 密码验证方法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">userSchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">comparePassword</span> <span class="o">=</span> <span class="kr">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">candidatePassword</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">candidatePassword</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="nx">userSchema</span><span class="p">);</span>
-</span></span></code></pre></div><h4 id="jwt-认证实现">JWT 认证实现</h4>
-<p>JWT 认证中间件负责验证用户身份并保护需要认证的路由：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/middleware/auth.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jsonwebtoken&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/User&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;Bearer &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;未提供认证令牌&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">decoded</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">decoded</span><span class="p">.</span><span class="nx">userId</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;-password&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;无效的认证令牌&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">req</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">next</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">401</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;认证失败&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">auth</span><span class="p">;</span>
-</span></span></code></pre></div><h4 id="认证路由实现">认证路由实现</h4>
-<p>认证路由处理用户注册和登录请求：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/routes/auth.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jsonwebtoken&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/User&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../middleware/auth&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 用户注册
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/register&#39;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查用户是否已存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">existingUser</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">      <span class="nx">$or</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">email</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">username</span> <span class="p">}]</span> 
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">existingUser</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;用户名或邮箱已存在&#39;</span> 
-</span></span><span class="line"><span class="cl">      <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 创建新用户
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">user</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 生成 JWT 令牌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">userId</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="p">},</span> 
-</span></span><span class="line"><span class="cl">      <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">expiresIn</span><span class="o">:</span> <span class="s1">&#39;7d&#39;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">token</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">id</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">username</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">email</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 用户登录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 查找用户
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="nx">email</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;邮箱或密码错误&#39;</span> 
-</span></span><span class="line"><span class="cl">      <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 验证密码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">isMatch</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">user</span><span class="p">.</span><span class="nx">comparePassword</span><span class="p">(</span><span class="nx">password</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;邮箱或密码错误&#39;</span> 
-</span></span><span class="line"><span class="cl">      <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 生成 JWT 令牌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">userId</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="p">},</span> 
-</span></span><span class="line"><span class="cl">      <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">expiresIn</span><span class="o">:</span> <span class="s1">&#39;7d&#39;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">token</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">id</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">username</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">email</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取当前用户信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/me&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">username</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span><span class="p">;</span>
-</span></span></code></pre></div><h3 id="前端实现">前端实现</h3>
-<p>前端使用 Redux Toolkit 管理认证状态，并通过 Axios 与后端 API 交互。</p>
-<h4 id="认证状态管理">认证状态管理</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// frontend/src/features/auth/authSlice.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">createSlice</span><span class="p">,</span> <span class="nx">createAsyncThunk</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@reduxjs/toolkit&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">api</span> <span class="kr">from</span> <span class="s1">&#39;../../config/api&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">string</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">username</span>: <span class="kt">string</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">email</span>: <span class="kt">string</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">AuthState</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">user</span>: <span class="kt">User</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">token</span>: <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">loading</span>: <span class="kt">boolean</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">error</span>: <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">initialState</span>: <span class="kt">AuthState</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">user</span>: <span class="kt">null</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">token</span>: <span class="kt">localStorage.getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">loading</span>: <span class="kt">false</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">error</span>: <span class="kt">null</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">login</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;auth/login&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="p">(</span><span class="nx">credentials</span><span class="o">:</span> <span class="p">{</span> <span class="nx">email</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">password</span>: <span class="kt">string</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/auth/login&#39;</span><span class="p">,</span> <span class="nx">credentials</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">register</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;auth/register&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="p">(</span><span class="nx">userData</span><span class="o">:</span> <span class="p">{</span> <span class="nx">username</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">email</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">password</span>: <span class="kt">string</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/auth/register&#39;</span><span class="p">,</span> <span class="nx">userData</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">loadUser</span> <span class="o">=</span> <span class="nx">createAsyncThunk</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;auth/loadUser&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="p">{</span> <span class="nx">getState</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">auth</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">getState</span><span class="p">()</span> <span class="kr">as</span> <span class="p">{</span> <span class="nx">auth</span>: <span class="kt">AuthState</span> <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">api</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;/auth/me&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">Authorization</span><span class="o">:</span> <span class="sb">`Bearer </span><span class="si">${</span><span class="nx">auth</span><span class="p">.</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">authSlice</span> <span class="o">=</span> <span class="nx">createSlice</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;auth&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">initialState</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">reducers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logout</span><span class="o">:</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">state</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">state</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">extraReducers</span><span class="o">:</span> <span class="p">(</span><span class="nx">builder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">builder</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">})</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">token</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="p">})</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="s1">&#39;登录失败&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">})</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// ... 其他异步操作处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="p">{</span> <span class="nx">logout</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">authSlice</span><span class="p">.</span><span class="nx">actions</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">authSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
-</span></span></code></pre></div><h2 id="任务管理模块实现">任务管理模块实现</h2>
-<p>任务管理是 todoIng 的核心功能之一，实现了完整的 CRUD 操作和状态管理。</p>
-<h3 id="任务模型设计">任务模型设计</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/models/Task.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">taskSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">status</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="s1">&#39;in-progress&#39;</span><span class="p">,</span> <span class="s1">&#39;paused&#39;</span><span class="p">,</span> <span class="s1">&#39;completed&#39;</span><span class="p">,</span> <span class="s1">&#39;cancelled&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;created&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">priority</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">enum</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;medium&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">assignee</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">createdBy</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">:</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">ObjectId</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ref</span><span class="o">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">timestamps</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Task&#39;</span><span class="p">,</span> <span class="nx">taskSchema</span><span class="p">);</span>
-</span></span></code></pre></div><h3 id="任务路由实现">任务路由实现</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// backend/src/routes/tasks.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/Task&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../middleware/auth&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 创建任务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Task</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="p">...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">createdBy</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">task</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">201</span><span class="p">).</span><span class="nx">json</span><span class="p">(</span><span class="nx">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取任务列表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Task</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">      <span class="nx">$or</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="nx">createdBy</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="nx">assignee</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;assignee&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">).</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;createdBy&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 获取任务详情
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Task</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;assignee&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="nx">populate</span><span class="p">(</span><span class="s1">&#39;createdBy&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;任务不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">createdBy</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">&amp;&amp;</span> 
-</span></span><span class="line"><span class="cl">        <span class="nx">task</span><span class="p">.</span><span class="nx">assignee</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;无权访问此任务&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 更新任务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Task</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;任务不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">createdBy</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;无权修改此任务&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">task</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">task</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">400</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 删除任务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/:id&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">task</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">Task</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;任务不存在&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">createdBy</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">!==</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">403</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;无权删除此任务&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">task</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;任务已删除&#39;</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span><span class="p">;</span>
-</span></span></code></pre></div><h2 id="总结">总结</h2>
-<p>在这篇文章中，我们详细介绍了 todoIng 核心模块的实现，包括用户认证系统和任务管理功能。这些模块构成了整个系统的基础，为后续的高级功能提供了支撑。</p>
-<p>用户认证系统采用了业界标准的 JWT 实现，具有良好的安全性和可扩展性。任务管理模块实现了完整的 CRUD 操作，并通过合理的权限控制确保了数据安全。</p>
+<p>todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：</p>
+<ol>
+<li><strong>技术栈独立</strong>：前端和后端可以使用最适合各自领域的技术栈</li>
+<li><strong>开发效率</strong>：前后端团队可以并行开发，互不干扰</li>
+<li><strong>可扩展性</strong>：前后端可以独立扩展和部署</li>
+<li><strong>维护性</strong>：代码结构清晰，易于维护和重构</li>
+</ol>
+<p>下面是 todoIng 的整体架构图：</p>
+<pre tabindex="0"><code>graph TD
+    A[用户界面] --&gt; B{前端应用}
+    B --&gt; C[React + TypeScript]
+    B --&gt; D[Redux状态管理]
+    B --&gt; E[Bootstrap UI组件]
+    
+    C --&gt; F{后端API}
+    D --&gt; F
+    E --&gt; F
+    
+    F --&gt; G[Node.js + Express]
+    F --&gt; H[JWT认证]
+    F --&gt; I[MongoDB数据库]
+    
+    G --&gt; J[任务管理模块]
+    G --&gt; K[用户认证模块]
+    G --&gt; L[历史追踪模块]
+    G --&gt; M[团队协作模块]
+    G --&gt; N[AI报告模块]
+    
+    I --&gt; O[用户数据]
+    I --&gt; P[任务数据]
+    I --&gt; Q[历史记录]
+    I --&gt; R[团队信息]
+    
+    N --&gt; S[OpenAI API]
+    
+    subgraph 前端层
+        A
+        B
+        C
+        D
+        E
+    end
+    
+    subgraph 后端层
+        F
+        G
+        H
+        I
+        J
+        K
+        L
+        M
+        N
+        S
+    end
+    
+    subgraph 数据层
+        O
+        P
+        Q
+        R
+    end
+</code></pre><h2 id="核心设计理念">核心设计理念</h2>
+<h3 id="用户认证系统设计">用户认证系统设计</h3>
+<p>用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。我们的设计考虑了以下几个关键点：</p>
+<ol>
+<li><strong>安全性</strong>：使用 industry-standard 的 JWT 实现，确保令牌的安全性</li>
+<li><strong>可扩展性</strong>：支持多种认证方式，包括传统的用户名密码认证和可选的双因素认证</li>
+<li><strong>状态管理</strong>：通过 Redux Toolkit 在前端管理认证状态，确保用户在页面刷新后仍保持登录状态</li>
+</ol>
+<p>JWT 认证机制的核心思想是无状态认证，服务器不需要存储会话信息，而是通过验证令牌的签名来确认用户身份。这种设计大大降低了服务器的存储压力，提高了系统的可扩展性。</p>
+<h3 id="任务管理系统设计">任务管理系统设计</h3>
+<p>任务管理是 todoIng 的核心功能之一，我们设计了一套完整的任务生命周期管理机制：</p>
+<ol>
+<li><strong>任务状态管理</strong>：定义了完整的任务状态流转体系，包括创建、进行中、暂停、完成、取消等状态</li>
+<li><strong>任务权限控制</strong>：确保只有任务创建者和分配者才能修改任务</li>
+<li><strong>数据一致性</strong>：通过数据库事务和验证机制确保任务数据的一致性</li>
+</ol>
+<p>任务模型设计遵循了领域驱动设计的原则，将任务相关的属性和行为封装在一起，便于维护和扩展。</p>
+<h2 id="模块化架构设计">模块化架构设计</h2>
+<p>todoIng 采用模块化设计，将不同功能划分为独立的模块：</p>
+<pre tabindex="0"><code>graph LR
+    A[todoIng核心系统] --&gt; B[用户认证模块]
+    A --&gt; C[任务管理模块]
+    A --&gt; D[历史追踪模块]
+    A --&gt; E[团队协作模块]
+    A --&gt; F[报告生成模块]
+    A --&gt; G[成就系统模块]
+    
+    B --&gt; B1[注册登录]
+    B --&gt; B2[JWT令牌管理]
+    
+    C --&gt; C1[任务创建/编辑]
+    C --&gt; C2[任务状态管理]
+    
+    D --&gt; D1[变更记录]
+    D --&gt; D2[快照机制]
+    
+    E --&gt; E1[团队管理]
+    E --&gt; E2[权限控制]
+    
+    F --&gt; F1[数据收集]
+    F --&gt; F2[AI内容生成]
+    
+    G --&gt; G1[成就定义]
+    G --&gt; G2[成就解锁]
+</code></pre><p>这种模块化设计的好处：</p>
+<ol>
+<li><strong>易于维护</strong>：每个模块职责单一，便于理解和维护</li>
+<li><strong>可扩展性强</strong>：可以独立添加或修改某个模块而不影响其他部分</li>
+<li><strong>团队协作</strong>：不同团队可以并行开发不同模块</li>
+</ol>
+<h2 id="技术选型考量">技术选型考量</h2>
+<h3 id="前端技术栈选择">前端技术栈选择</h3>
+<p>选择 React + TypeScript 的组合主要基于以下考虑：</p>
+<ol>
+<li><strong>生态系统丰富</strong>：React 拥有庞大的生态系统和社区支持</li>
+<li><strong>类型安全</strong>：TypeScript 提供了静态类型检查，减少运行时错误</li>
+<li><strong>开发体验</strong>：热重载和丰富的开发工具提升开发效率</li>
+<li><strong>组件化开发</strong>：React 的组件化思想与我们的模块化设计高度契合</li>
+</ol>
+<h3 id="后端技术栈选择">后端技术栈选择</h3>
+<p>Node.js + Express 的选择考虑了：</p>
+<ol>
+<li><strong>性能表现</strong>：Node.js 的事件驱动非阻塞 I/O 模型适合构建高并发应用</li>
+<li><strong>统一语言</strong>：前后端都使用 JavaScript/TypeScript，降低学习成本</li>
+<li><strong>开发效率</strong>：Express 提供了简洁的 API，快速构建 RESTful 服务</li>
+<li><strong>社区支持</strong>：丰富的第三方库和活跃的社区支持</li>
+</ol>
+<h3 id="数据库选择">数据库选择</h3>
+<p>MongoDB 的选择基于：</p>
+<ol>
+<li><strong>灵活的数据模型</strong>：无需预定义严格的表结构，适合快速迭代</li>
+<li><strong>水平扩展</strong>：支持分片集群，便于水平扩展</li>
+<li><strong>开发友好</strong>：文档结构与 JSON 格式一致，易于理解和操作</li>
+<li><strong>功能丰富</strong>：内置聚合管道等高级功能，便于数据分析</li>
+</ol>
+<h2 id="系统交互设计">系统交互设计</h2>
+<p>系统各模块之间的交互经过精心设计，确保数据流清晰且高效：</p>
+<pre tabindex="0"><code>sequenceDiagram
+    participant U as 用户
+    participant F as 前端
+    participant B as 后端
+    participant D as 数据库
+    participant A as OpenAI
+    
+    U-&gt;&gt;F: 操作界面
+    F-&gt;&gt;B: 发送请求
+    B-&gt;&gt;D: 查询/更新数据
+    D--&gt;&gt;B: 返回数据
+    B--&gt;&gt;F: 响应结果
+    F--&gt;&gt;U: 更新界面
+    
+    B-&gt;&gt;A: 请求AI服务(报告生成)
+    A--&gt;&gt;B: 返回生成内容
+    B-&gt;&gt;D: 保存报告
+</code></pre><p>这种设计确保了系统的响应性和可维护性。</p>
+<h2 id="可扩展性设计">可扩展性设计</h2>
+<p>todoIng 在设计之初就考虑了可扩展性，主要体现在以下几个方面：</p>
+<h3 id="1-插件化架构">1. 插件化架构</h3>
+<p>系统采用插件化架构，允许通过添加新的模块来扩展功能：</p>
+<pre tabindex="0"><code>graph TB
+    A[todoIng核心] --&gt; B[核心模块]
+    A --&gt; C[插件接口]
+    C --&gt; D[通知插件]
+    C --&gt; E[日历插件]
+    C --&gt; F[统计插件]
+    C --&gt; G[导出插件]
+    
+    subgraph 核心系统
+        A
+        B
+        C
+    end
+    
+    subgraph 可选插件
+        D
+        E
+        F
+        G
+    end
+</code></pre><h3 id="2-微服务准备">2. 微服务准备</h3>
+<p>虽然当前版本是单体应用，但架构设计上已经为未来拆分为微服务做好了准备：</p>
+<ul>
+<li>模块间通过清晰的接口通信</li>
+<li>数据库设计遵循领域驱动设计原则</li>
+<li>业务逻辑与数据存储解耦</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>通过合理的架构设计和技术选型，todoIng 的核心模块具备了良好的可维护性和可扩展性。模块化设计使得系统易于理解和维护，而前后端分离架构则提升了开发效率和系统性能。</p>
 <p>在下一篇文章中，我们将介绍 todoIng 最具特色的功能——Git 风格的任务历史追踪系统。这个功能使得 todoIng 与其他任务管理工具区别开来，为用户提供了前所未有的任务管理体验。</p>
 
           </div>
@@ -847,7 +599,7 @@ todoIng/ ├── backend/ # 后端服务 │ ├── src/ │ │ ├── 
                 <a href=https://axfinn.github.io/blog/2025-08/todoing-git-style-history-tracking/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
-                    <span>todoIng Git 风格历史追踪系统实现解析</span>
+                    <span>todoIng Git 风格历史追踪系统设计与架构</span>
                   </div>
                 </a>
               

@@ -9,11 +9,11 @@
     <lastBuildDate>Fri, 01 Aug 2025 14:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>todoIng 核心模块实现详解</title>
+      <title>todoIng 核心模块设计与架构</title>
       <link>https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/</link>
       <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/</guid>
-      <description>&lt;h1 id=&#34;todoing-核心模块实现详解&#34;&gt;todoIng 核心模块实现详解&lt;/h1&gt;&#xA;&lt;p&gt;在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。&lt;/p&gt;&#xA;&lt;h2 id=&#34;项目架构概览&#34;&gt;项目架构概览&lt;/h2&gt;&#xA;&lt;p&gt;todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js + Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;todoIng/&#xA;├── backend/           # 后端服务&#xA;│   ├── src/&#xA;│   │   ├── config/    # 配置文件&#xA;│   │   ├── middleware/ # 中间件&#xA;│   │   ├── models/    # 数据模型&#xA;│   │   ├── routes/    # 路由&#xA;│   │   └── app.js     # 应用入口&#xA;│   └── package.json&#xA;├── frontend/          # 前端应用&#xA;│   ├── src/&#xA;│   │   ├── app/       # 应用配置&#xA;│   │   ├── components/ # 组件&#xA;│   │   ├── features/  # 功能模块&#xA;│   │   ├── pages/     # 页面&#xA;│   │   └── App.tsx    # 应用根组件&#xA;│   └── package.json&#xA;└── docker-compose.yml # Docker 配置&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;用户认证系统实现&#34;&gt;用户认证系统实现&lt;/h2&gt;&#xA;&lt;p&gt;用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;todoing-核心模块设计与架构&#34;&gt;todoIng 核心模块设计与架构&lt;/h1&gt;&#xA;&lt;p&gt;在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。&lt;/p&gt;&#xA;&lt;h2 id=&#34;项目架构概览&#34;&gt;项目架构概览&lt;/h2&gt;&#xA;&lt;p&gt;todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;技术栈独立&lt;/strong&gt;：前端和后端可以使用最适合各自领域的技术栈&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;开发效率&lt;/strong&gt;：前后端团队可以并行开发，互不干扰&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;可扩展性&lt;/strong&gt;：前后端可以独立扩展和部署&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;维护性&lt;/strong&gt;：代码结构清晰，易于维护和重构&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;下面是 todoIng 的整体架构图：&lt;/p&gt;</description>
     </item>
     <item>
       <title>todoIng 项目概览：像管理代码一样管理你的任务</title>

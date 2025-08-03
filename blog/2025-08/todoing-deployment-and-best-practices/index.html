@@ -7,24 +7,43 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="todoIng 部署方案与最佳实践
+  <meta name="description" content="todoIng 部署架构与运维策略
 在前面的系列文章中，我们详细介绍了 todoIng 的各项功能和实现原理。今天，我们将探讨如何部署 todoIng 应用，并分享一些在实际部署过程中的最佳实践。
 部署方案概览
-todoIng 支持多种部署方式，以适应不同的使用场景和需求：
-
-Docker Compose 部署（推荐）：适用于生产环境和测试环境
-手动部署：适用于开发环境和自定义配置
-云平台部署：适用于需要高可用性和扩展性的场景
-
-Docker Compose 部署（推荐）
-Docker Compose 是部署 todoIng 的推荐方式，它能够快速启动整个应用栈，包括前端、后端和数据库。">
+todoIng 支持多种部署方式，以适应不同的使用场景和需求。我们的部署架构设计遵循了现代化应用部署的最佳实践，确保系统具有高可用性、可扩展性和安全性。
+部署架构设计
+todoIng 的部署架构采用分层设计：
+graph TD
+    A[用户访问] --&gt; B{负载均衡器}
+    B --&gt; C[前端服务集群]
+    B --&gt; D[后端服务集群]
+    C --&gt; E[(MongoDB集群)]
+    D --&gt; E
+    D --&gt; F[Redis缓存]
+    D --&gt; G[AI服务接口]
+    
+    subgraph 应用层
+        C
+        D
+    end
+    
+    subgraph 数据层
+        E
+        F
+    end
+    
+    subgraph 外部服务
+        G
+    end
+这种架构的优势：">
   
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-deployment-and-best-practices/">
   <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="todoIng 部署方案与最佳实践">
-  <meta property="og:description" content="todoIng 部署方案与最佳实践 在前面的系列文章中，我们详细介绍了 todoIng 的各项功能和实现原理。今天，我们将探讨如何部署 todoIng 应用，并分享一些在实际部署过程中的最佳实践。
-部署方案概览 todoIng 支持多种部署方式，以适应不同的使用场景和需求：
-Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动部署：适用于开发环境和自定义配置 云平台部署：适用于需要高可用性和扩展性的场景 Docker Compose 部署（推荐） Docker Compose 是部署 todoIng 的推荐方式，它能够快速启动整个应用栈，包括前端、后端和数据库。">
+  <meta property="og:title" content="todoIng 部署架构与运维策略">
+  <meta property="og:description" content="todoIng 部署架构与运维策略 在前面的系列文章中，我们详细介绍了 todoIng 的各项功能和实现原理。今天，我们将探讨如何部署 todoIng 应用，并分享一些在实际部署过程中的最佳实践。
+部署方案概览 todoIng 支持多种部署方式，以适应不同的使用场景和需求。我们的部署架构设计遵循了现代化应用部署的最佳实践，确保系统具有高可用性、可扩展性和安全性。
+部署架构设计 todoIng 的部署架构采用分层设计：
+graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群] B --&gt; D[后端服务集群] C --&gt; E[(MongoDB集群)] D --&gt; E D --&gt; F[Redis缓存] D --&gt; G[AI服务接口] subgraph 应用层 C D end subgraph 数据层 E F end subgraph 外部服务 G end 这种架构的优势：">
   <meta property="og:locale" content="zn_Hans">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -39,7 +58,7 @@ Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动�
 
   <title>
   
-       todoIng 部署方案与最佳实践 | jaxiu He 
+       todoIng 部署架构与运维策略 | jaxiu He 
   
   </title>
 
@@ -328,7 +347,7 @@ Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动�
     
   </ul>
 
-  <div class="px-4 post-heading">todoIng 部署方案与最佳实践</div>
+  <div class="px-4 post-heading">todoIng 部署架构与运维策略</div>
 
   <ul class="post-meta li-x mt-1">
     
@@ -337,7 +356,7 @@ Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动�
 
     
       <li class="middot"></li>
-      <li>4 minutes read</li>
+      <li>6 minutes read</li>
     
   </ul>
   
@@ -346,412 +365,298 @@ Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动�
 
 
           <div class="post-content markdown">
-            <h1 id="todoing-部署方案与最佳实践">todoIng 部署方案与最佳实践</h1>
+            <h1 id="todoing-部署架构与运维策略">todoIng 部署架构与运维策略</h1>
 <p>在前面的系列文章中，我们详细介绍了 todoIng 的各项功能和实现原理。今天，我们将探讨如何部署 todoIng 应用，并分享一些在实际部署过程中的最佳实践。</p>
 <h2 id="部署方案概览">部署方案概览</h2>
-<p>todoIng 支持多种部署方式，以适应不同的使用场景和需求：</p>
+<p>todoIng 支持多种部署方式，以适应不同的使用场景和需求。我们的部署架构设计遵循了现代化应用部署的最佳实践，确保系统具有高可用性、可扩展性和安全性。</p>
+<h3 id="部署架构设计">部署架构设计</h3>
+<p>todoIng 的部署架构采用分层设计：</p>
+<pre tabindex="0"><code>graph TD
+    A[用户访问] --&gt; B{负载均衡器}
+    B --&gt; C[前端服务集群]
+    B --&gt; D[后端服务集群]
+    C --&gt; E[(MongoDB集群)]
+    D --&gt; E
+    D --&gt; F[Redis缓存]
+    D --&gt; G[AI服务接口]
+    
+    subgraph 应用层
+        C
+        D
+    end
+    
+    subgraph 数据层
+        E
+        F
+    end
+    
+    subgraph 外部服务
+        G
+    end
+</code></pre><p>这种架构的优势：</p>
 <ol>
-<li><strong>Docker Compose 部署</strong>（推荐）：适用于生产环境和测试环境</li>
-<li><strong>手动部署</strong>：适用于开发环境和自定义配置</li>
-<li><strong>云平台部署</strong>：适用于需要高可用性和扩展性的场景</li>
+<li><strong>高可用性</strong>：通过集群部署确保服务的高可用性</li>
+<li><strong>可扩展性</strong>：可以根据负载情况动态扩展各组件</li>
+<li><strong>安全性</strong>：通过分层架构隔离不同组件，提高安全性</li>
 </ol>
-<h2 id="docker-compose-部署推荐">Docker Compose 部署（推荐）</h2>
+<h2 id="docker-compose-部署架构">Docker Compose 部署架构</h2>
 <p>Docker Compose 是部署 todoIng 的推荐方式，它能够快速启动整个应用栈，包括前端、后端和数据库。</p>
-<h3 id="环境准备">环境准备</h3>
-<p>首先确保系统已安装 Docker 和 Docker Compose：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装 Docker（Ubuntu 示例）</span>
-</span></span><span class="line"><span class="cl">curl -fsSL https://get.docker.com -o get-docker.sh
-</span></span><span class="line"><span class="cl">sudo sh get-docker.sh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装 Docker Compose</span>
-</span></span><span class="line"><span class="cl">sudo curl -L <span class="s2">&#34;https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-</span><span class="k">$(</span>uname -s<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">&#34;</span> -o /usr/local/bin/docker-compose
-</span></span><span class="line"><span class="cl">sudo chmod +x /usr/local/bin/docker-compose
-</span></span></code></pre></div><h3 id="部署步骤">部署步骤</h3>
+<h3 id="容器化架构设计">容器化架构设计</h3>
+<p>todoIng 的容器化架构采用微服务设计理念：</p>
+<pre tabindex="0"><code>graph TD
+    A[前端容器] --&gt; B[后端API容器]
+    B --&gt; C[MongoDB容器]
+    B --&gt; D[Redis容器]
+    B --&gt; E[AI服务]
+    
+    subgraph Docker网络
+        A
+        B
+        C
+        D
+    end
+    
+    E[外部AI服务] -.-&gt; B
+</code></pre><h3 id="服务间通信设计">服务间通信设计</h3>
+<p>容器间的服务通信经过精心设计：</p>
 <ol>
-<li>克隆项目代码：</li>
+<li><strong>内部网络</strong>：所有容器通过 Docker 自定义网络进行通信</li>
+<li><strong>端口管理</strong>：只暴露必要的端口到宿主机</li>
+<li><strong>环境变量</strong>：通过环境变量配置服务间的连接信息</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/axfinn/todoIng.git
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> todoIng
-</span></span></code></pre></div><ol start="2">
-<li>配置环境变量：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 后端环境变量</span>
-</span></span><span class="line"><span class="cl">cp backend/.env.example backend/.env
-</span></span><span class="line"><span class="cl"><span class="c1"># 编辑 backend/.env 文件，设置必要的环境变量</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 前端环境变量</span>
-</span></span><span class="line"><span class="cl">cp frontend/.env.example frontend/.env
-</span></span><span class="line"><span class="cl"><span class="c1"># 编辑 frontend/.env 文件，设置必要的环境变量</span>
-</span></span></code></pre></div><ol start="3">
-<li>启动服务：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用默认的 docker-compose.yml 文件</span>
-</span></span><span class="line"><span class="cl">docker-compose up -d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 或者使用特定环境的配置文件</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 开发环境</span>
-</span></span><span class="line"><span class="cl">docker-compose -f docker-compose.dev.yml up -d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 本地测试环境</span>
-</span></span><span class="line"><span class="cl">docker-compose -f docker-compose.local.yml up -d
-</span></span></code></pre></div><ol start="4">
-<li>访问应用：</li>
-</ol>
-<pre tabindex="0"><code>前端: http://localhost
-后端 API: http://localhost:5001/api
-</code></pre><h3 id="docker-compose-配置文件详解">Docker Compose 配置文件详解</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># docker-compose.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># MongoDB 数据库</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mongodb</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mongo:6.0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">todoing_mongodb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MONGO_INITDB_ROOT_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">${MONGO_ROOT_USERNAME}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MONGO_INITDB_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">${MONGO_ROOT_PASSWORD}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">mongodb_data:/data/db</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;27017:27017&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todoing_network</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 后端服务</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./backend</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">todoing_backend</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">NODE_ENV=production</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">MONGO_URI=mongodb://mongodb:27017/todoing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">JWT_SECRET=${JWT_SECRET}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">OPENAI_API_KEY=${OPENAI_API_KEY}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;5001:5001&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">mongodb</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todoing_network</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 前端服务</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">frontend</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./frontend</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">todoing_frontend</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;80:80&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">backend</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">todoing_network</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mongodb_data</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">todoing_network</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
-</span></span></span></code></pre></div><h3 id="环境变量配置">环境变量配置</h3>
-<h4 id="后端环境变量backendenv">后端环境变量（backend/.env）</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># MongoDB 配置</span>
-</span></span><span class="line"><span class="cl"><span class="nv">MONGO_URI</span><span class="o">=</span>mongodb://localhost:27017/todoing
-</span></span><span class="line"><span class="cl"><span class="nv">MONGO_ROOT_USERNAME</span><span class="o">=</span>admin
-</span></span><span class="line"><span class="cl"><span class="nv">MONGO_ROOT_PASSWORD</span><span class="o">=</span>password
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># JWT 配置</span>
-</span></span><span class="line"><span class="cl"><span class="nv">JWT_SECRET</span><span class="o">=</span>your_jwt_secret_key_here_change_this_in_production
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安全配置</span>
-</span></span><span class="line"><span class="cl"><span class="nv">DISABLE_REGISTRATION</span><span class="o">=</span><span class="nb">false</span>
-</span></span><span class="line"><span class="cl"><span class="nv">ENABLE_CAPTCHA</span><span class="o">=</span><span class="nb">false</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># OpenAI 配置（可选）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_openai_api_key_here
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 默认用户配置（可选）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">DEFAULT_USERNAME</span><span class="o">=</span>admin
-</span></span><span class="line"><span class="cl"><span class="nv">DEFAULT_EMAIL</span><span class="o">=</span>admin@example.com
-</span></span></code></pre></div><h4 id="前端环境变量frontendenv">前端环境变量（frontend/.env）</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># API 地址</span>
-</span></span><span class="line"><span class="cl"><span class="nv">VITE_API_URL</span><span class="o">=</span>http://localhost:5001/api
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 功能开关</span>
-</span></span><span class="line"><span class="cl"><span class="nv">VITE_ENABLE_CAPTCHA</span><span class="o">=</span><span class="nb">false</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># OpenAI 配置（可选）</span>
-</span></span><span class="line"><span class="cl"><span class="nv">VITE_OPENAI_API_KEY</span><span class="o">=</span>your_openai_api_key_here
-</span></span></code></pre></div><h2 id="手动部署">手动部署</h2>
+<h3 id="数据持久化策略">数据持久化策略</h3>
+<p>容器化部署中的数据持久化设计：</p>
+<pre tabindex="0"><code>graph TD
+    A[MongoDB容器] --&gt; B[(数据卷)]
+    C[日志文件] --&gt; D[(日志卷)]
+    E[配置文件] --&gt; F[(配置卷)]
+    
+    B --&gt; G[宿主机存储]
+    D --&gt; G
+    F --&gt; G
+</code></pre><h2 id="手动部署架构">手动部署架构</h2>
 <p>对于需要更多自定义配置的场景，可以选择手动部署方式。</p>
-<h3 id="后端部署">后端部署</h3>
+<h3 id="部署拓扑设计">部署拓扑设计</h3>
+<p>手动部署采用经典的三层架构：</p>
+<pre tabindex="0"><code>graph TD
+    A[Web服务器] --&gt; B[应用服务器]
+    B --&gt; C[数据库服务器]
+    B --&gt; D[缓存服务器]
+    B --&gt; E[AI服务]
+    
+    subgraph 前端层
+        A
+    end
+    
+    subgraph 应用层
+        B
+    end
+    
+    subgraph 数据层
+        C
+        D
+    end
+    
+    subgraph 外部服务
+        E
+    end
+</code></pre><h3 id="组件部署策略">组件部署策略</h3>
+<p>各组件的部署考虑了以下因素：</p>
 <ol>
-<li>安装依赖：</li>
+<li><strong>前端服务</strong>：使用 Nginx 作为静态文件服务器</li>
+<li><strong>后端服务</strong>：使用 PM2 管理 Node.js 进程</li>
+<li><strong>数据库服务</strong>：使用 MongoDB 副本集确保高可用性</li>
+<li><strong>缓存服务</strong>：使用 Redis 提升系统性能</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> backend
-</span></span><span class="line"><span class="cl">npm install
-</span></span></code></pre></div><ol start="2">
-<li>配置环境变量：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp .env.example .env
-</span></span><span class="line"><span class="cl"><span class="c1"># 编辑 .env 文件</span>
-</span></span></code></pre></div><ol start="3">
-<li>启动服务：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 生产环境</span>
-</span></span><span class="line"><span class="cl">npm start
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 开发环境</span>
-</span></span><span class="line"><span class="cl">npm run dev
-</span></span></code></pre></div><h3 id="前端部署">前端部署</h3>
-<ol>
-<li>安装依赖：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> frontend
-</span></span><span class="line"><span class="cl">npm install
-</span></span></code></pre></div><ol start="2">
-<li>配置环境变量：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp .env.example .env
-</span></span><span class="line"><span class="cl"><span class="c1"># 编辑 .env 文件</span>
-</span></span></code></pre></div><ol start="3">
-<li>构建和启动：</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 构建生产版本</span>
-</span></span><span class="line"><span class="cl">npm run build
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 预览生产构建</span>
-</span></span><span class="line"><span class="cl">npm run preview
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 或者开发模式启动</span>
-</span></span><span class="line"><span class="cl">npm run dev
-</span></span></code></pre></div><h2 id="云平台部署">云平台部署</h2>
+<h2 id="云平台部署策略">云平台部署策略</h2>
 <p>todoIng 也可以部署到各种云平台，如 AWS、Azure、Google Cloud 等。</p>
-<h3 id="部署到-heroku">部署到 Heroku</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 登录 Heroku</span>
-</span></span><span class="line"><span class="cl">heroku login
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建应用</span>
-</span></span><span class="line"><span class="cl">heroku create your-todoing-app
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 设置环境变量</span>
-</span></span><span class="line"><span class="cl">heroku config:set <span class="nv">MONGO_URI</span><span class="o">=</span>your_mongodb_uri
-</span></span><span class="line"><span class="cl">heroku config:set <span class="nv">JWT_SECRET</span><span class="o">=</span>your_jwt_secret
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 部署</span>
-</span></span><span class="line"><span class="cl">git push heroku main
-</span></span></code></pre></div><h3 id="部署到-aws">部署到 AWS</h3>
-<p>可以使用 AWS ECS 或 Elastic Beanstalk 部署 todoIng：</p>
+<h3 id="云原生架构">云原生架构</h3>
+<p>在云平台上的部署采用云原生架构：</p>
+<pre tabindex="0"><code>graph TD
+    A[负载均衡器] --&gt; B{Kubernetes集群}
+    B --&gt; C[前端Pods]
+    B --&gt; D[后端Pods]
+    D --&gt; E[(MongoDB服务)]
+    D --&gt; F[(Redis服务)]
+    D --&gt; G[AI服务]
+    
+    subgraph Kubernetes
+        B
+        C
+        D
+        E
+        F
+    end
+    
+    G -.-&gt; D
+</code></pre><h3 id="微服务拆分">微服务拆分</h3>
+<p>未来计划将 todoIng 拆分为更细粒度的微服务：</p>
+<pre tabindex="0"><code>graph TD
+    A[API网关] --&gt; B[用户服务]
+    A --&gt; C[任务服务]
+    A --&gt; D[历史服务]
+    A --&gt; E[团队服务]
+    A --&gt; F[报告服务]
+    A --&gt; G[通知服务]
+    
+    B --&gt; H[(用户数据库)]
+    C --&gt; I[(任务数据库)]
+    D --&gt; J[(历史数据库)]
+    E --&gt; K[(团队数据库)]
+    F --&gt; L[(报告数据库)]
+    
+    C --&gt; M[AI服务]
+    D --&gt; N[事件总线]
+    G --&gt; N
+</code></pre><h2 id="安全架构设计">安全架构设计</h2>
+<h3 id="网络安全策略">网络安全策略</h3>
+<p>todoIng 的网络安全设计遵循纵深防御原则：</p>
+<pre tabindex="0"><code>graph LR
+    A[外部网络] --&gt; B[防火墙]
+    B --&gt; C[WAF]
+    C --&gt; D[负载均衡]
+    D --&gt; E[应用服务器]
+    E --&gt; F[数据库服务器]
+    
+    subgraph 安全边界
+        B
+        C
+        D
+        E
+        F
+    end
+</code></pre><h3 id="认证授权体系">认证授权体系</h3>
+<p>系统采用多层认证授权体系：</p>
 <ol>
-<li>构建 Docker 镜像：</li>
+<li><strong>传输层安全</strong>：使用 HTTPS 加密所有通信</li>
+<li><strong>应用层认证</strong>：使用 JWT 进行用户身份验证</li>
+<li><strong>资源层授权</strong>：基于 RBAC 进行细粒度权限控制</li>
+<li><strong>数据层加密</strong>：敏感数据在存储时进行加密</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t todoing-backend ./backend
-</span></span><span class="line"><span class="cl">docker build -t todoing-frontend ./frontend
-</span></span></code></pre></div><ol start="2">
-<li>推送到 ECR：</li>
+<h2 id="性能优化架构">性能优化架构</h2>
+<h3 id="缓存架构">缓存架构</h3>
+<p>todoIng 采用多级缓存架构提升性能：</p>
+<pre tabindex="0"><code>graph TD
+    A[用户请求] --&gt; B[CDN缓存]
+    B --&gt; C[应用层缓存]
+    C --&gt; D[数据库缓存]
+    D --&gt; E[数据库]
+    
+    F[Redis] --&gt; C
+    G[Memcached] --&gt; D
+    
+    subgraph 缓存层
+        B
+        C
+        D
+        F
+        G
+    end
+</code></pre><h3 id="数据库优化">数据库优化</h3>
+<p>数据库层面的优化策略：</p>
+<ol>
+<li><strong>索引优化</strong>：为常用查询字段创建合适的索引</li>
+<li><strong>读写分离</strong>：将读操作和写操作分离到不同的数据库实例</li>
+<li><strong>分片策略</strong>：对大数据量的表进行分片处理</li>
+<li><strong>连接池</strong>：使用连接池管理数据库连接</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aws ecr get-login-password --region us-west-2 <span class="p">|</span> docker login --username AWS --password-stdin your-account.dkr.ecr.us-west-2.amazonaws.com
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker tag todoing-backend:latest your-account.dkr.ecr.us-west-2.amazonaws.com/todoing-backend:latest
-</span></span><span class="line"><span class="cl">docker push your-account.dkr.ecr.us-west-2.amazonaws.com/todoing-backend:latest
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker tag todoing-frontend:latest your-account.dkr.ecr.us-west-2.amazonaws.com/todoing-frontend:latest
-</span></span><span class="line"><span class="cl">docker push your-account.dkr.ecr.us-west-2.amazonaws.com/todoing-frontend:latest
-</span></span></code></pre></div><h2 id="安全最佳实践">安全最佳实践</h2>
-<h3 id="1-环境变量管理">1. 环境变量管理</h3>
-<p>永远不要将敏感信息（如 API 密钥、密码）硬编码在代码中：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 正确做法</span>
-</span></span><span class="line"><span class="cl"><span class="nv">JWT_SECRET</span><span class="o">=</span><span class="si">${</span><span class="nv">JWT_SECRET</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl"><span class="nv">MONGO_URI</span><span class="o">=</span><span class="si">${</span><span class="nv">MONGO_URI</span><span class="si">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 错误做法</span>
-</span></span><span class="line"><span class="cl"><span class="nv">JWT_SECRET</span><span class="o">=</span>my_secret_key_123
-</span></span><span class="line"><span class="cl"><span class="nv">MONGO_URI</span><span class="o">=</span>mongodb://user:password@localhost:27017/todoing
-</span></span></code></pre></div><h3 id="2-https-配置">2. HTTPS 配置</h3>
-<p>在生产环境中，始终使用 HTTPS：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># nginx 配置示例
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">your-domain.com</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kn">ssl_certificate</span> <span class="s">/path/to/your/certificate.crt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kn">ssl_certificate_key</span> <span class="s">/path/to/your/private.key</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span> <span class="s">http://localhost:3000</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="3-数据库安全">3. 数据库安全</h3>
-<ul>
-<li>使用强密码</li>
-<li>限制数据库访问权限</li>
-<li>定期备份数据</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// MongoDB 安全配置示例
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">connectDB</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">conn</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGO_URI</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">useNewUrlParser</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">useUnifiedTopology</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// 启用认证
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">auth</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">username</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGO_USERNAME</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">password</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGO_PASSWORD</span>
-</span></span><span class="line"><span class="cl">      <span class="p">},</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// SSL 配置（如果需要）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">ssl</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGO_SSL</span> <span class="o">===</span> <span class="s1">&#39;true&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`MongoDB 连接成功: </span><span class="si">${</span><span class="nx">conn</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">host</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`MongoDB 连接失败: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h2 id="性能优化">性能优化</h2>
-<h3 id="1-数据库索引优化">1. 数据库索引优化</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 为常用查询字段创建索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">taskSchema</span><span class="p">.</span><span class="nx">index</span><span class="p">({</span> <span class="nx">createdBy</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="nx">taskSchema</span><span class="p">.</span><span class="nx">index</span><span class="p">({</span> <span class="nx">status</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="nx">taskSchema</span><span class="p">.</span><span class="nx">index</span><span class="p">({</span> <span class="nx">createdAt</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="nx">taskSchema</span><span class="p">.</span><span class="nx">index</span><span class="p">({</span> <span class="s2">&#34;collaborators.user&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
-</span></span></code></pre></div><h3 id="2-缓存策略">2. 缓存策略</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 使用 Redis 缓存用户数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;redis&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getCachedUserData</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">cached</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`user:</span><span class="si">${</span><span class="nx">userId</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">cached</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">cached</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">setex</span><span class="p">(</span><span class="sb">`user:</span><span class="si">${</span><span class="nx">userId</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">user</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h3 id="3-前端性能优化">3. 前端性能优化</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 使用 React.memo 优化组件渲染
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">TaskItem</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(({</span> <span class="nx">task</span><span class="p">,</span> <span class="nx">onEdit</span><span class="p">,</span> <span class="nx">onDelete</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&#34;task-item&#34;</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">description</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&#34;task-actions&#34;</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">onEdit</span><span class="p">(</span><span class="nx">task</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">编辑</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">onDelete</span><span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">_id</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">删除</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="err">/div&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/div&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><h2 id="监控和日志">监控和日志</h2>
-<h3 id="1-应用日志">1. 应用日志</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 后端日志配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">winston</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;winston&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">expressWinston</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express-winston&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">createLogger</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">format</span><span class="o">:</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">combine</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">(),</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">transports</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">({</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;error.log&#39;</span><span class="p">,</span> <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span> <span class="p">}),</span>
-</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">({</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;combined.log&#39;</span> <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// HTTP 请求日志
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">expressWinston</span><span class="p">.</span><span class="nx">logger</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">transports</span><span class="o">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">({</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;requests.log&#39;</span> <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">format</span><span class="o">:</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">combine</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">(),</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">winston</span><span class="p">.</span><span class="nx">format</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}));</span>
-</span></span></code></pre></div><h3 id="2-健康检查端点">2. 健康检查端点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 健康检查路由
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查数据库连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">await</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">admin</span><span class="p">().</span><span class="nx">ping</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 检查其他依赖服务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;healthy&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">timestamp</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">services</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;connected&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 其他服务状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;unhealthy&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><h2 id="备份和恢复">备份和恢复</h2>
-<h3 id="1-数据库备份">1. 数据库备份</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># MongoDB 备份脚本</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
-</span></span><span class="line"><span class="cl"><span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date +%Y%m%d_%H%M%S<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">&#34;/backups/mongodb&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&#34;todoing_mongodb&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">mkdir -p <span class="nv">$BACKUP_DIR</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> <span class="nv">$CONTAINER_NAME</span> mongodump --out /dump
-</span></span><span class="line"><span class="cl">docker cp <span class="nv">$CONTAINER_NAME</span>:/dump <span class="nv">$BACKUP_DIR</span>/<span class="nv">$DATE</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 压缩备份</span>
-</span></span><span class="line"><span class="cl">tar -czf <span class="nv">$BACKUP_DIR</span>/<span class="nv">$DATE</span>.tar.gz -C <span class="nv">$BACKUP_DIR</span> <span class="nv">$DATE</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 删除7天前的备份</span>
-</span></span><span class="line"><span class="cl">find <span class="nv">$BACKUP_DIR</span> -name <span class="s2">&#34;*.tar.gz&#34;</span> -mtime +7 -delete
-</span></span></code></pre></div><h3 id="2-自动化部署脚本">2. 自动化部署脚本</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># deploy.sh</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;开始部署 todoIng...&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 拉取最新代码</span>
-</span></span><span class="line"><span class="cl">git pull origin main
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 构建 Docker 镜像</span>
-</span></span><span class="line"><span class="cl">docker-compose build
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 停止并删除旧容器</span>
-</span></span><span class="line"><span class="cl">docker-compose down
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 启动新容器</span>
-</span></span><span class="line"><span class="cl">docker-compose up -d
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 等待服务启动</span>
-</span></span><span class="line"><span class="cl">sleep <span class="m">30</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 检查服务状态</span>
-</span></span><span class="line"><span class="cl">docker-compose ps
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;部署完成！&#34;</span>
-</span></span></code></pre></div><h2 id="总结">总结</h2>
-<p>通过合理的部署方案和最佳实践，我们可以确保 todoIng 应用的稳定性、安全性和高性能。Docker Compose 提供了最简单快捷的部署方式，而手动部署和云平台部署则提供了更多的自定义选项。</p>
+<h2 id="监控与运维架构">监控与运维架构</h2>
+<h3 id="监控体系">监控体系</h3>
+<p>todoIng 建立了完整的监控体系：</p>
+<pre tabindex="0"><code>graph TD
+    A[应用指标] --&gt; B[Prometheus]
+    C[日志收集] --&gt; D[Elasticsearch]
+    E[追踪信息] --&gt; F[Jaeger]
+    G[健康检查] --&gt; H[自定义探针]
+    
+    B --&gt; I[Grafana]
+    D --&gt; J[Kibana]
+    F --&gt; K[Jaeger UI]
+    
+    I --&gt; L[运维团队]
+    J --&gt; L
+    K --&gt; L
+    H --&gt; L
+</code></pre><h3 id="日志架构">日志架构</h3>
+<p>系统采用集中式日志管理：</p>
+<ol>
+<li><strong>结构化日志</strong>：使用统一的日志格式便于分析</li>
+<li><strong>分级日志</strong>：根据日志级别进行不同的处理</li>
+<li><strong>实时收集</strong>：使用 Fluentd 实时收集日志</li>
+<li><strong>长期存储</strong>：将日志存储到 Elasticsearch 便于查询</li>
+</ol>
+<h2 id="备份与恢复架构">备份与恢复架构</h2>
+<h3 id="数据备份策略">数据备份策略</h3>
+<p>todoIng 采用多层次的数据备份策略：</p>
+<pre tabindex="0"><code>graph TD
+    A[实时数据] --&gt; B{备份策略}
+    B --&gt; C[实时备份]
+    B --&gt; D[定时备份]
+    B --&gt; E[增量备份]
+    
+    C --&gt; F[主备同步]
+    D --&gt; G[每日快照]
+    E --&gt; H[变更日志]
+    
+    F --&gt; I[(备份存储)]
+    G --&gt; I
+    H --&gt; I
+</code></pre><h3 id="灾难恢复">灾难恢复</h3>
+<p>系统具备完善的灾难恢复能力：</p>
+<ol>
+<li><strong>多地域部署</strong>：在多个地域部署服务实例</li>
+<li><strong>自动故障转移</strong>：当主服务出现故障时自动切换到备用服务</li>
+<li><strong>数据恢复测试</strong>：定期进行数据恢复演练</li>
+<li><strong>应急预案</strong>：制定详细的应急响应计划</li>
+</ol>
+<h2 id="可扩展性设计">可扩展性设计</h2>
+<h3 id="水平扩展">水平扩展</h3>
+<p>todoIng 支持水平扩展以应对增长的用户需求：</p>
+<pre tabindex="0"><code>graph TD
+    A[负载均衡] --&gt; B[前端实例1]
+    A --&gt; C[前端实例2]
+    A --&gt; D[前端实例N]
+    
+    B --&gt; E[后端集群]
+    C --&gt; E
+    D --&gt; E
+    
+    E --&gt; F[数据库集群]
+</code></pre><h3 id="微服务准备">微服务准备</h3>
+<p>虽然当前版本是单体应用，但架构设计上已经为未来拆分为微服务做好了准备：</p>
+<ol>
+<li><strong>模块化设计</strong>：各功能模块相对独立，便于拆分</li>
+<li><strong>接口标准化</strong>：模块间通过清晰的接口通信</li>
+<li><strong>数据隔离</strong>：数据库设计遵循领域驱动设计原则</li>
+<li><strong>业务解耦</strong>：业务逻辑与数据存储解耦</li>
+</ol>
+<h2 id="未来发展方向">未来发展方向</h2>
+<h3 id="1-服务网格集成">1. 服务网格集成</h3>
+<p>计划集成服务网格技术提升微服务治理能力：</p>
+<ol>
+<li><strong>流量管理</strong>：通过服务网格管理服务间流量</li>
+<li><strong>安全控制</strong>：实现服务间通信的 mTLS 加密</li>
+<li><strong>可观测性</strong>：通过服务网格增强系统可观测性</li>
+<li><strong>弹性能力</strong>：利用服务网格实现熔断、限流等功能</li>
+</ol>
+<h3 id="2-无服务器架构">2. 无服务器架构</h3>
+<p>探索无服务器架构的可能性：</p>
+<ol>
+<li><strong>函数即服务</strong>：将部分功能重构为无服务器函数</li>
+<li><strong>事件驱动</strong>：基于事件驱动的无服务器架构</li>
+<li><strong>成本优化</strong>：通过无服务器架构优化成本结构</li>
+<li><strong>弹性伸缩</strong>：利用云平台的自动伸缩能力</li>
+</ol>
+<h3 id="3-边缘计算">3. 边缘计算</h3>
+<p>结合边缘计算技术提升用户体验：</p>
+<ol>
+<li><strong>就近访问</strong>：将服务部署到离用户更近的边缘节点</li>
+<li><strong>数据同步</strong>：实现边缘节点与中心节点的数据同步</li>
+<li><strong>离线能力</strong>：支持边缘节点的离线工作模式</li>
+<li><strong>实时处理</strong>：在边缘节点进行实时数据处理</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>通过合理的部署架构和运维策略，我们可以确保 todoIng 应用的稳定性、安全性和高性能。Docker Compose 提供了最简单快捷的部署方式，而手动部署和云平台部署则提供了更多的自定义选项。</p>
 <p>关键要点包括：</p>
 <ol>
 <li><strong>选择合适的部署方式</strong>：根据实际需求选择 Docker Compose、手动部署或云平台部署</li>
@@ -805,7 +710,7 @@ Docker Compose 部署（推荐）：适用于生产环境和测试环境 手动�
                 <a href=https://axfinn.github.io/blog/2025-08/todoing-ai-report-generation/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
-                    <span>todoIng AI 报告生成：智能提升工作效率</span>
+                    <span>todoIng AI 报告生成系统设计与智能应用</span>
                   </div>
                 </a>
               
