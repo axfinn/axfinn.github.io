@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>系统架构 on jaxiu He</title>
+    <link>https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</link>
+    <description>Recent content in 系统架构 on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Fri, 01 Aug 2025 14:00:00 +0800</lastBuildDate>
+    <atom:link href="https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>todoIng 核心模块实现详解</title>
+      <link>https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/</link>
+      <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/</guid>
+      <description>&lt;h1 id=&#34;todoing-核心模块实现详解&#34;&gt;todoIng 核心模块实现详解&lt;/h1&gt;&#xA;&lt;p&gt;在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块实现，包括用户认证系统和基础任务管理功能。这些模块是整个系统的基础，为其他高级功能提供了支撑。&lt;/p&gt;&#xA;&lt;h2 id=&#34;项目架构概览&#34;&gt;项目架构概览&lt;/h2&gt;&#xA;&lt;p&gt;todoIng 采用前后端分离的架构设计，前端使用 React 构建，后端使用 Node.js + Express.js 实现。数据存储采用 MongoDB 数据库，通过 Mongoose 进行对象建模。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;todoIng/&#xA;├── backend/           # 后端服务&#xA;│   ├── src/&#xA;│   │   ├── config/    # 配置文件&#xA;│   │   ├── middleware/ # 中间件&#xA;│   │   ├── models/    # 数据模型&#xA;│   │   ├── routes/    # 路由&#xA;│   │   └── app.js     # 应用入口&#xA;│   └── package.json&#xA;├── frontend/          # 前端应用&#xA;│   ├── src/&#xA;│   │   ├── app/       # 应用配置&#xA;│   │   ├── components/ # 组件&#xA;│   │   ├── features/  # 功能模块&#xA;│   │   ├── pages/     # 页面&#xA;│   │   └── App.tsx    # 应用根组件&#xA;│   └── package.json&#xA;└── docker-compose.yml # Docker 配置&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;用户认证系统实现&#34;&gt;用户认证系统实现&lt;/h2&gt;&#xA;&lt;p&gt;用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

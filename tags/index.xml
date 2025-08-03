@@ -6,13 +6,160 @@
     <description>Recent content in Tags on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 22:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 16:00:00 +0800</lastBuildDate>
     <atom:link href="https://axfinn.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DevOps</title>
+      <link>https://axfinn.github.io/tags/devops/</link>
+      <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://axfinn.github.io/tags/docker/</link>
+      <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TodoIng</title>
+      <link>https://axfinn.github.io/tags/todoing/</link>
+      <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/todoing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>最佳实践</title>
+      <link>https://axfinn.github.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>部署</title>
+      <link>https://axfinn.github.io/tags/%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E9%83%A8%E7%BD%B2/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI</title>
       <link>https://axfinn.github.io/tags/ai/</link>
-      <pubDate>Thu, 31 Jul 2025 22:00:00 +0800</pubDate>
+      <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAI</title>
+      <link>https://axfinn.github.io/tags/openai/</link>
+      <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/openai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工作效率</title>
+      <link>https://axfinn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</link>
+      <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>报告生成</title>
+      <link>https://axfinn.github.io/tags/%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90/</link>
+      <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MongoDB</title>
+      <link>https://axfinn.github.io/tags/mongodb/</link>
+      <pubDate>Sat, 02 Aug 2025 15:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>RBAC</title>
+      <link>https://axfinn.github.io/tags/rbac/</link>
+      <pubDate>Sat, 02 Aug 2025 15:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/rbac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>团队协作</title>
+      <link>https://axfinn.github.io/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/</link>
+      <pubDate>Sat, 02 Aug 2025 15:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>权限管理</title>
+      <link>https://axfinn.github.io/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sat, 02 Aug 2025 15:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://axfinn.github.io/tags/git/</link>
+      <pubDate>Sat, 02 Aug 2025 09:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>事件驱动</title>
+      <link>https://axfinn.github.io/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sat, 02 Aug 2025 09:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>历史追踪</title>
+      <link>https://axfinn.github.io/tags/%E5%8E%86%E5%8F%B2%E8%BF%BD%E8%B8%AA/</link>
+      <pubDate>Sat, 02 Aug 2025 09:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%8E%86%E5%8F%B2%E8%BF%BD%E8%B8%AA/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JWT</title>
+      <link>https://axfinn.github.io/tags/jwt/</link>
+      <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/jwt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node.js</title>
+      <link>https://axfinn.github.io/tags/node.js/</link>
+      <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/node.js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>React</title>
+      <link>https://axfinn.github.io/tags/react/</link>
+      <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/react/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>系统架构</title>
+      <link>https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>任务管理</title>
+      <link>https://axfinn.github.io/tags/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Fri, 01 Aug 2025 10:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>开源项目</title>
+      <link>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Fri, 01 Aug 2025 10:00:00 +0800</pubDate>
+      <guid>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     <item>
@@ -20,13 +167,6 @@
       <link>https://axfinn.github.io/tags/deepchat/</link>
       <pubDate>Thu, 31 Jul 2025 22:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/deepchat/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>开源项目</title>
-      <link>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
-      <pubDate>Thu, 31 Jul 2025 22:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     <item>
@@ -394,24 +534,10 @@
       <description></description>
     </item>
     <item>
-      <title>Docker</title>
-      <link>https://axfinn.github.io/tags/docker/</link>
-      <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/docker/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Flask</title>
       <link>https://axfinn.github.io/tags/flask/</link>
       <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/flask/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Git</title>
-      <link>https://axfinn.github.io/tags/git/</link>
-      <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/git/</guid>
       <description></description>
     </item>
     <item>
@@ -468,13 +594,6 @@
       <link>https://axfinn.github.io/tags/%E8%BF%90%E7%BB%B4/</link>
       <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
       <guid>https://axfinn.github.io/tags/%E8%BF%90%E7%BB%B4/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>部署</title>
-      <link>https://axfinn.github.io/tags/%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/tags/%E9%83%A8%E7%BD%B2/</guid>
       <description></description>
     </item>
     <item>
