@@ -407,6 +407,8 @@
 
   
 
+  
+
 
 
 
@@ -430,7 +432,7 @@
             
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF">
-                <span>技术 (52)</span>
+                <span>技术 (53)</span>
               </a>
             </li>           
           
@@ -447,8 +449,8 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7">
-                <span>Ai工具 (8)</span>
+              <a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">
+                <span>架构设计 (9)</span>
               </a>
             </li>           
           
@@ -456,8 +458,8 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1">
-                <span>架构设计 (8)</span>
+              <a href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7">
+                <span>Ai工具 (8)</span>
               </a>
             </li>           
           
@@ -736,6 +738,8 @@
 
   
 
+  
+
 
 
 
@@ -774,7 +778,7 @@
             <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button"><span>架构设计 (8)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/todoing" role="button"><span>todoing (6)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/todoing" role="button"><span>todoing (7)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (6)</span></a></li>
@@ -876,7 +880,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  56 posts
+                  57 posts
                 </div>
               
             </div>
@@ -920,6 +924,75 @@
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/qwen-code-core-implementation-details/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">Qwen Code 核心代码实现细节深度解读</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 23, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>9 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。
+CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts：
+#!/usr/bin/env node import &#39;./src/gemini.js&#39;; import { main } from &#39;./src/gemini.js&#39;; // --- Global Entry Point --- main().catch((error) =&gt; { console.error(&#39;An unexpected critical error occurred:&#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情：
+导入主模块 gemini.js 调用 main() 函数启动应用 实现全局错误处理，确保任何未捕获的异常都能被妥善处理 CLI 启动流程可以用下图表示：
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/qwen-code" role="button">Qwen Code </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button">源码解析 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82" role="button">实现细节 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81" role="button">核心代码 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -1046,77 +1119,6 @@
       
     
       <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97" role="button">开发指南 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/qwen-code-cli-usage/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">Qwen Code CLI 使用详解</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 23, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>3 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      Qwen Code CLI 使用详解 CLI 入门 Qwen Code 是一个功能强大的命令行 AI 工作流工具，为开发者提供了一种全新的与代码交互的方式。通过 CLI，用户可以与 AI 进行对话，执行各种编程任务。
-安装 确保您已经安装了 Node.js 20&#43; 版本，然后通过 npm 安装 Qwen Code：
-npm install -g @qwen-code/qwen-code 基本使用 安装完成后，您可以通过以下命令启动 Qwen Code：
-qwen-code 这将启动交互式 CLI 会话，您可以直接与 AI 进行对话。
-非交互式使用 您也可以通过管道或重定向将输入传递给 Qwen Code：
-echo &#34;帮我生成一个 React 组件&#34; | qwen-code CLI 入口实现 Qwen Code 的 CLI 入口是一个基于 React 和 Ink 构建的命令行应用程序。主要特性包括：
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI工具 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/qwen-code" role="button">Qwen Code </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/cli" role="button">CLI </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97" role="button">使用指南 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7" role="button">开发工具 </a></li>
       
     
   </div>

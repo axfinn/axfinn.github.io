@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="jaxiu He">
+  <meta name="description" content="todoIng 架构设计与未来展望
+在之前的系列文章中，我们详细介绍了 todoIng 项目的功能实现和部署方案。今天我们从更高的视角来审视这个项目，探讨其架构设计思路、系统组件之间的关系以及未来的可扩展方向。
+整体架构设计
+todoIng 采用了现代化的前后端分离架构，这种设计模式带来了许多优势：
+
+技术栈独立：前端和后端可以使用最适合各自领域的技术栈
+开发效率：前后端团队可以并行开发，互不干扰
+可扩展性：前后端可以独立扩展和部署
+维护性：代码结构清晰，易于维护和重构
+
+下面是 todoIng 的整体架构图：">
+  
+  <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-architecture-and-future/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="todoIng 架构设计与未来展望">
+  <meta property="og:description" content="todoIng 架构设计与未来展望 在之前的系列文章中，我们详细介绍了 todoIng 项目的功能实现和部署方案。今天我们从更高的视角来审视这个项目，探讨其架构设计思路、系统组件之间的关系以及未来的可扩展方向。
+整体架构设计 todoIng 采用了现代化的前后端分离架构，这种设计模式带来了许多优势：
+技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易于维护和重构 下面是 todoIng 的整体架构图：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-08-03T20:00:00+08:00">
+    <meta property="article:modified_time" content="2025-08-03T20:00:00+08:00">
+    <meta property="article:tag" content="TodoIng">
+    <meta property="article:tag" content="系统架构">
+    <meta property="article:tag" content="可扩展性">
+    <meta property="article:tag" content="未来规划">
+
+
+  <title>
+  
+       todoIng 架构设计与未来展望 | jaxiu He 
+  
+  </title>
+
+  <link rel="canonical" href="https://axfinn.github.io/blog/2025-08/todoing-architecture-and-future/">
+
+  
+  
+
+  
+  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://axfinn.github.io/img/logo.png"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+  
+
+  
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  
+  
+
+  
+  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
+  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://axfinn.github.io/">
+          
+        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+            </li>
+          
+          
+        </ul>
+
+        
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
+              <div class="dropdown-wrapper">
+                <ul id="search-results" class="dropdown-menu"></ul>
+              </div>
+            </form>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+  <script src="https://axfinn.github.io/js/search.js"></script>
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+      
+
+        
+        <div class="carousel-item">
+          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://axfinn.github.io/">
+          
+            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://axfinn.github.io/">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+      
+        <li><a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 架构设计 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">todoIng 架构设计与未来展望</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Aug 3, 2025</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>5 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <h1 id="todoing-架构设计与未来展望">todoIng 架构设计与未来展望</h1>
+<p>在之前的系列文章中，我们详细介绍了 todoIng 项目的功能实现和部署方案。今天我们从更高的视角来审视这个项目，探讨其架构设计思路、系统组件之间的关系以及未来的可扩展方向。</p>
+<h2 id="整体架构设计">整体架构设计</h2>
+<p>todoIng 采用了现代化的前后端分离架构，这种设计模式带来了许多优势：</p>
+<ol>
+<li><strong>技术栈独立</strong>：前端和后端可以使用最适合各自领域的技术栈</li>
+<li><strong>开发效率</strong>：前后端团队可以并行开发，互不干扰</li>
+<li><strong>可扩展性</strong>：前后端可以独立扩展和部署</li>
+<li><strong>维护性</strong>：代码结构清晰，易于维护和重构</li>
+</ol>
+<p>下面是 todoIng 的整体架构图：</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
+    A[用户界面] --&gt; B{前端应用}
+    B --&gt; C[React + TypeScript]
+    B --&gt; D[Redux状态管理]
+    B --&gt; E[Bootstrap UI组件]
+    
+    C --&gt; F{后端API}
+    D --&gt; F
+    E --&gt; F
+    
+    F --&gt; G[Node.js + Express]
+    F --&gt; H[JWT认证]
+    F --&gt; I[MongoDB数据库]
+    
+    G --&gt; J[任务管理模块]
+    G --&gt; K[用户认证模块]
+    G --&gt; L[历史追踪模块]
+    G --&gt; M[团队协作模块]
+    G --&gt; N[AI报告模块]
+    
+    I --&gt; O[用户数据]
+    I --&gt; P[任务数据]
+    I --&gt; Q[历史记录]
+    I --&gt; R[团队信息]
+    
+    N --&gt; S[OpenAI API]
+    
+    subgraph 前端层
+        A
+        B
+        C
+        D
+        E
+    end
+    
+    subgraph 后端层
+        F
+        G
+        H
+        I
+        J
+        K
+        L
+        M
+        N
+        S
+    end
+    
+    subgraph 数据层
+        O
+        P
+        Q
+        R
+    end
+</code></pre><h2 id="核心设计理念">核心设计理念</h2>
+<h3 id="1-git-风格的历史追踪">1. Git 风格的历史追踪</h3>
+<p>todoIng 最具创新性的功能是 Git 风格的任务历史追踪。这个设计灵感来源于 Git 的版本控制系统，我们将这一思想应用到任务管理中，为每个任务维护一个完整的变更历史。</p>
+<p>这种设计的优势在于：</p>
+<ul>
+<li><strong>可追溯性</strong>：用户可以随时查看任务的完整演进过程</li>
+<li><strong>透明度</strong>：团队成员可以了解任务状态变更的原因和背景</li>
+<li><strong>学习价值</strong>：通过分析历史记录，用户可以优化自己的工作流程</li>
+</ul>
+<h3 id="2-基于角色的权限控制">2. 基于角色的权限控制</h3>
+<p>为了支持团队协作，todoIng 实现了基于角色的权限控制系统（RBAC）。通过为用户分配不同的角色，我们可以精确控制他们对资源的访问权限。</p>
+<p>权限控制的层级结构：</p>
+<ul>
+<li>系统级权限：控制用户能否创建团队、项目等</li>
+<li>团队级权限：控制用户在团队中的操作权限</li>
+<li>项目级权限：控制用户在项目中的操作权限</li>
+<li>任务级权限：控制用户对特定任务的操作权限</li>
+</ul>
+<h3 id="3-模块化设计">3. 模块化设计</h3>
+<p>todoIng 采用模块化设计，将不同功能划分为独立的模块：</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph LR
+    A[todoIng核心系统] --&gt; B[用户认证模块]
+    A --&gt; C[任务管理模块]
+    A --&gt; D[历史追踪模块]
+    A --&gt; E[团队协作模块]
+    A --&gt; F[报告生成模块]
+    A --&gt; G[成就系统模块]
+    
+    B --&gt; B1[注册登录]
+    B --&gt; B2[JWT令牌管理]
+    
+    C --&gt; C1[任务创建/编辑]
+    C --&gt; C2[任务状态管理]
+    
+    D --&gt; D1[变更记录]
+    D --&gt; D2[快照机制]
+    
+    E --&gt; E1[团队管理]
+    E --&gt; E2[权限控制]
+    
+    F --&gt; F1[数据收集]
+    F --&gt; F2[AI内容生成]
+    
+    G --&gt; G1[成就定义]
+    G --&gt; G2[成就解锁]
+</code></pre><p>这种模块化设计的好处：</p>
+<ul>
+<li><strong>易于维护</strong>：每个模块职责单一，便于理解和维护</li>
+<li><strong>可扩展性强</strong>：可以独立添加或修改某个模块而不影响其他部分</li>
+<li><strong>团队协作</strong>：不同团队可以并行开发不同模块</li>
+</ul>
+<h2 id="技术选型考量">技术选型考量</h2>
+<h3 id="前端技术栈">前端技术栈</h3>
+<p>选择 React + TypeScript 的组合主要基于以下考虑：</p>
+<ul>
+<li><strong>生态系统丰富</strong>：React 拥有庞大的生态系统和社区支持</li>
+<li><strong>类型安全</strong>：TypeScript 提供了静态类型检查，减少运行时错误</li>
+<li><strong>开发体验</strong>：热重载和丰富的开发工具提升开发效率</li>
+</ul>
+<h3 id="后端技术栈">后端技术栈</h3>
+<p>Node.js + Express 的选择考虑了：</p>
+<ul>
+<li><strong>性能表现</strong>：Node.js 的事件驱动非阻塞 I/O 模型适合构建高并发应用</li>
+<li><strong>统一语言</strong>：前后端都使用 JavaScript/TypeScript，降低学习成本</li>
+<li><strong>开发效率</strong>：Express 提供了简洁的 API，快速构建 RESTful 服务</li>
+</ul>
+<h3 id="数据库选择">数据库选择</h3>
+<p>MongoDB 的选择基于：</p>
+<ul>
+<li><strong>灵活的数据模型</strong>：无需预定义严格的表结构，适合快速迭代</li>
+<li><strong>水平扩展</strong>：支持分片集群，便于水平扩展</li>
+<li><strong>开发友好</strong>：文档结构与 JSON 格式一致，易于理解和操作</li>
+</ul>
+<h2 id="可扩展性设计">可扩展性设计</h2>
+<p>todoIng 在设计之初就考虑了可扩展性，主要体现在以下几个方面：</p>
+<h3 id="1-插件化架构">1. 插件化架构</h3>
+<p>系统采用插件化架构，允许通过添加新的模块来扩展功能：</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TB
+    A[todoIng核心] --&gt; B[核心模块]
+    A --&gt; C[插件接口]
+    C --&gt; D[通知插件]
+    C --&gt; E[日历插件]
+    C --&gt; F[统计插件]
+    C --&gt; G[导出插件]
+    
+    subgraph 核心系统
+        A
+        B
+        C
+    end
+    
+    subgraph 可选插件
+        D
+        E
+        F
+        G
+    end
+</code></pre><h3 id="2-微服务准备">2. 微服务准备</h3>
+<p>虽然当前版本是单体应用，但架构设计上已经为未来拆分为微服务做好了准备：</p>
+<ul>
+<li>模块间通过清晰的接口通信</li>
+<li>数据库设计遵循领域驱动设计原则</li>
+<li>业务逻辑与数据存储解耦</li>
+</ul>
+<h3 id="3-api-设计标准化">3. API 设计标准化</h3>
+<p>所有后端接口都遵循 RESTful 设计原则，便于未来与其他系统集成：</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph LR
+    A[第三方应用] --&gt; B{API网关}
+    B --&gt; C[todoIng API]
+    B --&gt; D[其他内部服务]
+    
+    C --&gt; E[认证服务]
+    C --&gt; F[任务服务]
+    C --&gt; G[历史服务]
+</code></pre><h2 id="未来发展方向">未来发展方向</h2>
+<h3 id="1-移动端应用">1. 移动端应用</h3>
+<p>计划开发原生移动应用，提供更好的移动端体验：</p>
+<ul>
+<li>使用 React Native 实现跨平台移动应用</li>
+<li>保持与 Web 版本一致的功能和用户体验</li>
+<li>支持离线操作和数据同步</li>
+</ul>
+<h3 id="2-更智能的-ai-功能">2. 更智能的 AI 功能</h3>
+<p>进一步深化 AI 在任务管理中的应用：</p>
+<ul>
+<li>智能任务推荐：基于历史数据推荐任务优先级和分配</li>
+<li>自动任务分解：将复杂任务自动分解为子任务</li>
+<li>智能时间估算：基于历史完成时间预测任务所需时间</li>
+<li>个性化工作建议：根据用户习惯提供工作流程优化建议</li>
+</ul>
+<h3 id="3-集成第三方服务">3. 集成第三方服务</h3>
+<p>扩展与其他工具和服务的集成能力：</p>
+<ul>
+<li>与日历应用集成（Google Calendar, Outlook等）</li>
+<li>与通讯工具集成（Slack, Microsoft Teams等）</li>
+<li>与代码仓库集成（GitHub, GitLab等）</li>
+<li>与项目管理工具集成（Jira, Trello等）</li>
+</ul>
+<h3 id="4-高级分析功能">4. 高级分析功能</h3>
+<p>提供更深入的数据分析和洞察：</p>
+<ul>
+<li>团队效率分析仪表板</li>
+<li>个人工作习惯分析</li>
+<li>项目进度预测</li>
+<li>资源利用率报告</li>
+</ul>
+<h3 id="5-企业级功能">5. 企业级功能</h3>
+<p>为满足企业用户需求，计划添加以下功能：</p>
+<ul>
+<li>单点登录（SSO）支持</li>
+<li>LDAP/AD 集成</li>
+<li>审计日志</li>
+<li>数据备份和恢复</li>
+<li>多租户支持</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>todoIng 作为一个现代化的任务管理系统，不仅在功能上具有创新性，在架构设计上也充分考虑了可扩展性和维护性。通过采用前后端分离、模块化设计和插件化架构，系统具备了良好的扩展能力。</p>
+<p>未来，todoIng 将继续在 AI 集成、移动端支持和企业级功能方面深入发展，致力于为用户提供更智能、更便捷的任务管理体验。我们相信，通过不断的技术创新和功能完善，todoIng 能够成为个人和团队任务管理的首选工具。</p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/todoing" role="button">todoIng </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84" role="button">系统架构 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7" role="button">可扩展性 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%9C%AA%E6%9D%A5%E8%A7%84%E5%88%92" role="button">未来规划 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://axfinn.github.io/blog/2025-08/todoing-deployment-and-best-practices/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>todoIng 部署方案与最佳实践</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+  </div>
+  
+
+  <div id="blog-pet">
+    <div id="pet-toggle-button">X</div>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        
+        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
+        
+        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
+        
+        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
+        
+        <circle cx="40" cy="50" r="5" fill="#333"/>
+        <circle cx="60" cy="50" r="5" fill="#333"/>
+        
+        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
+    </svg>
+    <div id="pet-speech-bubble"></div>
+</div>
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+
+
+
+  
+  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+
+
+
+
+  </body>
+</html>
