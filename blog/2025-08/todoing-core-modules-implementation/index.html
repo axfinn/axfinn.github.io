@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="jaxiu He">
   <meta name="description" content="todoIng 核心模块设计与架构
-在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
+在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
 项目架构概览
 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：
 
@@ -22,7 +22,7 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-core-modules-implementation/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="todoIng 核心模块设计与架构">
-  <meta property="og:description" content="todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
+  <meta property="og:description" content="todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。
 项目架构概览 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：
 技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易于维护和重构 下面是 todoIng 的整体架构图：">
   <meta property="og:locale" content="zn_Hans">
@@ -348,7 +348,7 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
 
           <div class="post-content markdown">
             <h1 id="todoing-核心模块设计与架构">todoIng 核心模块设计与架构</h1>
-<p>在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计思路和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。</p>
+<p>在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。</p>
 <h2 id="项目架构概览">项目架构概览</h2>
 <p>todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势：</p>
 <ol>
@@ -358,32 +358,34 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
 <li><strong>维护性</strong>：代码结构清晰，易于维护和重构</li>
 </ol>
 <p>下面是 todoIng 的整体架构图：</p>
-<pre tabindex="0"><code>graph TD
-    A[用户界面] --&gt; B{前端应用}
-    B --&gt; C[React + TypeScript]
-    B --&gt; D[Redux状态管理]
-    B --&gt; E[Bootstrap UI组件]
+<div class="mermaid">
+
+graph TD
+    A[用户界面] --> B{前端应用}
+    B --> C[React + TypeScript]
+    B --> D[Redux状态管理]
+    B --> E[Bootstrap UI组件]
     
-    C --&gt; F{后端API}
-    D --&gt; F
-    E --&gt; F
+    C --> F{后端API}
+    D --> F
+    E --> F
     
-    F --&gt; G[Node.js + Express]
-    F --&gt; H[JWT认证]
-    F --&gt; I[MongoDB数据库]
+    F --> G[Node.js + Express]
+    F --> H[JWT认证]
+    F --> I[MongoDB数据库]
     
-    G --&gt; J[任务管理模块]
-    G --&gt; K[用户认证模块]
-    G --&gt; L[历史追踪模块]
-    G --&gt; M[团队协作模块]
-    G --&gt; N[AI报告模块]
+    G --> J[任务管理模块]
+    G --> K[用户认证模块]
+    G --> L[历史追踪模块]
+    G --> M[团队协作模块]
+    G --> N[AI报告模块]
     
-    I --&gt; O[用户数据]
-    I --&gt; P[任务数据]
-    I --&gt; Q[历史记录]
-    I --&gt; R[团队信息]
+    I --> O[用户数据]
+    I --> P[任务数据]
+    I --> Q[历史记录]
+    I --> R[团队信息]
     
-    N --&gt; S[OpenAI API]
+    N --> S[OpenAI API]
     
     subgraph 前端层
         A
@@ -412,7 +414,9 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
         Q
         R
     end
-</code></pre><h2 id="核心设计理念">核心设计理念</h2>
+
+</div>
+<h2 id="核心设计理念">核心设计理念</h2>
 <h3 id="用户认证系统设计">用户认证系统设计</h3>
 <p>用户认证是任何应用的基础功能，todoIng 的认证系统采用 JWT（JSON Web Token）实现，具有安全、高效的特点。我们的设计考虑了以下几个关键点：</p>
 <ol>
@@ -431,32 +435,36 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
 <p>任务模型设计遵循了领域驱动设计的原则，将任务相关的属性和行为封装在一起，便于维护和扩展。</p>
 <h2 id="模块化架构设计">模块化架构设计</h2>
 <p>todoIng 采用模块化设计，将不同功能划分为独立的模块：</p>
-<pre tabindex="0"><code>graph LR
-    A[todoIng核心系统] --&gt; B[用户认证模块]
-    A --&gt; C[任务管理模块]
-    A --&gt; D[历史追踪模块]
-    A --&gt; E[团队协作模块]
-    A --&gt; F[报告生成模块]
-    A --&gt; G[成就系统模块]
+<div class="mermaid">
+
+graph LR
+    A[todoIng核心系统] --> B[用户认证模块]
+    A --> C[任务管理模块]
+    A --> D[历史追踪模块]
+    A --> E[团队协作模块]
+    A --> F[报告生成模块]
+    A --> G[成就系统模块]
     
-    B --&gt; B1[注册登录]
-    B --&gt; B2[JWT令牌管理]
+    B --> B1[注册登录]
+    B --> B2[JWT令牌管理]
     
-    C --&gt; C1[任务创建/编辑]
-    C --&gt; C2[任务状态管理]
+    C --> C1[任务创建/编辑]
+    C --> C2[任务状态管理]
     
-    D --&gt; D1[变更记录]
-    D --&gt; D2[快照机制]
+    D --> D1[变更记录]
+    D --> D2[快照机制]
     
-    E --&gt; E1[团队管理]
-    E --&gt; E2[权限控制]
+    E --> E1[团队管理]
+    E --> E2[权限控制]
     
-    F --&gt; F1[数据收集]
-    F --&gt; F2[AI内容生成]
+    F --> F1[数据收集]
+    F --> F2[AI内容生成]
     
-    G --&gt; G1[成就定义]
-    G --&gt; G2[成就解锁]
-</code></pre><p>这种模块化设计的好处：</p>
+    G --> G1[成就定义]
+    G --> G2[成就解锁]
+
+</div>
+<p>这种模块化设计的好处：</p>
 <ol>
 <li><strong>易于维护</strong>：每个模块职责单一，便于理解和维护</li>
 <li><strong>可扩展性强</strong>：可以独立添加或修改某个模块而不影响其他部分</li>
@@ -489,35 +497,41 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
 </ol>
 <h2 id="系统交互设计">系统交互设计</h2>
 <p>系统各模块之间的交互经过精心设计，确保数据流清晰且高效：</p>
-<pre tabindex="0"><code>sequenceDiagram
+<div class="mermaid">
+
+sequenceDiagram
     participant U as 用户
     participant F as 前端
     participant B as 后端
     participant D as 数据库
     participant A as OpenAI
     
-    U-&gt;&gt;F: 操作界面
-    F-&gt;&gt;B: 发送请求
-    B-&gt;&gt;D: 查询/更新数据
-    D--&gt;&gt;B: 返回数据
-    B--&gt;&gt;F: 响应结果
-    F--&gt;&gt;U: 更新界面
+    U->>F: 操作界面
+    F->>B: 发送请求
+    B->>D: 查询/更新数据
+    D-->>B: 返回数据
+    B-->>F: 响应结果
+    F-->>U: 更新界面
     
-    B-&gt;&gt;A: 请求AI服务(报告生成)
-    A--&gt;&gt;B: 返回生成内容
-    B-&gt;&gt;D: 保存报告
-</code></pre><p>这种设计确保了系统的响应性和可维护性。</p>
+    B->>A: 请求AI服务(报告生成)
+    A-->>B: 返回生成内容
+    B->>D: 保存报告
+
+</div>
+<p>这种设计确保了系统的响应性和可维护性。</p>
 <h2 id="可扩展性设计">可扩展性设计</h2>
 <p>todoIng 在设计之初就考虑了可扩展性，主要体现在以下几个方面：</p>
 <h3 id="1-插件化架构">1. 插件化架构</h3>
 <p>系统采用插件化架构，允许通过添加新的模块来扩展功能：</p>
-<pre tabindex="0"><code>graph TB
-    A[todoIng核心] --&gt; B[核心模块]
-    A --&gt; C[插件接口]
-    C --&gt; D[通知插件]
-    C --&gt; E[日历插件]
-    C --&gt; F[统计插件]
-    C --&gt; G[导出插件]
+<div class="mermaid">
+
+graph TB
+    A[todoIng核心] --> B[核心模块]
+    A --> C[插件接口]
+    C --> D[通知插件]
+    C --> E[日历插件]
+    C --> F[统计插件]
+    C --> G[导出插件]
     
     subgraph 核心系统
         A
@@ -531,7 +545,9 @@ todoIng 采用现代化的前后端分离架构设计，这种架构模式带来
         F
         G
     end
-</code></pre><h3 id="2-微服务准备">2. 微服务准备</h3>
+
+</div>
+<h3 id="2-微服务准备">2. 微服务准备</h3>
 <p>虽然当前版本是单体应用，但架构设计上已经为未来拆分为微服务做好了准备：</p>
 <ul>
 <li>模块间通过清晰的接口通信</li>

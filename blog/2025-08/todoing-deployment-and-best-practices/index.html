@@ -13,6 +13,8 @@
 todoIng 支持多种部署方式，以适应不同的使用场景和需求。我们的部署架构设计遵循了现代化应用部署的最佳实践，确保系统具有高可用性、可扩展性和安全性。
 部署架构设计
 todoIng 的部署架构采用分层设计：
+
+
 graph TD
     A[用户访问] --&gt; B{负载均衡器}
     B --&gt; C[前端服务集群]
@@ -35,6 +37,8 @@ graph TD
     subgraph 外部服务
         G
     end
+
+
 这种架构的优势：">
   
   <meta property="og:url" content="https://axfinn.github.io/blog/2025-08/todoing-deployment-and-best-practices/">
@@ -371,14 +375,16 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <p>todoIng 支持多种部署方式，以适应不同的使用场景和需求。我们的部署架构设计遵循了现代化应用部署的最佳实践，确保系统具有高可用性、可扩展性和安全性。</p>
 <h3 id="部署架构设计">部署架构设计</h3>
 <p>todoIng 的部署架构采用分层设计：</p>
-<pre tabindex="0"><code>graph TD
-    A[用户访问] --&gt; B{负载均衡器}
-    B --&gt; C[前端服务集群]
-    B --&gt; D[后端服务集群]
-    C --&gt; E[(MongoDB集群)]
-    D --&gt; E
-    D --&gt; F[Redis缓存]
-    D --&gt; G[AI服务接口]
+<div class="mermaid">
+
+graph TD
+    A[用户访问] --> B{负载均衡器}
+    B --> C[前端服务集群]
+    B --> D[后端服务集群]
+    C --> E[(MongoDB集群)]
+    D --> E
+    D --> F[Redis缓存]
+    D --> G[AI服务接口]
     
     subgraph 应用层
         C
@@ -393,7 +399,9 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
     subgraph 外部服务
         G
     end
-</code></pre><p>这种架构的优势：</p>
+
+</div>
+<p>这种架构的优势：</p>
 <ol>
 <li><strong>高可用性</strong>：通过集群部署确保服务的高可用性</li>
 <li><strong>可扩展性</strong>：可以根据负载情况动态扩展各组件</li>
@@ -403,11 +411,13 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <p>Docker Compose 是部署 todoIng 的推荐方式，它能够快速启动整个应用栈，包括前端、后端和数据库。</p>
 <h3 id="容器化架构设计">容器化架构设计</h3>
 <p>todoIng 的容器化架构采用微服务设计理念：</p>
-<pre tabindex="0"><code>graph TD
-    A[前端容器] --&gt; B[后端API容器]
-    B --&gt; C[MongoDB容器]
-    B --&gt; D[Redis容器]
-    B --&gt; E[AI服务]
+<div class="mermaid">
+
+graph TD
+    A[前端容器] --> B[后端API容器]
+    B --> C[MongoDB容器]
+    B --> D[Redis容器]
+    B --> E[AI服务]
     
     subgraph Docker网络
         A
@@ -416,8 +426,10 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
         D
     end
     
-    E[外部AI服务] -.-&gt; B
-</code></pre><h3 id="服务间通信设计">服务间通信设计</h3>
+    E[外部AI服务] -.-> B
+
+</div>
+<h3 id="服务间通信设计">服务间通信设计</h3>
 <p>容器间的服务通信经过精心设计：</p>
 <ol>
 <li><strong>内部网络</strong>：所有容器通过 Docker 自定义网络进行通信</li>
@@ -426,23 +438,29 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 </ol>
 <h3 id="数据持久化策略">数据持久化策略</h3>
 <p>容器化部署中的数据持久化设计：</p>
-<pre tabindex="0"><code>graph TD
-    A[MongoDB容器] --&gt; B[(数据卷)]
-    C[日志文件] --&gt; D[(日志卷)]
-    E[配置文件] --&gt; F[(配置卷)]
+<div class="mermaid">
+
+graph TD
+    A[MongoDB容器] --> B[(数据卷)]
+    C[日志文件] --> D[(日志卷)]
+    E[配置文件] --> F[(配置卷)]
     
-    B --&gt; G[宿主机存储]
-    D --&gt; G
-    F --&gt; G
-</code></pre><h2 id="手动部署架构">手动部署架构</h2>
+    B --> G[宿主机存储]
+    D --> G
+    F --> G
+
+</div>
+<h2 id="手动部署架构">手动部署架构</h2>
 <p>对于需要更多自定义配置的场景，可以选择手动部署方式。</p>
 <h3 id="部署拓扑设计">部署拓扑设计</h3>
 <p>手动部署采用经典的三层架构：</p>
-<pre tabindex="0"><code>graph TD
-    A[Web服务器] --&gt; B[应用服务器]
-    B --&gt; C[数据库服务器]
-    B --&gt; D[缓存服务器]
-    B --&gt; E[AI服务]
+<div class="mermaid">
+
+graph TD
+    A[Web服务器] --> B[应用服务器]
+    B --> C[数据库服务器]
+    B --> D[缓存服务器]
+    B --> E[AI服务]
     
     subgraph 前端层
         A
@@ -460,7 +478,9 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
     subgraph 外部服务
         E
     end
-</code></pre><h3 id="组件部署策略">组件部署策略</h3>
+
+</div>
+<h3 id="组件部署策略">组件部署策略</h3>
 <p>各组件的部署考虑了以下因素：</p>
 <ol>
 <li><strong>前端服务</strong>：使用 Nginx 作为静态文件服务器</li>
@@ -472,13 +492,15 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <p>todoIng 也可以部署到各种云平台，如 AWS、Azure、Google Cloud 等。</p>
 <h3 id="云原生架构">云原生架构</h3>
 <p>在云平台上的部署采用云原生架构：</p>
-<pre tabindex="0"><code>graph TD
-    A[负载均衡器] --&gt; B{Kubernetes集群}
-    B --&gt; C[前端Pods]
-    B --&gt; D[后端Pods]
-    D --&gt; E[(MongoDB服务)]
-    D --&gt; F[(Redis服务)]
-    D --&gt; G[AI服务]
+<div class="mermaid">
+
+graph TD
+    A[负载均衡器] --> B{Kubernetes集群}
+    B --> C[前端Pods]
+    B --> D[后端Pods]
+    D --> E[(MongoDB服务)]
+    D --> F[(Redis服务)]
+    D --> G[AI服务]
     
     subgraph Kubernetes
         B
@@ -488,35 +510,43 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
         F
     end
     
-    G -.-&gt; D
-</code></pre><h3 id="微服务拆分">微服务拆分</h3>
+    G -.-> D
+
+</div>
+<h3 id="微服务拆分">微服务拆分</h3>
 <p>未来计划将 todoIng 拆分为更细粒度的微服务：</p>
-<pre tabindex="0"><code>graph TD
-    A[API网关] --&gt; B[用户服务]
-    A --&gt; C[任务服务]
-    A --&gt; D[历史服务]
-    A --&gt; E[团队服务]
-    A --&gt; F[报告服务]
-    A --&gt; G[通知服务]
+<div class="mermaid">
+
+graph TD
+    A[API网关] --> B[用户服务]
+    A --> C[任务服务]
+    A --> D[历史服务]
+    A --> E[团队服务]
+    A --> F[报告服务]
+    A --> G[通知服务]
     
-    B --&gt; H[(用户数据库)]
-    C --&gt; I[(任务数据库)]
-    D --&gt; J[(历史数据库)]
-    E --&gt; K[(团队数据库)]
-    F --&gt; L[(报告数据库)]
+    B --> H[(用户数据库)]
+    C --> I[(任务数据库)]
+    D --> J[(历史数据库)]
+    E --> K[(团队数据库)]
+    F --> L[(报告数据库)]
     
-    C --&gt; M[AI服务]
-    D --&gt; N[事件总线]
-    G --&gt; N
-</code></pre><h2 id="安全架构设计">安全架构设计</h2>
+    C --> M[AI服务]
+    D --> N[事件总线]
+    G --> N
+
+</div>
+<h2 id="安全架构设计">安全架构设计</h2>
 <h3 id="网络安全策略">网络安全策略</h3>
 <p>todoIng 的网络安全设计遵循纵深防御原则：</p>
-<pre tabindex="0"><code>graph LR
-    A[外部网络] --&gt; B[防火墙]
-    B --&gt; C[WAF]
-    C --&gt; D[负载均衡]
-    D --&gt; E[应用服务器]
-    E --&gt; F[数据库服务器]
+<div class="mermaid">
+
+graph LR
+    A[外部网络] --> B[防火墙]
+    B --> C[WAF]
+    C --> D[负载均衡]
+    D --> E[应用服务器]
+    E --> F[数据库服务器]
     
     subgraph 安全边界
         B
@@ -525,7 +555,9 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
         E
         F
     end
-</code></pre><h3 id="认证授权体系">认证授权体系</h3>
+
+</div>
+<h3 id="认证授权体系">认证授权体系</h3>
 <p>系统采用多层认证授权体系：</p>
 <ol>
 <li><strong>传输层安全</strong>：使用 HTTPS 加密所有通信</li>
@@ -536,14 +568,16 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <h2 id="性能优化架构">性能优化架构</h2>
 <h3 id="缓存架构">缓存架构</h3>
 <p>todoIng 采用多级缓存架构提升性能：</p>
-<pre tabindex="0"><code>graph TD
-    A[用户请求] --&gt; B[CDN缓存]
-    B --&gt; C[应用层缓存]
-    C --&gt; D[数据库缓存]
-    D --&gt; E[数据库]
+<div class="mermaid">
+
+graph TD
+    A[用户请求] --> B[CDN缓存]
+    B --> C[应用层缓存]
+    C --> D[数据库缓存]
+    D --> E[数据库]
     
-    F[Redis] --&gt; C
-    G[Memcached] --&gt; D
+    F[Redis] --> C
+    G[Memcached] --> D
     
     subgraph 缓存层
         B
@@ -552,7 +586,9 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
         F
         G
     end
-</code></pre><h3 id="数据库优化">数据库优化</h3>
+
+</div>
+<h3 id="数据库优化">数据库优化</h3>
 <p>数据库层面的优化策略：</p>
 <ol>
 <li><strong>索引优化</strong>：为常用查询字段创建合适的索引</li>
@@ -563,21 +599,25 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <h2 id="监控与运维架构">监控与运维架构</h2>
 <h3 id="监控体系">监控体系</h3>
 <p>todoIng 建立了完整的监控体系：</p>
-<pre tabindex="0"><code>graph TD
-    A[应用指标] --&gt; B[Prometheus]
-    C[日志收集] --&gt; D[Elasticsearch]
-    E[追踪信息] --&gt; F[Jaeger]
-    G[健康检查] --&gt; H[自定义探针]
+<div class="mermaid">
+
+graph TD
+    A[应用指标] --> B[Prometheus]
+    C[日志收集] --> D[Elasticsearch]
+    E[追踪信息] --> F[Jaeger]
+    G[健康检查] --> H[自定义探针]
     
-    B --&gt; I[Grafana]
-    D --&gt; J[Kibana]
-    F --&gt; K[Jaeger UI]
+    B --> I[Grafana]
+    D --> J[Kibana]
+    F --> K[Jaeger UI]
     
-    I --&gt; L[运维团队]
-    J --&gt; L
-    K --&gt; L
-    H --&gt; L
-</code></pre><h3 id="日志架构">日志架构</h3>
+    I --> L[运维团队]
+    J --> L
+    K --> L
+    H --> L
+
+</div>
+<h3 id="日志架构">日志架构</h3>
 <p>系统采用集中式日志管理：</p>
 <ol>
 <li><strong>结构化日志</strong>：使用统一的日志格式便于分析</li>
@@ -588,20 +628,24 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <h2 id="备份与恢复架构">备份与恢复架构</h2>
 <h3 id="数据备份策略">数据备份策略</h3>
 <p>todoIng 采用多层次的数据备份策略：</p>
-<pre tabindex="0"><code>graph TD
-    A[实时数据] --&gt; B{备份策略}
-    B --&gt; C[实时备份]
-    B --&gt; D[定时备份]
-    B --&gt; E[增量备份]
+<div class="mermaid">
+
+graph TD
+    A[实时数据] --> B{备份策略}
+    B --> C[实时备份]
+    B --> D[定时备份]
+    B --> E[增量备份]
     
-    C --&gt; F[主备同步]
-    D --&gt; G[每日快照]
-    E --&gt; H[变更日志]
+    C --> F[主备同步]
+    D --> G[每日快照]
+    E --> H[变更日志]
     
-    F --&gt; I[(备份存储)]
-    G --&gt; I
-    H --&gt; I
-</code></pre><h3 id="灾难恢复">灾难恢复</h3>
+    F --> I[(备份存储)]
+    G --> I
+    H --> I
+
+</div>
+<h3 id="灾难恢复">灾难恢复</h3>
 <p>系统具备完善的灾难恢复能力：</p>
 <ol>
 <li><strong>多地域部署</strong>：在多个地域部署服务实例</li>
@@ -612,17 +656,21 @@ graph TD A[用户访问] --&gt; B{负载均衡器} B --&gt; C[前端服务集群
 <h2 id="可扩展性设计">可扩展性设计</h2>
 <h3 id="水平扩展">水平扩展</h3>
 <p>todoIng 支持水平扩展以应对增长的用户需求：</p>
-<pre tabindex="0"><code>graph TD
-    A[负载均衡] --&gt; B[前端实例1]
-    A --&gt; C[前端实例2]
-    A --&gt; D[前端实例N]
+<div class="mermaid">
+
+graph TD
+    A[负载均衡] --> B[前端实例1]
+    A --> C[前端实例2]
+    A --> D[前端实例N]
     
-    B --&gt; E[后端集群]
-    C --&gt; E
-    D --&gt; E
+    B --> E[后端集群]
+    C --> E
+    D --> E
     
-    E --&gt; F[数据库集群]
-</code></pre><h3 id="微服务准备">微服务准备</h3>
+    E --> F[数据库集群]
+
+</div>
+<h3 id="微服务准备">微服务准备</h3>
 <p>虽然当前版本是单体应用，但架构设计上已经为未来拆分为微服务做好了准备：</p>
 <ol>
 <li><strong>模块化设计</strong>：各功能模块相对独立，便于拆分</li>

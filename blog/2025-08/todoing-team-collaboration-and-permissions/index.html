@@ -361,28 +361,32 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 <p>todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模型，并结合了项目组的概念来组织团队成员和任务。</p>
 <h3 id="rbac-权限模型">RBAC 权限模型</h3>
 <p>基于角色的访问控制（Role-Based Access Control, RBAC）是一种权限管理模型，它通过角色来关联用户和权限。在 todoIng 中，我们采用了多层级的 RBAC 模型：</p>
-<pre tabindex="0"><code>graph TD
-    A[用户] --&gt; B{角色分配}
-    B --&gt; C[系统角色]
-    B --&gt; D[团队角色]
-    B --&gt; E[项目角色]
-    B --&gt; F[任务角色]
+<div class="mermaid">
+
+graph TD
+    A[用户] --> B{角色分配}
+    B --> C[系统角色]
+    B --> D[团队角色]
+    B --> E[项目角色]
+    B --> F[任务角色]
     
-    C --&gt; G[系统管理员]
-    C --&gt; H[普通用户]
+    C --> G[系统管理员]
+    C --> H[普通用户]
     
-    D --&gt; I[团队拥有者]
-    D --&gt; J[团队管理员]
-    D --&gt; K[团队成员]
+    D --> I[团队拥有者]
+    D --> J[团队管理员]
+    D --> K[团队成员]
     
-    E --&gt; L[项目拥有者]
-    E --&gt; M[项目管理员]
-    E --&gt; N[项目成员]
+    E --> L[项目拥有者]
+    E --> M[项目管理员]
+    E --> N[项目成员]
     
-    F --&gt; O[任务创建者]
-    F --&gt; P[任务分配者]
-    F --&gt; Q[任务协作者]
-</code></pre><p>这种多层级的权限模型具有以下优势：</p>
+    F --> O[任务创建者]
+    F --> P[任务分配者]
+    F --> Q[任务协作者]
+
+</div>
+<p>这种多层级的权限模型具有以下优势：</p>
 <ol>
 <li><strong>灵活性</strong>：不同层级可以设置不同的权限粒度</li>
 <li><strong>可扩展性</strong>：可以轻松添加新的角色和权限类型</li>
@@ -390,21 +394,25 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 </ol>
 <h3 id="组织结构设计">组织结构设计</h3>
 <p>todoIng 采用了团队-项目-任务的三层组织结构：</p>
-<pre tabindex="0"><code>graph TD
-    A[组织] --&gt; B[团队1]
-    A --&gt; C[团队2]
-    A --&gt; D[团队3]
+<div class="mermaid">
+
+graph TD
+    A[组织] --> B[团队1]
+    A --> C[团队2]
+    A --> D[团队3]
     
-    B --&gt; E[项目A]
-    B --&gt; F[项目B]
+    B --> E[项目A]
+    B --> F[项目B]
     
-    E --&gt; G[任务1]
-    E --&gt; H[任务2]
-    E --&gt; I[任务3]
+    E --> G[任务1]
+    E --> H[任务2]
+    E --> I[任务3]
     
-    F --&gt; J[任务4]
-    F --&gt; K[任务5]
-</code></pre><p>这种结构的优势：</p>
+    F --> J[任务4]
+    F --> K[任务5]
+
+</div>
+<p>这种结构的优势：</p>
 <ol>
 <li><strong>清晰的归属关系</strong>：每个任务都明确归属于特定的项目和团队</li>
 <li><strong>权限继承</strong>：下层资源自动继承上层的访问权限</li>
@@ -413,18 +421,22 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 <h2 id="核心架构设计">核心架构设计</h2>
 <h3 id="权限检查机制">权限检查机制</h3>
 <p>系统采用多层权限检查机制，确保每次操作都经过严格的权限验证：</p>
-<pre tabindex="0"><code>flowchart LR
-    A[用户请求] --&gt; B{身份验证}
-    B --&gt;|有效| C[权限检查]
-    B --&gt;|无效| D[拒绝访问]
-    C --&gt; E{任务权限}
-    C --&gt; F{项目权限}
-    C --&gt; G{团队权限}
-    E --&gt; H[允许操作]
-    F --&gt; H
-    G --&gt; H
-    H --&gt; I[执行操作]
-</code></pre><p>权限检查的优先级顺序：</p>
+<div class="mermaid">
+
+flowchart LR
+    A[用户请求] --> B{身份验证}
+    B -->|有效| C[权限检查]
+    B -->|无效| D[拒绝访问]
+    C --> E{任务权限}
+    C --> F{项目权限}
+    C --> G{团队权限}
+    E --> H[允许操作]
+    F --> H
+    G --> H
+    H --> I[执行操作]
+
+</div>
+<p>权限检查的优先级顺序：</p>
 <ol>
 <li><strong>任务级权限</strong>：最高优先级，任务创建者和直接协作者拥有最高权限</li>
 <li><strong>项目级权限</strong>：项目成员根据角色拥有相应权限</li>
@@ -433,7 +445,9 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 </ol>
 <h3 id="数据模型架构">数据模型架构</h3>
 <p>权限系统的核心数据模型采用分层设计：</p>
-<pre tabindex="0"><code>erDiagram
+<div class="mermaid">
+
+erDiagram
     USER ||--o{ TEAM_MEMBERSHIP : has
     TEAM ||--o{ TEAM_MEMBERSHIP : includes
     TEAM ||--o{ PROJECT : owns
@@ -488,7 +502,9 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
         string taskId
         string[] permissions
     }
-</code></pre><h2 id="权限控制策略">权限控制策略</h2>
+
+</div>
+<h2 id="权限控制策略">权限控制策略</h2>
 <h3 id="细粒度权限控制">细粒度权限控制</h3>
 <p>todoIng 支持对任务操作的细粒度权限控制：</p>
 <ol>
@@ -509,38 +525,50 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 <h2 id="团队协作机制">团队协作机制</h2>
 <h3 id="协作模式设计">协作模式设计</h3>
 <p>todoIng 支持多种团队协作模式：</p>
-<pre tabindex="0"><code>graph TD
-    A[协作模式] --&gt; B[任务分配]
-    A --&gt; C[协作者添加]
-    A --&gt; D[评论讨论]
-    A --&gt; E[文件共享]
-    A --&gt; F[进度同步]
+<div class="mermaid">
+
+graph TD
+    A[协作模式] --> B[任务分配]
+    A --> C[协作者添加]
+    A --> D[评论讨论]
+    A --> E[文件共享]
+    A --> F[进度同步]
     
-    B --&gt; G[明确责任人]
-    C --&gt; H[多人协作]
-    D --&gt; I[上下文沟通]
-    E --&gt; J[资源共享]
-    F --&gt; K[状态透明]
-</code></pre><h3 id="通知与沟通">通知与沟通</h3>
+    B --> G[明确责任人]
+    C --> H[多人协作]
+    D --> I[上下文沟通]
+    E --> J[资源共享]
+    F --> K[状态透明]
+
+</div>
+<h3 id="通知与沟通">通知与沟通</h3>
 <p>系统内置了通知机制，确保团队成员及时了解任务变更：</p>
-<pre tabindex="0"><code>graph LR
-    A[任务变更] --&gt; B{事件检测}
-    B --&gt; C[通知生成]
-    C --&gt; D[渠道分发]
-    D --&gt; E[邮件通知]
-    D --&gt; F[站内通知]
-    D --&gt; G[即时消息]
-</code></pre><h2 id="可扩展性设计">可扩展性设计</h2>
+<div class="mermaid">
+
+graph LR
+    A[任务变更] --> B{事件检测}
+    B --> C[通知生成]
+    C --> D[渠道分发]
+    D --> E[邮件通知]
+    D --> F[站内通知]
+    D --> G[即时消息]
+
+</div>
+<h2 id="可扩展性设计">可扩展性设计</h2>
 <h3 id="插件化权限系统">插件化权限系统</h3>
 <p>权限系统采用插件化设计，支持扩展：</p>
-<pre tabindex="0"><code>graph TB
-    A[todoIng核心] --&gt; B[权限核心]
-    B --&gt; C[基础权限]
-    B --&gt; D[插件接口]
-    D --&gt; E[LDAP集成]
-    D --&gt; F[OAuth集成]
-    D --&gt; G[单点登录]
-</code></pre><h3 id="第三方集成">第三方集成</h3>
+<div class="mermaid">
+
+graph TB
+    A[todoIng核心] --> B[权限核心]
+    B --> C[基础权限]
+    B --> D[插件接口]
+    D --> E[LDAP集成]
+    D --> F[OAuth集成]
+    D --> G[单点登录]
+
+</div>
+<h3 id="第三方集成">第三方集成</h3>
 <p>系统支持与第三方认证系统的集成：</p>
 <ol>
 <li><strong>LDAP/AD 集成</strong>：企业用户可以直接使用现有的认证系统</li>
@@ -550,13 +578,17 @@ todoIng 的团队协作系统采用了基于角色的访问控制（RBAC）模�
 <h2 id="性能优化策略">性能优化策略</h2>
 <h3 id="权限缓存">权限缓存</h3>
 <p>为了提高权限检查的性能，系统采用了多级缓存策略：</p>
-<pre tabindex="0"><code>graph LR
-    A[权限检查] --&gt; B{内存缓存}
-    B --&gt;|命中| C[返回结果]
-    B --&gt;|未命中| D[数据库查询]
-    D --&gt; E[更新缓存]
-    E --&gt; C
-</code></pre><h3 id="数据库索引优化">数据库索引优化</h3>
+<div class="mermaid">
+
+graph LR
+    A[权限检查] --> B{内存缓存}
+    B -->|命中| C[返回结果]
+    B -->|未命中| D[数据库查询]
+    D --> E[更新缓存]
+    E --> C
+
+</div>
+<h3 id="数据库索引优化">数据库索引优化</h3>
 <p>针对权限相关的查询操作，系统建立了专门的数据库索引：</p>
 <ol>
 <li><strong>用户角色索引</strong>：加速用户角色查询</li>
