@@ -3,16 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://axfinn.github.io/blog/</loc>
-    <lastmod>2025-08-03T20:00:00+08:00</lastmod>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/categories/</loc>
-    <lastmod>2025-08-03T20:00:00+08:00</lastmod>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/blog/2025-08/fcopy-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/</loc>
-    <lastmod>2025-08-03T20:00:00+08:00</lastmod>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/node.js/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/series/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/</loc>
-    <lastmod>2025-08-03T20:00:00+08:00</lastmod>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/vue/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/%E5%89%AA%E8%B4%B4%E6%9D%BF/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2025-08-12T14:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/todoing/</loc>
     <lastmod>2025-08-03T20:00:00+08:00</lastmod>
@@ -107,9 +134,6 @@
     <loc>https://axfinn.github.io/tags/jwt/</loc>
     <lastmod>2025-08-01T14:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://axfinn.github.io/tags/node.js/</loc>
-    <lastmod>2025-08-01T14:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://axfinn.github.io/tags/react/</loc>
     <lastmod>2025-08-01T14:00:00+08:00</lastmod>
   </url><url>
@@ -120,9 +144,6 @@
     <lastmod>2025-08-01T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2025-08-01T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2025-08-01T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90/</loc>
@@ -374,9 +395,6 @@
     <loc>https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://axfinn.github.io/series/</loc>
-    <lastmod>2025-07-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://axfinn.github.io/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/</loc>
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
@@ -525,9 +543,6 @@
     <lastmod>2025-07-18T18:30:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/vscode/</loc>
-    <lastmod>2025-07-18T18:30:00+08:00</lastmod>
-  </url><url>
-    <loc>https://axfinn.github.io/tags/vue/</loc>
     <lastmod>2025-07-18T18:30:00+08:00</lastmod>
   </url><url>
     <loc>https://axfinn.github.io/tags/vue3/</loc>

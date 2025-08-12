@@ -409,6 +409,8 @@
 
   
 
+  
+
 
 
 
@@ -568,6 +570,15 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97">
                 <span>开发指南 (1)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://axfinn.github.io/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE">
+                <span>开源项目 (1)</span>
               </a>
             </li>           
           
@@ -740,6 +751,8 @@
 
   
 
+  
+
 
 
 
@@ -784,10 +797,10 @@
             <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (6)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/electron" role="button"><span>electron (5)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button"><span>开源项目 (6)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button"><span>开源项目 (5)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/electron" role="button"><span>electron (5)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7" role="button"><span>开发工具 (4)</span></a></li>
@@ -808,6 +821,9 @@
             <li><a href="https://axfinn.github.io/tags/mongodb" role="button"><span>mongodb (3)</span></a></li>
           
         
+            <li><a href="https://axfinn.github.io/tags/node.js" role="button"><span>node.js (3)</span></a></li>
+          
+        
             <li><a href="https://axfinn.github.io/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0" role="button"><span>多平台 (3)</span></a></li>
           
         
@@ -817,9 +833,6 @@
             <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84" role="button"><span>架构 (3)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button"><span>源码解析 (3)</span></a></li>
-          
-        
       </div>
     </div>
 
@@ -827,6 +840,8 @@
   
 
           
+  
+
   
 
 
@@ -852,6 +867,8 @@
           
           
             <li class="py-1"><a href="https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5"><span>Qwen Code实践 (1)</span></a></li>
+          
+            <li class="py-1"><a href="https://axfinn.github.io/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span>开源项目 (1)</span></a></li>
           
         
       </div>
@@ -880,7 +897,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  57 posts
+                  58 posts
                 </div>
               
             </div>
@@ -920,10 +937,81 @@
         <a href="https://axfinn.github.io/blog/page/8/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://axfinn.github.io/blog/page/19/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="https://axfinn.github.io/blog/page/20/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/deepchat-multi-window-tabs-architecture/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">DeepChat 多窗口多标签架构深度解析</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 31, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>7 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      DeepChat 多窗口多标签架构深度解析 引言 现代桌面应用程序普遍采用多窗口多标签的设计模式，以提升用户的工作效率和使用体验。DeepChat 作为一个功能丰富的 AI 聊天平台，实现了先进的多窗口多标签架构，支持跨窗口的标签页拖拽、独立会话管理等功能。本文将深入解析 DeepChat 的多窗口多标签架构设计，揭示其背后的技术实现原理。
+传统 Electron 多窗口实现 在传统的 Electron 应用中，创建多个窗口通常有两种方式：
+BrowserWindow 方式 - 每个窗口都是独立的 BrowserWindow 实例 BrowserView 方式 - 在主窗口中使用 BrowserView 实现标签页效果 这两种方式各有优缺点：
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 架构设计 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/deepchat" role="button">DeepChat </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/electron" role="button">Electron </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button">架构设计 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3" role="button">多窗口 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E5%A4%9A%E6%A0%87%E7%AD%BE" role="button">多标签 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -1055,77 +1143,6 @@
       
     
       <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">深入解析NPS项目近期重大更新：从代码层面看技术演进</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 30, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>5 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      深入解析NPS项目近期重大更新：从代码层面看技术演进 NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强大的内网穿透代理服务器，近期进行了多次重要更新。本文将从源码层面深入剖析这些更新的技术细节和实现原理，帮助读者更好地理解项目的演进过程。
-最新版本更新概览 在过去的一个月中，NPS项目发布了多个版本，主要集中在解决客户端和服务端握手过程中的EOF错误、优化多语言支持、改进Docker部署配置等方面。其中最重要的更新是v0.26.63版本，它解决了长期困扰用户的关键连接问题。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">nps </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7" role="button">网络工具 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button">源码解析 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6" role="button">技术深度 </a></li>
       
     
   </div>

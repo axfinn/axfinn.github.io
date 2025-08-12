@@ -409,6 +409,8 @@
 
   
 
+  
+
 
 
 
@@ -568,6 +570,15 @@
             <li class="py-1">
               <a href="https://axfinn.github.io/categories/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97">
                 <span>开发指南 (1)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://axfinn.github.io/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE">
+                <span>开源项目 (1)</span>
               </a>
             </li>           
           
@@ -740,6 +751,8 @@
 
   
 
+  
+
 
 
 
@@ -784,10 +797,10 @@
             <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (6)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/electron" role="button"><span>electron (5)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button"><span>开源项目 (6)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button"><span>开源项目 (5)</span></a></li>
+            <li><a href="https://axfinn.github.io/tags/electron" role="button"><span>electron (5)</span></a></li>
           
         
             <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7" role="button"><span>开发工具 (4)</span></a></li>
@@ -808,6 +821,9 @@
             <li><a href="https://axfinn.github.io/tags/mongodb" role="button"><span>mongodb (3)</span></a></li>
           
         
+            <li><a href="https://axfinn.github.io/tags/node.js" role="button"><span>node.js (3)</span></a></li>
+          
+        
             <li><a href="https://axfinn.github.io/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0" role="button"><span>多平台 (3)</span></a></li>
           
         
@@ -817,9 +833,6 @@
             <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84" role="button"><span>架构 (3)</span></a></li>
           
         
-            <li><a href="https://axfinn.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button"><span>源码解析 (3)</span></a></li>
-          
-        
       </div>
     </div>
 
@@ -827,6 +840,8 @@
   
 
           
+  
+
   
 
 
@@ -852,6 +867,8 @@
           
           
             <li class="py-1"><a href="https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5"><span>Qwen Code实践 (1)</span></a></li>
+          
+            <li class="py-1"><a href="https://axfinn.github.io/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span>开源项目 (1)</span></a></li>
           
         
       </div>
@@ -880,7 +897,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  57 posts
+                  58 posts
                 </div>
               
             </div>
@@ -920,10 +937,81 @@
         <a href="https://axfinn.github.io/blog/page/5/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://axfinn.github.io/blog/page/19/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="https://axfinn.github.io/blog/page/20/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://axfinn.github.io/blog/2025-07/deepchat-performance-enterprise/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">DeepChat 性能优化与企业级应用</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 31, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>6 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      DeepChat 性能优化与企业级应用 引言 随着 AI 技术的快速发展，越来越多的企业开始将 AI 工具集成到其工作流程中。DeepChat 作为一个功能强大的开源 AI 聊天平台，不仅适用于个人用户，也具备了企业级应用的潜力。本文将深入探讨 DeepChat 的性能优化策略和企业级应用实践。
+架构层面的性能优化 内存管理优化 DeepChat 采用了多种内存管理策略来优化性能：
+class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; // 1GB private gcInterval: NodeJS.Timeout | null = null; constructor() { this.startMemoryMonitoring(); } // 监控内存使用情况 private startMemoryMonitoring(): void { this.gcInterval = setInterval(() =&gt; { const memoryUsage = process.memoryUsage(); // 检查内存使用是否超过阈值 if (memoryUsage.heapUsed &gt; this.memoryThreshold) { this.performGarbageCollection(); } // 记录内存使用情况 this.logMemoryUsage(memoryUsage); }, 30000); // 每30秒检查一次 } // 执行垃圾回收 private performGarbageCollection(): void { // 卸载不活跃的会话 SessionManager.getInstance().unloadInactiveSessions(); // 清理缓存 CacheManager.getInstance().cleanup(); // 如果支持，触发 Node.js 垃圾回收 if (global.gc) { global.gc(); } } // 优化大型数据处理 async processLargeData&lt;T&gt;( data: T[], processor: (item: T) =&gt; Promise&lt;any&gt;, batchSize: number = 100 ): Promise&lt;any[]&gt; { const results: any[] = []; // 分批处理数据以避免内存溢出 for (let i = 0; i &lt; data.length; i &#43;= batchSize) { const batch = data.slice(i, i &#43; batchSize); const batchResults = await Promise.all( batch.map(item =&gt; processor(item)) ); results.push(...batchResults); // 给事件循环一些时间 await new Promise(resolve =&gt; setImmediate(resolve)); } return results; } } 渲染性能优化 针对 UI 渲染性能，DeepChat 采用了多种优化技术：
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://axfinn.github.io/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 架构设计 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://axfinn.github.io/tags/deepchat" role="button">DeepChat </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/ai" role="button">AI </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" role="button">性能优化 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8" role="button">企业应用 </a></li>
+      
+    
+      <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button">架构设计 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -1060,77 +1148,6 @@
       
     
       <li><a href="https://axfinn.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button">架构设计 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://axfinn.github.io/blog/2025-07/deepchat-search-enhancement/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">DeepChat 搜索增强功能实现分析</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 31, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>6 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      DeepChat 搜索增强功能实现分析 引言 在当今信息爆炸的时代，单纯的 AI 模型已经不能满足用户对实时、准确信息的需求。DeepChat 通过强大的搜索增强功能，将 AI 的智能与搜索引擎的实时信息相结合，为用户提供更加准确和及时的回答。本文将深入分析 DeepChat 的搜索增强功能实现机制。
-搜索增强的核心价值 为什么需要搜索增强？ 传统的 AI 模型存在以下局限性：
-知识截止时间 - 大多数模型的知识截止到训练数据的时间点 实时信息缺失 - 无法获取最新的新闻、股价、天气等实时信息 事实准确性 - 模型可能会产生&#34;幻觉&#34;，提供不准确的信息 个性化限制 - 无法访问用户的私人数据和特定环境信息 搜索增强功能通过将 AI 与搜索引擎结合，有效解决了这些问题。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI工具 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://axfinn.github.io/tags/deepchat" role="button">DeepChat </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/ai" role="button">AI </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E6%90%9C%E7%B4%A2%E5%A2%9E%E5%BC%BA" role="button">搜索增强 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E9%9B%86%E6%88%90" role="button">搜索引擎集成 </a></li>
-      
-    
-      <li><a href="https://axfinn.github.io/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2" role="button">信息检索 </a></li>
       
     
   </div>
