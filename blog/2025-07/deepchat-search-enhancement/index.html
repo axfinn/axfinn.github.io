@@ -21,7 +21,7 @@
 
 搜索增强功能通过将 AI 与搜索引擎结合，有效解决了这些问题。">
   
-  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/deepchat-search-enhancement/">
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-search-enhancement/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="DeepChat 搜索增强功能实现分析">
   <meta property="og:description" content="DeepChat 搜索增强功能实现分析 引言 在当今信息爆炸的时代，单纯的 AI 模型已经不能满足用户对实时、准确信息的需求。DeepChat 通过强大的搜索增强功能，将 AI 的智能与搜索引擎的实时信息相结合，为用户提供更加准确和及时的回答。本文将深入分析 DeepChat 的搜索增强功能实现机制。
@@ -45,29 +45,40 @@
   
   </title>
 
-  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/deepchat-search-enhancement/">
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/deepchat-search-enhancement/">
 
   
   
 
   
-  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+  
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
     
   
-  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
   <link rel="shortcut icon"
   
-      href="https://axfinn.github.io/img/logo.png"
+      href="https://blog.jaxiu.cn/img/logo.png"
   
   >
 
@@ -86,13 +97,13 @@
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -105,11 +116,10 @@
   
 
   
-  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
-  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
 
 </head>
-
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
   
     
@@ -123,9 +133,9 @@
     <div class="container">
 
       
-      <a class="navbar-brand" href="https://axfinn.github.io/">
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
           
-        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> jaxiu He</strong>
       </a>
@@ -142,21 +152,21 @@
         
         <ul class="navbar-nav mr-auto ">
           <li class="nav-item ">
-            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
           </li>
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
             </li>
           
           
@@ -179,7 +189,7 @@
     </div>
   </nav>
   
-  <script src="https://axfinn.github.io/js/search.js"></script>
+  <script src="https://blog.jaxiu.cn/js/search.js"></script>
  
       
  
@@ -202,7 +212,7 @@
 
         
         <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -223,7 +233,7 @@
 
         
         <div class="carousel-item">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -248,15 +258,15 @@
     <div class="row mx-0 headfont mt-3 pt-4">
       
       <div class="col-12 col-sm-5 align-middle">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
           
         </a>
       </div>
       
       <div class="col-12 col-sm-7 text-left pl-2">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           <h1 class="mb-2 h1" style="font-weight: 300;" >
             <strong>jaxiu He</strong>
           </h1>
@@ -322,9 +332,9 @@
   <ul class="post-meta li-x">
     
       
-        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://axfinn.github.io/categories/ai%E5%B7%A5%E5%85%B7"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI工具 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/ai%E5%B7%A5%E5%85%B7"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI工具 </a></li>
       
     
     
@@ -776,22 +786,22 @@ class PrivacyAwareSearch {
               <div class="mb-5">
                 
 <div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/deepchat" role="button">DeepChat </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/deepchat" role="button">DeepChat </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/ai" role="button">AI </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/ai" role="button">AI </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%90%9C%E7%B4%A2%E5%A2%9E%E5%BC%BA" role="button">搜索增强 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%90%9C%E7%B4%A2%E5%A2%9E%E5%BC%BA" role="button">搜索增强 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E9%9B%86%E6%88%90" role="button">搜索引擎集成 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E9%9B%86%E6%88%90" role="button">搜索引擎集成 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2" role="button">信息检索 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2" role="button">信息检索 </a></li>
       
     
   </div>
@@ -807,7 +817,7 @@ class PrivacyAwareSearch {
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=https://axfinn.github.io/blog/2025-07/deepchat-mcp-support/ class="post-meta">Previous
+                <a href=https://blog.jaxiu.cn/blog/2025-07/deepchat-mcp-support/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
                     <span>DeepChat MCP 支持深度剖析</span>
@@ -818,7 +828,7 @@ class PrivacyAwareSearch {
             
             <div class="col-md-6 text-right" >
               
-                <a href=https://axfinn.github.io/blog/2025-07/deepchat-multi-window-tabs/ class="post-meta">Next
+                <a href=https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
                     <span>DeepChat 多窗口多标签架构设计</span>
@@ -916,31 +926,31 @@ class PrivacyAwareSearch {
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
 
 
 
   
-  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
  
-  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -960,7 +970,7 @@ class PrivacyAwareSearch {
   new WOW().init();
 </script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
 
 
 

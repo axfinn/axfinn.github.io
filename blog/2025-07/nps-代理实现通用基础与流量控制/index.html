@@ -12,7 +12,7 @@
 base.go：代理服务的基石
 base.go 文件定义了 NPS 中所有代理服务的基础抽象和通用功能。它确保了不同代理模式（如 TCP、UDP、SOCKS5、HTTP 等）能够遵循统一的接口规范，并共享一些核心的辅助功能。">
   
-  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/">
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 代理实现：通用基础与流量控制">
   <meta property="og:description" content="引言 在 NPS 服务端核心解析中，我们了解了 server.go 如何作为服务端的“大脑”，协调各项任务。本篇文章将深入 NPS 的代理实现细节，从 nps/server/proxy/base.go 文件入手，剖析所有代理服务共用的基础结构、接口定义以及流量控制、安全检查等通用逻辑。理解这些通用组件，有助于我们更好地把握 NPS 多样化代理模式的实现原理。
@@ -35,29 +35,40 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
   
   </title>
 
-  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/">
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/">
 
   
   
 
   
-  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+  
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
     
   
-  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
   <link rel="shortcut icon"
   
-      href="https://axfinn.github.io/img/logo.png"
+      href="https://blog.jaxiu.cn/img/logo.png"
   
   >
 
@@ -76,13 +87,13 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -95,11 +106,10 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
   
 
   
-  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
-  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
 
 </head>
-
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
   
     
@@ -113,9 +123,9 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
     <div class="container">
 
       
-      <a class="navbar-brand" href="https://axfinn.github.io/">
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
           
-        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> jaxiu He</strong>
       </a>
@@ -132,21 +142,21 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
         
         <ul class="navbar-nav mr-auto ">
           <li class="nav-item ">
-            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
           </li>
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
             </li>
           
           
@@ -169,7 +179,7 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
     </div>
   </nav>
   
-  <script src="https://axfinn.github.io/js/search.js"></script>
+  <script src="https://blog.jaxiu.cn/js/search.js"></script>
  
       
  
@@ -192,7 +202,7 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 
         
         <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -213,7 +223,7 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 
         
         <div class="carousel-item">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -238,15 +248,15 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
     <div class="row mx-0 headfont mt-3 pt-4">
       
       <div class="col-12 col-sm-5 align-middle">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
           
         </a>
       </div>
       
       <div class="col-12 col-sm-7 text-left pl-2">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           <h1 class="mb-2 h1" style="font-weight: 300;" >
             <strong>jaxiu He</strong>
           </h1>
@@ -312,9 +322,9 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
   <ul class="post-meta li-x">
     
       
-        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
       
     
     
@@ -533,22 +543,22 @@ sequenceDiagram
               <div class="mb-5">
                 
 <div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E4%BB%A3%E7%90%86" role="button">代理 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E4%BB%A3%E7%90%86" role="button">代理 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6" role="button">流量控制 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6" role="button">流量控制 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E5%AE%89%E5%85%A8" role="button">安全 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%89%E5%85%A8" role="button">安全 </a></li>
       
     
   </div>
@@ -564,7 +574,7 @@ sequenceDiagram
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/ class="post-meta">Previous
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
                     <span>NPS 服务端核心解析：架构与流量管理</span>
@@ -575,7 +585,7 @@ sequenceDiagram
             
             <div class="col-md-6 text-right" >
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0tcp-%E9%9A%A7%E9%81%93%E4%B8%8E-http-%E4%BB%A3%E7%90%86/ class="post-meta">Next
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0tcp-%E9%9A%A7%E9%81%93%E4%B8%8E-http-%E4%BB%A3%E7%90%86/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
                     <span>NPS 代理实现：TCP 隧道与 HTTP 代理</span>
@@ -673,31 +683,31 @@ sequenceDiagram
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
 
 
 
   
-  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
  
-  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -717,7 +727,7 @@ sequenceDiagram
   new WOW().init();
 </script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
 
 
 

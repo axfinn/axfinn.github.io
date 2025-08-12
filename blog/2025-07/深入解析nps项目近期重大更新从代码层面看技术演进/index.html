@@ -12,7 +12,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 最新版本更新概览
 在过去的一个月中，NPS项目发布了多个版本，主要集中在解决客户端和服务端握手过程中的EOF错误、优化多语言支持、改进Docker部署配置等方面。其中最重要的更新是v0.26.63版本，它解决了长期困扰用户的关键连接问题。">
   
-  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="深入解析NPS项目近期重大更新：从代码层面看技术演进">
   <meta property="og:description" content="深入解析NPS项目近期重大更新：从代码层面看技术演进 NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强大的内网穿透代理服务器，近期进行了多次重要更新。本文将从源码层面深入剖析这些更新的技术细节和实现原理，帮助读者更好地理解项目的演进过程。
@@ -36,29 +36,40 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
   </title>
 
-  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
 
   
   
 
   
-  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+  
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
     
   
-  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
   <link rel="shortcut icon"
   
-      href="https://axfinn.github.io/img/logo.png"
+      href="https://blog.jaxiu.cn/img/logo.png"
   
   >
 
@@ -77,13 +88,13 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -96,11 +107,10 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
 
   
-  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
-  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
 
 </head>
-
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
   
     
@@ -114,9 +124,9 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
     <div class="container">
 
       
-      <a class="navbar-brand" href="https://axfinn.github.io/">
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
           
-        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> jaxiu He</strong>
       </a>
@@ -133,21 +143,21 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
         
         <ul class="navbar-nav mr-auto ">
           <li class="nav-item ">
-            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
           </li>
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
             </li>
           
           
@@ -170,7 +180,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
     </div>
   </nav>
   
-  <script src="https://axfinn.github.io/js/search.js"></script>
+  <script src="https://blog.jaxiu.cn/js/search.js"></script>
  
       
  
@@ -193,7 +203,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
         
         <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -214,7 +224,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
         
         <div class="carousel-item">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -239,15 +249,15 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
     <div class="row mx-0 headfont mt-3 pt-4">
       
       <div class="col-12 col-sm-5 align-middle">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
           
         </a>
       </div>
       
       <div class="col-12 col-sm-7 text-left pl-2">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           <h1 class="mb-2 h1" style="font-weight: 300;" >
             <strong>jaxiu He</strong>
           </h1>
@@ -313,7 +323,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   <ul class="post-meta li-x">
     
       
-        <li><a href="https://axfinn.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 源码解析 </a></li>
       
     
     
@@ -477,25 +487,25 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
               <div class="mb-5">
                 
 <div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">nps </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">nps </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7" role="button">网络工具 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7" role="button">网络工具 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button">源码解析 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" role="button">源码解析 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6" role="button">技术深度 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6" role="button">技术深度 </a></li>
       
     
   </div>
@@ -511,7 +521,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=https://axfinn.github.io/blog/2025-07/qwen-code-practical-applications-and-summary/ class="post-meta">Previous
+                <a href=https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
                     <span>Qwen Code 实战应用与总结</span>
@@ -522,7 +532,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
             
             <div class="col-md-6 text-right" >
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E8%A6%81%E6%9B%B4%E6%96%B0%E8%A7%A3%E6%9E%90/ class="post-meta">Next
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E8%A6%81%E6%9B%B4%E6%96%B0%E8%A7%A3%E6%9E%90/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
                     <span>NPS项目近期重要更新解析</span>
@@ -620,31 +630,31 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
 
 
 
   
-  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
  
-  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -664,7 +674,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   new WOW().init();
 </script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
 
 
 

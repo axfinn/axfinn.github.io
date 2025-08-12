@@ -12,7 +12,7 @@
 UDP 代理的需求与挑战
 UDP（User Datagram Protocol）是一种无连接的传输协议，常用于对实时性要求较高、允许少量丢包的应用，如 DNS 查询、在线游戏、音视频通话等。由于 UDP 的无连接特性，其代理实现与 TCP 代理有所不同，主要挑战在于：">
   
-  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 代理实现：UDP 代理与数据转发">
   <meta property="og:description" content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种 TCP 相关的代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理）和 P2P 代理。本篇文章将聚焦于 NPS 的 UDP 代理实现。我们将通过分析 nps/server/proxy/udp.go 文件，揭示 NPS 如何处理 UDP 流量，实现内网 UDP 服务的穿透。
@@ -35,29 +35,40 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
   
   </title>
 
-  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
 
   
   
 
   
-  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+  
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
     
   
-  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
   <link rel="shortcut icon"
   
-      href="https://axfinn.github.io/img/logo.png"
+      href="https://blog.jaxiu.cn/img/logo.png"
   
   >
 
@@ -76,13 +87,13 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -95,11 +106,10 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
   
 
   
-  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
-  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
 
 </head>
-
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
   
     
@@ -113,9 +123,9 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
     <div class="container">
 
       
-      <a class="navbar-brand" href="https://axfinn.github.io/">
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
           
-        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> jaxiu He</strong>
       </a>
@@ -132,21 +142,21 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
         
         <ul class="navbar-nav mr-auto ">
           <li class="nav-item ">
-            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
           </li>
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
             </li>
           
           
@@ -169,7 +179,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
     </div>
   </nav>
   
-  <script src="https://axfinn.github.io/js/search.js"></script>
+  <script src="https://blog.jaxiu.cn/js/search.js"></script>
  
       
  
@@ -192,7 +202,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
 
         
         <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -213,7 +223,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
 
         
         <div class="carousel-item">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -238,15 +248,15 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
     <div class="row mx-0 headfont mt-3 pt-4">
       
       <div class="col-12 col-sm-5 align-middle">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
           
         </a>
       </div>
       
       <div class="col-12 col-sm-7 text-left pl-2">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           <h1 class="mb-2 h1" style="font-weight: 300;" >
             <strong>jaxiu He</strong>
           </h1>
@@ -312,9 +322,9 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
   <ul class="post-meta li-x">
     
       
-        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
       
     
     
@@ -493,22 +503,22 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
               <div class="mb-5">
                 
 <div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/udp%E4%BB%A3%E7%90%86" role="button">UDP代理 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/udp%E4%BB%A3%E7%90%86" role="button">UDP代理 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE" role="button">网络协议 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE" role="button">网络协议 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
       
     
   </div>
@@ -524,7 +534,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0p2p-%E5%8D%8F%E8%AE%AE%E4%B8%8E-udp-%E6%89%93%E6%B4%9E/ class="post-meta">Previous
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0p2p-%E5%8D%8F%E8%AE%AE%E4%B8%8E-udp-%E6%89%93%E6%B4%9E/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
                     <span>NPS 代理实现：P2P 协议与 UDP 打洞</span>
@@ -535,7 +545,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
             
             <div class="col-md-6 text-right" >
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/ class="post-meta">Next
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
                     <span>NPS 代理实现：WebSocket 代理与 HTTP 反向代理</span>
@@ -633,31 +643,31 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
 
 
 
   
-  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
  
-  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -677,7 +687,7 @@ UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接�
   new WOW().init();
 </script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
 
 
 

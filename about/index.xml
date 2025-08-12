@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>关于 jaxiu He on jaxiu He</title>
-    <link>https://axfinn.github.io/about/</link>
+    <link>https://blog.jaxiu.cn/about/</link>
     <description>Recent content in 关于 jaxiu He on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="https://axfinn.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.jaxiu.cn/about/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

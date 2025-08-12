@@ -14,7 +14,7 @@ control.go 文件提供了客户端的一些高级控制功能，使得用户可
 TLS 加密控制
 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 和 GetTlsEnable() 函数，用于控制客户端与服务端之间是否启用 TLS 加密。这为用户提供了在客户端层面配置加密传输的灵活性。">
   
-  <meta property="og:url" content="https://axfinn.github.io/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%85%E5%8A%A9%E6%A8%A1%E5%9D%97%E6%8E%A7%E5%88%B6%E4%B8%8E-p2p-%E6%89%93%E6%B4%9E%E7%BB%86%E8%8A%82/">
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%85%E5%8A%A9%E6%A8%A1%E5%9D%97%E6%8E%A7%E5%88%B6%E4%B8%8E-p2p-%E6%89%93%E6%B4%9E%E7%BB%86%E8%8A%82/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 客户端辅助模块：控制与 P2P 打洞细节">
   <meta property="og:description" content="引言 在上一篇文章中，我们深入剖析了 NPS 客户端的核心 client.go，了解了其连接管理和流量转发机制。本篇文章将继续探索 NPS 客户端的其他辅助模块，特别是 nps/client/control.go 文件。这个文件包含了客户端的一些控制逻辑，例如获取任务状态、从配置文件启动客户端，以及一些 P2P UDP 打洞相关的辅助函数。
@@ -39,29 +39,40 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
   
   </title>
 
-  <link rel="canonical" href="https://axfinn.github.io/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%85%E5%8A%A9%E6%A8%A1%E5%9D%97%E6%8E%A7%E5%88%B6%E4%B8%8E-p2p-%E6%89%93%E6%B4%9E%E7%BB%86%E8%8A%82/">
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%85%E5%8A%A9%E6%A8%A1%E5%9D%97%E6%8E%A7%E5%88%B6%E4%B8%8E-p2p-%E6%89%93%E6%B4%9E%E7%BB%86%E8%8A%82/">
 
   
   
 
   
-  <link href="https://axfinn.github.io/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+  
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://axfinn.github.io/css/font.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
     
   
-  <link href="https://axfinn.github.io/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://axfinn.github.io/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/vendors/mdb/style.min.css" rel="stylesheet"> 
-  <link href="https://axfinn.github.io/css/main.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
   <link rel="shortcut icon"
   
-      href="https://axfinn.github.io/img/logo.png"
+      href="https://blog.jaxiu.cn/img/logo.png"
   
   >
 
@@ -80,13 +91,13 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/js/vendors/katex/katex.min.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
     
-    <link rel="stylesheet" href="https://axfinn.github.io/css/vendors/highlight/github-gist.css">
+    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -99,11 +110,10 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
   
 
   
-  <script src="https://axfinn.github.io/js/dynamic-bg.js"></script>
-  <link href="https://axfinn.github.io/css/dynamic-bg-control.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
 
 </head>
-
   <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
   
     
@@ -117,9 +127,9 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
     <div class="container">
 
       
-      <a class="navbar-brand" href="https://axfinn.github.io/">
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
           
-        <img class="avatar" src="https://axfinn.github.io/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
         <strong> jaxiu He</strong>
       </a>
@@ -136,21 +146,21 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
         
         <ul class="navbar-nav mr-auto ">
           <li class="nav-item ">
-            <a class="nav-link" href="https://axfinn.github.io/">Home</a>
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
           </li>
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/blog/" >博客  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/moment/" >动态  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
             </li>
           
              
             <li class="nav-item ">
-              <a class="nav-link" href="https://axfinn.github.io/about/" >关于  </a>
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
             </li>
           
           
@@ -173,7 +183,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
     </div>
   </nav>
   
-  <script src="https://axfinn.github.io/js/search.js"></script>
+  <script src="https://blog.jaxiu.cn/js/search.js"></script>
  
       
  
@@ -196,7 +206,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
 
         
         <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -217,7 +227,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
 
         
         <div class="carousel-item">
-          <div class="view" style="background-image: url('https://axfinn.github.io/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
 
             
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
@@ -242,15 +252,15 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
     <div class="row mx-0 headfont mt-3 pt-4">
       
       <div class="col-12 col-sm-5 align-middle">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://axfinn.github.io/img/logo.png" alt="" >
+            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
           
         </a>
       </div>
       
       <div class="col-12 col-sm-7 text-left pl-2">
-        <a href="https://axfinn.github.io/">
+        <a href="https://blog.jaxiu.cn/">
           <h1 class="mb-2 h1" style="font-weight: 300;" >
             <strong>jaxiu He</strong>
           </h1>
@@ -316,9 +326,9 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
   <ul class="post-meta li-x">
     
       
-        <li><a href="https://axfinn.github.io/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://axfinn.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
       
     
     
@@ -429,25 +439,25 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
               <div class="mb-5">
                 
 <div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://axfinn.github.io/tags/"><i class="fas fa-tags"></i></a></li>
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="https://axfinn.github.io/tags/nps" role="button">NPS </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button">客户端 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button">客户端 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/p2p" role="button">P2P </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/p2p" role="button">P2P </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/udp%E6%89%93%E6%B4%9E" role="button">UDP打洞 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/udp%E6%89%93%E6%B4%9E" role="button">UDP打洞 </a></li>
       
     
-      <li><a href="https://axfinn.github.io/tags/%E6%8E%A7%E5%88%B6" role="button">控制 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%8E%A7%E5%88%B6" role="button">控制 </a></li>
       
     
   </div>
@@ -463,7 +473,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=https://axfinn.github.io/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/ class="post-meta">Previous
+                <a href=https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
                     <span>NPS 客户端核心解析：连接管理与流量转发</span>
@@ -474,7 +484,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
             
             <div class="col-md-6 text-right" >
               
-                <a href=https://axfinn.github.io/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%8A%A8%E6%80%81%E5%8F%91%E7%8E%B0%E4%BB%BB%E5%8A%A1%E7%9A%84ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%B7%B5/ class="post-meta">Next
+                <a href=https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%8A%A8%E6%80%81%E5%8F%91%E7%8E%B0%E4%BB%BB%E5%8A%A1%E7%9A%84ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%B7%B5/ class="post-meta">Next
                   <div class="pt-2 pb-5 flex-reverse">
                     <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
                     <span>构建智能运维大脑：一个可动态发现任务的AI智能体实践</span>
@@ -572,31 +582,31 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/popper.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/vendors/mdb/mdb.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
 
 
 
   
-  <script src="https://axfinn.github.io/js/vendors/highlight.pack.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
   <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
  
-  <script src="https://axfinn.github.io/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://axfinn.github.io/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -616,7 +626,7 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
   new WOW().init();
 </script>
 
-<script type="text/javascript" src="https://axfinn.github.io/js/pet.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
 
 
 

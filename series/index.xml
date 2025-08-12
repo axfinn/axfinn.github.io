@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on jaxiu He</title>
-    <link>https://axfinn.github.io/series/</link>
+    <link>https://blog.jaxiu.cn/series/</link>
     <description>Recent content in Series on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Tue, 12 Aug 2025 14:00:00 +0800</lastBuildDate>
-    <atom:link href="https://axfinn.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.jaxiu.cn/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>开源项目</title>
-      <link>https://axfinn.github.io/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+      <link>https://blog.jaxiu.cn/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Tue, 12 Aug 2025 14:00:00 +0800</pubDate>
-      <guid>https://axfinn.github.io/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>https://blog.jaxiu.cn/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     <item>
       <title>Qwen Code实践</title>
-      <link>https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://blog.jaxiu.cn/series/qwen-code%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://axfinn.github.io/series/qwen-code%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>https://blog.jaxiu.cn/series/qwen-code%E5%AE%9E%E8%B7%B5/</guid>
       <description></description>
     </item>
   </channel>
