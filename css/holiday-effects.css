@@ -544,12 +544,55 @@ body.holiday-christmas a:hover {
         font-size: 14px;
     }
 
+    /* 移动端按钮样式 - 避免重叠 */
     .holiday-control-btn {
         width: 44px;
         height: 44px;
         font-size: 20px;
         bottom: 15px;
         right: 15px;
+        /* 改善触摸交互 */
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .holiday-music-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        bottom: 70px;
+        /* 在特效按钮上方 */
+        right: 15px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 圣诞树装饰移动端适配 */
+    .holiday-christmas-tree {
+        bottom: 130px;
+        /* 避免与按钮重叠 */
+        left: 10px;
+    }
+
+    .christmas-tree-container {
+        padding: 10px 15px;
+    }
+
+    .christmas-tree-body {
+        font-size: 40px;
+    }
+
+    .christmas-star {
+        font-size: 20px;
+    }
+
+    .christmas-gifts {
+        font-size: 14px;
+    }
+
+    .christmas-greeting {
+        font-size: 12px;
+        padding: 5px 10px;
     }
 }
 
