@@ -6,13 +6,15 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="DeepChat 架构设计解析：Electron 多平台实现原理
+  <meta name="description"
+    content="DeepChat 架构设计解析：Electron 多平台实现原理
 引言
 在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。
 Electron 在 DeepChat 中的应用
 Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框架，主要原因包括：">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="DeepChat 架构设计解析：Electron 多平台实现原理">
@@ -31,9 +33,9 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 
 
   <title>
-  
-       DeepChat 架构设计解析：Electron 多平台实现原理 | jaxiu He 
-  
+    
+     DeepChat 架构设计解析：Electron 多平台实现原理 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/">
@@ -46,7 +48,7 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -56,45 +58,42 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -105,6 +104,10 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -123,74 +126,62 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -199,48 +190,50 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -251,44 +244,45 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -398,7 +392,7 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 <h3 id="窗口管理">窗口管理</h3>
 <p>DeepChat 实现了多窗口架构，不同平台上的窗口行为略有不同：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 创建窗口的示例代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">createWindow</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">createWindow</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">win</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserWindow</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">width</span><span class="o">:</span> <span class="mi">1200</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">height</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
@@ -409,9 +403,9 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 根据平台设置窗口行为
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// macOS 特定设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h2 id="主进程与渲染进程的通信设计">主进程与渲染进程的通信设计</h2>
@@ -423,14 +417,14 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 └──────────────────┘                   └──────────────────────┘
 </code></pre><p>主进程和渲染进程之间通过 <code>ipcMain</code> 和 <code>ipcRenderer</code> 模块进行通信：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 主进程中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcMain</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nx">ipcMain</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="s1">&#39;perform-action&#39;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 执行操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 渲染进程中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcRenderer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">ipcRenderer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;perform-action&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
 </span></span></code></pre></div><h3 id="数据状态管理">数据状态管理</h3>
 <p>DeepChat 采用了分层的数据管理策略：</p>
@@ -562,14 +556,14 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -585,7 +579,7 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -598,46 +592,27 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -645,22 +620,22 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -673,11 +648,5 @@ Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨�
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

@@ -6,8 +6,10 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="Qwen Code 核心代码实现细节深度解读
+  <meta name="description"
+    content="Qwen Code 核心代码实现细节深度解读
 引言
 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。
 CLI 入口点分析
@@ -35,7 +37,7 @@ main().catch((error) =&gt; {
 实现全局错误处理，确保任何未捕获的异常都能被妥善处理
 
 CLI 启动流程可以用下图表示：">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="Qwen Code 核心代码实现细节深度解读">
@@ -55,9 +57,9 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
 
 
   <title>
-  
-       Qwen Code 核心代码实现细节深度解读 | jaxiu He 
-  
+    
+     Qwen Code 核心代码实现细节深度解读 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/">
@@ -70,7 +72,7 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -80,45 +82,42 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -129,6 +128,10 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -147,74 +150,62 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -223,48 +214,50 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -275,44 +268,45 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -385,7 +379,7 @@ CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">main</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./src/gemini.js&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// --- Global Entry Point ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">main</span><span class="p">().</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">main</span><span class="p">().</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;An unexpected critical error occurred:&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
@@ -423,44 +417,44 @@ flowchart TD
 <h3 id="主逻辑实现">主逻辑实现</h3>
 <p><code>packages/cli/src/gemini.tsx</code> 是 CLI 的核心实现文件。让我们分析其中的关键部分：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 程序主函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">main() {</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">async</span> <span class="kd">function</span> <span class="nx">main() {</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 解析命令行参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">parseArguments</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">parseArguments</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 加载配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadConfig</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadConfig</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 设置主题
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">await</span> <span class="nx">setupTheme</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">theme</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">setupTheme</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">theme</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 处理认证
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">await</span> <span class="nx">handleAuthentication</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">handleAuthentication</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查是否需要增加内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">await</span> <span class="nx">checkAndAdjustMemory</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">checkAndAdjustMemory</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 初始化沙箱（如果配置了）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">await</span> <span class="nx">initializeSandbox</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">sandbox</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">initializeSandbox</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">sandbox</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 处理非交互模式输入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">isTTY</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">isTTY</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">input</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">readStdin</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">trim</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 在非交互模式下处理输入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">await</span> <span class="nx">processNonInteractiveInput</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="nx">processNonInteractiveInput</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 启动交互式模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">await</span> <span class="nx">startInteractiveMode</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">startInteractiveMode</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>这个函数展示了 CLI 的完整启动流程，从参数解析到交互式模式启动。</p>
 <h2 id="核心处理器实现">核心处理器实现</h2>
 <h3 id="请求处理核心">请求处理核心</h3>
 <p>核心处理器负责处理用户请求，这是 Qwen Code 的大脑：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/processor.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">RequestProcessor</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">RequestProcessor</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">contextManager</span>: <span class="kt">ContextManager</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">modelInterface</span>: <span class="kt">ModelInterface</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">toolExecutor</span>: <span class="kt">ToolExecutor</span><span class="p">;</span>
@@ -480,35 +474,35 @@ flowchart TD
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">process</span><span class="p">(</span><span class="nx">userInput</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 将用户输入添加到上下文
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="nx">userInput</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="nx">userInput</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 构建完整的上下文
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">buildFullContext</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">buildFullContext</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 调用模型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">modelResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelInterface</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">modelResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelInterface</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 解析模型响应
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">parsedResponse</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">responseParser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">modelResponse</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">parsedResponse</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">responseParser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">modelResponse</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 处理工具调用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">toolCalls</span> <span class="o">&amp;&amp;</span> <span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">toolCalls</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">toolCalls</span> <span class="o">&amp;&amp;</span> <span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">toolCalls</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">toolResults</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">executeTools</span><span class="p">(</span><span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">toolCalls</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 将工具结果反馈给模型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">finalResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelInterface</span><span class="p">.</span><span class="nx">callWithTools</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">finalResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelInterface</span><span class="p">.</span><span class="nx">callWithTools</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">context</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">toolResults</span>
 </span></span><span class="line"><span class="cl">      <span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 将最终响应添加到上下文
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="nx">finalResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="nx">finalResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">finalResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 将响应添加到上下文
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">contextManager</span><span class="p">.</span><span class="nx">addMessage</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">parsedResponse</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -522,14 +516,14 @@ flowchart TD
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">getAvailableTools</span><span class="p">()</span><span class="o">:</span> <span class="nx">Tool</span><span class="p">[]</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 返回当前可用的工具列表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">getAllTools</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">getAllTools</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">executeTools</span><span class="p">(</span><span class="nx">toolCalls</span>: <span class="kt">ToolCall</span><span class="p">[])</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">ToolResult</span><span class="err">[]</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">results</span>: <span class="kt">ToolResult</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 并行执行所有工具调用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">toolPromises</span> <span class="o">=</span> <span class="nx">toolCalls</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">toolCall</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">toolPromises</span> <span class="o">=</span> <span class="nx">toolCalls</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">toolCall</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">toolExecutor</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">          <span class="nx">toolCall</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
@@ -549,10 +543,10 @@ flowchart TD
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 等待所有工具执行完成
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">toolResults</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">toolPromises</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">toolResults</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">toolPromises</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 将结果添加到结果数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">toolResults</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">toolResults</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -591,7 +585,7 @@ sequenceDiagram
 <h3 id="文件读取工具">文件读取工具</h3>
 <p><code>read_file</code> 工具是 Qwen Code 最基础也是最重要的工具之一：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/readFile.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">readFileTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">readFileTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;read_file&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;读取文件内容。处理文本、图像(PNG, JPG, GIF, WEBP, SVG, BMP)和PDF文件。&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
@@ -613,41 +607,41 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">execute</span>: <span class="kt">async</span> <span class="p">(</span><span class="nx">params</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;缺少必需参数: absolute_path&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径是否为绝对路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;路径必须是绝对路径&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径安全性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;路径不合法&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 获取文件信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 检查是否为文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">stats</span><span class="p">.</span><span class="nx">isFile</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">stats</span><span class="p">.</span><span class="nx">isFile</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;指定路径不是文件&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 根据文件类型处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">fileType</span> <span class="o">=</span> <span class="nx">getFileType</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">fileType</span> <span class="o">=</span> <span class="nx">getFileType</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">isTextFile</span><span class="p">(</span><span class="nx">fileType</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 处理文本文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">await</span> <span class="nx">handleTextFile</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="nx">handleTextFile</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isImageFile</span><span class="p">(</span><span class="nx">fileType</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 处理图像文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">await</span> <span class="nx">handleImageFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="nx">handleImageFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isPdfFile</span><span class="p">(</span><span class="nx">fileType</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 处理PDF文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">await</span> <span class="nx">handlePdfFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="nx">handlePdfFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`不支持的文件类型: </span><span class="si">${</span><span class="nx">fileType</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
@@ -661,11 +655,11 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 处理文本文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handleTextFile</span><span class="p">(</span><span class="nx">params</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handleTextFile</span><span class="p">(</span><span class="nx">params</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">content</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">absolute_path</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 如果指定了分页参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">limit</span> <span class="o">||</span> <span class="nx">params</span><span class="p">.</span><span class="nx">offset</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">limit</span> <span class="o">||</span> <span class="nx">params</span><span class="p">.</span><span class="nx">offset</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">offset</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">limit</span> <span class="o">?</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">params.limit</span> : <span class="kt">lines.length</span><span class="p">;</span>
@@ -676,9 +670,9 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 处理图像文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handleImageFile</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handleImageFile</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 读取图像文件并转换为base64
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">base64</span> <span class="o">=</span> <span class="nx">buffer</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;base64&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">mimeType</span> <span class="o">=</span> <span class="nx">getMimeType</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
@@ -686,17 +680,17 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 处理PDF文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handlePdfFile</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">handlePdfFile</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 这里可以使用pdf-parse等库来提取PDF文本内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 为简化，这里直接返回文件信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 为简化，这里直接返回文件信息
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="sb">`PDF文件，大小: </span><span class="si">${</span><span class="nx">stats</span><span class="p">.</span><span class="nx">size</span><span class="si">}</span><span class="sb"> 字节`</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>这个实现展示了 Qwen Code 如何安全地读取各种类型的文件，并根据文件类型进行不同的处理。</p>
 <h3 id="文件写入工具">文件写入工具</h3>
 <p><code>write_file</code> 工具允许 AI 将内容写入文件：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/writeFile.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">writeFileTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">writeFileTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;write_file&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;将内容写入指定文件&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
@@ -713,7 +707,7 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">execute</span>: <span class="kt">async</span> <span class="p">(</span><span class="nx">params</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;缺少必需参数: file_path&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -722,22 +716,22 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径是否为绝对路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;文件路径必须是绝对路径&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径安全性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;文件路径不合法&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 确保目录存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="p">{</span> <span class="nx">recursive</span>: <span class="kt">true</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 写入文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">,</span> <span class="nx">params</span><span class="p">.</span><span class="nx">content</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="p">,</span> <span class="nx">params</span><span class="p">.</span><span class="nx">content</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="sb">`成功写入文件: </span><span class="si">${</span><span class="nx">params</span><span class="p">.</span><span class="nx">file_path</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -748,7 +742,7 @@ sequenceDiagram
 </span></span></code></pre></div><h3 id="目录列表工具">目录列表工具</h3>
 <p><code>list_directory</code> 工具允许 AI 查看目录内容：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/listDirectory.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">listDirectoryTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">listDirectoryTool</span>: <span class="kt">Tool</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;list_directory&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;列出指定目录的内容&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
@@ -770,35 +764,35 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">execute</span>: <span class="kt">async</span> <span class="p">(</span><span class="nx">params</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;缺少必需参数: path&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径是否为绝对路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;路径必须是绝对路径&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证路径安全性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValidPath</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;路径不合法&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 检查路径是否存在且为目录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">stats</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">stat</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;指定路径不是目录&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 读取目录内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">entries</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span> <span class="p">{</span> <span class="nx">withFileTypes</span>: <span class="kt">true</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">entries</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readdir</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span> <span class="p">{</span> <span class="nx">withFileTypes</span>: <span class="kt">true</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 过滤条目
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kd">let</span> <span class="nx">filteredEntries</span> <span class="o">=</span> <span class="nx">entries</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nx">filteredEntries</span> <span class="o">=</span> <span class="nx">entries</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 应用忽略模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">ignore</span> <span class="o">&amp;&amp;</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">ignore</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">ignore</span> <span class="o">&amp;&amp;</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">ignore</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">filteredEntries</span> <span class="o">=</span> <span class="nx">filteredEntries</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="o">!</span><span class="nx">params</span><span class="p">.</span><span class="nx">ignore</span><span class="p">.</span><span class="nx">some</span><span class="p">((</span><span class="nx">pattern</span>: <span class="kt">string</span><span class="p">)</span> <span class="o">=&gt;</span> 
 </span></span><span class="line"><span class="cl">            <span class="nx">minimatch</span><span class="p">(</span><span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">)</span>
@@ -807,17 +801,17 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 应用.gitignore规则（如果配置了）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">respect_git_ignore</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">respect_git_ignore</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">filteredEntries</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">applyGitIgnoreFilter</span><span class="p">(</span><span class="nx">filteredEntries</span><span class="p">,</span> <span class="nx">params</span><span class="p">.</span><span class="nx">path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 格式化结果
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">filteredEntries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">filteredEntries</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="nx">name</span>: <span class="kt">entry.name</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">          <span class="kr">type</span><span class="o">:</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span> <span class="o">?</span> <span class="s1">&#39;directory&#39;</span> <span class="o">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// 可以添加更多文件信息，如大小、修改时间等
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">        <span class="p">};</span>
 </span></span><span class="line"><span class="cl">      <span class="p">});</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
@@ -833,7 +827,7 @@ sequenceDiagram
 <h3 id="与-qwen-模型通信">与 Qwen 模型通信</h3>
 <p>模型接口层负责与 Qwen 模型进行通信：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/modelInterface.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ModelInterface</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ModelInterface</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">apiKey</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">baseUrl</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">model</span>: <span class="kt">string</span><span class="p">;</span>
@@ -845,28 +839,28 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">model</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 创建HTTP客户端
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">baseURL</span>: <span class="kt">this.baseUrl</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">timeout</span>: <span class="kt">30000</span><span class="p">,</span> <span class="c1">// 30秒超时
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;Authorization&#39;</span><span class="o">:</span> <span class="sb">`Bearer </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">apiKey</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加响应拦截器处理错误
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// 服务器返回错误响应
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`API错误: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb"> - </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`API错误: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb"> - </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// 请求发出但没有收到响应
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;网络错误: 无法连接到API服务器&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;网络错误: 无法连接到API服务器&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// 其他错误
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`请求错误: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`请求错误: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
@@ -909,25 +903,25 @@ sequenceDiagram
 <h3 id="路径验证">路径验证</h3>
 <p>为了确保安全性，Qwen Code 实现了严格的路径验证机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/security/pathValidator.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">isValidPath</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">isValidPath</span><span class="p">(</span><span class="nx">filePath</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查是否为绝对路径
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">filePath</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">path</span><span class="p">.</span><span class="nx">isAbsolute</span><span class="p">(</span><span class="nx">filePath</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查是否包含路径遍历字符
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">filePath</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">filePath</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;..\\&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">filePath</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">filePath</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;..\\&#39;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查是否在允许的目录范围内
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">allowedPaths</span> <span class="o">=</span> <span class="nx">getAllowedPaths</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">allowedPaths</span> <span class="o">=</span> <span class="nx">getAllowedPaths</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">allowedPaths</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">allowedPath</span> <span class="o">=&gt;</span> <span class="nx">filePath</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">allowedPath</span><span class="p">)))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查是否访问了敏感目录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">sensitiveDirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/etc&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr&#39;</span><span class="p">,</span> <span class="s1">&#39;/root&#39;</span><span class="p">,</span> <span class="s1">&#39;/sys&#39;</span><span class="p">,</span> <span class="s1">&#39;/proc&#39;</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">sensitiveDirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/etc&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr&#39;</span><span class="p">,</span> <span class="s1">&#39;/root&#39;</span><span class="p">,</span> <span class="s1">&#39;/sys&#39;</span><span class="p">,</span> <span class="s1">&#39;/proc&#39;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">sensitiveDirs</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">dir</span> <span class="o">=&gt;</span> <span class="nx">filePath</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="nx">dir</span><span class="p">)))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -937,37 +931,37 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">getAllowedPaths</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 允许当前工作目录及其子目录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()];</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()];</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="权限控制">权限控制</h3>
 <p>Qwen Code 实现了细粒度的权限控制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/security/permissionManager.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">PermissionManager</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">PermissionManager</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">permissions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 默认权限配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">permissions</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">permissions</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
 </span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;read_file&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]],</span>
 </span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;write_file&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]],</span>
 </span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;list_directory&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]],</span>
 </span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;run_shell_command&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;execute&#39;</span><span class="p">]],</span>
 </span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="s1">&#39;google_web_search&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;network&#39;</span><span class="p">]],</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// ... 其他工具权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">]);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">]);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="nx">checkPermission</span><span class="p">(</span><span class="nx">toolName</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">action</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">toolPermissions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">toolName</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">toolPermissions</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// 未注册的工具默认拒绝
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">toolPermissions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">action</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 可以根据配置文件动态调整权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">updatePermissions</span><span class="p">(</span><span class="nx">newPermissions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">updatePermissions</span><span class="p">(</span><span class="nx">newPermissions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">toolName</span><span class="p">,</span> <span class="nx">permissions</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">newPermissions</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">toolName</span><span class="p">,</span> <span class="nx">permissions</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -977,7 +971,7 @@ sequenceDiagram
 <h3 id="对话历史管理">对话历史管理</h3>
 <p>为了维持对话的连贯性，Qwen Code 实现了上下文管理机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/contextManager.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ContextManager</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ContextManager</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">history</span>: <span class="kt">Array</span><span class="o">&lt;</span><span class="p">{</span><span class="nx">role</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">content</span>: <span class="kt">string</span><span class="p">}</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">maxHistoryLength</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
@@ -989,9 +983,9 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">role</span><span class="p">,</span> <span class="nx">content</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 限制历史记录长度，避免超出模型上下文限制
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxHistoryLength</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxHistoryLength</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 保留系统消息和最新的几条消息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">systemMessages</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">role</span> <span class="o">===</span> <span class="s1">&#39;system&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">systemMessages</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">role</span> <span class="o">===</span> <span class="s1">&#39;system&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">recentMessages</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">maxHistoryLength</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">history</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">systemMessages</span><span class="p">,</span> <span class="p">...</span><span class="nx">recentMessages</span><span class="p">];</span>
@@ -1007,7 +1001,7 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 可以根据需要添加系统消息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">addSystemMessage</span><span class="p">(</span><span class="nx">content</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">addSystemMessage</span><span class="p">(</span><span class="nx">content</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">unshift</span><span class="p">({</span><span class="nx">role</span><span class="o">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="nx">content</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1015,7 +1009,7 @@ sequenceDiagram
 <h3 id="工具注册机制">工具注册机制</h3>
 <p>Qwen Code 实现了灵活的工具注册机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/toolRegistry.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ToolRegistry</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ToolRegistry</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tools</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">Tool</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="nx">registerTool</span><span class="p">(</span><span class="nx">tool</span>: <span class="kt">Tool</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
@@ -1040,10 +1034,10 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 全局工具注册表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">const</span> <span class="nx">toolRegistry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ToolRegistry</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">toolRegistry</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ToolRegistry</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 在应用启动时注册所有工具
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">registerAllTools</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">registerAllTools</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">(</span><span class="nx">readFileTool</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">(</span><span class="nx">writeFileTool</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">(</span><span class="nx">listDirectoryTool</span><span class="p">);</span>
@@ -1055,7 +1049,7 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">(</span><span class="nx">webFetchTool</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">toolRegistry</span><span class="p">.</span><span class="nx">registerTool</span><span class="p">(</span><span class="nx">saveMemoryTool</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// ... 注册其他工具
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>工具注册与管理系统可以用下图表示：</p>
 <div class="mermaid">
 
@@ -1085,7 +1079,7 @@ graph TD
 <h3 id="统一错误处理">统一错误处理</h3>
 <p>Qwen Code 实现了统一的错误处理机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/errorHandler.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ErrorHandler</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ErrorHandler</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">logger</span>: <span class="kt">Logger</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">logger</span>: <span class="kt">Logger</span><span class="p">)</span> <span class="p">{</span>
@@ -1094,10 +1088,10 @@ graph TD
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="nx">handleError</span><span class="p">(</span><span class="nx">error</span>: <span class="kt">Error</span><span class="p">)</span><span class="o">:</span> <span class="nx">ErrorResponse</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 记录错误日志
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">stack</span>: <span class="kt">error.stack</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">stack</span>: <span class="kt">error.stack</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 根据错误类型返回相应响应
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">ValidationError</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span> <span class="k">instanceof</span> <span class="nx">ValidationError</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kr">type</span><span class="o">:</span> <span class="s1">&#39;validation_error&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">message</span>: <span class="kt">error.message</span><span class="p">,</span>
@@ -1122,7 +1116,7 @@ graph TD
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 默认错误处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">type</span><span class="o">:</span> <span class="s1">&#39;unknown_error&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;发生未知错误&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">code</span><span class="o">:</span> <span class="s1">&#39;UNKNOWN_ERROR&#39;</span>
@@ -1131,7 +1125,7 @@ graph TD
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 自定义错误类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ValidationError</span> <span class="kr">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ValidationError</span> <span class="kr">extends</span> <span class="nb">Error</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">message</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">super</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;ValidationError&#39;</span><span class="p">;</span>
@@ -1154,7 +1148,7 @@ graph TD
 </span></span></code></pre></div><h3 id="日志记录系统">日志记录系统</h3>
 <p>Qwen Code 使用结构化日志记录重要事件：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/logger.ts
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">debug</span> <span class="kr">from</span> <span class="s1">&#39;debug&#39;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">debug</span> <span class="kr">from</span> <span class="s1">&#39;debug&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">Logger</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">namespace</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
@@ -1192,10 +1186,10 @@ graph TD
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 输出到控制台
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 使用 debug 库输出调试信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">level</span> <span class="o">===</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">level</span> <span class="o">===</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">debugLogger</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">meta</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1289,14 +1283,14 @@ graph TD
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -1312,7 +1306,7 @@ graph TD
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -1325,46 +1319,27 @@ graph TD
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -1372,22 +1347,22 @@ graph TD
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -1400,11 +1375,5 @@ graph TD
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

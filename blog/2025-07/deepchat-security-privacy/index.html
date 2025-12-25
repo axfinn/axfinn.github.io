@@ -6,8 +6,10 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="DeepChat 安全与隐私保护机制
+  <meta name="description"
+    content="DeepChat 安全与隐私保护机制
 引言
 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
 安全架构设计
@@ -40,7 +42,7 @@ DeepChat 采用了分层的安全架构设计：
 数据加密机制
 本地数据存储加密
 DeepChat 对本地存储的敏感数据进行加密处理：">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="DeepChat 安全与隐私保护机制">
@@ -60,9 +62,9 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 
 
   <title>
-  
-       DeepChat 安全与隐私保护机制 | jaxiu He 
-  
+    
+     DeepChat 安全与隐私保护机制 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/">
@@ -75,7 +77,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -85,45 +87,42 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -134,6 +133,10 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -152,74 +155,62 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -228,48 +219,50 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -280,44 +273,45 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -419,7 +413,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 加密数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">iv</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createCipher</span><span class="p">(</span><span class="s1">&#39;aes-256-gcm&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionKey</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">cipher</span><span class="p">.</span><span class="nx">setAAD</span><span class="p">(</span><span class="nx">iv</span><span class="p">);</span>
@@ -437,7 +431,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 解密数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">encrypted</span><span class="p">,</span> <span class="nx">iv</span><span class="p">,</span> <span class="nx">authTag</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">decipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createDecipher</span><span class="p">(</span><span class="s1">&#39;aes-256-gcm&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionKey</span><span class="p">);</span>
@@ -451,13 +445,13 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取或生成加密密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">getOrGenerateEncryptionKey</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">getOrGenerateEncryptionKey</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 尝试从安全存储中获取密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 生成新的密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">key</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">32</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">key</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">32</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -474,13 +468,13 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 保存敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">saveSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">saveSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">encryptedValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryption</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">encryptedValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">encryptedValue</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">encryptedValue</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
@@ -493,7 +487,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 删除敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">removeSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">removeSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -504,23 +498,23 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">proxyConfig</span>: <span class="kt">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 设置代理配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">ProxyConfig</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">ProxyConfig</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 配置 HTTP 客户端使用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 配置 WebSocket 连接使用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取当前代理配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getProxy</span><span class="p">()</span><span class="o">:</span> <span class="nx">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getProxy</span><span class="p">()</span><span class="o">:</span> <span class="nx">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 禁用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">disableProxy</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">disableProxy</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">disableProxy</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">disableProxy</span><span class="p">();</span>
@@ -542,29 +536,29 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 强制使用 HTTPS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;https://&#39;</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;https://&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 验证 SSL 证书
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">httpsAgent</span>: <span class="kt">new</span> <span class="nx">https</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">httpsAgent</span>: <span class="kt">new</span> <span class="nx">https</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">rejectUnauthorized</span>: <span class="kt">true</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 可以指定自定义 CA 证书
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">ca</span>: <span class="kt">this.loadCustomCACertificates</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">ca</span>: <span class="kt">this.loadCustomCACertificates</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">      <span class="p">})</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加请求拦截器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">requestInterceptor</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">requestInterceptor</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">AxiosRequestConfig</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 确保使用 HTTPS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Only HTTPS connections are allowed&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加安全头部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="p">...</span><span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;User-Agent&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getSecureUserAgent</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;X-Content-Type-Options&#39;</span><span class="o">:</span> <span class="s1">&#39;nosniff&#39;</span><span class="p">,</span>
@@ -577,7 +571,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">loadCustomCACertificates</span><span class="p">()</span><span class="o">:</span> <span class="nx">Buffer</span><span class="p">[]</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 加载自定义 CA 证书（如果有的话）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">caPaths</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCustomCACertificatePaths</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">caPaths</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCustomCACertificatePaths</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">caPaths</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">path</span> <span class="o">=&gt;</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -589,7 +583,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">token</span>: <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 用户登录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">username</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">username</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/auth/login&#39;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">username</span><span class="p">,</span>
@@ -600,7 +594,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 保存认证信息（加密存储）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -610,24 +604,24 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查认证状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">isAuthenticated</span><span class="p">()</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">isAuthenticated</span><span class="p">()</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 尝试从存储中恢复认证信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">storedToken</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">storedToken</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">storedToken</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="nx">storedToken</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 验证令牌有效性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">validateToken</span><span class="p">(</span><span class="nx">storedToken</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">validateToken</span><span class="p">(</span><span class="nx">storedToken</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 用户登出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">secureStorage</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
@@ -639,7 +633,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">validateToken</span><span class="p">(</span><span class="nx">token</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证 JWT 令牌或其他类型的令牌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">try</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">decoded</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">getJWTSecret</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">decoded</span><span class="p">.</span><span class="nx">exp</span> <span class="o">&gt;</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -653,9 +647,9 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">userPermissions</span>: <span class="kt">Set</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查用户是否有特定权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 未启用认证时，默认允许所有权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">AuthenticationManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">AuthenticationManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -663,7 +657,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查多个权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">hasPermissions</span><span class="p">(</span><span class="nx">permissions</span>: <span class="kt">string</span><span class="p">[],</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;AND&#39;</span> <span class="o">|</span> <span class="s1">&#39;OR&#39;</span> <span class="o">=</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">hasPermissions</span><span class="p">(</span><span class="nx">permissions</span>: <span class="kt">string</span><span class="p">[],</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;AND&#39;</span> <span class="o">|</span> <span class="s1">&#39;OR&#39;</span> <span class="o">=</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">operator</span> <span class="o">===</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">permissions</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">p</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">p</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -672,14 +666,14 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 请求权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">requestPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">requestPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 检查是否已拥有权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 显示权限请求对话框
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">userPermissions</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">savePermissions</span><span class="p">();</span>
@@ -690,7 +684,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 在 UI 中显示权限请求对话框
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;show-permission-dialog&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;show-permission-dialog&#39;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">permission</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">description</span>: <span class="kt">this.getPermissionDescription</span><span class="p">(</span><span class="nx">permission</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
@@ -716,56 +710,56 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">originalContent</span>: <span class="kt">WeakMap</span><span class="p">&lt;</span><span class="nt">Element</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 启用隐私模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">enablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">enablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 隐藏敏感元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hideSensitiveElements</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">hideSensitiveElements</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 监听新创建的元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">observeDOMChanges</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">observeDOMChanges</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 发送事件通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 禁用隐私模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">disablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">disablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 恢复原始内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">restoreSensitiveElements</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">restoreSensitiveElements</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 停止监听 DOM 变化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">stopObservingDOMChanges</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">stopObservingDOMChanges</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 发送事件通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">hideSensitiveElements</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 查找所有敏感元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">sensitiveElements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">sensitiveElements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;.api-key, .password, .sensitive-data, [data-sensitive=&#34;true&#34;]&#39;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nx">sensitiveElements</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 保存原始内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 替换为隐藏内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;••••••••&#39;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;••••••••&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;privacy-mode-hidden&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">restoreSensitiveElements</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 恢复所有被隐藏的元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.privacy-mode-hidden&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.privacy-mode-hidden&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">originalContent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">originalContent</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">originalContent</span><span class="p">;</span>
@@ -795,7 +789,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">registerDefaultShortcuts</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 注册隐私模式切换快捷键 (Ctrl+Shift+H)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">registerShortcut</span><span class="p">(</span><span class="s1">&#39;Ctrl+Shift+H&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">registerShortcut</span><span class="p">(</span><span class="s1">&#39;Ctrl+Shift+H&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">privacyManager</span> <span class="o">=</span> <span class="nx">PrivacyModeManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">privacyManager</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">privacyManager</span><span class="p">.</span><span class="nx">disablePrivacyMode</span><span class="p">();</span>
@@ -805,7 +799,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 注册其他快捷键...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">registerShortcut</span><span class="p">(</span><span class="nx">combination</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">shortcuts</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">combination</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">callback</span><span class="p">);</span>
@@ -832,7 +826,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">)</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;meta&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加主键
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">[</span><span class="s1">&#39;Control&#39;</span><span class="p">,</span> <span class="s1">&#39;Shift&#39;</span><span class="p">,</span> <span class="s1">&#39;Alt&#39;</span><span class="p">,</span> <span class="s1">&#39;Meta&#39;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">[</span><span class="s1">&#39;Control&#39;</span><span class="p">,</span> <span class="s1">&#39;Shift&#39;</span><span class="p">,</span> <span class="s1">&#39;Alt&#39;</span><span class="p">,</span> <span class="s1">&#39;Meta&#39;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">keys</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -850,7 +844,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 记录安全事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logSecurityEvent</span><span class="p">(</span><span class="nx">event</span>: <span class="kt">SecurityEvent</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">logSecurityEvent</span><span class="p">(</span><span class="nx">event</span>: <span class="kt">SecurityEvent</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">logEntry</span>: <span class="kt">LogEntry</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">timestamp</span>: <span class="kt">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">eventType</span>: <span class="kt">event.type</span><span class="p">,</span>
@@ -862,21 +856,21 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 写入日志文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fs</span><span class="p">.</span><span class="nx">appendFileSync</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">fs</span><span class="p">.</span><span class="nx">appendFileSync</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">logFile</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果是高严重性事件，发送通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="s1">&#39;high&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="s1">&#39;high&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 发送安全警报
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span>: <span class="kt">LogEntry</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span>: <span class="kt">LogEntry</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 可以通过邮件、系统通知等方式发送警报
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;security-alert&#39;</span><span class="p">,</span> <span class="nx">logEntry</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;security-alert&#39;</span><span class="p">,</span> <span class="nx">logEntry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -981,14 +975,14 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -1004,7 +998,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -1017,46 +1011,27 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -1064,22 +1039,22 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -1092,11 +1067,5 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

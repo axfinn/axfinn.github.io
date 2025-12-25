@@ -6,10 +6,12 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
-  <meta name="author" content="jaxiu He">
-  <meta name="description" content="引言
-在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/client/register.go，探讨 NPS 是如何实现对后端服务的健康检查以及支持客户端动态注册的。">
   
+  <meta name="author" content="jaxiu He">
+  <meta name="description"
+    content="引言
+在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/client/register.go，探讨 NPS 是如何实现对后端服务的健康检查以及支持客户端动态注册的。">
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 客户端深度解析：健康检查与动态注册">
@@ -28,9 +30,9 @@
 
 
   <title>
-  
-       NPS 客户端深度解析：健康检查与动态注册 | jaxiu He 
-  
+    
+     NPS 客户端深度解析：健康检查与动态注册 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/">
@@ -43,7 +45,7 @@
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -53,45 +55,42 @@
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -102,6 +101,10 @@
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -120,74 +123,62 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -196,48 +187,50 @@
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -248,44 +241,45 @@
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -353,51 +347,51 @@
 <p>内网穿透的目的是将内网服务暴露到公网，但如果内网服务本身宕机了，NPS 客户端与服务端的连接依然是通畅的。这时，用户的请求仍然会被转发到客户端，但客户端无法连接到宕机的内网服务，最终导致用户访问失败。为了避免这种情况，NPS 设计了一套健康检查机制，让客户端能够主动监控其代理的内网服务的状态，并在服务异常时及时通知服务端。</p>
 <h3 id="heathcheck健康检查的启动器"><code>heathCheck()</code>：健康检查的启动器</h3>
 <p>健康检查功能由 <code>client.go</code> 中的 <code>TRPClient.Start()</code> 方法启动，它会作为一个独立的 goroutine 运行 <code>heathCheck()</code> 函数。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in client.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span> <span class="c1">// 启动健康检查</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>heathCheck()</code> 函数会遍历配置文件中的所有健康检查任务，并为每一个任务启动一个专门的 <code>check</code> goroutine。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in health.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">hs</span> <span class="p">[]</span><span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span> <span class="nx">signal</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">h</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">hs</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="nf">check</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span> <span class="nx">signal</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="check-与-tcphealthcheck执行检查"><code>check()</code> 与 <code>tcpHealthCheck()</code>：执行检查</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in client.go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span><span class="w"> </span><span class="c1">// 启动健康检查</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>heathCheck()</code> 函数会遍历配置文件中的所有健康检查任务，并为每一个任务启动一个专门的 <code>check</code> goroutine。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in health.go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">heathCheck</span><span class="p">(</span><span class="nx">hs</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">hs</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">go</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="check-与-tcphealthcheck执行检查"><code>check()</code> 与 <code>tcpHealthCheck()</code>：执行检查</h3>
 <p><code>check()</code> 函数是执行健康检查的核心循环。它会根据配置的检查间隔 (<code>h.IntervalSecond</code>)，周期性地调用具体的检查方法。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">check</span><span class="p">(</span><span class="nx">h</span> <span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span> <span class="nx">signal</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="nx">h</span><span class="p">.</span><span class="nx">HealthType</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;tcp&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">tcpHealthCheck</span><span class="p">(</span><span class="nx">h</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">				<span class="c1">// ... 失败处理</span>
-</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">				<span class="c1">// ... 成功处理</span>
-</span></span><span class="line"><span class="cl">			<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="nx">h</span><span class="p">.</span><span class="nx">IntervalSecond</span><span class="p">)</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>目前，NPS 主要支持 TCP 类型的健康检查 (<code>tcpHealthCheck</code>)。其逻辑非常直接：尝试通过 <code>net.DialTimeout</code> 连接到配置的内网目标服务 (<code>h.HealthTarget</code>)。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span><span class="w"> </span><span class="nx">signal</span><span class="w"> </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">switch</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">HealthType</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;tcp&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">tcpHealthCheck</span><span class="p">(</span><span class="nx">h</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="c1">// ... 失败处理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="c1">// ... 成功处理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="nx">h</span><span class="p">.</span><span class="nx">IntervalSecond</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>目前，NPS 主要支持 TCP 类型的健康检查 (<code>tcpHealthCheck</code>)。其逻辑非常直接：尝试通过 <code>net.DialTimeout</code> 连接到配置的内网目标服务 (<code>h.HealthTarget</code>)。</p>
 <ul>
 <li><strong>连接成功</strong>：表示服务健康，将连续失败计数器 <code>h.FailCount</code> 清零。</li>
 <li><strong>连接失败</strong>：表示服务异常，将 <code>h.FailCount</code> 加一。</li>
 </ul>
 <h3 id="失败上报机制">失败上报机制</h3>
 <p>当连续失败次数 (<code>h.FailCount</code>) 超过了配置的最大失败次数 (<code>h.MaxFail</code>)，并且当前任务尚未被标记为停止时，客户端就会向服务端发送一个健康检查失败的通知。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in check()</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">h</span><span class="p">.</span><span class="nx">FailCount</span> <span class="p">&gt;</span> <span class="nx">h</span><span class="p">.</span><span class="nx">MaxFail</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span> <span class="p">=</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;The service %s has been stopped&#34;</span><span class="p">,</span> <span class="nx">h</span><span class="p">.</span><span class="nx">HealthTarget</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">signal</span><span class="p">.</span><span class="nf">WriteHealthData</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">HEALTH_CHECK_FAIL</span><span class="p">,</span> <span class="nx">h</span><span class="p">.</span><span class="nx">TaskId</span><span class="p">)</span> <span class="c1">// 发送失败通知</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in check()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">FailCount</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">MaxFail</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">!</span><span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;The service %s has been stopped&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">HealthTarget</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">signal</span><span class="p">.</span><span class="nf">WriteHealthData</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">HEALTH_CHECK_FAIL</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">TaskId</span><span class="p">)</span><span class="w"> </span><span class="c1">// 发送失败通知</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>signal.WriteHealthData()</code>: 通过主控制连接 (<code>signal</code>)，将 <code>common.HEALTH_CHECK_FAIL</code> 标志和对应的任务 ID (<code>h.TaskId</code>) 发送给服务端。</li>
 <li>服务端 (<code>bridge</code> 模块) 接收到这个通知后，就会将对应的隧道或主机标记为离线状态，不再向其转发新的请求，从而实现了服务异常的快速熔断。</li>
 </ul>
@@ -406,24 +400,24 @@
 <p>在某些大规模或动态的部署场景中（例如，自动伸缩的容器集群），预先在服务端为每一个客户端都配置好 <code>vkey</code> 是不现实的。为了解决这个问题，NPS 提供了客户端动态注册功能。它允许客户端使用一个公共的、预设的 <code>vkey</code>（在服务端配置中称为 <code>public_vkey</code>）向服务端进行“登记”，服务端会为这个客户端动态生成一个唯一的、全新的 <code>vkey</code> 并返回。</p>
 <h3 id="register-函数动态注册的入口"><code>Register()</code> 函数：动态注册的入口</h3>
 <p><code>register.go</code> 文件中的 <code>Register()</code> 函数是实现动态注册的唯一入口。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Register</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 建立一个类型为 WORK_REGISTER 的连接</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewConn</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">server</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_REGISTER</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 发送公共 vkey</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">SendInfo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">{</span><span class="nx">VerifyKey</span><span class="p">:</span> <span class="nx">key</span><span class="p">});</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 3. 等待并接收服务端返回的新 vkey</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">link</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetLinkInfo</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">link</span><span class="p">.</span><span class="nx">VerifyKey</span><span class="p">,</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><strong>注册流程：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">Register</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 1. 建立一个类型为 WORK_REGISTER 的连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">NewConn</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">server</span><span class="p">,</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">WORK_REGISTER</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 2. 发送公共 vkey</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">SendInfo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">{</span><span class="nx">VerifyKey</span><span class="p">:</span><span class="w"> </span><span class="nx">key</span><span class="p">});</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 3. 等待并接收服务端返回的新 vkey</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">link</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">GetLinkInfo</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nx">link</span><span class="p">.</span><span class="nx">VerifyKey</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>注册流程：</strong></p>
 <ol>
 <li><strong>建立注册连接</strong>: 客户端调用 <code>NewConn()</code> 建立一个到服务端的 TCP 连接，但连接类型被特殊地标记为 <code>common.WORK_REGISTER</code>。</li>
 <li><strong>发送公共密钥</strong>: 客户端将公共 <code>vkey</code> (<code>public_vkey</code>) 发送给服务端进行验证。</li>
@@ -531,14 +525,14 @@
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -554,7 +548,7 @@
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -567,46 +561,27 @@
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -614,22 +589,22 @@
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -642,11 +617,5 @@
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

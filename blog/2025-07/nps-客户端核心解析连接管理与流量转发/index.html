@@ -6,14 +6,16 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="引言
+  <meta name="description"
+    content="引言
 在 NPS 系列文章的前几篇中，我们详细剖析了 NPS 服务端的各个模块和代理实现。本篇文章将转向 NPS 的 客户端（Client） 模块，深入分析 nps/client/client.go 文件。这个文件是 NPS 客户端的“大脑”，负责与服务端建立连接、管理隧道、处理不同类型的流量以及维护客户端的生命周期。理解客户端的运作机制，是掌握 NPS 完整内网穿透流程的关键。
 client.go：客户端的“大脑”
 client.go 文件定义了 TRPClient 结构体，它是 NPS 客户端的核心。它负责客户端的启动、与服务端的通信、隧道管理以及流量转发。
 TRPClient 结构体
 TRPClient 结构体包含了客户端运行所需的所有关键信息：">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 客户端核心解析：连接管理与流量转发">
@@ -33,9 +35,9 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 
 
   <title>
-  
-       NPS 客户端核心解析：连接管理与流量转发 | jaxiu He 
-  
+    
+     NPS 客户端核心解析：连接管理与流量转发 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/">
@@ -48,7 +50,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -58,45 +60,42 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -107,6 +106,10 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -125,74 +128,62 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -201,48 +192,50 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -253,44 +246,45 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -357,20 +351,20 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 <p><code>client.go</code> 文件定义了 <code>TRPClient</code> 结构体，它是 NPS 客户端的核心。它负责客户端的启动、与服务端的通信、隧道管理以及流量转发。</p>
 <h3 id="trpclient-结构体"><code>TRPClient</code> 结构体</h3>
 <p><code>TRPClient</code> 结构体包含了客户端运行所需的所有关键信息：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TRPClient</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">svrAddr</span>        <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">bridgeConnType</span> <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">proxyUrl</span>       <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">vKey</span>           <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">p2pAddr</span>        <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tunnel</span>         <span class="o">*</span><span class="nx">nps_mux</span><span class="p">.</span><span class="nx">Mux</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">signal</span>         <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">ticker</span>         <span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Ticker</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">cnf</span>            <span class="o">*</span><span class="nx">config</span><span class="p">.</span><span class="nx">Config</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">disconnectTime</span> <span class="kt">int</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">once</span>           <span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">TRPClient</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">svrAddr</span><span class="w">        </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">bridgeConnType</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">proxyUrl</span><span class="w">       </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">vKey</span><span class="w">           </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">p2pAddr</span><span class="w">        </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">tunnel</span><span class="w">         </span><span class="o">*</span><span class="nx">nps_mux</span><span class="p">.</span><span class="nx">Mux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">signal</span><span class="w">         </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ticker</span><span class="w">         </span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Ticker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">cnf</span><span class="w">            </span><span class="o">*</span><span class="nx">config</span><span class="p">.</span><span class="nx">Config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">disconnectTime</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">once</span><span class="w">           </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>svrAddr string</code>：NPS 服务端的地址。</li>
 <li><code>bridgeConnType string</code>：与服务端连接的桥接类型（例如 TCP、KCP 等）。</li>
 <li><code>proxyUrl string</code>：如果客户端通过代理连接服务端，则为代理地址。</li>
@@ -386,35 +380,35 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 <p><code>NewRPClient()</code> 函数用于创建并初始化一个 <code>TRPClient</code> 实例。</p>
 <h3 id="start-方法客户端的启动流程"><code>Start()</code> 方法：客户端的启动流程</h3>
 <p><code>TRPClient</code> 的 <code>Start()</code> 方法是客户端的入口点，它负责建立与服务端的连接并启动各项服务：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">CloseClient</span> <span class="p">=</span> <span class="kc">false</span> <span class="c1">// 全局变量，控制客户端关闭</span>
-</span></span><span class="line"><span class="cl"><span class="nx">retry</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">CloseClient</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">NowStatus</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 全局变量，表示客户端当前状态</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewConn</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">vKey</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_MAIN</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">proxyUrl</span><span class="p">)</span> <span class="c1">// 建立主控制连接</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;The connection server failed and will be reconnected in five seconds, error&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">goto</span> <span class="nx">retry</span> <span class="c1">// 连接失败，5秒后重试</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">c</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error data from server, and will be reconnected in five seconds&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">goto</span> <span class="nx">retry</span> <span class="c1">// 服务端返回错误数据，5秒后重试</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Successful connection with server %s&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nx">s</span><span class="p">.</span><span class="nf">ping</span><span class="p">()</span> <span class="c1">// 启动心跳协程</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span> <span class="p">=</span> <span class="nx">c</span> <span class="c1">// 存储主控制连接</span>
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nx">s</span><span class="p">.</span><span class="nf">newChan</span><span class="p">()</span> <span class="c1">// 启动多路复用隧道连接</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span> <span class="c1">// 启动健康检查</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">NowStatus</span> <span class="p">=</span> <span class="mi">1</span> <span class="c1">// 客户端状态设置为已连接</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nf">handleMain</span><span class="p">()</span> <span class="c1">// 处理主控制连接的指令</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">CloseClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">// 全局变量，控制客户端关闭</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">retry</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">CloseClient</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">NowStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">// 全局变量，表示客户端当前状态</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">NewConn</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">vKey</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">WORK_MAIN</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">proxyUrl</span><span class="p">)</span><span class="w"> </span><span class="c1">// 建立主控制连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;The connection server failed and will be reconnected in five seconds, error&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="nx">retry</span><span class="w"> </span><span class="c1">// 连接失败，5秒后重试</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error data from server, and will be reconnected in five seconds&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="nx">retry</span><span class="w"> </span><span class="c1">// 服务端返回错误数据，5秒后重试</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Successful connection with server %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">ping</span><span class="p">()</span><span class="w"> </span><span class="c1">// 启动心跳协程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="c1">// 存储主控制连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">newChan</span><span class="p">()</span><span class="w"> </span><span class="c1">// 启动多路复用隧道连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span><span class="w"> </span><span class="c1">// 启动健康检查</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">NowStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 客户端状态设置为已连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleMain</span><span class="p">()</span><span class="w"> </span><span class="c1">// 处理主控制连接的指令</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><strong>连接重试机制</strong>：客户端会尝试连接服务端，如果失败则等待 5 秒后重试，直到连接成功。</li>
 <li><strong>主控制连接 (<code>signal</code>)</strong>：通过 <code>NewConn()</code> 函数建立与服务端的主控制连接，用于发送心跳、接收服务端指令等。</li>
 <li><strong>心跳机制 (<code>ping()</code>)</strong>：启动一个 goroutine 定时发送心跳包，以维持连接活性并检测服务端状态。</li>
@@ -424,41 +418,41 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </ul>
 <h3 id="handlemain处理服务端指令"><code>handleMain()</code>：处理服务端指令</h3>
 <p><code>handleMain()</code> 方法在一个循环中读取 <code>signal</code> 连接的数据，并根据不同的 <code>flags</code> 处理来自服务端的指令：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">handleMain</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">flags</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nf">ReadFlag</span><span class="p">()</span> <span class="c1">// 读取指令标志</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Accept server data error %s, end this service&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span> <span class="c1">// 读取失败，断开连接</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="nx">flags</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">common</span><span class="p">.</span><span class="nx">NEW_UDP_CONN</span><span class="p">:</span> <span class="c1">// 新的 UDP 连接请求</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// ... 处理 UDP 连接 ...</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span> <span class="c1">// 循环结束，关闭客户端</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>目前 <code>handleMain()</code> 中只处理了 <code>common.NEW_UDP_CONN</code> 类型的指令，这表明服务端可以通过主控制连接通知客户端建立新的 UDP 连接。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">handleMain</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">flags</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nf">ReadFlag</span><span class="p">()</span><span class="w"> </span><span class="c1">// 读取指令标志</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Accept server data error %s, end this service&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">break</span><span class="w"> </span><span class="c1">// 读取失败，断开连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">flags</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">NEW_UDP_CONN</span><span class="p">:</span><span class="w"> </span><span class="c1">// 新的 UDP 连接请求</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// ... 处理 UDP 连接 ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">// 循环结束，关闭客户端</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>目前 <code>handleMain()</code> 中只处理了 <code>common.NEW_UDP_CONN</code> 类型的指令，这表明服务端可以通过主控制连接通知客户端建立新的 UDP 连接。</p>
 <h3 id="newchan建立多路复用隧道"><code>newChan()</code>：建立多路复用隧道</h3>
 <p><code>newChan()</code> 方法负责建立与服务端的多路复用隧道，并接受来自服务端的逻辑连接：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">newChan</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tunnel</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewConn</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">vKey</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_CHAN</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">proxyUrl</span><span class="p">)</span> <span class="c1">// 建立隧道连接</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;connect to &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span> <span class="s">&#34;error:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">tunnel</span> <span class="p">=</span> <span class="nx">nps_mux</span><span class="p">.</span><span class="nf">NewMux</span><span class="p">(</span><span class="nx">tunnel</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">disconnectTime</span><span class="p">)</span> <span class="c1">// 创建多路复用器</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">src</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">tunnel</span><span class="p">.</span><span class="nf">Accept</span><span class="p">()</span> <span class="c1">// 接受来自服务端的逻辑连接</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span> <span class="c1">// 接受失败，关闭客户端</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nx">s</span><span class="p">.</span><span class="nf">handleChan</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="c1">// 处理逻辑连接</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">newChan</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">tunnel</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">NewConn</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">vKey</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">WORK_CHAN</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">proxyUrl</span><span class="p">)</span><span class="w"> </span><span class="c1">// 建立隧道连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;connect to &#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">svrAddr</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;error:&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">tunnel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">nps_mux</span><span class="p">.</span><span class="nf">NewMux</span><span class="p">(</span><span class="nx">tunnel</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">bridgeConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">disconnectTime</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建多路复用器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">tunnel</span><span class="p">.</span><span class="nf">Accept</span><span class="p">()</span><span class="w"> </span><span class="c1">// 接受来自服务端的逻辑连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">s</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">// 接受失败，关闭客户端</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">break</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleChan</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span><span class="w"> </span><span class="c1">// 处理逻辑连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><strong><code>NewConn()</code></strong>：再次调用 <code>NewConn()</code> 建立一个类型为 <code>common.WORK_CHAN</code> 的连接，作为多路复用隧道的底层连接。</li>
 <li><strong><code>nps_mux.NewMux()</code></strong>：使用 <code>nps_mux</code> 库将底层连接封装为多路复用器。</li>
 <li><strong><code>s.tunnel.Accept()</code></strong>：在一个循环中，客户端会持续接受来自服务端的多路复用隧道上的逻辑连接。每个逻辑连接都代表一个具体的隧道请求（例如 TCP 隧道、HTTP 代理等）。</li>
@@ -466,36 +460,36 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </ul>
 <h3 id="handlechan处理逻辑连接与流量转发"><code>handleChan()</code>：处理逻辑连接与流量转发</h3>
 <p><code>handleChan()</code> 方法是客户端处理具体隧道流量的核心。它负责解析服务端发送的连接信息，并建立与本地目标服务的连接，然后进行数据转发：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">handleChan</span><span class="p">(</span><span class="nx">src</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">lk</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">NewConn</span><span class="p">(</span><span class="nx">src</span><span class="p">).</span><span class="nf">GetLinkInfo</span><span class="p">()</span> <span class="c1">// 获取连接信息</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">lk</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;get connection info from server error &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span> <span class="p">=</span> <span class="nx">common</span><span class="p">.</span><span class="nf">FormatAddress</span><span class="p">(</span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span> <span class="c1">// 格式化目标地址</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span> <span class="o">==</span> <span class="s">&#34;http&#34;</span> <span class="p">{</span> <span class="c1">// HTTP 代理</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ... 处理 HTTP 请求 ...</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span> <span class="o">==</span> <span class="s">&#34;udp5&#34;</span> <span class="p">{</span> <span class="c1">// UDP 代理 (SOCKS5 UDP ASSOCIATE)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;new %s connection with the goal of %s, remote address:%s&#34;</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nf">handleUdp</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// TCP 或其他类型连接</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">targetConn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">DialTimeout</span><span class="p">(</span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Option</span><span class="p">.</span><span class="nx">Timeout</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;connect to %s error %s&#34;</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;new %s connection with the goal of %s, remote address:%s&#34;</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ... PROXY Protocol 处理 ...</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">conn</span><span class="p">.</span><span class="nf">CopyWaitGroup</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">targetConn</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Crypt</span><span class="p">,</span> <span class="nx">lk</span><span class="p">.</span><span class="nx">Compress</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">// 数据拷贝</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">handleChan</span><span class="p">(</span><span class="nx">src</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">lk</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nf">NewConn</span><span class="p">(</span><span class="nx">src</span><span class="p">).</span><span class="nf">GetLinkInfo</span><span class="p">()</span><span class="w"> </span><span class="c1">// 获取连接信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">lk</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;get connection info from server error &#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nf">FormatAddress</span><span class="p">(</span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span><span class="w"> </span><span class="c1">// 格式化目标地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;http&#34;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// HTTP 代理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// ... 处理 HTTP 请求 ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;udp5&#34;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// UDP 代理 (SOCKS5 UDP ASSOCIATE)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;new %s connection with the goal of %s, remote address:%s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleUdp</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TCP 或其他类型连接</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">targetConn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nf">DialTimeout</span><span class="p">(</span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Option</span><span class="p">.</span><span class="nx">Timeout</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;connect to %s error %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;new %s connection with the goal of %s, remote address:%s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">ConnType</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Host</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// ... PROXY Protocol 处理 ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">conn</span><span class="p">.</span><span class="nf">CopyWaitGroup</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">targetConn</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Crypt</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Compress</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="c1">// 数据拷贝</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><strong><code>conn.NewConn(src).GetLinkInfo()</code></strong>：从逻辑连接 (<code>src</code>) 中读取服务端发送的 <code>LinkInfo</code>，其中包含了目标地址、连接类型、加密/压缩等信息。</li>
 <li><strong>HTTP 代理处理</strong>：如果 <code>lk.ConnType</code> 是 &ldquo;http&rdquo;，则会进入专门的 HTTP 请求处理逻辑，包括读取 HTTP 请求、转发给本地目标、读取响应并写回。</li>
 <li><strong>UDP 代理处理 (<code>handleUdp()</code>)</strong>：如果 <code>lk.ConnType</code> 是 &ldquo;udp5&rdquo;（SOCKS5 UDP ASSOCIATE），则调用 <code>s.handleUdp(src)</code> 进行 UDP 流量转发。</li>
@@ -604,14 +598,14 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -627,7 +621,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -640,46 +634,27 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -687,22 +662,22 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -715,11 +690,5 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

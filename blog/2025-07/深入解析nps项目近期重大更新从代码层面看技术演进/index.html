@@ -6,12 +6,14 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="深入解析NPS项目近期重大更新：从代码层面看技术演进
+  <meta name="description"
+    content="深入解析NPS项目近期重大更新：从代码层面看技术演进
 NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强大的内网穿透代理服务器，近期进行了多次重要更新。本文将从源码层面深入剖析这些更新的技术细节和实现原理，帮助读者更好地理解项目的演进过程。
 最新版本更新概览
 在过去的一个月中，NPS项目发布了多个版本，主要集中在解决客户端和服务端握手过程中的EOF错误、优化多语言支持、改进Docker部署配置等方面。其中最重要的更新是v0.26.63版本，它解决了长期困扰用户的关键连接问题。">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="深入解析NPS项目近期重大更新：从代码层面看技术演进">
@@ -31,9 +33,9 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
 
   <title>
-  
-       深入解析NPS项目近期重大更新：从代码层面看技术演进 | jaxiu He 
-  
+    
+     深入解析NPS项目近期重大更新：从代码层面看技术演进 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/">
@@ -46,7 +48,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -56,45 +58,42 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -105,6 +104,10 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -123,74 +126,62 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -199,48 +190,50 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -251,44 +244,45 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -374,50 +368,50 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 </li>
 </ol>
 <p>让我们来看一下具体的代码变更：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 在client/control.go中</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 使用更直接的方式发送版本信息，避免使用WriteLenContent方法</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 先发送长度（4字节小端序）</span>
-</span></span><span class="line"><span class="cl"><span class="nx">versionLen</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nx">binary</span><span class="p">.</span><span class="nx">LittleEndian</span><span class="p">.</span><span class="nf">PutUint32</span><span class="p">(</span><span class="nx">versionLen</span><span class="p">,</span> <span class="nb">uint32</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">clientVersionBytes</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">versionLen</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;=== CLIENT: Failed to send client version length to server: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">connection</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 再发送版本内容</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">clientVersionBytes</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;=== CLIENT: Failed to send client version to server: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">connection</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 在bridge/bridge.go中</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 重置读取超时，增加超时时间到15秒</span>
-</span></span><span class="line"><span class="cl"><span class="nx">c</span><span class="p">.</span><span class="nf">SetReadDeadlineBySecond</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//read test flag</span>
-</span></span><span class="line"><span class="cl"><span class="nx">buf</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: Step 1 - Reading CONN_TEST flag from client: %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: The client %s connect error: failed to read test flag - %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span> <span class="o">!=</span> <span class="nx">common</span><span class="p">.</span><span class="nx">CONN_TEST</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: The client %s connect error: test flag not match, got %s, expected %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span> <span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">),</span> <span class="nx">common</span><span class="p">.</span><span class="nx">CONN_TEST</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h4 id="v02655---客户端连接错误处理优化">v0.26.55 - 客户端连接错误处理优化</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 在client/control.go中</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 使用更直接的方式发送版本信息，避免使用WriteLenContent方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 先发送长度（4字节小端序）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">versionLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">binary</span><span class="p">.</span><span class="nx">LittleEndian</span><span class="p">.</span><span class="nf">PutUint32</span><span class="p">(</span><span class="nx">versionLen</span><span class="p">,</span><span class="w"> </span><span class="nb">uint32</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">clientVersionBytes</span><span class="p">)))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">versionLen</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;=== CLIENT: Failed to send client version length to server: %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">connection</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 再发送版本内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">clientVersionBytes</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;=== CLIENT: Failed to send client version to server: %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">connection</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 在bridge/bridge.go中</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 重置读取超时，增加超时时间到15秒</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">c</span><span class="p">.</span><span class="nf">SetReadDeadlineBySecond</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="cp">//read test flag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: Step 1 - Reading CONN_TEST flag from client: %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: The client %s connect error: failed to read test flag - %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">CONN_TEST</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;=== SERVER: The client %s connect error: test flag not match, got %s, expected %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">),</span><span class="w"> </span><span class="nx">common</span><span class="p">.</span><span class="nx">CONN_TEST</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h4 id="v02655---客户端连接错误处理优化">v0.26.55 - 客户端连接错误处理优化</h4>
 <p>该版本主要优化了客户端连接的错误处理逻辑。通过查看代码变更，我们可以发现开发团队注释掉了<a href="file:///Volumes/M20/code/docs/nps/bridge/bridge.go">bridge/bridge.go</a>文件中的连接关闭和返回语句，允许系统继续处理连接而不是立即中断。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetShortLenContent</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;The client %s version check error: failed to read version - %s&#34;</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// c.Close()</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// return     // 注释掉返回语句，允许继续处理</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">!=</span> <span class="nx">version</span><span class="p">.</span><span class="nf">GetVersion</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Check if client version is compatible (equal or greater than minimum required version)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>这种修改使得系统在遇到版本检查错误时不会立即断开连接，而是继续尝试处理，提高了系统的容错能力。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">GetShortLenContent</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;The client %s version check error: failed to read version - %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Conn</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">(),</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// c.Close()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// return     // 注释掉返回语句，允许继续处理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">version</span><span class="p">.</span><span class="nf">GetVersion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Check if client version is compatible (equal or greater than minimum required version)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>这种修改使得系统在遇到版本检查错误时不会立即断开连接，而是继续尝试处理，提高了系统的容错能力。</p>
 <h4 id="v02652---多语言支持完善">v0.26.52 - 多语言支持完善</h4>
 <p>该版本修复了选择中文等语言不生效的问题。通过分析代码，我们可以看到问题主要出在前端JavaScript代码中。</p>
 <p>在<a href="file:///Volumes/M20/code/docs/nps/web/static/js/language.js">web/static/js/language.js</a>文件中，开发团队完善了语言切换功能，确保用户选择的语言能够正确应用到界面元素上。</p>
@@ -427,18 +421,18 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 </span></span><span class="line"><span class="cl">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">setLang</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 如果 setLang 函数未定义，则直接设置默认文字并手动处理语言切换
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[langtag]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[langtag]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">tag</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;langtag&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">});</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 设置语言Cookie
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nps</span><span class="p">.</span><span class="nx">web_base_url</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">nps</span><span class="p">.</span><span class="nx">web_base_url</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">path</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s1">&#39;lang=&#39;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;; path=&#39;</span> <span class="o">+</span> <span class="nx">path</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 更新语言菜单显示
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">langText</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">langText</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#languagemenu span&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nx">langText</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
@@ -562,14 +556,14 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -585,7 +579,7 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -598,46 +592,27 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -645,22 +620,22 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -673,11 +648,5 @@ NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强�
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

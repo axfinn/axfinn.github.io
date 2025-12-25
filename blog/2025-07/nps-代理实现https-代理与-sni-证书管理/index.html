@@ -6,8 +6,10 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="引言
+  <meta name="description"
+    content="引言
 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。
 HTTPS 代理的需求与挑战
 HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：
@@ -18,7 +20,7 @@ SNI 支持：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户�
 
 https.go：HTTPS 代理的实现
 https.go 文件定义了 HttpsServer 结构体，它是 NPS 实现 HTTPS 代理的核心。">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 代理实现：HTTPS 代理与 SNI 证书管理">
@@ -39,9 +41,9 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 
 
   <title>
-  
-       NPS 代理实现：HTTPS 代理与 SNI 证书管理 | jaxiu He 
-  
+    
+     NPS 代理实现：HTTPS 代理与 SNI 证书管理 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/">
@@ -54,7 +56,7 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -64,45 +66,42 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -113,6 +112,10 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -131,74 +134,62 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -207,48 +198,50 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -259,44 +252,45 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -370,13 +364,13 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 <p><code>https.go</code> 文件定义了 <code>HttpsServer</code> 结构体，它是 NPS 实现 HTTPS 代理的核心。</p>
 <h3 id="httpsserver-结构体"><code>HttpsServer</code> 结构体</h3>
 <p><code>HttpsServer</code> 结构体继承了 <code>httpServer</code>（虽然在 <code>https.go</code> 中没有直接定义 <code>httpServer</code>，但从代码逻辑看，它应该是一个包含 <code>BaseServer</code> 和一些 HTTP 相关功能的结构体），并增加了 HTTPS 特有的字段：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HttpsServer</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">httpServer</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">listener</span>         <span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">httpsListenerMap</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">hostIdCertMap</span>    <span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpsServer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpServer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">listener</span><span class="w">         </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpsListenerMap</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">hostIdCertMap</span><span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>httpServer</code>：继承了处理 HTTP 请求的通用逻辑。</li>
 <li><code>listener net.Listener</code>：用于监听传入 HTTPS 连接的网络监听器。</li>
 <li><code>httpsListenerMap sync.Map</code>：一个并发安全的 Map，用于存储不同域名的 <code>HttpsListener</code> 实例。键通常是域名，值是 <code>*HttpsListener</code>。</li>
@@ -385,36 +379,36 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 <p><code>NewHttpsServer()</code> 函数用于创建并初始化一个 <code>HttpsServer</code> 实例。</p>
 <h3 id="start-方法启动-https-监听与-sni-处理"><code>Start()</code> 方法：启动 HTTPS 监听与 SNI 处理</h3>
 <p><code>HttpsServer</code> 的 <code>Start()</code> 方法负责启动 HTTPS 监听，并为每个传入连接进行 SNI 解析和证书选择：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">https</span> <span class="o">*</span><span class="nx">HttpsServer</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">conn</span><span class="p">.</span><span class="nf">Accept</span><span class="p">(</span><span class="nx">https</span><span class="p">.</span><span class="nx">listener</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span> <span class="o">:=</span> <span class="nf">GetServerNameFromClientHello</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 从 ClientHello 中获取 SNI</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">:=</span> <span class="nf">buildHttpsRequest</span><span class="p">(</span><span class="nx">serverName</span><span class="p">)</span> <span class="c1">// 构建一个模拟的 HTTP 请求</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">file</span><span class="p">.</span><span class="nf">GetDb</span><span class="p">().</span><span class="nf">GetInfoByHost</span><span class="p">(</span><span class="nx">serverName</span><span class="p">,</span> <span class="nx">r</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;the url %s can&#39;t be parsed!,remote addr %s&#34;</span><span class="p">,</span> <span class="nx">serverName</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;加载客户端本地证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">https</span><span class="p">.</span><span class="nf">handleHttps2</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// 使用客户端本地证书</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;使用上传证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 判断是路径还是证书内容</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过上传文件加载证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">)</span> <span class="c1">// 使用上传的证书内容</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过路径加载证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// 检查证书文件是否存在，并读取内容</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">cert</span><span class="p">),</span> <span class="nb">string</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="c1">// 使用上传的证书文件</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><strong>核心流程：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">https</span><span class="w"> </span><span class="o">*</span><span class="nx">HttpsServer</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">conn</span><span class="p">.</span><span class="nf">Accept</span><span class="p">(</span><span class="nx">https</span><span class="p">.</span><span class="nx">listener</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">serverName</span><span class="p">,</span><span class="w"> </span><span class="nx">rb</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetServerNameFromClientHello</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="c1">// 从 ClientHello 中获取 SNI</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">buildHttpsRequest</span><span class="p">(</span><span class="nx">serverName</span><span class="p">)</span><span class="w"> </span><span class="c1">// 构建一个模拟的 HTTP 请求</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nf">GetDb</span><span class="p">().</span><span class="nf">GetInfoByHost</span><span class="p">(</span><span class="nx">serverName</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;the url %s can&#39;t be parsed!,remote addr %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">serverName</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;加载客户端本地证书&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nx">https</span><span class="p">.</span><span class="nf">handleHttps2</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">serverName</span><span class="p">,</span><span class="w"> </span><span class="nx">rb</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="c1">// 使用客户端本地证书</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;使用上传证书&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 判断是路径还是证书内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过上传文件加载证书&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">rb</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">)</span><span class="w"> </span><span class="c1">// 使用上传的证书内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过路径加载证书&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 检查证书文件是否存在，并读取内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">rb</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">cert</span><span class="p">),</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span><span class="w"> </span><span class="c1">// 使用上传的证书文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>核心流程：</strong></p>
 <ol>
 <li><strong>获取 SNI</strong>：<code>GetServerNameFromClientHello(c)</code> 是一个关键函数，它通过读取客户端发送的 SSL/TLS <code>ClientHello</code> 消息，从中解析出 SNI 域名 (<code>serverName</code>) 和原始的字节流 (<code>rb</code>)。</li>
 <li><strong>查找主机配置</strong>：根据 <code>serverName</code> 从数据库中查找对应的主机配置 (<code>file.Host</code>)。</li>
@@ -428,11 +422,11 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 </ol>
 <h3 id="httpslistener动态创建的-https-监听器"><code>HttpsListener</code>：动态创建的 HTTPS 监听器</h3>
 <p><code>HttpsListener</code> 是一个自定义的 <code>net.Listener</code> 实现，它允许 NPS 动态地为不同的域名创建和管理 HTTPS 监听器。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HttpsListener</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">acceptConn</span>     <span class="kd">chan</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">parentListener</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpsListener</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">acceptConn</span><span class="w">     </span><span class="kd">chan</span><span class="w"> </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">parentListener</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>acceptConn chan *conn.Conn</code>：一个通道，用于接收来自 <code>HttpsServer</code> 的连接。</li>
 <li><code>parentListener net.Listener</code>：底层的 TCP 监听器。</li>
 </ul>
@@ -551,14 +545,14 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -574,7 +568,7 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -587,46 +581,27 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -634,22 +609,22 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -662,11 +637,5 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

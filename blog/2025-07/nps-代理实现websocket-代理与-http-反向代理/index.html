@@ -6,8 +6,10 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="引言
+  <meta name="description"
+    content="引言
 在 NPS 系列文章的前几篇中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理、P2P 代理和 UDP 代理）。本篇文章将深入 NPS 的 WebSocket 代理和 HTTP 反向代理实现。我们将通过分析 nps/server/proxy/websocket.go 文件，揭示 NPS 如何处理这两种特殊的 HTTP 流量，实现更灵活的网络穿透。
 WebSocket 与 HTTP 反向代理的需求
 
@@ -16,7 +18,7 @@ HTTP 反向代理：将客户端的 HTTP 请求转发到后端服务器，并返
 
 websocket.go：WebSocket 与 HTTP 反向代理的实现
 websocket.go 文件主要定义了 HttpReverseProxy 和 ReverseProxy 两个结构体，它们共同协作来处理 HTTP 反向代理和 WebSocket 连接。">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 代理实现：WebSocket 代理与 HTTP 反向代理">
@@ -35,9 +37,9 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 
 
   <title>
-  
-       NPS 代理实现：WebSocket 代理与 HTTP 反向代理 | jaxiu He 
-  
+    
+     NPS 代理实现：WebSocket 代理与 HTTP 反向代理 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
@@ -50,7 +52,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -60,45 +62,42 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -109,6 +108,10 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -127,74 +130,62 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -203,48 +194,50 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -255,44 +248,45 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -364,11 +358,11 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 <p><code>websocket.go</code> 文件主要定义了 <code>HttpReverseProxy</code> 和 <code>ReverseProxy</code> 两个结构体，它们共同协作来处理 HTTP 反向代理和 WebSocket 连接。</p>
 <h3 id="httpreverseproxyhttp-请求的入口"><code>HttpReverseProxy</code>：HTTP 请求的入口</h3>
 <p><code>HttpReverseProxy</code> 实现了 <code>http.Handler</code> 接口，是所有 HTTP 请求（包括 WebSocket 升级请求）进入 NPS 反向代理的入口点。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HttpReverseProxy</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">proxy</span>                 <span class="o">*</span><span class="nx">ReverseProxy</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">responseHeaderTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">proxy</span><span class="w">                 </span><span class="o">*</span><span class="nx">ReverseProxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">responseHeaderTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>proxy *ReverseProxy</code>：指向实际处理请求的 <code>ReverseProxy</code> 实例。</li>
 <li><code>responseHeaderTimeout time.Duration</code>：后端响应头的超时时间。</li>
 </ul>
@@ -385,11 +379,11 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 </ol>
 <h3 id="reverseproxy核心反向代理逻辑"><code>ReverseProxy</code>：核心反向代理逻辑</h3>
 <p><code>ReverseProxy</code> 结构体是对 Go 标准库 <code>net/http/httputil.ReverseProxy</code> 的封装和扩展，主要用于定制连接建立和错误处理。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ReverseProxy</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="nx">httputil</span><span class="p">.</span><span class="nx">ReverseProxy</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">WebSocketDialContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">ReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">*</span><span class="nx">httputil</span><span class="p">.</span><span class="nx">ReverseProxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">WebSocketDialContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>*httputil.ReverseProxy</code>：嵌入了标准库的反向代理，继承了其大部分功能。</li>
 <li><code>WebSocketDialContext func(...)</code>：一个自定义的函数，用于在 WebSocket 升级时建立与后端服务的连接。</li>
 </ul>
@@ -434,23 +428,23 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 </ol>
 <h3 id="joinwebsocket-数据双向拷贝"><code>Join()</code>：WebSocket 数据双向拷贝</h3>
 <p><code>Join()</code> 函数负责在两个 <code>io.ReadWriteCloser</code> 之间进行双向数据拷贝，通常用于 WebSocket 连接：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">c1</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">c2</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">host</span> <span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span> <span class="p">(</span><span class="nx">inCount</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">outCount</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">wait</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// pipe 函数用于单向数据拷贝</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pipe</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">to</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">from</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">count</span> <span class="o">*</span><span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">to</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">from</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">wait</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">goroutine</span><span class="p">.</span><span class="nf">CopyBuffer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Flow</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="c1">// 使用 goroutine.CopyBuffer 进行数据拷贝和流量统计</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">wait</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 两个 goroutine 进行双向拷贝</span>
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nf">pipe</span><span class="p">(</span><span class="nx">c1</span><span class="p">,</span> <span class="nx">c2</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">inCount</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nf">pipe</span><span class="p">(</span><span class="nx">c2</span><span class="p">,</span> <span class="nx">c1</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">outCount</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">wait</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span> <span class="c1">// 等待两个 goroutine 完成</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">Join</span><span class="p">(</span><span class="nx">c1</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">inCount</span><span class="w"> </span><span class="kt">int64</span><span class="p">,</span><span class="w"> </span><span class="nx">outCount</span><span class="w"> </span><span class="kt">int64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wait</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// pipe 函数用于单向数据拷贝</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">pipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">to</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">*</span><span class="kt">int64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">to</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">from</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">goroutine</span><span class="p">.</span><span class="nf">CopyBuffer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">from</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Flow</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 使用 goroutine.CopyBuffer 进行数据拷贝和流量统计</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 两个 goroutine 进行双向拷贝</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nf">pipe</span><span class="p">(</span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">inCount</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nf">pipe</span><span class="p">(</span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">outCount</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span><span class="w"> </span><span class="c1">// 等待两个 goroutine 完成</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>它启动两个 goroutine，分别负责从一个连接读取数据并写入另一个连接，实现双向数据流。</li>
 <li><code>goroutine.CopyBuffer()</code> 是一个自定义的拷贝函数，它在拷贝数据的同时，还会进行流量统计。</li>
 </ul>
@@ -539,14 +533,14 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -562,7 +556,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -575,46 +569,27 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -622,22 +597,22 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -650,11 +625,5 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

@@ -6,13 +6,15 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="引言
+  <meta name="description"
+    content="引言
 一个稳定可靠的服务，离不开健全的配置管理和数据持久化机制。NPS 作为一个需要长期运行的内网穿透服务器，必须能够加载启动配置、在运行时动态修改配置，并在服务重启后恢复所有任务和客户端信息。这一切都由 nps/file 目录下的代码实现。本篇文章将深入这一模块，剖析 NPS 是如何通过简单的 JSON 文件，构建出一个轻量级且高效的“数据库”，并实现对客户端、隧道、主机等所有配置的增删改查和持久化存储。
 
 file.go：NPS 的数据中枢
 nps/file 目录的核心是 file.go 文件，它定义了 NPS 的数据模型和所有数据操作的接口。NPS 并未采用传统的关系型数据库或 NoSQL 数据库，而是选择使用 JSON 文件作为其数据存储后端，这使得 NPS 非常轻量、易于部署和迁移。">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E6%8E%A2%E7%A7%98%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="NPS 核心探秘：配置加载与数据持久化">
@@ -32,9 +34,9 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 
 
   <title>
-  
-       NPS 核心探秘：配置加载与数据持久化 | jaxiu He 
-  
+    
+     NPS 核心探秘：配置加载与数据持久化 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E6%8E%A2%E7%A7%98%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/">
@@ -47,7 +49,7 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -57,45 +59,42 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -106,6 +105,10 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -124,74 +127,62 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -200,48 +191,50 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -252,44 +245,45 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -357,17 +351,17 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 <p><code>nps/file</code> 目录的核心是 <code>file.go</code> 文件，它定义了 NPS 的数据模型和所有数据操作的接口。NPS 并未采用传统的关系型数据库或 NoSQL 数据库，而是选择使用 JSON 文件作为其数据存储后端，这使得 NPS 非常轻量、易于部署和迁移。</p>
 <h3 id="核心结构jsondb">核心结构：<code>JsonDb</code></h3>
 <p><code>JsonDb</code> 结构体是 NPS 在内存中的数据缓存，所有运行时的配置信息都存储在这里。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">JsonDb</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Clients</span>       <span class="p">[]</span><span class="o">*</span><span class="nx">Client</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Hosts</span>         <span class="p">[]</span><span class="o">*</span><span class="nx">Host</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Tasks</span>         <span class="p">[]</span><span class="o">*</span><span class="nx">Tunnel</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Flow</span>          <span class="o">*</span><span class="nx">flow</span><span class="p">.</span><span class="nx">Flow</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">BlackIpList</span>   <span class="p">[]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Store</span>         <span class="o">*</span><span class="nx">store</span><span class="p">.</span><span class="nx">Store</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Secret</span>        <span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">JsonDb</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Clients</span><span class="w">       </span><span class="p">[]</span><span class="o">*</span><span class="nx">Client</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Hosts</span><span class="w">         </span><span class="p">[]</span><span class="o">*</span><span class="nx">Host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Tasks</span><span class="w">         </span><span class="p">[]</span><span class="o">*</span><span class="nx">Tunnel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Flow</span><span class="w">          </span><span class="o">*</span><span class="nx">flow</span><span class="p">.</span><span class="nx">Flow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">BlackIpList</span><span class="w">   </span><span class="p">[]</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Store</span><span class="w">         </span><span class="o">*</span><span class="nx">store</span><span class="p">.</span><span class="nx">Store</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Secret</span><span class="w">        </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>Clients</code>, <code>Hosts</code>, <code>Tasks</code>: 分别是存储客户端、域名主机和隧道任务的切片。</li>
 <li><code>Flow</code>: 全局流量统计。</li>
 <li><code>BlackIpList</code>: 全局 IP 黑名单。</li>
@@ -382,20 +376,20 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 </ul>
 <h3 id="初始化与加载newjsondb">初始化与加载：<code>NewJsonDb()</code></h3>
 <p>NPS 服务启动时，会调用 <code>NewJsonDb()</code> 来初始化数据中枢。这个函数负责从磁盘上的 JSON 文件中读取数据，并将其加载到内存的 <code>JsonDb</code> 实例中。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewJsonDb</span><span class="p">()</span> <span class="o">*</span><span class="nx">JsonDb</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">db</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JsonDb</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 加载客户端、主机、任务等配置</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;clients.json&#34;</span><span class="p">)),</span> <span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;hosts.json&#34;</span><span class="p">)),</span> <span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Hosts</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">db</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>GetContentFromFile()</code> 负责读取文件内容，然后 <code>json.Unmarshal</code> 将 JSON 字节流反序列化为对应的 Go 结构体切片，完成了数据的加载。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">NewJsonDb</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">JsonDb</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">JsonDb</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 加载客户端、主机、任务等配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;clients.json&#34;</span><span class="p">)),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;hosts.json&#34;</span><span class="p">)),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Hosts</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nx">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>GetContentFromFile()</code> 负责读取文件内容，然后 <code>json.Unmarshal</code> 将 JSON 字节流反序列化为对应的 Go 结构体切片，完成了数据的加载。</p>
 <h3 id="数据访问接口">数据访问接口</h3>
 <p><code>JsonDb</code> 提供了一套丰富的 API 方法，供 NPS 的其他模块安全地访问和操作数据。这些方法都通过加锁来保证并发安全。</p>
 <ul>
@@ -421,17 +415,17 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 <p>这些方法构成了 NPS 内部的数据访问层，将核心逻辑与底层的文件读写解耦。</p>
 <h3 id="数据持久化save">数据持久化：<code>Save()</code></h3>
 <p>当通过 Web 界面修改配置后，如何将内存中的变更写回磁盘呢？答案是 <code>Save()</code> 方法。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">JsonDb</span><span class="p">)</span> <span class="nf">Save</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">db</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 将客户端、主机、任务等数据序列化为 JSON</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;clients.json&#34;</span><span class="p">),</span> <span class="nx">clients</span><span class="p">,</span> <span class="mo">0666</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>Save()</code> 方法的逻辑与 <code>NewJsonDb()</code> 相反：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">JsonDb</span><span class="p">)</span><span class="w"> </span><span class="nf">Save</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">db</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">defer</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 将客户端、主机、任务等数据序列化为 JSON</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">clients</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;clients.json&#34;</span><span class="p">),</span><span class="w"> </span><span class="nx">clients</span><span class="p">,</span><span class="w"> </span><span class="mo">0666</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>Save()</code> 方法的逻辑与 <code>NewJsonDb()</code> 相反：</p>
 <ol>
 <li><strong>加锁</strong>: 获取写锁，防止在写入文件时数据被其他 goroutine 修改。</li>
 <li><strong>序列化</strong>: 使用 <code>json.Marshal</code> 将内存中的 <code>db.Clients</code>, <code>db.Hosts</code> 等切片序列化为 JSON 格式的字节流。</li>
@@ -528,14 +522,14 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -551,7 +545,7 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -564,46 +558,27 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -611,22 +586,22 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -639,11 +614,5 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>

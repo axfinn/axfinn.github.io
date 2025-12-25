@@ -6,12 +6,14 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
   <meta name="author" content="jaxiu He">
-  <meta name="description" content="DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用
+  <meta name="description"
+    content="DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用
 引言
 在当今多样化的计算环境中，用户使用着不同操作系统的设备，包括 macOS、Windows 和 Linux。为了让应用程序能够触及更广泛的用户群体，跨平台支持已成为现代桌面应用开发的基本要求。DeepChat 作为一个功能丰富的 AI 聊天平台，成功实现了对三大主流操作系统的支持，为用户提供了统一而优质的使用体验。
 本文将深入解析 DeepChat 的跨平台实现机制，从构建系统、平台适配到发布流程，全面剖析其背后的技术细节和工程实践。">
-  
+
   <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-cross-platform-implementation/">
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用">
@@ -31,9 +33,9 @@
 
 
   <title>
-  
-       DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用 | jaxiu He 
-  
+    
+     DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用 | jaxiu He 
+    
   </title>
 
   <link rel="canonical" href="https://blog.jaxiu.cn/blog/2025-07/deepchat-cross-platform-implementation/">
@@ -46,7 +48,7 @@
   
   <meta name="baidu-site-verification" content="your-baidu-verify-code" />
   
-  
+
   
   
   <meta name="google-site-verification" content="your-google-verify-code" />
@@ -56,45 +58,42 @@
   <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
-  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet"> 
-    
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
   
   <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
-  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
-  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
   <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
 
 
   
-  <link rel="shortcut icon"
-  
-      href="https://blog.jaxiu.cn/img/logo.png"
-  
-  >
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
 
 
   
   
 
   <style type="text/css">
-      @media (min-width: 800px) and (max-width: 850px) {
-              .navbar:not(.top-nav-collapse) {
-                  background: #1C2331!important;
-              }
-          }
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
   </style>
 
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
   
   
 
   
-    
-    <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
   
 
   
@@ -105,6 +104,10 @@
   </script>
   
   
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
 
   
   <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
@@ -123,74 +126,62 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      
-      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-          
-        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <strong> jaxiu He</strong>
-      </a>
-
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
 
         
-        <ul class="navbar-nav mr-auto ">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-          </li>
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
-            </li>
-          
-             
-            <li class="nav-item ">
-              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
-            </li>
-          
-          
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-query">
-              <div class="dropdown-wrapper">
-                <ul id="search-results" class="dropdown-menu"></ul>
-              </div>
-            </form>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </div>
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
 
     </div>
-  </nav>
-  
-  <script src="https://blog.jaxiu.cn/js/search.js"></script>
+</nav>
  
       
- 
 
 
 
 
 
 
-<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
 
   
   
@@ -199,48 +190,50 @@
   
   <div class="carousel-inner" role="listbox">
     
-      
-
-        
-        <div class="carousel-item active">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-              
-              
-              
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
-    
-      
-
-        
-        <div class="carousel-item">
-          <div class="view" style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-            
-            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-            
-
-            </div>
-            
-
-          </div>
-        </div>
-        
-      
     
 
-  
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
   </div>
   
 
@@ -251,44 +244,45 @@
       <div class="col-12 col-sm-5 align-middle">
         <a href="https://blog.jaxiu.cn/">
           
-            <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="" >
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
           
         </a>
       </div>
-      
+
       <div class="col-12 col-sm-7 text-left pl-2">
         <a href="https://blog.jaxiu.cn/">
-          <h1 class="mb-2 h1" style="font-weight: 300;" >
+          <h1 class="mb-2 h1" style="font-weight: 300;">
             <strong>jaxiu He</strong>
           </h1>
         </a>
-        
 
-             
+
+        
         <div class="mt-2" style="font-size: 1rem; color: white;">
-            
-              <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
-            
-            
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
 
-            
+          
 
-            
+          
 
-            
+          
 
-            
-    
-            
-    
-        
-            
-                <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
-            
-    
-            
+          
 
-            
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
         </div>
       </div>
     </div>
@@ -399,10 +393,10 @@
 <h4 id="通用配置文件">通用配置文件</h4>
 <p>DeepChat 使用 <a href="file:///Volumes/M20/code/docs/deepchat/electron-builder.yml">electron-builder.yml</a> 作为主要的构建配置文件，定义了应用的基本信息和通用构建规则：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">appId</span><span class="p">:</span><span class="w"> </span><span class="l">com.wefonk.deepchat</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">productName</span><span class="p">:</span><span class="w"> </span><span class="l">DeepChat</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">directories</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">productName</span><span class="p">:</span><span class="w"> </span><span class="l">DeepChat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">directories</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">buildResources</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">files</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">files</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!**/.vscode/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!src/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!test/*&#39;</span><span class="w">
@@ -411,10 +405,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!scripts/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!.github/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># ... 更多排除规则</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">asarUnpack</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">asarUnpack</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;**/node_modules/sharp/**/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;**/node_modules/@img/**/*&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">extraResources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">extraResources</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l">./runtime/</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">app.asar.unpacked/runtime</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;**/*&#39;</span><span class="p">]</span><span class="w">
@@ -428,7 +422,7 @@
 <h4 id="平台特定配置">平台特定配置</h4>
 <p>为了处理 macOS x64 架构的特殊需求，DeepChat 还提供了 <a href="file:///Volumes/M20/code/docs/deepchat/electron-builder-macx64.yml">electron-builder-macx64.yml</a> 配置文件：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">afterSign</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/notarize.js</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">afterPack</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/afterPack.js</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">afterPack</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/afterPack.js</span><span class="w">
 </span></span></span></code></pre></div><p>这些配置指定了在打包完成后需要执行的脚本，如 macOS 的公证流程。</p>
 <h3 id="构建脚本组织">构建脚本组织</h3>
 <p>在 <a href="file:///Volumes/M20/code/docs/deepchat/package.json">package.json</a> 中，DeepChat 定义了完整的构建脚本体系：</p>
@@ -492,7 +486,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">notarizeApp</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 公证逻辑实现
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="apple-silicon-支持">Apple Silicon 支持</h4>
 <p>为了支持 Apple Silicon 设备，DeepChat 提供了两种构建方式：</p>
 <ol>
@@ -537,15 +531,15 @@
 <h3 id="系统托盘实现">系统托盘实现</h3>
 <p>DeepChat 在不同平台上实现了系统托盘功能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 根据平台设置不同的托盘图标
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// macOS 特定设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">macOSIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">macOSIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;win32&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Windows 特定设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">windowsIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">windowsIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Linux 特定设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">linuxIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">linuxIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="窗口管理">窗口管理</h3>
 <p>不同平台的窗口行为略有不同，DeepChat 通过条件代码来处理：</p>
@@ -560,9 +554,9 @@
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 根据平台设置窗口行为
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// macOS 特定设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h2 id="运行时依赖管理">运行时依赖管理</h2>
@@ -761,14 +755,14 @@
 
     
     
-
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
 
   
   <div class="pb-2 mt-5 pt-5">
     
-      <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
     
     
 
@@ -784,7 +778,7 @@
 
 
     
-        <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
     
 
     
@@ -797,46 +791,27 @@
   
   <div class="copyright py-4">
     
-    <span>  2016 - 2025 &copy; | Powered by Hugo and <a href='https://github.com/axfinn/AllinOne' target="_blank">AllinOne Theme</a>.  </span>
+    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
 
-  <div id="blog-pet">
-    <div id="pet-toggle-button">X</div>
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        
-        <circle cx="50" cy="60" r="35" fill="#FFDDC1"/>
-        
-        <path d="M30 30 Q35 10 45 30 Z" fill="#FFDDC1"/>
-        
-        <path d="M70 30 Q65 10 55 30 Z" fill="#FFDDC1"/>
-        
-        <circle cx="40" cy="50" r="5" fill="#333"/>
-        <circle cx="60" cy="50" r="5" fill="#333"/>
-        
-        <path d="M45 70 Q50 75 55 70" stroke="#333" stroke-width="2" fill="none"/>
-    </svg>
-    <div id="pet-speech-bubble"></div>
-</div>
-
 </footer>
-
 
     
 
 
 
 
-
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
@@ -844,22 +819,22 @@
 
 
 
-  
-  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
- 
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          renderMathInElement(document.body);
-      });
-  </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
 
 
 
@@ -872,11 +847,5 @@
   
   new WOW().init();
 </script>
-
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/pet.js"></script>
-
-
-
-
   </body>
 </html>
