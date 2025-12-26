@@ -19,8 +19,8 @@ const HolidayEffects = {
                 end: new Date(year, 11, 26, 23, 59, 59) // 12月26日
             }),
             effects: ['snow', 'christmasTree', 'banner', 'music'],
-            // Kevin MacLeod - Jingle Bells (Calm version)
-            music: 'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Jingle%20Bells.mp3',
+            // 圣诞节背景音乐 - 本地文件
+            music: '/audio/christmas-bgm.mp3',
             theme: {
                 primary: '#2E7D32',    // 圣诞绿
                 secondary: '#C62828',  // 圣诞红
@@ -38,8 +38,8 @@ const HolidayEffects = {
                 end: new Date(year, 0, 2, 23, 59, 59) // 1月2日
             }),
             effects: ['fireworks', 'confetti', 'countdown', 'banner', 'music'],
-            // Kevin MacLeod - Auld Lang Syne (New Year classic)
-            music: 'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Auld%20Lang%20Syne.mp3',
+            // 元旦庆祝音乐 - SoundHelix 欢快电子风格 (完整曲目)
+            music: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
             theme: {
                 primary: '#e53935',    // 红色
                 secondary: '#FFD700',  // 金色
