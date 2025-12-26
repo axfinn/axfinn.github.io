@@ -45,6 +45,34 @@ const HolidayEffects = {
                 secondary: '#FFD700',  // 金色
                 accent: '#FF6B6B'
             }
+        },
+        {
+            id: 'spring_festival',
+            name: '春节',
+            emoji: '🧧',
+            greeting: '恭喜发财',
+            zodiac: '马', // 2026年生肖
+            // 2026年春节: 2月17日 (马年)
+            // 特效期: 除夕(2/16) - 初五(2/21)
+            getDateRange: (year) => {
+                // 2026年春节日期
+                if (year === 2026) {
+                    return {
+                        start: new Date(2026, 1, 16, 0, 0, 0),  // 2月16日 除夕
+                        end: new Date(2026, 1, 21, 23, 59, 59)  // 2月21日 初五
+                    };
+                }
+                // 默认返回一个永不匹配的范围（未来年份需要手动更新）
+                return { start: new Date(0), end: new Date(0) };
+            },
+            effects: ['fireworks', 'redPackets', 'lanterns', 'banner', 'music'],
+            // 春节喜庆音乐
+            music: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+            theme: {
+                primary: '#C62828',    // 中国红
+                secondary: '#FFD700',  // 金色
+                accent: '#FF8F00'      // 橙金色
+            }
         }
         // 更多节日可以在这里添加...
     ],
@@ -140,6 +168,12 @@ const HolidayEffects = {
                     break;
                 case 'music':
                     this.startMusic();
+                    break;
+                case 'redPackets':
+                    this.startRedPackets();
+                    break;
+                case 'lanterns':
+                    this.showLanterns();
                     break;
             }
         }
@@ -265,8 +299,7 @@ const HolidayEffects = {
         let lastFirework = 0;
 
         const animate = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const now = Date.now();
             if (now - lastFirework > 800 + Math.random() * 1500) {
@@ -414,6 +447,81 @@ const HolidayEffects = {
     },
 
     /**
+     * 红包雨特效 (春节)
+     */
+    startRedPackets: function () {
+        const container = document.createElement('div');
+        container.id = 'holiday-red-packets';
+        container.className = 'holiday-red-packets-container';
+        document.body.appendChild(container);
+        this.elements.redPacketsContainer = container;
+
+        const emojis = ['🧧', '💰', '🪙', '💴', '🎊'];
+
+        const createRedPacket = () => {
+            const packet = document.createElement('div');
+            packet.className = 'holiday-red-packet';
+            packet.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            const size = Math.random() * 20 + 25;
+            const left = Math.random() * 100;
+            const delay = Math.random() * 2;
+            const duration = Math.random() * 3 + 4;
+            const rotate = Math.random() * 360;
+
+            packet.style.cssText = `
+                left: ${left}%;
+                font-size: ${size}px;
+                animation-delay: ${delay}s;
+                animation-duration: ${duration}s;
+                --rotate: ${rotate}deg;
+            `;
+
+            container.appendChild(packet);
+
+            setTimeout(() => {
+                packet.remove();
+            }, (delay + duration) * 1000);
+        };
+
+        // 创建初始红包雨
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createRedPacket, i * 200);
+        }
+
+        // 持续创建红包
+        this.animationFrames.redPackets = setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                createRedPacket();
+            }
+        }, 400);
+    },
+
+    /**
+     * 灯笼装饰 (春节)
+     */
+    showLanterns: function () {
+        const lanternsContainer = document.createElement('div');
+        lanternsContainer.id = 'holiday-lanterns';
+        lanternsContainer.className = 'holiday-lanterns';
+
+        // 左右两边各一个大灯笼
+        lanternsContainer.innerHTML = `
+            <div class="holiday-lantern holiday-lantern-left">
+                🏮
+                <div class="lantern-text">福</div>
+            </div>
+            <div class="holiday-lantern holiday-lantern-right">
+                🏮
+                <div class="lantern-text">春</div>
+            </div>
+        `;
+
+        document.body.appendChild(lanternsContainer);
+        this.elements.lanterns = lanternsContainer;
+    },
+
+    /**
      * 背景音乐
      */
     startMusic: function () {
@@ -545,25 +653,37 @@ const HolidayEffects = {
         banner.id = 'holiday-banner';
         banner.className = 'holiday-banner';
 
-        const now = new Date();
-        const newYear = new Date(this.activeHoliday.year, 0, 1, 0, 0, 0);
-
-        if (now >= newYear) {
+        // 春节特殊横幅
+        if (this.activeHoliday.id === 'spring_festival') {
+            const zodiac = this.activeHoliday.zodiac || '';
             banner.innerHTML = `
-        <div class="holiday-banner-content">
-          <span class="holiday-banner-text">
-            ✨ ${this.activeHoliday.emoji} ${this.activeHoliday.greeting}！祝您 ${this.activeHoliday.year} 年万事如意！${this.activeHoliday.emoji} ✨
-          </span>
-        </div>
-      `;
+            <div class="holiday-banner-content">
+              <span class="holiday-banner-text">
+                🧧 ${this.activeHoliday.emoji} 恭贺新禧！祝您${this.activeHoliday.year}${zodiac}年大吉大利、${this.activeHoliday.greeting}！${this.activeHoliday.emoji} 🧧
+              </span>
+            </div>
+          `;
         } else {
-            banner.innerHTML = `
-        <div class="holiday-banner-content">
-          <span class="holiday-banner-text">
-            🎊 ${this.activeHoliday.year} ${this.activeHoliday.name}即将到来！🎊
-          </span>
-        </div>
-      `;
+            const now = new Date();
+            const newYear = new Date(this.activeHoliday.year, 0, 1, 0, 0, 0);
+
+            if (now >= newYear) {
+                banner.innerHTML = `
+            <div class="holiday-banner-content">
+              <span class="holiday-banner-text">
+                ✨ ${this.activeHoliday.emoji} ${this.activeHoliday.greeting}！祝您 ${this.activeHoliday.year} 年万事如意！${this.activeHoliday.emoji} ✨
+              </span>
+            </div>
+          `;
+            } else {
+                banner.innerHTML = `
+            <div class="holiday-banner-content">
+              <span class="holiday-banner-text">
+                🎊 ${this.activeHoliday.year} ${this.activeHoliday.name}即将到来！🎊
+              </span>
+            </div>
+          `;
+            }
         }
 
         document.body.insertBefore(banner, document.body.firstChild);
