@@ -425,6 +425,8 @@
 
   
 
+  
+
 
 
 
@@ -448,7 +450,7 @@
             
             <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF">
-                <span>技术 (53)</span>
+                <span>技术 (54)</span>
               </a>
             </li>           
           
@@ -457,7 +459,7 @@
             
             <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90">
-                <span>项目分析 (17)</span>
+                <span>项目分析 (18)</span>
               </a>
             </li>           
           
@@ -791,6 +793,8 @@
 
   
 
+  
+
 
 
 
@@ -814,7 +818,7 @@
             <li><a href="https://blog.jaxiu.cn/tags/nps" role="button"><span>nps (18)</span></a></li>
           
         
-            <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button"><span>go语言 (15)</span></a></li>
+            <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button"><span>go语言 (16)</span></a></li>
           
         
             <li><a href="https://blog.jaxiu.cn/tags/ai" role="button"><span>ai (14)</span></a></li>
@@ -841,6 +845,9 @@
             <li><a href="https://blog.jaxiu.cn/tags/electron" role="button"><span>electron (5)</span></a></li>
           
         
+            <li><a href="https://blog.jaxiu.cn/tags/docker" role="button"><span>docker (4)</span></a></li>
+          
+        
             <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7" role="button"><span>开发工具 (4)</span></a></li>
           
         
@@ -848,9 +855,6 @@
           
         
             <li><a href="https://blog.jaxiu.cn/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF" role="button"><span>服务端 (4)</span></a></li>
-          
-        
-            <li><a href="https://blog.jaxiu.cn/tags/docker" role="button"><span>docker (3)</span></a></li>
           
         
             <li><a href="https://blog.jaxiu.cn/tags/git" role="button"><span>git (3)</span></a></li>
@@ -862,13 +866,13 @@
             <li><a href="https://blog.jaxiu.cn/tags/node.js" role="button"><span>node.js (3)</span></a></li>
           
         
+            <li><a href="https://blog.jaxiu.cn/tags/vue" role="button"><span>vue (3)</span></a></li>
+          
+        
             <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0" role="button"><span>多平台 (3)</span></a></li>
           
         
             <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button"><span>客户端 (3)</span></a></li>
-          
-        
-            <li><a href="https://blog.jaxiu.cn/tags/%E6%9E%B6%E6%9E%84" role="button"><span>架构 (3)</span></a></li>
           
         
       </div>
@@ -878,6 +882,8 @@
   
 
           
+  
+
   
 
   
@@ -910,6 +916,8 @@
           
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96"><span>博客优化 (2)</span></a></li>
           
+            <li class="py-1"><a href="https://blog.jaxiu.cn/series/devtools"><span>Devtools (1)</span></a></li>
+          
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/qwen-code%E5%AE%9E%E8%B7%B5"><span>Qwen Code实践 (1)</span></a></li>
           
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span>开源项目 (1)</span></a></li>
@@ -941,7 +949,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  61 posts
+                  62 posts
                 </div>
               
             </div>
@@ -985,6 +993,79 @@
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://blog.jaxiu.cn/blog/2025-07/%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%91%BD%E4%BB%A4/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">一句话命令</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>One minute read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      常用一句话命令 网络 监听端口：netstat -tnple ，如果没有安装软件包 net-tools
+LINUX系统排查 快速下载 数据库 数据库备份：
+备份脚本：
+#!/bin//bash # export NOW=&#34;$(date &#43;&#34;%Y-%m-%d&#34;)&#34; export DATA_DIR=backup export DATA_DATABASE=dress mysqldump --opt -uroot -p&#39;P@ssw0rd&#39; -h&#39;h2.jaxiu.cn&#39; $DATA_DATABASE &gt; $DATA_DIR/${DATA_DATABASE}_$NOW.sql 一句话 docker 命令： docker run -ti --name mysql_dump -v /root/x/scripts/mysql_backup.sh:/mysql_backup.sh -v /root/x/scripts/backup:/backup:rw mysql:5.7.16 ./mysql_backup.sh
+删除已有历史备份
+find $DATA_DIR/ -type f -name &#34;*.sql&#34; -mtime &#43;7 -exec rm -rf {} \;
+数据库查询一句话命令
+单引号引起来的起来的是命令 docker run -ti --name mysql_t mysql:5.7.16 &#39; mysql -u root -proot -h 10.105.40.49 -e &#34;show databases&#34;&#39; ; docker stop mysql_t;docker rm mysql_t;
+一句话命令开启http访问当前页面
+docker run -dti --name nginx_t -v /tmp/test:/usr/share/nginx/html -p 8080:80 nginx
+linux 快捷命令......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/sci" role="button">Sci </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/vscode" role="button">Vscode </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/vue" role="button">Vue </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/qa" role="button">Qa </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -1115,77 +1196,6 @@ TLS 加密控制 control.go 中定义了 tlsEnable1 变量以及 SetTlsEnable() 
 </div>
 
             
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">NPS 客户端核心解析：连接管理与流量转发</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 18, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>6 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      引言 在 NPS 系列文章的前几篇中，我们详细剖析了 NPS 服务端的各个模块和代理实现。本篇文章将转向 NPS 的 客户端（Client） 模块，深入分析 nps/client/client.go 文件。这个文件是 NPS 客户端的“大脑”，负责与服务端建立连接、管理隧道、处理不同类型的流量以及维护客户端的生命周期。理解客户端的运作机制，是掌握 NPS 完整内网穿透流程的关键。
-client.go：客户端的“大脑” client.go 文件定义了 TRPClient 结构体，它是 NPS 客户端的核心。它负责客户端的启动、与服务端的通信、隧道管理以及流量转发。
-TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有关键信息：
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button">客户端 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1" role="button">网络通信 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
           
         </div>
       </div>
@@ -1236,7 +1246,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

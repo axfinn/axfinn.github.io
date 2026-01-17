@@ -6,8 +6,15 @@
     <description>Recent content in Docker on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 03 Aug 2025 16:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 17 Jan 2026 14:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DevTools：从零构建全栈开发者工具站</title>
+      <link>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</link>
+      <pubDate>Sat, 17 Jan 2026 14:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</guid>
+      <description>&lt;p&gt;开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。&lt;/p&gt;&#xA;&lt;p&gt;本文介绍 &lt;strong&gt;DevTools&lt;/strong&gt; —— 一个功能完整的开发者工具站，包含 16+ 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>todoIng 部署架构与运维策略</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-deployment-and-best-practices/</link>

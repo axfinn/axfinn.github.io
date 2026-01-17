@@ -6,8 +6,15 @@
     <description>Recent content in Series on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Tue, 12 Aug 2025 14:45:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 17 Jan 2026 14:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DevTools</title>
+      <link>https://blog.jaxiu.cn/series/devtools/</link>
+      <pubDate>Sat, 17 Jan 2026 14:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/series/devtools/</guid>
+      <description></description>
+    </item>
     <item>
       <title>博客优化</title>
       <link>https://blog.jaxiu.cn/series/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/</link>

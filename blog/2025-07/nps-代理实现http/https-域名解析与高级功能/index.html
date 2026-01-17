@@ -364,19 +364,19 @@ HTTP/HTTPS 域名解析的需求 在实际应用中，我们经常需要将内�
 <p><code>http.go</code> 文件定义了 <code>httpServer</code> 结构体，它是 NPS 实现 HTTP/HTTPS 域名解析的核心。</p>
 <h3 id="httpserver-结构体"><code>httpServer</code> 结构体</h3>
 <p><code>httpServer</code> 结构体继承了 <code>BaseServer</code>，并包含了 HTTP/HTTPS 代理所需的关键字段：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">httpServer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">BaseServer</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpPort</span><span class="w">      </span><span class="kt">int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpsPort</span><span class="w">     </span><span class="kt">int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpServer</span><span class="w">    </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpsServer</span><span class="w">   </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpsListener</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">useCache</span><span class="w">      </span><span class="kt">bool</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">addOrigin</span><span class="w">     </span><span class="kt">bool</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">cache</span><span class="w">         </span><span class="o">*</span><span class="nx">cache</span><span class="p">.</span><span class="nx">Cache</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">cacheLen</span><span class="w">      </span><span class="kt">int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">httpServer</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">BaseServer</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpPort</span>      <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpsPort</span>     <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpServer</span>    <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpsServer</span>   <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpsListener</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">useCache</span>      <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">addOrigin</span>     <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cache</span>         <span class="o">*</span><span class="nx">cache</span><span class="p">.</span><span class="nx">Cache</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cacheLen</span>      <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li><code>BaseServer</code>：继承了 <code>base.go</code> 中定义的通用功能。</li>
 <li><code>httpPort int</code> / <code>httpsPort int</code>：HTTP 和 HTTPS 监听端口。</li>
 <li><code>httpServer *http.Server</code> / <code>httpsServer *http.Server</code>：Go 标准库的 HTTP 服务器实例。</li>
@@ -557,7 +557,7 @@ HTTP/HTTPS 域名解析的需求 在实际应用中，我们经常需要将内�
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

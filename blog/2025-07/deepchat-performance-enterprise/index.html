@@ -416,43 +416,43 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 <p>DeepChat 采用了多种内存管理策略来优化性能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">MemoryOptimizer</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">memoryThreshold</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span> <span class="c1">// 1GB
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">gcInterval</span>: <span class="kt">NodeJS.Timeout</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">gcInterval</span>: <span class="kt">NodeJS.Timeout</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">startMemoryMonitoring</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 监控内存使用情况
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">startMemoryMonitoring</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">startMemoryMonitoring</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">gcInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">memoryUsage</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">memoryUsage</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 检查内存使用是否超过阈值
-</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">memoryUsage</span><span class="p">.</span><span class="nx">heapUsed</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">memoryThreshold</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">memoryUsage</span><span class="p">.</span><span class="nx">heapUsed</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">memoryThreshold</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">performGarbageCollection</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 记录内存使用情况
-</span></span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">logMemoryUsage</span><span class="p">(</span><span class="nx">memoryUsage</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">logMemoryUsage</span><span class="p">(</span><span class="nx">memoryUsage</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="mi">30000</span><span class="p">);</span> <span class="c1">// 每30秒检查一次
-</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 执行垃圾回收
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">performGarbageCollection</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">performGarbageCollection</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 卸载不活跃的会话
-</span></span></span><span class="line"><span class="cl">    <span class="nx">SessionManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">unloadInactiveSessions</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">SessionManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">unloadInactiveSessions</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 清理缓存
-</span></span></span><span class="line"><span class="cl">    <span class="nx">CacheManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">cleanup</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">CacheManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">cleanup</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果支持，触发 Node.js 垃圾回收
-</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="kr">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="kr">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">global</span><span class="p">.</span><span class="nx">gc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 优化大型数据处理
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">processLargeData</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">processLargeData</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">data</span>: <span class="kt">T</span><span class="p">[],</span> 
 </span></span><span class="line"><span class="cl">    <span class="nx">processor</span><span class="o">:</span> <span class="p">(</span><span class="nx">item</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">batchSize</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">100</span>
@@ -460,7 +460,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">results</span>: <span class="kt">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 分批处理数据以避免内存溢出
-</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">batchSize</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">batchSize</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">batch</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">i</span> <span class="o">+</span> <span class="nx">batchSize</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">batchResults</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">batch</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">processor</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span>
@@ -469,7 +469,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">batchResults</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 给事件循环一些时间
-</span></span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setImmediate</span><span class="p">(</span><span class="nx">resolve</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">await</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setImmediate</span><span class="p">(</span><span class="nx">resolve</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">results</span><span class="p">;</span>
@@ -478,7 +478,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span></code></pre></div><h3 id="渲染性能优化">渲染性能优化</h3>
 <p>针对 UI 渲染性能，DeepChat 采用了多种优化技术：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-tsx" data-lang="tsx"><span class="line"><span class="cl"><span class="c1">// 虚拟化长列表组件
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">VirtualizedList</span>: <span class="kt">React.FC</span><span class="p">&lt;</span><span class="nt">VirtualizedListProps</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">VirtualizedList</span>: <span class="kt">React.FC</span><span class="p">&lt;</span><span class="nt">VirtualizedListProps</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">items</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">itemHeight</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">renderItem</span>
@@ -487,7 +487,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">[</span><span class="nx">visibleRange</span><span class="p">,</span> <span class="nx">setVisibleRange</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span> <span class="nx">start</span>: <span class="kt">0</span><span class="p">,</span> <span class="nx">end</span>: <span class="kt">0</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 计算可见范围
-</span></span></span><span class="line"><span class="cl">  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">updateVisibleRange</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">containerRef</span><span class="p">.</span><span class="nx">current</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      
@@ -498,7 +498,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">scrollTop</span> <span class="o">/</span> <span class="nx">itemHeight</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">start</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">containerHeight</span> <span class="o">/</span> <span class="nx">itemHeight</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// 额外渲染5个项目
-</span></span></span><span class="line"><span class="cl">        <span class="nx">items</span><span class="p">.</span><span class="nx">length</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">items</span><span class="p">.</span><span class="nx">length</span>
 </span></span><span class="line"><span class="cl">      <span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="nx">setVisibleRange</span><span class="p">({</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span> <span class="p">});</span>
@@ -547,12 +547,12 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span></code></pre></div><h3 id="懒加载与代码分割">懒加载与代码分割</h3>
 <p>DeepChat 采用懒加载和代码分割来减少初始加载时间：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 动态导入组件
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">LazyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">LazyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> 
 </span></span><span class="line"><span class="cl">  <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./HeavyComponent&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用 Suspense 包装懒加载组件
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">App</span>: <span class="kt">React.FC</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">App</span>: <span class="kt">React.FC</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">Suspense</span> <span class="na">fallback</span><span class="o">=</span><span class="p">{&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="nx">Loading</span><span class="p">...&lt;/</span><span class="nt">div</span><span class="p">&gt;}&gt;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">LazyComponent</span> <span class="p">/&gt;</span>
@@ -561,7 +561,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 路由级别的代码分割
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">RouterConfig</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">RouterConfig</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">Routes</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">Route</span> <span class="na">path</span><span class="o">=</span><span class="s">&#34;/&#34;</span> <span class="na">element</span><span class="o">=</span><span class="p">{&lt;</span><span class="nt">MainView</span> <span class="p">/&gt;}</span> <span class="p">/&gt;</span>
@@ -584,9 +584,9 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">batchTimeout</span>: <span class="kt">NodeJS.Timeout</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">batchSizeLimit</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">batchTimeLimit</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span> <span class="c1">// 毫秒
-</span></span></span><span class="line"><span class="cl">  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 添加请求到批处理队列
-</span></span></span><span class="line"><span class="cl">  <span class="nx">addRequest</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">request</span>: <span class="kt">Omit</span><span class="p">&lt;</span><span class="nt">BatchRequest</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;,</span> <span class="s1">&#39;id&#39;</span><span class="p">&gt;)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">addRequest</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">request</span>: <span class="kt">Omit</span><span class="p">&lt;</span><span class="nt">BatchRequest</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;,</span> <span class="s1">&#39;id&#39;</span><span class="p">&gt;)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">batchRequest</span>: <span class="kt">BatchRequest</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">request</span><span class="p">,</span>
@@ -598,11 +598,11 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">batchRequest</span> <span class="kr">as</span> <span class="nx">BatchRequest</span><span class="p">&lt;</span><span class="nt">unknown</span><span class="p">&gt;);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 检查是否需要立即发送批处理请求
-</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">batchSizeLimit</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">batchSizeLimit</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">flushBatch</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 设置批处理超时
-</span></span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="k">this</span><span class="p">.</span><span class="nx">flushBatch</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">batchTimeLimit</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
@@ -610,7 +610,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 发送批处理请求
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">flushBatch</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">flushBatch</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">clearTimeout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">batchTimeout</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
@@ -621,11 +621,11 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 获取当前批处理请求
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">batch</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">batchSizeLimit</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">batch</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pendingRequests</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">batchSizeLimit</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 构造批处理请求
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">batchPayload</span> <span class="o">=</span> <span class="nx">batch</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">req</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">batchPayload</span> <span class="o">=</span> <span class="nx">batch</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">req</span> <span class="o">=&gt;</span> <span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">id</span>: <span class="kt">req.id</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">method</span>: <span class="kt">req.method</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">url</span>: <span class="kt">req.url</span><span class="p">,</span>
@@ -634,10 +634,10 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="p">}));</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 发送批处理请求
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/batch&#39;</span><span class="p">,</span> <span class="nx">batchPayload</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/batch&#39;</span><span class="p">,</span> <span class="nx">batchPayload</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 处理响应
-</span></span></span><span class="line"><span class="cl">      <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">result</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">result</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">batch</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">req</span> <span class="o">=&gt;</span> <span class="nx">req</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
@@ -649,7 +649,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 批处理请求失败，单独处理每个请求
-</span></span></span><span class="line"><span class="cl">      <span class="nx">batch</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">request</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">batch</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">request</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">request</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -667,18 +667,18 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取缓存项
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="kr">get</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">T</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="kr">get</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">T</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 首先检查内存缓存
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">memoryEntry</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">memoryEntry</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">memoryEntry</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isExpired</span><span class="p">(</span><span class="nx">memoryEntry</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">memoryEntry</span><span class="p">.</span><span class="nx">value</span> <span class="kr">as</span> <span class="nx">T</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 然后检查磁盘缓存
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">diskEntry</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">diskCache</span><span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">CacheEntry</span><span class="p">&gt;(</span><span class="nx">key</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">diskEntry</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">diskCache</span><span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">CacheEntry</span><span class="p">&gt;(</span><span class="nx">key</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">diskEntry</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isExpired</span><span class="p">(</span><span class="nx">diskEntry</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 将磁盘缓存提升到内存缓存
-</span></span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">diskEntry</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">diskEntry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">diskEntry</span><span class="p">.</span><span class="nx">value</span> <span class="kr">as</span> <span class="nx">T</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -686,32 +686,32 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 设置缓存项
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="kr">set</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">T</span><span class="p">,</span> <span class="nx">ttl</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">3600000</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="kr">set</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">T</span><span class="p">,</span> <span class="nx">ttl</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">3600000</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">entry</span>: <span class="kt">CacheEntry</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">value</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">expiry</span>: <span class="kt">Date.now</span><span class="p">()</span> <span class="o">+</span> <span class="nx">ttl</span>
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 存储到内存缓存
-</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">entry</span> <span class="kr">as</span> <span class="nx">CacheEntry</span><span class="p">&lt;</span><span class="nt">unknown</span><span class="p">&gt;);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">entry</span> <span class="kr">as</span> <span class="nx">CacheEntry</span><span class="p">&lt;</span><span class="nt">unknown</span><span class="p">&gt;);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 存储到磁盘缓存
-</span></span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">diskCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">entry</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">diskCache</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">entry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 检查内存缓存大小
-</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">checkMemoryCacheSize</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">checkMemoryCacheSize</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查缓存项是否过期
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">isExpired</span><span class="p">(</span><span class="nx">entry</span>: <span class="kt">CacheEntry</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">isExpired</span><span class="p">(</span><span class="nx">entry</span>: <span class="kt">CacheEntry</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">expiry</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查并清理内存缓存
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">checkMemoryCacheSize</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">checkMemoryCacheSize</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="nx">size</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxMemoryEntries</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 移除最旧的条目
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="nx">keys</span><span class="p">());</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">memoryCache</span><span class="p">.</span><span class="nx">keys</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">keysToRemove</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">maxMemoryEntries</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="nx">keysToRemove</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">key</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -725,10 +725,10 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 <p>DeepChat 提供了企业级配置管理功能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">EnterpriseConfig</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 企业标识
-</span></span></span><span class="line"><span class="cl">  <span class="nx">enterpriseId</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">enterpriseId</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 安全配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">security</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">security</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">ssoEnabled</span>: <span class="kt">boolean</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">ssoProvider</span><span class="o">?:</span> <span class="s1">&#39;saml&#39;</span> <span class="o">|</span> <span class="s1">&#39;oauth2&#39;</span> <span class="o">|</span> <span class="s1">&#39;ldap&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">encryptionRequired</span>: <span class="kt">boolean</span><span class="p">;</span>
@@ -736,27 +736,27 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 网络配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">network</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">network</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">proxy?</span>: <span class="kt">ProxyConfig</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">allowedDomains</span>: <span class="kt">string</span><span class="p">[];</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">blockedDomains</span>: <span class="kt">string</span><span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 模型配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">models</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">models</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">defaultProvider</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">allowedProviders</span>: <span class="kt">string</span><span class="p">[];</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">customProviders</span>: <span class="kt">CustomProviderConfig</span><span class="p">[];</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 审计配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">audit</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">audit</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">logLevel</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span> <span class="o">|</span> <span class="s1">&#39;basic&#39;</span> <span class="o">|</span> <span class="s1">&#39;detailed&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">logRetentionDays</span>: <span class="kt">number</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 自定义UI配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">ui</span><span class="o">:</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">ui</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">branding?</span>: <span class="kt">BrandingConfig</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">disabledFeatures</span>: <span class="kt">string</span><span class="p">[];</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">customThemes</span>: <span class="kt">CustomTheme</span><span class="p">[];</span>
@@ -767,10 +767,10 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">config</span>: <span class="kt">EnterpriseConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 加载企业配置
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">loadEnterpriseConfig</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">EnterpriseConfig</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">loadEnterpriseConfig</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">EnterpriseConfig</span> <span class="err">|</span> <span class="na">null</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 首先尝试从环境变量加载
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">configPath</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DEEPCHAT_ENTERPRISE_CONFIG</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">configPath</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DEEPCHAT_ENTERPRISE_CONFIG</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">configPath</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">configData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">promises</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">configPath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">configData</span><span class="p">);</span>
@@ -778,7 +778,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 然后尝试从预定义位置加载
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">defaultPaths</span> <span class="o">=</span> <span class="p">[</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">defaultPaths</span> <span class="o">=</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">(),</span> <span class="s1">&#39;enterprise-config.json&#39;</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">getPath</span><span class="p">(</span><span class="s1">&#39;userData&#39;</span><span class="p">),</span> <span class="s1">&#39;enterprise-config.json&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">];</span>
@@ -790,7 +790,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// 文件不存在或解析失败，继续尝试下一个路径
-</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
@@ -801,17 +801,17 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取配置值
-</span></span></span><span class="line"><span class="cl">  <span class="kr">get</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">defaultValue?</span>: <span class="kt">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">T</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">get</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">&gt;(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">defaultValue?</span>: <span class="kt">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">T</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">defaultValue</span> <span class="kr">as</span> <span class="nx">T</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 使用 lodash 的 get 方法支持嵌套属性访问
-</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">)</span> <span class="kr">as</span> <span class="nx">T</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">)</span> <span class="kr">as</span> <span class="nx">T</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查功能是否启用
-</span></span></span><span class="line"><span class="cl">  <span class="nx">isFeatureEnabled</span><span class="p">(</span><span class="nx">feature</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">isFeatureEnabled</span><span class="p">(</span><span class="nx">feature</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">disabledFeatures</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">[]</span><span class="p">&gt;(</span><span class="s1">&#39;ui.disabledFeatures&#39;</span><span class="p">,</span> <span class="p">[]);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">!</span><span class="nx">disabledFeatures</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">feature</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -826,7 +826,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 初始化 SSO
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">initialize</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">initialize</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">provider</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="s1">&#39;saml&#39;</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">initializeSAML</span><span class="p">();</span>
@@ -841,11 +841,11 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// SAML 集成
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">initializeSAML</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">initializeSAML</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">samlConfig</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">saml</span><span class="o">!</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 配置 SAML 策略
-</span></span></span><span class="line"><span class="cl">    <span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">new</span> <span class="nx">SamlStrategy</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">new</span> <span class="nx">SamlStrategy</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">callbackUrl</span>: <span class="kt">samlConfig.callbackUrl</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">entryPoint</span>: <span class="kt">samlConfig.entryPoint</span><span class="p">,</span>
@@ -865,7 +865,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// OAuth2 集成
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">initializeOAuth2</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">initializeOAuth2</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">oauth2Config</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">oauth2</span><span class="o">!</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">new</span> <span class="nx">OAuth2Strategy</span><span class="p">(</span>
@@ -888,16 +888,16 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 查找或创建用户
-</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">findOrCreateUser</span><span class="p">(</span><span class="nx">profile</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">tokens?</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">User</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">findOrCreateUser</span><span class="p">(</span><span class="nx">profile</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">tokens?</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">User</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 根据企业配置查找用户
-</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">findByExternalId</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">findByExternalId</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">provider</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 创建新用户
-</span></span></span><span class="line"><span class="cl">      <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">createUser</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">createUser</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">externalId</span>: <span class="kt">profile.id</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">provider</span>: <span class="kt">this.config.provider</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">email</span>: <span class="kt">profile.email</span><span class="p">,</span>
@@ -906,7 +906,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">      <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">tokens</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 更新令牌
-</span></span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">updateUserTokens</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">await</span> <span class="nx">UserManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">updateUserTokens</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
@@ -924,7 +924,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 记录数据访问事件
-</span></span></span><span class="line"><span class="cl">  <span class="nx">logDataAccess</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logDataAccess</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">userId</span>: <span class="kt">string</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">dataType</span>: <span class="kt">string</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;read&#39;</span> <span class="o">|</span> <span class="s1">&#39;write&#39;</span> <span class="o">|</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span>
@@ -943,7 +943,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 执行数据保留策略
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">enforceRetentionPolicy</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">enforceRetentionPolicy</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">retentionDays</span> <span class="o">=</span> <span class="nx">EnterpriseConfigManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="kr">get</span><span class="p">&lt;</span><span class="nt">number</span><span class="p">&gt;(</span><span class="s1">&#39;security.dataRetentionDays&#39;</span><span class="p">,</span> <span class="mi">365</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
@@ -951,14 +951,14 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl">    <span class="nx">cutoffDate</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">cutoffDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">-</span> <span class="nx">retentionDays</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 删除过期的会话数据
-</span></span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="nx">SessionManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">deleteSessionsBefore</span><span class="p">(</span><span class="nx">cutoffDate</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">await</span> <span class="nx">SessionManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">deleteSessionsBefore</span><span class="p">(</span><span class="nx">cutoffDate</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 清理过期的审计日志
-</span></span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">auditLogger</span><span class="p">.</span><span class="nx">cleanupLogs</span><span class="p">(</span><span class="nx">cutoffDate</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">auditLogger</span><span class="p">.</span><span class="nx">cleanupLogs</span><span class="p">(</span><span class="nx">cutoffDate</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 生成合规报告
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">generateComplianceReport</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">ComplianceReport</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">generateComplianceReport</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">ComplianceReport</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">report</span>: <span class="kt">ComplianceReport</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">generatedAt</span>: <span class="kt">new</span> <span class="nb">Date</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">period</span><span class="o">:</span> <span class="p">{</span>
@@ -990,7 +990,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 <h3 id="企业定制化实践">企业定制化实践</h3>
 <p>企业可以根据自身需求对 DeepChat 进行定制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 企业自定义主题
-</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">enterpriseTheme</span>: <span class="kt">CustomTheme</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">enterpriseTheme</span>: <span class="kt">CustomTheme</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;enterprise-dark&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">colors</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">primary</span><span class="o">:</span> <span class="s1">&#39;#0066cc&#39;</span><span class="p">,</span>
@@ -1009,20 +1009,20 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 企业自定义功能模块
-</span></span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">EnterpriseModule</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">EnterpriseModule</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 企业特定功能实现
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">enterpriseFeature</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">enterpriseFeature</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">any</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 实现企业特定逻辑
-</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">result</span><span class="o">:</span> <span class="s1">&#39;Enterprise feature executed successfully&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">data</span>
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 与企业系统的集成
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">integrateWithEnterpriseSystem</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">integrateWithEnterpriseSystem</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 实现与企业内部系统的集成逻辑
-</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h2 id="小结">小结</h2>
 <p>DeepChat 在性能优化和企业级应用方面表现出色：</p>
@@ -1152,7 +1152,7 @@ class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; //
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

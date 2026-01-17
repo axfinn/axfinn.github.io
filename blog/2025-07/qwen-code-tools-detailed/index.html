@@ -414,10 +414,10 @@ graph TD
 <p>功能：显示指定目录下的文件和子目录</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 列出项目根目录的内容
-</span></span></span><span class="line"><span class="cl"><span class="nx">list_directory</span><span class="p">({</span><span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project&#34;</span><span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">list_directory</span><span class="p">({</span><span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project&#34;</span><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 列出目录内容但忽略 node_modules 和 .git
-</span></span></span><span class="line"><span class="cl"><span class="nx">list_directory</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">list_directory</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">ignore</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;node_modules&#34;</span><span class="p">,</span> <span class="s2">&#34;.git&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -431,16 +431,16 @@ graph TD
 <p>功能：读取并返回文件内容</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 读取整个文件
-</span></span></span><span class="line"><span class="cl"><span class="nx">read_file</span><span class="p">({</span><span class="nx">absolute_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/README.md&#34;</span><span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">read_file</span><span class="p">({</span><span class="nx">absolute_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/README.md&#34;</span><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 只读取前100行
-</span></span></span><span class="line"><span class="cl"><span class="nx">read_file</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">read_file</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">absolute_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/large_file.txt&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">limit</span><span class="o">:</span> <span class="mi">100</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 从第50行开始读取100行
-</span></span></span><span class="line"><span class="cl"><span class="nx">read_file</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">read_file</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">absolute_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/large_file.txt&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">limit</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">offset</span><span class="o">:</span> <span class="mi">50</span>
@@ -454,7 +454,7 @@ graph TD
 <p>功能：将内容写入指定文件</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 写入文件
-</span></span></span><span class="line"><span class="cl"><span class="nx">write_file</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">write_file</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">file_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/new_file.txt&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">content</span><span class="o">:</span> <span class="s2">&#34;Hello, Qwen Code!&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -469,10 +469,10 @@ graph TD
 <p>功能：高效查找符合特定模式的文件</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 查找所有 .js 文件
-</span></span></span><span class="line"><span class="cl"><span class="nx">glob</span><span class="p">({</span><span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;**/*.js&#34;</span><span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">glob</span><span class="p">({</span><span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;**/*.js&#34;</span><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 在特定目录中查找 .ts 文件
-</span></span></span><span class="line"><span class="cl"><span class="nx">glob</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">glob</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;**/*.ts&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/src&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -486,12 +486,12 @@ graph TD
 <p>功能：在文件内容中搜索指定的正则表达式模式</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在整个项目中搜索 &#34;function myFunction&#34;
-</span></span></span><span class="line"><span class="cl"><span class="nx">search_file_content</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">search_file_content</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;function\\s+myFunction&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 在 .js 文件中搜索 import 语句
-</span></span></span><span class="line"><span class="cl"><span class="nx">search_file_content</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">search_file_content</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;import\\s+\\{.*\\}\\s+from\\s+.*&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">include</span><span class="o">:</span> <span class="s2">&#34;*.js&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -506,14 +506,14 @@ graph TD
 <p>功能：在文件中替换指定的文本内容，具有增强的可靠性特性</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 替换文件中的文本
-</span></span></span><span class="line"><span class="cl"><span class="nx">replace</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">replace</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">file_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/config.js&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">old_string</span><span class="o">:</span> <span class="s2">&#34;old_value&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">new_string</span><span class="o">:</span> <span class="s2">&#34;new_value&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 替换多个匹配项
-</span></span></span><span class="line"><span class="cl"><span class="nx">replace</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">replace</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">file_path</span><span class="o">:</span> <span class="s2">&#34;/path/to/project/data.json&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">old_string</span><span class="o">:</span> <span class="s2">&#34;development&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">new_string</span><span class="o">:</span> <span class="s2">&#34;production&#34;</span><span class="p">,</span>
@@ -557,7 +557,7 @@ graph LR
 <p>功能：通过 Google Search 执行网络搜索，返回包含引用和来源的摘要结果</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 搜索最新的人工智能进展
-</span></span></span><span class="line"><span class="cl"><span class="nx">google_web_search</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">google_web_search</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">query</span><span class="o">:</span> <span class="s2">&#34;latest advancements in AI-powered code generation&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></div><h3 id="web_fetch网页内容获取工具"><code>web_fetch</code>：网页内容获取工具</h3>
@@ -568,7 +568,7 @@ graph LR
 <p>功能：获取并处理网页内容</p>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 获取网页内容并提取关键点
-</span></span></span><span class="line"><span class="cl"><span class="nx">web_fetch</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">web_fetch</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">prompt</span><span class="o">:</span> <span class="s2">&#34;Summarize https://example.com/article and extract key points&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></div><h2 id="其他工具">其他工具</h2>
@@ -580,7 +580,7 @@ graph LR
 </ul>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 保存用户的偏好设置
-</span></span></span><span class="line"><span class="cl"><span class="nx">save_memory</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">save_memory</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">fact</span><span class="o">:</span> <span class="s2">&#34;用户偏好深色主题&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></div><h3 id="命令执行工具">命令执行工具</h3>
@@ -593,7 +593,7 @@ graph LR
 </ul>
 <p>示例：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 运行测试
-</span></span></span><span class="line"><span class="cl"><span class="nx">run_shell_command</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">run_shell_command</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">command</span><span class="o">:</span> <span class="s2">&#34;npm test&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">description</span><span class="o">:</span> <span class="s2">&#34;运行项目测试&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
@@ -744,7 +744,7 @@ graph TD
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

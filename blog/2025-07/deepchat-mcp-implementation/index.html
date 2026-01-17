@@ -412,16 +412,16 @@ MCP 协议简介 Model Context Protocol（MCP）是一个开放协议，旨在�
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">mcpClients</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">McpClient</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 启动 MCP 服务器
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">startServer</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">MCPServerConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">startServer</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">MCPServerConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 停止 MCP 服务器
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">stopServer</span><span class="p">(</span><span class="nx">serverName</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">stopServer</span><span class="p">(</span><span class="nx">serverName</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取可用工具列表
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">getAvailableTools</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">MCPToolDefinition</span><span class="err">[]</span><span class="p">&gt;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">getAvailableTools</span><span class="p">()</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">MCPToolDefinition</span><span class="err">[]</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 执行工具调用
-</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">executeToolCall</span><span class="p">(</span><span class="nx">toolCall</span>: <span class="kt">MCPToolCall</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">MCPToolResponse</span><span class="p">&gt;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">executeToolCall</span><span class="p">(</span><span class="nx">toolCall</span>: <span class="kt">MCPToolCall</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">MCPToolResponse</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="servermanager-服务器管理器">ServerManager 服务器管理器</h3>
 <p><a href="file:///Volumes/M20/code/docs/deepchat/src/main/presenter/mcpPresenter/serverManager.ts#L1-L430">ServerManager</a> 负责管理 MCP 服务器的生命周期：</p>
@@ -442,13 +442,13 @@ MCP 协议简介 Model Context Protocol（MCP）是一个开放协议，旨在�
 <h3 id="stdio-传输">Stdio 传输</h3>
 <p>Stdio 传输是最常用的传输方式，适用于本地运行的 MCP 工具：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Stdio 传输实现示例
-</span></span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">StdioTransport</span> <span class="kr">implements</span> <span class="nx">Transport</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">StdioTransport</span> <span class="kr">implements</span> <span class="nx">Transport</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">childProcess</span>: <span class="kt">ChildProcess</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">connect</span><span class="p">(</span><span class="nx">command</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">args</span>: <span class="kt">string</span><span class="p">[])</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">childProcess</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 建立 stdio 通信
-</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">send</span><span class="p">(</span><span class="nx">message</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">childProcess</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">);</span>
@@ -457,7 +457,7 @@ MCP 协议简介 Model Context Protocol（MCP）是一个开放协议，旨在�
 </span></span></code></pre></div><h3 id="http-传输">HTTP 传输</h3>
 <p>HTTP 传输适用于远程 MCP 服务：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// HTTP 传输实现示例
-</span></span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">HttpTransport</span> <span class="kr">implements</span> <span class="nx">Transport</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">HttpTransport</span> <span class="kr">implements</span> <span class="nx">Transport</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">baseUrl</span>: <span class="kt">string</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">send</span><span class="p">(</span><span class="nx">message</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
@@ -675,7 +675,7 @@ ThreadPresenter--&gt;ChatView: 显示结果
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

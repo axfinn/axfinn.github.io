@@ -393,10 +393,10 @@
 <h4 id="通用配置文件">通用配置文件</h4>
 <p>DeepChat 使用 <a href="file:///Volumes/M20/code/docs/deepchat/electron-builder.yml">electron-builder.yml</a> 作为主要的构建配置文件，定义了应用的基本信息和通用构建规则：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">appId</span><span class="p">:</span><span class="w"> </span><span class="l">com.wefonk.deepchat</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">productName</span><span class="p">:</span><span class="w"> </span><span class="l">DeepChat</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">directories</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">productName</span><span class="p">:</span><span class="w"> </span><span class="l">DeepChat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">directories</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">buildResources</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">files</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">files</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!**/.vscode/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!src/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!test/*&#39;</span><span class="w">
@@ -405,10 +405,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!scripts/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;!.github/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># ... 更多排除规则</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">asarUnpack</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">asarUnpack</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;**/node_modules/sharp/**/*&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;**/node_modules/@img/**/*&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">extraResources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">extraResources</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l">./runtime/</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">app.asar.unpacked/runtime</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;**/*&#39;</span><span class="p">]</span><span class="w">
@@ -422,7 +422,7 @@
 <h4 id="平台特定配置">平台特定配置</h4>
 <p>为了处理 macOS x64 架构的特殊需求，DeepChat 还提供了 <a href="file:///Volumes/M20/code/docs/deepchat/electron-builder-macx64.yml">electron-builder-macx64.yml</a> 配置文件：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">afterSign</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/notarize.js</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">afterPack</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/afterPack.js</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">afterPack</span><span class="p">:</span><span class="w"> </span><span class="l">scripts/afterPack.js</span><span class="w">
 </span></span></span></code></pre></div><p>这些配置指定了在打包完成后需要执行的脚本，如 macOS 的公证流程。</p>
 <h3 id="构建脚本组织">构建脚本组织</h3>
 <p>在 <a href="file:///Volumes/M20/code/docs/deepchat/package.json">package.json</a> 中，DeepChat 定义了完整的构建脚本体系：</p>
@@ -486,7 +486,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">notarizeApp</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 公证逻辑实现
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><h4 id="apple-silicon-支持">Apple Silicon 支持</h4>
 <p>为了支持 Apple Silicon 设备，DeepChat 提供了两种构建方式：</p>
 <ol>
@@ -531,15 +531,15 @@
 <h3 id="系统托盘实现">系统托盘实现</h3>
 <p>DeepChat 在不同平台上实现了系统托盘功能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 根据平台设置不同的托盘图标
-</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// macOS 特定设置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">macOSIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">macOSIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;win32&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Windows 特定设置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">windowsIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">windowsIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Linux 特定设置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">linuxIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tray</span><span class="p">(</span><span class="nx">linuxIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="窗口管理">窗口管理</h3>
 <p>不同平台的窗口行为略有不同，DeepChat 通过条件代码来处理：</p>
@@ -554,9 +554,9 @@
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 根据平台设置窗口行为
-</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">platform</span> <span class="o">===</span> <span class="s1">&#39;darwin&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// macOS 特定设置
-</span></span></span><span class="line"><span class="cl">    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">app</span><span class="p">.</span><span class="nx">dock</span><span class="p">.</span><span class="nx">setIcon</span><span class="p">(</span><span class="nx">dockIcon</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h2 id="运行时依赖管理">运行时依赖管理</h2>
@@ -791,7 +791,7 @@
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

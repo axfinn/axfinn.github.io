@@ -358,11 +358,11 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 <p><code>websocket.go</code> 文件主要定义了 <code>HttpReverseProxy</code> 和 <code>ReverseProxy</code> 两个结构体，它们共同协作来处理 HTTP 反向代理和 WebSocket 连接。</p>
 <h3 id="httpreverseproxyhttp-请求的入口"><code>HttpReverseProxy</code>：HTTP 请求的入口</h3>
 <p><code>HttpReverseProxy</code> 实现了 <code>http.Handler</code> 接口，是所有 HTTP 请求（包括 WebSocket 升级请求）进入 NPS 反向代理的入口点。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">proxy</span><span class="w">                 </span><span class="o">*</span><span class="nx">ReverseProxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">responseHeaderTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HttpReverseProxy</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">proxy</span>                 <span class="o">*</span><span class="nx">ReverseProxy</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">responseHeaderTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li><code>proxy *ReverseProxy</code>：指向实际处理请求的 <code>ReverseProxy</code> 实例。</li>
 <li><code>responseHeaderTimeout time.Duration</code>：后端响应头的超时时间。</li>
 </ul>
@@ -379,11 +379,11 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 </ol>
 <h3 id="reverseproxy核心反向代理逻辑"><code>ReverseProxy</code>：核心反向代理逻辑</h3>
 <p><code>ReverseProxy</code> 结构体是对 Go 标准库 <code>net/http/httputil.ReverseProxy</code> 的封装和扩展，主要用于定制连接建立和错误处理。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">ReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">*</span><span class="nx">httputil</span><span class="p">.</span><span class="nx">ReverseProxy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">WebSocketDialContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ReverseProxy</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="nx">httputil</span><span class="p">.</span><span class="nx">ReverseProxy</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">WebSocketDialContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li><code>*httputil.ReverseProxy</code>：嵌入了标准库的反向代理，继承了其大部分功能。</li>
 <li><code>WebSocketDialContext func(...)</code>：一个自定义的函数，用于在 WebSocket 升级时建立与后端服务的连接。</li>
 </ul>
@@ -428,23 +428,23 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 </ol>
 <h3 id="joinwebsocket-数据双向拷贝"><code>Join()</code>：WebSocket 数据双向拷贝</h3>
 <p><code>Join()</code> 函数负责在两个 <code>io.ReadWriteCloser</code> 之间进行双向数据拷贝，通常用于 WebSocket 连接：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">Join</span><span class="p">(</span><span class="nx">c1</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">inCount</span><span class="w"> </span><span class="kt">int64</span><span class="p">,</span><span class="w"> </span><span class="nx">outCount</span><span class="w"> </span><span class="kt">int64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wait</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// pipe 函数用于单向数据拷贝</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">pipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">to</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">*</span><span class="kt">int64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">to</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">from</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">goroutine</span><span class="p">.</span><span class="nf">CopyBuffer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="nx">from</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Flow</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 使用 goroutine.CopyBuffer 进行数据拷贝和流量统计</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 两个 goroutine 进行双向拷贝</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nf">pipe</span><span class="p">(</span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">inCount</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nf">pipe</span><span class="p">(</span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">outCount</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span><span class="w"> </span><span class="c1">// 等待两个 goroutine 完成</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">c1</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">c2</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">host</span> <span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span> <span class="p">(</span><span class="nx">inCount</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">outCount</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">wait</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// pipe 函数用于单向数据拷贝</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pipe</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">to</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">from</span> <span class="nx">io</span><span class="p">.</span><span class="nx">ReadWriteCloser</span><span class="p">,</span> <span class="nx">count</span> <span class="o">*</span><span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">to</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">from</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">wait</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">goroutine</span><span class="p">.</span><span class="nf">CopyBuffer</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Flow</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="c1">// 使用 goroutine.CopyBuffer 进行数据拷贝和流量统计</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">wait</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 两个 goroutine 进行双向拷贝</span>
+</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nf">pipe</span><span class="p">(</span><span class="nx">c1</span><span class="p">,</span> <span class="nx">c2</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">inCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">go</span> <span class="nf">pipe</span><span class="p">(</span><span class="nx">c2</span><span class="p">,</span> <span class="nx">c1</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">outCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">wait</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span> <span class="c1">// 等待两个 goroutine 完成</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li>它启动两个 goroutine，分别负责从一个连接读取数据并写入另一个连接，实现双向数据流。</li>
 <li><code>goroutine.CopyBuffer()</code> 是一个自定义的拷贝函数，它在拷贝数据的同时，还会进行流量统计。</li>
 </ul>
@@ -569,7 +569,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

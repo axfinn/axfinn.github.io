@@ -496,12 +496,12 @@ graph LR
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;tsc &amp;&amp; esbuild&#34;</span><span class="p">,</span>           <span class="c1">// 构建项目
-</span></span></span><span class="line"><span class="cl">    <span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;vitest&#34;</span><span class="p">,</span>                    <span class="c1">// 运行测试
-</span></span></span><span class="line"><span class="cl">    <span class="nt">&#34;lint&#34;</span><span class="p">:</span> <span class="s2">&#34;eslint .&#34;</span><span class="p">,</span>                  <span class="c1">// 代码检查
-</span></span></span><span class="line"><span class="cl">    <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="s2">&#34;prettier --write .&#34;</span><span class="p">,</span>      <span class="c1">// 代码格式化
-</span></span></span><span class="line"><span class="cl">    <span class="nt">&#34;typecheck&#34;</span><span class="p">:</span> <span class="s2">&#34;tsc --noEmit&#34;</span><span class="p">,</span>         <span class="c1">// 类型检查
-</span></span></span><span class="line"><span class="cl">    <span class="nt">&#34;preflight&#34;</span><span class="p">:</span> <span class="s2">&#34;run-s build test lint typecheck&#34;</span> <span class="c1">// 完整检查
-</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;vitest&#34;</span><span class="p">,</span>                    <span class="c1">// 运行测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;lint&#34;</span><span class="p">:</span> <span class="s2">&#34;eslint .&#34;</span><span class="p">,</span>                  <span class="c1">// 代码检查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="s2">&#34;prettier --write .&#34;</span><span class="p">,</span>      <span class="c1">// 代码格式化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;typecheck&#34;</span><span class="p">:</span> <span class="s2">&#34;tsc --noEmit&#34;</span><span class="p">,</span>         <span class="c1">// 类型检查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;preflight&#34;</span><span class="p">:</span> <span class="s2">&#34;run-s build test lint typecheck&#34;</span> <span class="c1">// 完整检查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>构建流程可以用下图表示：</p>
 <div class="mermaid">
@@ -602,13 +602,13 @@ flowchart TD
 </ol>
 <h3 id="docker-支持">Docker 支持</h3>
 <p>提供 Dockerfile 用于容器化部署：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">node:20-alpine</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">COPY</span> . .<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> npm install<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">RUN</span> npm run build<span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;bundle/gemini.js&#34;</span><span class="p">]</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:20-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> npm install<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> npm run build<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 3000</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;bundle/gemini.js&#34;</span><span class="p">]</span><span class="err">
 </span></span></span></code></pre></div><h2 id="扩展机制">扩展机制</h2>
 <h3 id="插件系统">插件系统</h3>
 <p>Qwen Code 支持插件扩展，允许开发者添加自定义工具和功能。</p>
@@ -733,7 +733,7 @@ flowchart TD
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

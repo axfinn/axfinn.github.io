@@ -383,10 +383,10 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
 <h3 id="4-运行-docker-容器">4. 运行 Docker 容器</h3>
 <p>镜像构建完成后，您可以在 Docker 容器中运行应用程序。关键在于将应用程序的端口（5000）映射到您主机上的一个端口（例如 80 或 8000），并挂载一个卷用于数据持久化存储。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
-</span></span></span><span class="line"><span class="cl">  --name hotel-instance <span class="se">\
-</span></span></span><span class="line"><span class="cl">  -p 80:5000 <span class="se">\
-</span></span></span><span class="line"><span class="cl">  -v /path/on/host/for/data:/app/hotel.db <span class="se">\
-</span></span></span><span class="line"><span class="cl">  hotel-app
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name hotel-instance <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 80:5000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -v /path/on/host/for/data:/app/hotel.db <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  hotel-app
 </span></span></code></pre></div><p><strong>参数说明：</strong></p>
 <ul>
 <li><code>-d</code>: 在分离模式（后台）运行容器。</li>
@@ -539,7 +539,7 @@ ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目�
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

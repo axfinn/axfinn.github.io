@@ -406,13 +406,13 @@ fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 运行容器</span>
 </span></span><span class="line"><span class="cl">docker run -d <span class="se">\
-</span></span></span><span class="line"><span class="cl">--name fcopy <span class="se">\
-</span></span></span><span class="line"><span class="cl">-p 2001:2001 <span class="se">\
-</span></span></span><span class="line"><span class="cl">-v /path/to/your/data:/app/uploads <span class="se">\
-</span></span></span><span class="line"><span class="cl">axiu/fcopy:latest
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--name fcopy <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-p 2001:2001 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-v /path/to/your/data:/app/uploads <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>axiu/fcopy:latest
 </span></span></code></pre></div><p>或者使用 Docker Compose：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">fcopy</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">axiu/fcopy:1.2.16</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">fcopy</span><span class="w">
@@ -492,7 +492,7 @@ fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨
 <li>创建 <code>docker-compose.yml</code> 文件：</li>
 </ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.8&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">fcopy</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">axiu/fcopy:1.2.16</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">fcopy</span><span class="w">
@@ -727,7 +727,7 @@ fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

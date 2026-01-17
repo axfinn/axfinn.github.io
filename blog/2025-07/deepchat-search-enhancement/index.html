@@ -389,13 +389,13 @@
 <p>DeepChat 定义了统一的搜索接口：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">SearchEngine</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 执行搜索
-</span></span></span><span class="line"><span class="cl">  <span class="nx">search</span><span class="p">(</span><span class="nx">query</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">options?</span>: <span class="kt">SearchOptions</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">SearchResult</span><span class="err">[]</span><span class="p">&gt;;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">search</span><span class="p">(</span><span class="nx">query</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">options?</span>: <span class="kt">SearchOptions</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">SearchResult</span><span class="err">[]</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取搜索建议
-</span></span></span><span class="line"><span class="cl">  <span class="nx">getSuggestions</span><span class="p">(</span><span class="nx">query</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">[]</span><span class="p">&gt;;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getSuggestions</span><span class="p">(</span><span class="nx">query</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">[]</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 验证配置
-</span></span></span><span class="line"><span class="cl">  <span class="nx">validateConfig</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">SearchConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">validateConfig</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">SearchConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">SearchResult</span> <span class="p">{</span>
@@ -473,18 +473,18 @@
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="nx">shouldTriggerSearch</span><span class="p">(</span><span class="nx">query</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">context</span>: <span class="kt">ChatContext</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 检查关键词
-</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">realtimeKeywords</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">keyword</span> <span class="o">=&gt;</span> 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">realtimeKeywords</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">keyword</span> <span class="o">=&gt;</span> 
 </span></span><span class="line"><span class="cl">      <span class="nx">query</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">includes</span><span class="p">(</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 检查上下文
-</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">lastModelResponse</span><span class="o">?</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;I recommend checking&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">lastModelResponse</span><span class="o">?</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;I recommend checking&#39;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 使用模型判断
-</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelBasedDetection</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">modelBasedDetection</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="搜索结果处理与注入">搜索结果处理与注入</h3>
@@ -496,21 +496,21 @@
 </span></span><span class="line"><span class="cl">    <span class="nx">conversation</span>: <span class="kt">Message</span><span class="p">[]</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">Message</span><span class="err">[]</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 过滤和排序结果
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">filteredResults</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">filterResults</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">filteredResults</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">filterResults</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">sortedResults</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rankResults</span><span class="p">(</span><span class="nx">filteredResults</span><span class="p">,</span> <span class="nx">query</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 构造上下文信息
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">searchContext</span> <span class="o">=</span> <span class="nx">sortedResults</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">searchContext</span> <span class="o">=</span> <span class="nx">sortedResults</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">({</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">title</span>: <span class="kt">result.title</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">url</span>: <span class="kt">result.url</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">content</span>: <span class="kt">result.snippet</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 创建包含搜索结果的系统消息
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">systemMessage</span>: <span class="kt">Message</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">systemMessage</span>: <span class="kt">Message</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">role</span><span class="o">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">content</span><span class="o">:</span> <span class="sb">`以下是与用户查询相关的搜索结果：
-</span></span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nx">searchContext</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> 
+</span></span></span><span class="line"><span class="cl"><span class="sb"></span><span class="si">${</span><span class="nx">searchContext</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> 
 </span></span><span class="line"><span class="cl">  <span class="sb">`</span><span class="si">${</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="sb">. </span><span class="si">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">url</span><span class="si">}</span><span class="sb">): </span><span class="si">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">content</span><span class="si">}</span><span class="sb">`</span>
 </span></span><span class="line"><span class="cl"><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">
 </span></span></span><span class="line"><span class="cl"><span class="sb">
@@ -518,7 +518,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 将系统消息注入到对话历史中
-</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="nx">systemMessage</span><span class="p">,</span> <span class="p">...</span><span class="nx">conversation</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="p">[</span><span class="nx">systemMessage</span><span class="p">,</span> <span class="p">...</span><span class="nx">conversation</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="搜索增强对话流程">搜索增强对话流程</h3>
@@ -563,14 +563,14 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">WebBrowser</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">scrapePage</span><span class="p">(</span><span class="nx">url</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">WebPageContent</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 使用 Puppeteer 或类似工具加载页面
-</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span> <span class="nx">waitUntil</span><span class="o">:</span> <span class="s1">&#39;networkidle2&#39;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 提取页面内容
-</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="nx">title</span>: <span class="kt">document.title</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">          <span class="nx">text</span>: <span class="kt">document.body.innerText</span><span class="p">,</span>
@@ -888,7 +888,7 @@ class PrivacyAwareSearch {
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

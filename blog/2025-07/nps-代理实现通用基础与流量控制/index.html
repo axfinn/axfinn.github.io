@@ -351,18 +351,18 @@ base.go：代理服务的基石 base.go 文件定义了 NPS 中所有代理服�
 <ul>
 <li>
 <p><strong><code>Service interface</code></strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Service</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">Close</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>这是所有 NPS 代理服务必须实现的接口。任何代理服务，无论是 TCP 隧道、SOCKS5 代理还是 HTTP 代理，都必须提供 <code>Start()</code> 方法来启动服务，以及 <code>Close()</code> 方法来优雅地关闭服务。这体现了面向接口编程的思想，使得 NPS 能够以统一的方式管理和操作各种代理服务。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Service</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Start</span><span class="p">()</span> <span class="kt">error</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Close</span><span class="p">()</span> <span class="kt">error</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这是所有 NPS 代理服务必须实现的接口。任何代理服务，无论是 TCP 隧道、SOCKS5 代理还是 HTTP 代理，都必须提供 <code>Start()</code> 方法来启动服务，以及 <code>Close()</code> 方法来优雅地关闭服务。这体现了面向接口编程的思想，使得 NPS 能够以统一的方式管理和操作各种代理服务。</p>
 </li>
 <li>
 <p><strong><code>NetBridge interface</code></strong>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">NetBridge</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">SendLinkInfo</span><span class="p">(</span><span class="nx">clientId</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">link</span><span class="w"> </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">target</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>这个接口定义了与 <code>bridge</code> 模块（服务端与客户端通信的桥梁）交互的方法。<code>SendLinkInfo</code> 方法负责将客户端的连接信息 (<code>link</code>) 和隧道信息 (<code>t</code>) 发送给 <code>bridge</code>，并从 <code>bridge</code> 获取到与目标服务建立的连接 (<code>target net.Conn</code>)。这表明 <code>proxy</code> 模块本身并不直接与客户端通信，而是通过 <code>bridge</code> 模块进行抽象和解耦。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">NetBridge</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">SendLinkInfo</span><span class="p">(</span><span class="nx">clientId</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">link</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">,</span> <span class="nx">t</span> <span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span><span class="p">)</span> <span class="p">(</span><span class="nx">target</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这个接口定义了与 <code>bridge</code> 模块（服务端与客户端通信的桥梁）交互的方法。<code>SendLinkInfo</code> 方法负责将客户端的连接信息 (<code>link</code>) 和隧道信息 (<code>t</code>) 发送给 <code>bridge</code>，并从 <code>bridge</code> 获取到与目标服务建立的连接 (<code>target net.Conn</code>)。这表明 <code>proxy</code> 模块本身并不直接与客户端通信，而是通过 <code>bridge</code> 模块进行抽象和解耦。</p>
 </li>
 </ul>
 <p>NPS 代理服务的核心接口可以用下图表示：</p>
@@ -404,14 +404,14 @@ classDiagram
 </div>
 <h3 id="baseserver通用代理服务结构体"><code>BaseServer</code>：通用代理服务结构体</h3>
 <p><code>BaseServer</code> 是一个嵌入在具体代理服务结构体中的基础结构体，它包含了所有代理服务通用的属性和方法：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">BaseServer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">id</span><span class="w">           </span><span class="kt">int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">bridge</span><span class="w">       </span><span class="nx">NetBridge</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">task</span><span class="w">         </span><span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">errorContent</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">BaseServer</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">id</span>           <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bridge</span>       <span class="nx">NetBridge</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">task</span>         <span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">errorContent</span> <span class="p">[]</span><span class="kt">byte</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li><code>id int</code>：代理服务的唯一标识符。</li>
 <li><code>bridge NetBridge</code>：实现了 <code>NetBridge</code> 接口的实例，用于与客户端通信。</li>
 <li><code>task *file.Tunnel</code>：当前代理服务所对应的隧道配置信息。</li>
@@ -645,7 +645,7 @@ sequenceDiagram
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   

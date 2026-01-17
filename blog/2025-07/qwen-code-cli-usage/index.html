@@ -423,7 +423,7 @@ echo &#34;帮我生成一个 React 组件&#34; | qwen-code CLI 入口实现 Qwen
 </span></span></code></pre></div><h3 id="批处理模式">批处理模式</h3>
 <p>通过结合 shell 脚本，可以实现批处理模式：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="k">for</span> file in *.js<span class="p">;</span> <span class="k">do</span>
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">for</span> file in *.js<span class="p">;</span> <span class="k">do</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;优化 </span><span class="nv">$file</span><span class="s2"> 文件&#34;</span> <span class="p">|</span> qwen-code &gt;&gt; optimizations.txt
 </span></span><span class="line"><span class="cl"><span class="k">done</span>
 </span></span></code></pre></div><h2 id="配置管理">配置管理</h2>
@@ -593,7 +593,7 @@ echo &#34;帮我生成一个 React 组件&#34; | qwen-code CLI 入口实现 Qwen
   
   <div class="copyright py-4">
     
-    <span> 2016 - 2025 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
         target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
   </div>
   
