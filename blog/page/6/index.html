@@ -429,6 +429,12 @@
 
   
 
+  
+
+  
+
+  
+
 
 
 
@@ -480,6 +486,24 @@
             <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/ai%E5%B7%A5%E5%85%B7">
                 <span>Ai工具 (8)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://blog.jaxiu.cn/categories/%E7%94%9F%E6%B4%BB">
+                <span>生活 (4)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://blog.jaxiu.cn/categories/%E5%AD%95%E6%9C%9F%E6%8C%87%E5%8D%97">
+                <span>孕期指南 (3)</span>
               </a>
             </li>           
           
@@ -640,15 +664,6 @@
               <li class="middot"></li>
             
             <li class="py-1">
-              <a href="https://blog.jaxiu.cn/categories/%E7%94%9F%E6%B4%BB">
-                <span>生活 (1)</span>
-              </a>
-            </li>           
-          
-            
-              <li class="middot"></li>
-            
-            <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1">
                 <span>系统设计 (1)</span>
               </a>
@@ -672,6 +687,12 @@
 
     
           
+
+  
+
+  
+
+  
 
   
 
@@ -873,10 +894,10 @@
             <li><a href="https://blog.jaxiu.cn/tags/vue" role="button"><span>vue (3)</span></a></li>
           
         
-            <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0" role="button"><span>多平台 (3)</span></a></li>
+            <li><a href="https://blog.jaxiu.cn/tags/%E4%BA%A7%E6%A3%80" role="button"><span>产检 (3)</span></a></li>
           
         
-            <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%A2%E6%88%B7%E7%AB%AF" role="button"><span>客户端 (3)</span></a></li>
+            <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E5%B9%B3%E5%8F%B0" role="button"><span>多平台 (3)</span></a></li>
           
         
       </div>
@@ -886,6 +907,12 @@
   
 
           
+  
+
+  
+
+  
+
   
 
   
@@ -919,6 +946,8 @@
       <div class="post-meta" >
         
           
+          
+            <li class="py-1"><a href="https://blog.jaxiu.cn/series/%E5%AD%95%E6%9C%9F%E7%9F%A5%E8%AF%86"><span>孕期知识 (3)</span></a></li>
           
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/devtools"><span>Devtools (2)</span></a></li>
           
@@ -955,7 +984,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  63 posts
+                  66 posts
                 </div>
               
             </div>
@@ -995,7 +1024,7 @@
         <a href="https://blog.jaxiu.cn/blog/page/7/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="https://blog.jaxiu.cn/blog/page/21/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="https://blog.jaxiu.cn/blog/page/22/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
             </div>
@@ -1003,26 +1032,25 @@
             
                 <div class="post-wrapper white-bg post-card">
   
-  <a href="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/">
+  <a href="https://blog.jaxiu.cn/blog/2025-08/todoing-project-overview/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">DeepChat 安全与隐私保护机制</div>
+      <div class="px-4 post-heading">todoIng 项目概览：像管理代码一样管理你的任务</div>
       <ul class="post-meta li-x mt-1">
         
-          <li>Jul 31, 2025</li>
+          <li>Aug 1, 2025</li>
         
     
         
           <li class="middot"></li>
-          <li>7 minutes read</li>
+          <li>3 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
-安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计：
-┌─────────────────────────────────────────────────────────────────────┐ │ DeepChat 安全架构 │ ├─────────────────────────────────────────────────────────────────────┤ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 应用层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 用户认证 │ │ 权限控制 │ │ 数据加密与隐私保护 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 传输层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ HTTPS/TLS │ │ 网络代理 │ │ API 密钥安全管理 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 存储层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 本地存储加密 │ │ 配置文件保护 │ │ 会话数据访问控制 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ └─────────────────────────────────────────────────────────────────────┘ 数据加密机制 本地数据存储加密 DeepChat 对本地存储的敏感数据进行加密处理：
+      todoIng 项目概览：像管理代码一样管理你的任务 在当今快节奏的工作环境中，任务管理工具已成为我们日常工作不可或缺的一部分。然而，大多数任务管理工具只能记录任务的当前状态，缺乏对任务完整生命周期的追踪。为了解决这个问题，我开发了 todoIng - 一个创新的任务管理系统，它不仅提供基本的任务管理功能，还为每个任务提供完整的生命周期追踪和变更历史记录，就像 Git 管理代码变更一样管理任务。
+什么是 todoIng？ todoIng 是一个现代化的任务管理系统，其核心理念是将软件开发中的版本控制概念应用到任务管理中。正如 Git 能够追踪代码的每一次变更一样，todoIng 能够追踪任务从创建到完成的每一个状态变化，为用户提供完整的任务历史记录。
 ......
     
   </a>
@@ -1035,7 +1063,81 @@
         
           <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
         
-          <li><a href="https://blog.jaxiu.cn/categories/%E5%AE%89%E5%85%A8"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 安全 </a></li>
+          <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/todoing" role="button">todoIng </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86" role="button">任务管理 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/git" role="button">Git </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/node.js" role="button">Node.js </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/react" role="button">React </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://blog.jaxiu.cn/blog/2025-07/deepchat-series-summary/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">DeepChat 系列总结：构建下一代 AI 交互平台的完整解析</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 31, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      DeepChat 系列总结：构建下一代 AI 交互平台的完整解析 引言 在过去的一系列文章中，我们深入探讨了 DeepChat 这一开源 AI 聊天平台的各个方面。从项目概览到具体的技术实现，从架构设计到企业级应用，我们全面剖析了这个功能强大的多模型 AI 对话平台。本文将对整个系列进行总结，并展望 AI 交互平台的未来发展趋势。
+系列文章回顾 我们一共发布了 8 篇关于 DeepChat 的深度分析文章，涵盖了以下关键主题：
+1. 项目概览与核心特性 在第一篇文章中，我们介绍了 DeepChat 的基本概念和核心特性。DeepChat 作为一个多模型 AI 聊天平台，支持几乎所有主流的大语言模型，包括云端模型（如 OpenAI、Gemini、Anthropic）和本地模型（通过 Ollama）。其统一的接口设计让用户可以在一个应用中无缝切换不同的 AI 模型。
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%80%BB%E7%BB%93"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 总结 </a></li>
         
       
       
@@ -1054,13 +1156,13 @@
       <li><a href="https://blog.jaxiu.cn/tags/ai" role="button">AI </a></li>
       
     
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%AE%89%E5%85%A8" role="button">安全 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%80%BB%E7%BB%93" role="button">总结 </a></li>
       
     
-      <li><a href="https://blog.jaxiu.cn/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4" role="button">隐私保护 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button">架构设计 </a></li>
       
     
-      <li><a href="https://blog.jaxiu.cn/tags/%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86" role="button">数据加密 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button">开源项目 </a></li>
       
     
   </div>
@@ -1074,9 +1176,9 @@
             
                 <div class="post-wrapper white-bg post-card">
   
-  <a href="https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/">
+  <a href="https://blog.jaxiu.cn/blog/2025-07/deepchat-performance-enterprise/">
     <div class="post-header text-center">
-      <div class="px-4 post-heading">DeepChat 多窗口多标签架构设计</div>
+      <div class="px-4 post-heading">DeepChat 性能优化与企业级应用</div>
       <ul class="post-meta li-x mt-1">
         
           <li>Jul 31, 2025</li>
@@ -1084,16 +1186,16 @@
     
         
           <li class="middot"></li>
-          <li>5 minutes read</li>
+          <li>6 minutes read</li>
         
       </ul>
     </div>
     
 
     
-      DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口&#43;多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。
-多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念：
-并行处理 - 允许用户同时进行多个独立的对话 上下文隔离 - 每个会话都有独立的上下文，互不干扰 灵活组织 - 用户可以根据需要组织和管理会话 资源优化 - 合理管理内存和计算资源 架构图示 ┌─────────────────────────────────────────────────────────────────────┐ │ DeepChat 多窗口架构 │ ├─────────────────────────────────────────────────────────────────────┤ │ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ │ │ │ 主窗口 │ │ 子窗口A │ │ 子窗口B │ │ │ │ │ │ │ │ │ │ │ │ ┌─────────────┐ │ │ ┌─────────────┐ │ │ ┌─────────────┐ │ │ │ │ │ 标签页1 │ │ │ │ 标签页1 │ │ │ │ 标签页1 │ │ │ │ │ ├─────────────┤ │ │ ├─────────────┤ │ │ ├─────────────┤ │ │ │ │ │ 标签页2 │ │ │ │ 标签页2 │ │ │ │ 标签页2 │ │ │ │ │ ├─────────────┤ │ │ └─────────────┘ │ │ └─────────────┘ │ │ │ │ │ 标签页3 │ │ │ │ │ │ │ │ │ └─────────────┘ │ │ │ │ │ │ │ └─────────────────┘ └─────────────────┘ └─────────────────┘ │ └─────────────────────────────────────────────────────────────────────┘ 会话管理机制 会话数据结构 DeepChat 中的会话采用如下数据结构：
+      DeepChat 性能优化与企业级应用 引言 随着 AI 技术的快速发展，越来越多的企业开始将 AI 工具集成到其工作流程中。DeepChat 作为一个功能强大的开源 AI 聊天平台，不仅适用于个人用户，也具备了企业级应用的潜力。本文将深入探讨 DeepChat 的性能优化策略和企业级应用实践。
+架构层面的性能优化 内存管理优化 DeepChat 采用了多种内存管理策略来优化性能：
+class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; // 1GB private gcInterval: NodeJS.Timeout | null = null; constructor() { this.startMemoryMonitoring(); } // 监控内存使用情况 private startMemoryMonitoring(): void { this.gcInterval = setInterval(() =&gt; { const memoryUsage = process.memoryUsage(); // 检查内存使用是否超过阈值 if (memoryUsage.heapUsed &gt; this.memoryThreshold) { this.performGarbageCollection(); } // 记录内存使用情况 this.logMemoryUsage(memoryUsage); }, 30000); // 每30秒检查一次 } // 执行垃圾回收 private performGarbageCollection(): void { // 卸载不活跃的会话 SessionManager.getInstance().unloadInactiveSessions(); // 清理缓存 CacheManager.getInstance().cleanup(); // 如果支持，触发 Node.js 垃圾回收 if (global.gc) { global.gc(); } } // 优化大型数据处理 async processLargeData&lt;T&gt;( data: T[], processor: (item: T) =&gt; Promise&lt;any&gt;, batchSize: number = 100 ): Promise&lt;any[]&gt; { const results: any[] = []; // 分批处理数据以避免内存溢出 for (let i = 0; i &lt; data.length; i &#43;= batchSize) { const batch = data.slice(i, i &#43; batchSize); const batchResults = await Promise.all( batch.map(item =&gt; processor(item)) ); results.push(...batchResults); // 给事件循环一些时间 await new Promise(resolve =&gt; setImmediate(resolve)); } return results; } } 渲染性能优化 针对 UI 渲染性能，DeepChat 采用了多种优化技术：
 ......
     
   </a>
@@ -1125,87 +1227,13 @@
       <li><a href="https://blog.jaxiu.cn/tags/ai" role="button">AI </a></li>
       
     
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E7%AA%97%E5%8F%A3" role="button">多窗口 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" role="button">性能优化 </a></li>
       
     
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E6%A0%87%E7%AD%BE" role="button">多标签 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/ui%E8%AE%BE%E8%AE%A1" role="button">UI设计 </a></li>
+      <li><a href="https://blog.jaxiu.cn/tags/%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8" role="button">企业应用 </a></li>
       
     
       <li><a href="https://blog.jaxiu.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button">架构设计 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://blog.jaxiu.cn/blog/2025-07/deepchat-search-enhancement/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">DeepChat 搜索增强功能实现分析</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 31, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>6 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      DeepChat 搜索增强功能实现分析 引言 在当今信息爆炸的时代，单纯的 AI 模型已经不能满足用户对实时、准确信息的需求。DeepChat 通过强大的搜索增强功能，将 AI 的智能与搜索引擎的实时信息相结合，为用户提供更加准确和及时的回答。本文将深入分析 DeepChat 的搜索增强功能实现机制。
-搜索增强的核心价值 为什么需要搜索增强？ 传统的 AI 模型存在以下局限性：
-知识截止时间 - 大多数模型的知识截止到训练数据的时间点 实时信息缺失 - 无法获取最新的新闻、股价、天气等实时信息 事实准确性 - 模型可能会产生&#34;幻觉&#34;，提供不准确的信息 个性化限制 - 无法访问用户的私人数据和特定环境信息 搜索增强功能通过将 AI 与搜索引擎结合，有效解决了这些问题。
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-          <li><a href="https://blog.jaxiu.cn/categories/ai%E5%B7%A5%E5%85%B7"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI工具 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://blog.jaxiu.cn/tags/deepchat" role="button">DeepChat </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/ai" role="button">AI </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E6%90%9C%E7%B4%A2%E5%A2%9E%E5%BC%BA" role="button">搜索增强 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E9%9B%86%E6%88%90" role="button">搜索引擎集成 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2" role="button">信息检索 </a></li>
       
     
   </div>

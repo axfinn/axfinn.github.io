@@ -12,19 +12,57 @@
     content="DevTools 孕期管理模块：全栈实现一个云端孕期工具套件
 在 DevTools 开发者工具平台上新增了一个有温度的功能——孕期管理模块（/yun）。这个模块提供完整的孕期管理工具套件，包括待产包清单、宝宝用品清单、产检时间表、体重记录、胎动计数和孕期知识库，所有数据云端存储、密码保护。
 功能概览
-┌─────────────────────────────────────────────┐
-│              孕期管理 /yun                    │
-├─────────────────────────────────────────────┤
-│  概览面板  │  当前孕周 &#43; 倒计时 &#43; 宝宝大小    │
-├─────────────────────────────────────────────┤
-│  待产包    │  4类 31项预置 &#43; 自定义 &#43; 进度     │
-│  宝宝用品  │  6类 33项预置 &#43; 自定义 &#43; 进度     │
-│  产检      │  14次产检时间轴 &#43; 勾选 &#43; 备注     │
-│  体重      │  记录 &#43; SVG折线图 &#43; 变化追踪      │
-│  胎动      │  大按钮计数器 &#43; 计时 &#43; 历史       │
-│  知识库    │  20篇孕周指南 &#43; 7篇专题           │
-└─────────────────────────────────────────────┘
+
+
+graph LR
+    A[&#34;孕期管理 /yun&#34;] --&gt; B[&#34;概览面板&#34;]
+    A --&gt; C[&#34;待产包&#34;]
+    A --&gt; D[&#34;宝宝用品&#34;]
+    A --&gt; E[&#34;产检时间表&#34;]
+    A --&gt; F[&#34;体重记录&#34;]
+    A --&gt; G[&#34;胎动计数&#34;]
+    A --&gt; H[&#34;知识库&#34;]
+
+    B --- B1[&#34;孕周 &#43; 倒计时 &#43; 宝宝大小&#34;]
+    C --- C1[&#34;4类 31项预置 &#43; 自定义&#34;]
+    D --- D1[&#34;6类 33项预置 &#43; 自定义&#34;]
+    E --- E1[&#34;14次产检时间轴 &#43; 备注&#34;]
+    F --- F1[&#34;SVG折线图 &#43; 变化追踪&#34;]
+    G --- G1[&#34;大按钮计数器 &#43; 计时&#34;]
+    H --- H1[&#34;20篇孕周 &#43; 7篇专题&#34;]
+
+
 架构设计
+
+
+graph TB
+    subgraph 前端[&#34;前端 Vue3 &#43; Element Plus&#34;]
+        UI[&#34;PregnancyTool.vue&#34;] --&gt;|debounce 2s| API_CALL[&#34;fetch PUT /api/pregnancy/:id&#34;]
+        LS[&#34;localStorage&#34;] -.-&gt;|creatorKey 免密加载| UI
+    end
+
+    subgraph 后端[&#34;后端 Go &#43; Gin&#34;]
+        ROUTER[&#34;/api/pregnancy&#34;] --&gt; HANDLER[&#34;PregnancyHandler&#34;]
+        HANDLER --&gt;|bcrypt 验证| AUTH[&#34;密码/CreatorKey 鉴权&#34;]
+        HANDLER --&gt;|IP 限流| RATE[&#34;5次/IP/小时&#34;]
+        HANDLER --&gt; DB_OP[&#34;CRUD 操作&#34;]
+    end
+
+    subgraph 数据库[&#34;SQLite&#34;]
+        TABLE[&#34;pregnancy_profiles&#34;]
+        TABLE --&gt;|&#34;单行 = 一个用户&#34;| JSON[&#34;data JSON blob&#34;]
+        JSON --&gt; J1[&#34;hospital_bag&#34;]
+        JSON --&gt; J2[&#34;baby_essentials&#34;]
+        JSON --&gt; J3[&#34;prenatal_checks&#34;]
+        JSON --&gt; J4[&#34;weight_records&#34;]
+        JSON --&gt; J5[&#34;fetal_movements&#34;]
+    end
+
+    API_CALL --&gt; ROUTER
+    DB_OP --&gt; TABLE
+    CLEANUP[&#34;定时清理 goroutine&#34;] --&gt;|每小时| TABLE
+
+
 单表 &#43; JSON Blob 模式
 最核心的设计决策是采用单表 &#43; JSON data 列的方案，而非为每种数据（清单、产检、体重、胎动）创建独立表：">
 
@@ -32,7 +70,7 @@
   <meta property="og:site_name" content="jaxiu He">
   <meta property="og:title" content="DevTools 孕期管理模块：全栈实现一个云端孕期工具套件">
   <meta property="og:description" content="DevTools 孕期管理模块：全栈实现一个云端孕期工具套件 在 DevTools 开发者工具平台上新增了一个有温度的功能——孕期管理模块（/yun）。这个模块提供完整的孕期管理工具套件，包括待产包清单、宝宝用品清单、产检时间表、体重记录、胎动计数和孕期知识库，所有数据云端存储、密码保护。
-功能概览 ┌─────────────────────────────────────────────┐ │ 孕期管理 /yun │ ├─────────────────────────────────────────────┤ │ 概览面板 │ 当前孕周 &#43; 倒计时 &#43; 宝宝大小 │ ├─────────────────────────────────────────────┤ │ 待产包 │ 4类 31项预置 &#43; 自定义 &#43; 进度 │ │ 宝宝用品 │ 6类 33项预置 &#43; 自定义 &#43; 进度 │ │ 产检 │ 14次产检时间轴 &#43; 勾选 &#43; 备注 │ │ 体重 │ 记录 &#43; SVG折线图 &#43; 变化追踪 │ │ 胎动 │ 大按钮计数器 &#43; 计时 &#43; 历史 │ │ 知识库 │ 20篇孕周指南 &#43; 7篇专题 │ └─────────────────────────────────────────────┘ 架构设计 单表 &#43; JSON Blob 模式 最核心的设计决策是采用单表 &#43; JSON data 列的方案，而非为每种数据（清单、产检、体重、胎动）创建独立表：">
+功能概览 graph LR A[&#34;孕期管理 /yun&#34;] --&gt; B[&#34;概览面板&#34;] A --&gt; C[&#34;待产包&#34;] A --&gt; D[&#34;宝宝用品&#34;] A --&gt; E[&#34;产检时间表&#34;] A --&gt; F[&#34;体重记录&#34;] A --&gt; G[&#34;胎动计数&#34;] A --&gt; H[&#34;知识库&#34;] B --- B1[&#34;孕周 &#43; 倒计时 &#43; 宝宝大小&#34;] C --- C1[&#34;4类 31项预置 &#43; 自定义&#34;] D --- D1[&#34;6类 33项预置 &#43; 自定义&#34;] E --- E1[&#34;14次产检时间轴 &#43; 备注&#34;] F --- F1[&#34;SVG折线图 &#43; 变化追踪&#34;] G --- G1[&#34;大按钮计数器 &#43; 计时&#34;] H --- H1[&#34;20篇孕周 &#43; 7篇专题&#34;] 架构设计 graph TB subgraph 前端[&#34;前端 Vue3 &#43; Element Plus&#34;] UI[&#34;PregnancyTool.vue&#34;] --&gt;|debounce 2s| API_CALL[&#34;fetch PUT /api/pregnancy/:id&#34;] LS[&#34;localStorage&#34;] -.-&gt;|creatorKey 免密加载| UI end subgraph 后端[&#34;后端 Go &#43; Gin&#34;] ROUTER[&#34;/api/pregnancy&#34;] --&gt; HANDLER[&#34;PregnancyHandler&#34;] HANDLER --&gt;|bcrypt 验证| AUTH[&#34;密码/CreatorKey 鉴权&#34;] HANDLER --&gt;|IP 限流| RATE[&#34;5次/IP/小时&#34;] HANDLER --&gt; DB_OP[&#34;CRUD 操作&#34;] end subgraph 数据库[&#34;SQLite&#34;] TABLE[&#34;pregnancy_profiles&#34;] TABLE --&gt;|&#34;单行 = 一个用户&#34;| JSON[&#34;data JSON blob&#34;] JSON --&gt; J1[&#34;hospital_bag&#34;] JSON --&gt; J2[&#34;baby_essentials&#34;] JSON --&gt; J3[&#34;prenatal_checks&#34;] JSON --&gt; J4[&#34;weight_records&#34;] JSON --&gt; J5[&#34;fetal_movements&#34;] end API_CALL --&gt; ROUTER DB_OP --&gt; TABLE CLEANUP[&#34;定时清理 goroutine&#34;] --&gt;|每小时| TABLE 单表 &#43; JSON Blob 模式 最核心的设计决策是采用单表 &#43; JSON data 列的方案，而非为每种数据（清单、产检、体重、胎动）创建独立表：">
   <meta property="og:locale" content="zn_Hans">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blog">
@@ -365,19 +403,57 @@
             <h1 id="devtools-孕期管理模块全栈实现一个云端孕期工具套件">DevTools 孕期管理模块：全栈实现一个云端孕期工具套件</h1>
 <p>在 DevTools 开发者工具平台上新增了一个有温度的功能——孕期管理模块（<code>/yun</code>）。这个模块提供完整的孕期管理工具套件，包括待产包清单、宝宝用品清单、产检时间表、体重记录、胎动计数和孕期知识库，所有数据云端存储、密码保护。</p>
 <h2 id="功能概览">功能概览</h2>
-<pre tabindex="0"><code>┌─────────────────────────────────────────────┐
-│              孕期管理 /yun                    │
-├─────────────────────────────────────────────┤
-│  概览面板  │  当前孕周 + 倒计时 + 宝宝大小    │
-├─────────────────────────────────────────────┤
-│  待产包    │  4类 31项预置 + 自定义 + 进度     │
-│  宝宝用品  │  6类 33项预置 + 自定义 + 进度     │
-│  产检      │  14次产检时间轴 + 勾选 + 备注     │
-│  体重      │  记录 + SVG折线图 + 变化追踪      │
-│  胎动      │  大按钮计数器 + 计时 + 历史       │
-│  知识库    │  20篇孕周指南 + 7篇专题           │
-└─────────────────────────────────────────────┘
-</code></pre><h2 id="架构设计">架构设计</h2>
+<div class="mermaid">
+
+graph LR
+    A["孕期管理 /yun"] --> B["概览面板"]
+    A --> C["待产包"]
+    A --> D["宝宝用品"]
+    A --> E["产检时间表"]
+    A --> F["体重记录"]
+    A --> G["胎动计数"]
+    A --> H["知识库"]
+
+    B --- B1["孕周 + 倒计时 + 宝宝大小"]
+    C --- C1["4类 31项预置 + 自定义"]
+    D --- D1["6类 33项预置 + 自定义"]
+    E --- E1["14次产检时间轴 + 备注"]
+    F --- F1["SVG折线图 + 变化追踪"]
+    G --- G1["大按钮计数器 + 计时"]
+    H --- H1["20篇孕周 + 7篇专题"]
+
+</div>
+<h2 id="架构设计">架构设计</h2>
+<div class="mermaid">
+
+graph TB
+    subgraph 前端["前端 Vue3 + Element Plus"]
+        UI["PregnancyTool.vue"] -->|debounce 2s| API_CALL["fetch PUT /api/pregnancy/:id"]
+        LS["localStorage"] -.->|creatorKey 免密加载| UI
+    end
+
+    subgraph 后端["后端 Go + Gin"]
+        ROUTER["/api/pregnancy"] --> HANDLER["PregnancyHandler"]
+        HANDLER -->|bcrypt 验证| AUTH["密码/CreatorKey 鉴权"]
+        HANDLER -->|IP 限流| RATE["5次/IP/小时"]
+        HANDLER --> DB_OP["CRUD 操作"]
+    end
+
+    subgraph 数据库["SQLite"]
+        TABLE["pregnancy_profiles"]
+        TABLE -->|"单行 = 一个用户"| JSON["data JSON blob"]
+        JSON --> J1["hospital_bag"]
+        JSON --> J2["baby_essentials"]
+        JSON --> J3["prenatal_checks"]
+        JSON --> J4["weight_records"]
+        JSON --> J5["fetal_movements"]
+    end
+
+    API_CALL --> ROUTER
+    DB_OP --> TABLE
+    CLEANUP["定时清理 goroutine"] -->|每小时| TABLE
+
+</div>
 <h3 id="单表--json-blob-模式">单表 + JSON Blob 模式</h3>
 <p>最核心的设计决策是采用<strong>单表 + JSON data 列</strong>的方案，而非为每种数据（清单、产检、体重、胎动）创建独立表：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">pregnancy_profiles</span><span class="w"> </span><span class="p">(</span><span class="w">
@@ -518,27 +594,50 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></div><h2 id="知识库内容">知识库内容</h2>
-<p>知识库是纯前端静态数据，共 <strong>27 篇</strong>内容：</p>
-<p><strong>按孕周（20篇）</strong>：从孕1周到41周+，每2-4周一篇，包含：</p>
-<ul>
-<li>发育特征、胎儿大小</li>
-<li>常见症状、本阶段产检</li>
-<li>注意事项、危险信号</li>
-<li>饮食建议、饮食禁忌</li>
-<li>运动建议、情绪心理</li>
-<li>准爸爸须知</li>
-</ul>
-<p><strong>专题指南（7篇）</strong>：</p>
-<ul>
-<li>分娩方式选择</li>
-<li>母乳喂养指南</li>
-<li>产后恢复与坐月子</li>
-<li>新生儿护理入门</li>
-<li>孕期饮食完全指南</li>
-<li>孕期心理健康</li>
-<li>孕期办事清单</li>
-</ul>
-<p>支持按孕期阶段（早/中/晚期）和专题分类筛选，当前孕周自动高亮。</p>
+<p>知识库是纯前端静态数据，共 <strong>27 篇</strong>内容。同时我们也将完整内容发布为博客系列文章，方便阅读和分享：</p>
+<div class="mermaid">
+
+graph LR
+    subgraph 孕早期["孕早期 1-12周"]
+        E1["1-4周 受精着床"]
+        E2["5-6周 确认怀孕"]
+        E3["7-8周 首次胎心"]
+        E4["9-10周 胚胎→胎儿"]
+        E5["11-12周 NT检查"]
+    end
+
+    subgraph 孕中期["孕中期 13-28周"]
+        M1["13-14周 黄金期"]
+        M2["15-16周 唐筛"]
+        M3["17-18周 初感胎动"]
+        M4["19-20周 大排畸"]
+        M5["21-28周 快速成长"]
+    end
+
+    subgraph 孕晚期["孕晚期 29-40周"]
+        L1["29-32周 冲刺准备"]
+        L2["33-36周 临近足月"]
+        L3["37-40周 等待分娩"]
+        L4["41周+ 过预产期"]
+    end
+
+    subgraph 专题["专题指南"]
+        G1["分娩方式选择"]
+        G2["母乳喂养"]
+        G3["产后恢复"]
+        G4["新生儿护理"]
+        G5["饮食指南"]
+        G6["心理健康"]
+        G7["办事清单"]
+    end
+
+</div>
+<h3 id="系列文章索引">系列文章索引</h3>
+<p><strong>孕早期（1-12周）</strong>：<a href="https://blog.jaxiu.cn/blog/2026-02/pregnancy-early-trimester/">孕早期完全指南</a> — 从受精着床到 NT 检查，5 个关键阶段详解</p>
+<p><strong>孕中期（13-28周）</strong>：<a href="https://blog.jaxiu.cn/blog/2026-02/pregnancy-mid-trimester/">孕中期完全指南</a> — 黄金蜜月期，唐筛、大排畸、糖耐量三大关卡</p>
+<p><strong>孕晚期（29-40周）</strong>：<a href="https://blog.jaxiu.cn/blog/2026-02/pregnancy-late-trimester/">孕晚期完全指南</a> — 冲刺阶段到分娩倒计时</p>
+<p><strong>专题指南</strong>：<a href="https://blog.jaxiu.cn/blog/2026-02/pregnancy-delivery-postpartum/">分娩与产后指南</a> — 分娩方式选择、母乳喂养、产后恢复、新生儿护理</p>
+<p><strong>实用工具</strong>：<a href="https://blog.jaxiu.cn/blog/2026-02/pregnancy-diet-checklist/">孕期饮食与办事清单</a> — 完整饮食禁忌 + 孕期全阶段办事清单</p>
 <h2 id="文件变更清单">文件变更清单</h2>
 <table>
   <thead>
@@ -643,6 +742,13 @@
             </div>
             
             <div class="col-md-6 text-right" >
+              
+                <a href=https://blog.jaxiu.cn/blog/2026-02/pregnancy-early-trimester/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>孕早期完全指南（1-12周）：从验孕到 NT 检查</span>
+                  </div>
+                </a>
               
             </div>
           </div>
