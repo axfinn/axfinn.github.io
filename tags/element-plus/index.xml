@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Element Plus on jaxiu He</title>
+    <link>https://blog.jaxiu.cn/tags/element-plus/</link>
+    <description>Recent content in Element Plus on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Mon, 09 Feb 2026 20:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/element-plus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DevTools 孕期管理模块：全栈实现一个云端孕期工具套件</title>
+      <link>https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/</link>
+      <pubDate>Mon, 09 Feb 2026 20:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/</guid>
+      <description>&lt;h1 id=&#34;devtools-孕期管理模块全栈实现一个云端孕期工具套件&#34;&gt;DevTools 孕期管理模块：全栈实现一个云端孕期工具套件&lt;/h1&gt;&#xA;&lt;p&gt;在 DevTools 开发者工具平台上新增了一个有温度的功能——孕期管理模块（&lt;code&gt;/yun&lt;/code&gt;）。这个模块提供完整的孕期管理工具套件，包括待产包清单、宝宝用品清单、产检时间表、体重记录、胎动计数和孕期知识库，所有数据云端存储、密码保护。&lt;/p&gt;&#xA;&lt;h2 id=&#34;功能概览&#34;&gt;功能概览&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;┌─────────────────────────────────────────────┐&#xA;│              孕期管理 /yun                    │&#xA;├─────────────────────────────────────────────┤&#xA;│  概览面板  │  当前孕周 + 倒计时 + 宝宝大小    │&#xA;├─────────────────────────────────────────────┤&#xA;│  待产包    │  4类 31项预置 + 自定义 + 进度     │&#xA;│  宝宝用品  │  6类 33项预置 + 自定义 + 进度     │&#xA;│  产检      │  14次产检时间轴 + 勾选 + 备注     │&#xA;│  体重      │  记录 + SVG折线图 + 变化追踪      │&#xA;│  胎动      │  大按钮计数器 + 计时 + 历史       │&#xA;│  知识库    │  20篇孕周指南 + 7篇专题           │&#xA;└─────────────────────────────────────────────┘&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;架构设计&#34;&gt;架构设计&lt;/h2&gt;&#xA;&lt;h3 id=&#34;单表--json-blob-模式&#34;&gt;单表 + JSON Blob 模式&lt;/h3&gt;&#xA;&lt;p&gt;最核心的设计决策是采用&lt;strong&gt;单表 + JSON data 列&lt;/strong&gt;的方案，而非为每种数据（清单、产检、体重、胎动）创建独立表：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
