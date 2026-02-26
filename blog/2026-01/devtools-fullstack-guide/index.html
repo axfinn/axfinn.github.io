@@ -12,22 +12,16 @@
     content="开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。
 本文介绍 DevTools —— 一个功能完整的开发者工具站，包含 16&#43; 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="DevTools：从零构建全栈开发者工具站">
-  <meta property="og:description" content="开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。
-本文介绍 DevTools —— 一个功能完整的开发者工具站，包含 16&#43; 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2026-01-17T14:00:00+08:00">
-    <meta property="article:modified_time" content="2026-01-17T14:00:00+08:00">
-    <meta property="article:tag" content="Go语言">
-    <meta property="article:tag" content="Vue">
-    <meta property="article:tag" content="全栈开发">
-    <meta property="article:tag" content="Docker">
-    <meta property="article:tag" content="WebSocket">
-      <meta property="og:see_also" content="https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/">
+  <meta property="og:title" content="DevTools：从零构建全栈开发者工具站" />
+<meta property="og:description" content="开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。
+本文介绍 DevTools —— 一个功能完整的开发者工具站，包含 16&#43; 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2026-01-17T14:00:00+08:00" />
+<meta property="article:modified_time" content="2026-01-17T14:00:00+08:00" />
+<meta property="og:see_also" content="https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/" />
+
+
 
 
   <title>
@@ -356,54 +350,54 @@
 </ul>
 <p><strong>核心功能：</strong></p>
 <table>
-  <thead>
-      <tr>
-          <th>工具</th>
-          <th>功能描述</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>JSON 工具</td>
-          <td>格式化、压缩、校验、JSONPath 查询</td>
-      </tr>
-      <tr>
-          <td>Diff 对比</td>
-          <td>字符/单词/行级差异对比</td>
-      </tr>
-      <tr>
-          <td>Markdown</td>
-          <td>实时预览、导出 HTML/PDF</td>
-      </tr>
-      <tr>
-          <td>共享粘贴板</td>
-          <td>临时分享代码片段</td>
-      </tr>
-      <tr>
-          <td>Base64</td>
-          <td>文本/图片编解码</td>
-      </tr>
-      <tr>
-          <td>时间戳</td>
-          <td>时间戳转换与计算</td>
-      </tr>
-      <tr>
-          <td>正则测试</td>
-          <td>正则表达式在线测试</td>
-      </tr>
-      <tr>
-          <td>Mermaid</td>
-          <td>流程图/时序图绘制</td>
-      </tr>
-      <tr>
-          <td>聊天室</td>
-          <td>WebSocket 实时通讯</td>
-      </tr>
-      <tr>
-          <td>短链服务</td>
-          <td>URL 缩短与统计</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>工具</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JSON 工具</td>
+<td>格式化、压缩、校验、JSONPath 查询</td>
+</tr>
+<tr>
+<td>Diff 对比</td>
+<td>字符/单词/行级差异对比</td>
+</tr>
+<tr>
+<td>Markdown</td>
+<td>实时预览、导出 HTML/PDF</td>
+</tr>
+<tr>
+<td>共享粘贴板</td>
+<td>临时分享代码片段</td>
+</tr>
+<tr>
+<td>Base64</td>
+<td>文本/图片编解码</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td>时间戳转换与计算</td>
+</tr>
+<tr>
+<td>正则测试</td>
+<td>正则表达式在线测试</td>
+</tr>
+<tr>
+<td>Mermaid</td>
+<td>流程图/时序图绘制</td>
+</tr>
+<tr>
+<td>聊天室</td>
+<td>WebSocket 实时通讯</td>
+</tr>
+<tr>
+<td>短链服务</td>
+<td>URL 缩短与统计</td>
+</tr>
+</tbody>
 </table>
 <h2 id="架构设计">架构设计</h2>
 <p>整体架构采用前后端分离：</p>
@@ -455,50 +449,50 @@ graph TB
 <p>采用 768px 作为分界点，PC 端显示可折叠侧边栏，移动端使用抽屉菜单：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="c">&lt;!--</span> <span class="nx">PC</span> <span class="nx">端侧边栏</span> <span class="o">--&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">el-aside</span> <span class="nt">v-if</span><span class="o">=</span><span class="s">&#34;!isMobile&#34; :width=&#34;isCollapsed ? &#39;64px&#39; : &#39;200px&#39;&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">el-menu</span> <span class="nt">:collapse</span><span class="o">=</span><span class="s">&#34;isCollapsed&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="c">&lt;!--</span> <span class="nx">菜单项</span> <span class="o">--&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">el-menu</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">el-aside</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">el-aside</span> <span class="nt">v-if</span><span class="s">=&#34;!isMobile&#34; :width=&#34;isCollapsed ? &#39;64px&#39; : &#39;200px&#39;&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;el-menu </span><span class="nt">:collapse</span><span class="s">=&#34;isCollapsed&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="err">&lt;!--</span> <span class="na">菜单项</span> <span class="err">--</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/el-menu&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="err">/el-aside&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c">&lt;!--</span> <span class="nx">移动端抽屉</span> <span class="o">--&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">el-drawer</span> <span class="nt">v-if</span><span class="o">=</span><span class="s">&#34;isMobile&#34; v-model=&#34;drawerVisible&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">el-menu</span><span class="p">&gt;</span><span class="c">&lt;!--</span> <span class="nx">菜单项</span> <span class="o">--&gt;</span><span class="p">&lt;/</span><span class="nt">el-menu</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">el-drawer</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">el-drawer</span> <span class="nt">v-if</span><span class="s">=&#34;isMobile&#34; v-model=&#34;drawerVisible&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">el-menu</span><span class="p">&gt;</span><span class="c">&lt;!--</span> <span class="nx">菜单项</span> <span class="o">--&gt;&lt;</span><span class="err">/el-menu&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="err">/el-drawer&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 </span></span></code></pre></div><h3 id="keep-alive-缓存">Keep-alive 缓存</h3>
 <p>使用 <code>keep-alive</code> 保持组件状态，切换工具时不丢失输入数据：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">router-view</span> <span class="nt">v-slot</span><span class="o">=</span><span class="s">&#34;{ Component }&#34;</span><span class="p">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">router-view</span> <span class="nt">v-slot</span><span class="s">=&#34;{ Component }&#34;</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">keep-alive</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">component</span> <span class="nt">:is</span><span class="o">=</span><span class="s">&#34;Component&#34;</span> <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">keep-alive</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">router-view</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">component</span> <span class="nt">:is</span><span class="s">=&#34;Component&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="err">/keep-alive&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/router-view&gt;</span>
 </span></span></code></pre></div><h2 id="后端实现">后端实现</h2>
 <h3 id="api-路由设计">API 路由设计</h3>
 <p>采用 RESTful 风格，按功能模块分组：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// main.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">setupRoutes</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// main.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">setupRoutes</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">api</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/api&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 粘贴板</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">paste</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/paste&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 粘贴板
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">paste</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/paste&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">paste</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">rateLimiter</span><span class="p">.</span><span class="nf">Middleware</span><span class="p">(),</span> <span class="nx">pasteHandler</span><span class="p">.</span><span class="nx">Create</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">paste</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/:id&#34;</span><span class="p">,</span> <span class="nx">pasteHandler</span><span class="p">.</span><span class="nx">Get</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">paste</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/:id/info&#34;</span><span class="p">,</span> <span class="nx">pasteHandler</span><span class="p">.</span><span class="nx">GetInfo</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 聊天室</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">chat</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/chat&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 聊天室
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">chat</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/chat&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">chat</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/room&#34;</span><span class="p">,</span> <span class="nx">rateLimiter</span><span class="p">.</span><span class="nf">Middleware</span><span class="p">(),</span> <span class="nx">chatHandler</span><span class="p">.</span><span class="nx">CreateRoom</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">chat</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/room/:id/ws&#34;</span><span class="p">,</span> <span class="nx">chatHandler</span><span class="p">.</span><span class="nx">WebSocket</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 短链</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">api</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/shorturl&#34;</span><span class="p">,</span> <span class="nx">rateLimiter</span><span class="p">.</span><span class="nf">Middleware</span><span class="p">(),</span> <span class="nx">shortHandler</span><span class="p">.</span><span class="nx">Create</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 短链
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">api</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/shorturl&#34;</span><span class="p">,</span> <span class="nx">rateLimiter</span><span class="p">.</span><span class="nf">Middleware</span><span class="p">(),</span> <span class="nx">shortHandler</span><span class="p">.</span><span class="nx">Create</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/s/:id&#34;</span><span class="p">,</span> <span class="nx">shortHandler</span><span class="p">.</span><span class="nx">Redirect</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="限流中间件">限流中间件</h3>
 <p>基于 IP 的滑动窗口限流：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// middleware/ratelimit.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">RateLimiter</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// middleware/ratelimit.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">RateLimiter</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">requests</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">limit</span>    <span class="kt">int</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">window</span>   <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
@@ -512,8 +506,8 @@ graph TB
 </span></span><span class="line"><span class="cl">    <span class="nx">now</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">windowStart</span> <span class="o">:=</span> <span class="nx">now</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="o">-</span><span class="nx">rl</span><span class="p">.</span><span class="nx">window</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 清理过期请求</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">valid</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 清理过期请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">valid</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">t</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">rl</span><span class="p">.</span><span class="nx">requests</span><span class="p">[</span><span class="nx">ip</span><span class="p">]</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">t</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">windowStart</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">valid</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">valid</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span>
@@ -529,8 +523,8 @@ graph TB
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="websocket-聊天室">WebSocket 聊天室</h3>
 <p>实现实时通讯的核心架构：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// handlers/chat.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ChatHandler</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// handlers/chat.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ChatHandler</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">rooms</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">Room</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">mu</span>    <span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -547,8 +541,8 @@ graph TB
 </span></span><span class="line"><span class="cl">    <span class="nx">room</span>     <span class="o">*</span><span class="nx">Room</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 消息广播</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Room</span><span class="p">)</span> <span class="nf">broadcast</span><span class="p">(</span><span class="nx">msg</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 消息广播
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Room</span><span class="p">)</span> <span class="nf">broadcast</span><span class="p">(</span><span class="nx">msg</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">RLock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">r</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">RUnlock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
@@ -556,8 +550,8 @@ graph TB
 </span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">client</span><span class="p">.</span><span class="nx">send</span> <span class="o">&lt;-</span> <span class="nx">msg</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">default</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 发送失败，关闭连接</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">close</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 发送失败，关闭连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nb">close</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="nb">delete</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">clients</span><span class="p">,</span> <span class="nx">client</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -602,8 +596,8 @@ graph TB
 </span></span><span class="line"><span class="cl">        <span class="s">&#34;image/jpeg&#34;</span><span class="p">:</span> <span class="p">{</span><span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xD8</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">},</span>
 </span></span><span class="line"><span class="cl">        <span class="s">&#34;image/png&#34;</span><span class="p">:</span>  <span class="p">{</span><span class="mh">0x89</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x4E</span><span class="p">,</span> <span class="mh">0x47</span><span class="p">},</span>
 </span></span><span class="line"><span class="cl">        <span class="s">&#34;image/gif&#34;</span><span class="p">:</span>  <span class="p">{</span><span class="mh">0x47</span><span class="p">,</span> <span class="mh">0x49</span><span class="p">,</span> <span class="mh">0x46</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;video/mp4&#34;</span><span class="p">:</span>  <span class="p">{</span><span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x79</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">},</span> <span class="c1">// ftyp</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;video/mp4&#34;</span><span class="p">:</span>  <span class="p">{</span><span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x79</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">},</span> <span class="c1">// ftyp
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">mimeType</span><span class="p">,</span> <span class="nx">sig</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">signatures</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">HasPrefix</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">sig</span><span class="p">)</span> <span class="p">{</span>
@@ -677,38 +671,38 @@ graph TB
 </span></span></span></code></pre></div><p>最终镜像不到 100MB，包含完整的前后端应用。</p>
 <h2 id="安全机制总结">安全机制总结</h2>
 <table>
-  <thead>
-      <tr>
-          <th>层面</th>
-          <th>措施</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>请求限流</td>
-          <td>IP 维度滑动窗口限流</td>
-      </tr>
-      <tr>
-          <td>内容限制</td>
-          <td>文本 100KB，图片 30MB</td>
-      </tr>
-      <tr>
-          <td>密码保护</td>
-          <td>SHA256 哈希存储</td>
-      </tr>
-      <tr>
-          <td>文件验证</td>
-          <td>魔数检测 + 扩展名白名单</td>
-      </tr>
-      <tr>
-          <td>数据清理</td>
-          <td>定时清理过期数据</td>
-      </tr>
-      <tr>
-          <td>CORS</td>
-          <td>跨域请求控制</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>层面</th>
+<th>措施</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>请求限流</td>
+<td>IP 维度滑动窗口限流</td>
+</tr>
+<tr>
+<td>内容限制</td>
+<td>文本 100KB，图片 30MB</td>
+</tr>
+<tr>
+<td>密码保护</td>
+<td>SHA256 哈希存储</td>
+</tr>
+<tr>
+<td>文件验证</td>
+<td>魔数检测 + 扩展名白名单</td>
+</tr>
+<tr>
+<td>数据清理</td>
+<td>定时清理过期数据</td>
+</tr>
+<tr>
+<td>CORS</td>
+<td>跨域请求控制</td>
+</tr>
+</tbody>
 </table>
 <h2 id="扩展新工具">扩展新工具</h2>
 <p>添加新工具只需三步：</p>

@@ -4,7 +4,7 @@
     <title>周3 on jaxiu He</title>
     <link>https://blog.jaxiu.cn/tags/%E5%91%A83/</link>
     <description>Recent content in 周3 on jaxiu He</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 25 Feb 2026 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/%E5%91%A83/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d3/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d3/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周三妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周三（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐玉米糊鸡蛋羹香蕉&#34;&gt;早餐：玉米糊+鸡蛋羹+香蕉&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：玉米糊是低GI粗粮，易于消化吸收。鸡蛋羹细腻滑嫩，适合孕期食用。香蕉富含钾元素。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周三（妊娠期糖尿病+肾结石预防） 菜谱 早餐：玉米糊+鸡蛋羹+香蕉 营养提示：玉米糊是低GI粗粮，易于消化吸收。鸡蛋羹细腻滑嫩，适合孕期食用。香蕉富含钾元素。 详细做法： 玉米糊：玉米粉放入锅中，加入适量清水搅拌均匀，小火煮至糊状即可。 鸡蛋羹：鸡蛋打散，加入1.5倍温水，加少许盐搅拌均匀。蒸锅水开后放入，蒸8-10分钟至凝固。 香蕉：每天1根，选择成熟度适中的。 午餐：白灼虾+糙米饭+西</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第4周 周三（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w4d3/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w4d3/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第4周-周三妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第4周 周三（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐玉米糊荷包蛋香蕉&#34;&gt;早餐：玉米糊+荷包蛋+香蕉&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：玉米糊是低GI粗粮，易于消化吸收。荷包蛋提供优质蛋白质。香蕉富含钾元素，可补充孕期所需的电解质。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第4周 周三（妊娠期糖尿病+肾结石预防） 菜谱 早餐：玉米糊+荷包蛋+香蕉 营养提示：玉米糊是低GI粗粮，易于消化吸收。荷包蛋提供优质蛋白质。香蕉富含钾元素，可补充孕期所需的电解质。 详细做法： 玉米糊：玉米粉放入锅中，加入适量清水搅拌均匀，小火煮至糊状即可。 荷包蛋：锅中加水烧开，鸡蛋打入锅中，小火煮至蛋白凝固，蛋黄呈流心状态（约3-4分钟），或煮至全熟（约5分钟）。 香蕉：每天1根，选择成熟</description>
     </item>
   </channel>
 </rss>

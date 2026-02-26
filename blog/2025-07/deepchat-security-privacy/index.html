@@ -9,56 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="DeepChat 安全与隐私保护机制
-引言
-在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
-安全架构设计
-整体安全架构
-DeepChat 采用了分层的安全架构设计：
-┌─────────────────────────────────────────────────────────────────────┐
-│                        DeepChat 安全架构                            │
-├─────────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                    应用层安全                                   ││
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
-│  │  │ 用户认证     │  │ 权限控制     │  │ 数据加密与隐私保护       │ ││
-│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
-│  └─────────────────────────────────────────────────────────────────┘│
-│                              │                                      │
-│  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                    传输层安全                                   ││
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
-│  │  │ HTTPS/TLS   │  │ 网络代理     │  │ API 密钥安全管理         │ ││
-│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
-│  └─────────────────────────────────────────────────────────────────┘│
-│                              │                                      │
-│  ┌─────────────────────────────────────────────────────────────────┐│
-│  │                    存储层安全                                   ││
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
-│  │  │ 本地存储加密 │  │ 配置文件保护 │  │ 会话数据访问控制         │ ││
-│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
-│  └─────────────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────────┘
-数据加密机制
-本地数据存储加密
-DeepChat 对本地存储的敏感数据进行加密处理：">
+    content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。 安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计： ┌─────────────────────────────────────────────────">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="DeepChat 安全与隐私保护机制">
-  <meta property="og:description" content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
-安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计：
-┌─────────────────────────────────────────────────────────────────────┐ │ DeepChat 安全架构 │ ├─────────────────────────────────────────────────────────────────────┤ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 应用层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 用户认证 │ │ 权限控制 │ │ 数据加密与隐私保护 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 传输层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ HTTPS/TLS │ │ 网络代理 │ │ API 密钥安全管理 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 存储层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 本地存储加密 │ │ 配置文件保护 │ │ 会话数据访问控制 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ └─────────────────────────────────────────────────────────────────────┘ 数据加密机制 本地数据存储加密 DeepChat 对本地存储的敏感数据进行加密处理：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-31T21:00:00+08:00">
-    <meta property="article:modified_time" content="2025-07-31T21:00:00+08:00">
-    <meta property="article:tag" content="DeepChat">
-    <meta property="article:tag" content="AI">
-    <meta property="article:tag" content="安全">
-    <meta property="article:tag" content="隐私保护">
-    <meta property="article:tag" content="数据加密">
+  <meta property="og:title" content="DeepChat 安全与隐私保护机制" />
+<meta property="og:description" content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。 安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计： ┌─────────────────────────────────────────────────" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-31T21:00:00+08:00" />
+<meta property="article:modified_time" content="2025-07-31T21:00:00+08:00" />
+
+
 
 
   <title>
@@ -691,7 +651,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">getPermissionDescription</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">descriptions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">descriptions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;file-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问本地文件系统&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;network-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问网络资源&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;camera-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问摄像头&#39;</span><span class="p">,</span>
@@ -707,7 +667,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 <p>DeepChat 提供了隐私模式，可以在屏幕共享或投影时隐藏敏感内容：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">PrivacyModeManager</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">isEnabled</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">originalContent</span>: <span class="kt">WeakMap</span><span class="p">&lt;</span><span class="nt">Element</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">originalContent</span>: <span class="kt">WeakMap</span><span class="p">&lt;</span><span class="nt">Element</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 启用隐私模式
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">enablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
@@ -780,7 +740,7 @@ DeepChat 对本地存储的敏感数据进行加密处理：">
 </span></span></code></pre></div><h3 id="快捷键支持">快捷键支持</h3>
 <p>提供快捷键快速切换隐私模式：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">KeyboardShortcutManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">shortcuts</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="err">()</span> <span class="err">=</span><span class="p">&gt;</span> <span class="k">void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">shortcuts</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="err">()</span> <span class="err">=</span><span class="p">&gt;</span> <span class="k">void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">registerDefaultShortcuts</span><span class="p">();</span>

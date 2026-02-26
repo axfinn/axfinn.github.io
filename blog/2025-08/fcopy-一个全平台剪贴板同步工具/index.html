@@ -9,40 +9,17 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="在日常工作中，我们经常需要在不同设备之间复制粘贴文本、图片或文件。虽然有很多商业解决方案，但我还是希望能有一个简单、安全、自托管的解决方案。因此，我开发了 fcopy - 一个全平台剪贴板同步工具。
-项目介绍
-fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨设备同步。它采用现代化的技术栈构建，具有响应式设计，可以在桌面端和移动端使用。
-项目的主要特性包括：
+    content="在日常工作中，我们经常需要在不同设备之间复制粘贴文本、图片或文件。虽然有很多商业解决方案，但我还是希望能有一个简单、安全、自托管的解决方案。因此，我开发了 fcopy - 一个全平台剪贴板同步工具。 项目介绍 fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨设备同步。它采用现代化的技术栈构建，具有响应式设计，可以在桌面端和移动端使用。 项目的主要特性包括： 📋 文本和文件剪贴板同步 🔐 安全的API密钥认证机制 🖼️ 图片预览">
 
-📋 文本和文件剪贴板同步
-🔐 安全的API密钥认证机制
-🖼️ 图片预览和文件下载
-📱 响应式设计，支持移动端使用
-🌐 Socket.IO实时同步
-📊 访问统计和监控面板
-👤 用户管理和数据隔离
-🐳 Docker容器化部署支持
+  <meta property="og:title" content="fcopy - 一个全平台剪贴板同步工具" />
+<meta property="og:description" content="在日常工作中，我们经常需要在不同设备之间复制粘贴文本、图片或文件。虽然有很多商业解决方案，但我还是希望能有一个简单、安全、自托管的解决方案。因此，我开发了 fcopy - 一个全平台剪贴板同步工具。 项目介绍 fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨设备同步。它采用现代化的技术栈构建，具有响应式设计，可以在桌面端和移动端使用。 项目的主要特性包括： 📋 文本和文件剪贴板同步 🔐 安全的API密钥认证机制 🖼️ 图片预览" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-08/fcopy-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-08-12T14:00:00+08:00" />
+<meta property="article:modified_time" content="2025-08-12T14:00:00+08:00" />
 
-项目背景和动机
-在日常工作中，我经常需要在不同的设备之间复制粘贴内容，比如在电脑上复制一段代码，然后在远程服务器上粘贴；或者在手机上看到一段文字，想要快速发送到电脑上处理。虽然系统自带的剪贴板功能可以在单一设备上使用，但在跨设备场景下却显得力不从心。">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-08/fcopy-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="fcopy - 一个全平台剪贴板同步工具">
-  <meta property="og:description" content="在日常工作中，我们经常需要在不同设备之间复制粘贴文本、图片或文件。虽然有很多商业解决方案，但我还是希望能有一个简单、安全、自托管的解决方案。因此，我开发了 fcopy - 一个全平台剪贴板同步工具。
-项目介绍 fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨设备同步。它采用现代化的技术栈构建，具有响应式设计，可以在桌面端和移动端使用。
-项目的主要特性包括：
-📋 文本和文件剪贴板同步 🔐 安全的API密钥认证机制 🖼️ 图片预览和文件下载 📱 响应式设计，支持移动端使用 🌐 Socket.IO实时同步 📊 访问统计和监控面板 👤 用户管理和数据隔离 🐳 Docker容器化部署支持 项目背景和动机 在日常工作中，我经常需要在不同的设备之间复制粘贴内容，比如在电脑上复制一段代码，然后在远程服务器上粘贴；或者在手机上看到一段文字，想要快速发送到电脑上处理。虽然系统自带的剪贴板功能可以在单一设备上使用，但在跨设备场景下却显得力不从心。">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-08-12T14:00:00+08:00">
-    <meta property="article:modified_time" content="2025-08-12T14:00:00+08:00">
-    <meta property="article:tag" content="开源项目">
-    <meta property="article:tag" content="剪贴板">
-    <meta property="article:tag" content="工具">
-    <meta property="article:tag" content="Node.js">
-    <meta property="article:tag" content="Vue">
+
 
 
   <title>

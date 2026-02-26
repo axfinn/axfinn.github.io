@@ -9,49 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="DeepChat 多模型支持机制详解
-引言
-在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。
-统一接口设计与实现
-抽象层设计
-DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配器。
-┌─────────────────────────────────────────────────────────────┐
-│                    统一接口架构                             │
-├─────────────────────────────────────────────────────────────┤
-│                    ┌──────────────┐                         │
-│                    │  统一接口     │                         │
-│                    │ (API抽象层)   │                         │
-│                    └──────────────┘                         │
-│                            │                                │
-│          ┌─────────────────┼─────────────────┐              │
-│          │                 │                 │              │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
-│  │ OpenAI 适配器 │  │ Gemini 适配器 │  │ Ollama 适配器 │       │
-│  └──────────────┘  └──────────────┘  └──────────────┘       │
-│          │                 │                 │              │
-│    ┌─────▼─────┐    ┌─────▼─────┐     ┌─────▼─────┐         │
-│    │ OpenAI API│    │Gemini API │     │ Ollama API│         │
-│    └───────────┘    └───────────┘     └───────────┘         │
-└─────────────────────────────────────────────────────────────┘
-核心接口定义
-DeepChat 定义了统一的模型接口，所有模型适配器都需要实现这些接口：">
+    content="DeepChat 多模型支持机制详解 引言 在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。 统一接口设计与实现 抽象层设计 DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-model-support/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="DeepChat 多模型支持机制详解">
-  <meta property="og:description" content="DeepChat 多模型支持机制详解 引言 在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。
-统一接口设计与实现 抽象层设计 DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配器。
-┌─────────────────────────────────────────────────────────────┐ │ 统一接口架构 │ ├─────────────────────────────────────────────────────────────┤ │ ┌──────────────┐ │ │ │ 统一接口 │ │ │ │ (API抽象层) │ │ │ └──────────────┘ │ │ │ │ │ ┌─────────────────┼─────────────────┐ │ │ │ │ │ │ │ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │ │ │ OpenAI 适配器 │ │ Gemini 适配器 │ │ Ollama 适配器 │ │ │ └──────────────┘ └──────────────┘ └──────────────┘ │ │ │ │ │ │ │ ┌─────▼─────┐ ┌─────▼─────┐ ┌─────▼─────┐ │ │ │ OpenAI API│ │Gemini API │ │ Ollama API│ │ │ └───────────┘ └───────────┘ └───────────┘ │ └─────────────────────────────────────────────────────────────┘ 核心接口定义 DeepChat 定义了统一的模型接口，所有模型适配器都需要实现这些接口：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-31T19:00:00+08:00">
-    <meta property="article:modified_time" content="2025-07-31T19:00:00+08:00">
-    <meta property="article:tag" content="DeepChat">
-    <meta property="article:tag" content="AI">
-    <meta property="article:tag" content="多模型">
-    <meta property="article:tag" content="API集成">
-    <meta property="article:tag" content="架构设计">
+  <meta property="og:title" content="DeepChat 多模型支持机制详解" />
+<meta property="og:description" content="DeepChat 多模型支持机制详解 引言 在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。 统一接口设计与实现 抽象层设计 DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-model-support/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-31T19:00:00+08:00" />
+<meta property="article:modified_time" content="2025-07-31T19:00:00+08:00" />
+
+
 
 
   <title>

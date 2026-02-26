@@ -9,24 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="引言
-在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/client/register.go，探讨 NPS 是如何实现对后端服务的健康检查以及支持客户端动态注册的。">
+    content="引言 在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="NPS 客户端深度解析：健康检查与动态注册">
-  <meta property="og:description" content="引言 在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/client/register.go，探讨 NPS 是如何实现对后端服务的健康检查以及支持客户端动态注册的。">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-18T19:05:00+08:00">
-    <meta property="article:modified_time" content="2025-07-18T19:05:00+08:00">
-    <meta property="article:tag" content="NPS">
-    <meta property="article:tag" content="客户端">
-    <meta property="article:tag" content="Go语言">
-    <meta property="article:tag" content="健康检查">
-    <meta property="article:tag" content="动态注册">
-    <meta property="article:tag" content="熔断">
+  <meta property="og:title" content="NPS 客户端深度解析：健康检查与动态注册" />
+<meta property="og:description" content="引言 在前面的文章中，我们已经剖析了 NPS 客户端的核心逻辑（client.go）和控制模块（control.go）。我们了解到客户端如何与服务端建立连接、如何通过多路复用隧道转发流量，以及如何从配置文件启动。然而，一个成熟的系统不仅需要核心功能，还需要完善的辅助机制来保证其在复杂多变的生产环境中的稳定性和灵活性。本篇文章将深入 NPS 客户端的另外两个重要文件：nps/client/health.go 和 nps/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-18T19:05:00+08:00" />
+<meta property="article:modified_time" content="2025-07-18T19:05:00+08:00" />
+
+
 
 
   <title>
@@ -347,17 +339,17 @@
 <p>内网穿透的目的是将内网服务暴露到公网，但如果内网服务本身宕机了，NPS 客户端与服务端的连接依然是通畅的。这时，用户的请求仍然会被转发到客户端，但客户端无法连接到宕机的内网服务，最终导致用户访问失败。为了避免这种情况，NPS 设计了一套健康检查机制，让客户端能够主动监控其代理的内网服务的状态，并在服务异常时及时通知服务端。</p>
 <h3 id="heathcheck健康检查的启动器"><code>heathCheck()</code>：健康检查的启动器</h3>
 <p>健康检查功能由 <code>client.go</code> 中的 <code>TRPClient.Start()</code> 方法启动，它会作为一个独立的 goroutine 运行 <code>heathCheck()</code> 函数。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in client.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span> <span class="c1">// 启动健康检查</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in client.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">cnf</span><span class="p">.</span><span class="nx">Healths</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">signal</span><span class="p">)</span> <span class="c1">// 启动健康检查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><p><code>heathCheck()</code> 函数会遍历配置文件中的所有健康检查任务，并为每一个任务启动一个专门的 <code>check</code> goroutine。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in health.go</span>
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">hs</span> <span class="p">[]</span><span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span> <span class="nx">signal</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in health.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">heathCheck</span><span class="p">(</span><span class="nx">hs</span> <span class="p">[]</span><span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span> <span class="nx">signal</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">h</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">hs</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="nf">check</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span> <span class="nx">signal</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
@@ -366,14 +358,14 @@
 <p><code>check()</code> 函数是执行健康检查的核心循环。它会根据配置的检查间隔 (<code>h.IntervalSecond</code>)，周期性地调用具体的检查方法。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">check</span><span class="p">(</span><span class="nx">h</span> <span class="o">*</span><span class="nx">health</span><span class="p">.</span><span class="nx">Health</span><span class="p">,</span> <span class="nx">signal</span> <span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="nx">h</span><span class="p">.</span><span class="nx">HealthType</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">switch</span> <span class="nx">h</span><span class="p">.</span><span class="nx">HealthType</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;tcp&#34;</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">tcpHealthCheck</span><span class="p">(</span><span class="nx">h</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">				<span class="c1">// ... 失败处理</span>
-</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">				<span class="c1">// ... 成功处理</span>
-</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">// ... 失败处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">// ... 成功处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="nx">h</span><span class="p">.</span><span class="nx">IntervalSecond</span><span class="p">)</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
@@ -385,12 +377,12 @@
 </ul>
 <h3 id="失败上报机制">失败上报机制</h3>
 <p>当连续失败次数 (<code>h.FailCount</code>) 超过了配置的最大失败次数 (<code>h.MaxFail</code>)，并且当前任务尚未被标记为停止时，客户端就会向服务端发送一个健康检查失败的通知。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in check()</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">h</span><span class="p">.</span><span class="nx">FailCount</span> <span class="p">&gt;</span> <span class="nx">h</span><span class="p">.</span><span class="nx">MaxFail</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in check()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="nx">h</span><span class="p">.</span><span class="nx">FailCount</span> <span class="p">&gt;</span> <span class="nx">h</span><span class="p">.</span><span class="nx">MaxFail</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="p">.</span><span class="nx">Stop</span> <span class="p">=</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;The service %s has been stopped&#34;</span><span class="p">,</span> <span class="nx">h</span><span class="p">.</span><span class="nx">HealthTarget</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">signal</span><span class="p">.</span><span class="nf">WriteHealthData</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">HEALTH_CHECK_FAIL</span><span class="p">,</span> <span class="nx">h</span><span class="p">.</span><span class="nx">TaskId</span><span class="p">)</span> <span class="c1">// 发送失败通知</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">signal</span><span class="p">.</span><span class="nf">WriteHealthData</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">HEALTH_CHECK_FAIL</span><span class="p">,</span> <span class="nx">h</span><span class="p">.</span><span class="nx">TaskId</span><span class="p">)</span> <span class="c1">// 发送失败通知
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><ul>
 <li><code>signal.WriteHealthData()</code>: 通过主控制连接 (<code>signal</code>)，将 <code>common.HEALTH_CHECK_FAIL</code> 标志和对应的任务 ID (<code>h.TaskId</code>) 发送给服务端。</li>
 <li>服务端 (<code>bridge</code> 模块) 接收到这个通知后，就会将对应的隧道或主机标记为离线状态，不再向其转发新的请求，从而实现了服务异常的快速熔断。</li>
@@ -401,17 +393,17 @@
 <h3 id="register-函数动态注册的入口"><code>Register()</code> 函数：动态注册的入口</h3>
 <p><code>register.go</code> 文件中的 <code>Register()</code> 函数是实现动态注册的唯一入口。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Register</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">key</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 建立一个类型为 WORK_REGISTER 的连接</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewConn</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">server</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_REGISTER</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 建立一个类型为 WORK_REGISTER 的连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewConn</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">server</span><span class="p">,</span> <span class="nx">common</span><span class="p">.</span><span class="nx">WORK_REGISTER</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 发送公共 vkey</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">SendInfo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">{</span><span class="nx">VerifyKey</span><span class="p">:</span> <span class="nx">key</span><span class="p">});</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 发送公共 vkey
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">SendInfo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Link</span><span class="p">{</span><span class="nx">VerifyKey</span><span class="p">:</span> <span class="nx">key</span><span class="p">});</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 3. 等待并接收服务端返回的新 vkey</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">link</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetLinkInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 3. 等待并接收服务端返回的新 vkey
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">link</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">GetLinkInfo</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>

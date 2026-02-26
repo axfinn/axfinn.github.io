@@ -9,51 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="Qwen Code 实现框架深度解析
-引言
-Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。
-整体架构
-Qwen Code 的整体架构可以分为以下几个主要层次：
+    content="Qwen Code 实现框架深度解析 引言 Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。 整体架构 Qwen Code 的整体架构可以分为以下几个主要层次： 用户接口层：提供命令行交互界面 核心逻辑层：处理用户请求和 AI 模型交互 工具执行层：执行各种本地操作工具 模型接口层：与 Qwen 模型进行">
 
-用户接口层：提供命令行交互界面
-核心逻辑层：处理用户请求和 AI 模型交互
-工具执行层：执行各种本地操作工具
-模型接口层：与 Qwen 模型进行通信
-安全管理层：确保操作的安全性
+  <meta property="og:title" content="Qwen Code 实现框架深度解析" />
+<meta property="og:description" content="Qwen Code 实现框架深度解析 引言 Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。 整体架构 Qwen Code 的整体架构可以分为以下几个主要层次： 用户接口层：提供命令行交互界面 核心逻辑层：处理用户请求和 AI 模型交互 工具执行层：执行各种本地操作工具 模型接口层：与 Qwen 模型进行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-23T15:55:00+08:00" />
+<meta property="article:modified_time" content="2025-07-23T15:55:00+08:00" />
 
-┌─────────────────────────────────────┐
-│           用户接口层                 │
-│         (CLI 界面)                  │
-├─────────────────────────────────────┤
-│           核心逻辑层                 │
-│    (请求处理、响应生成)              │
-├─────────────────────────────────────┤
-│          工具执行层                  │
-│  (文件系统、网络、命令执行等工具)     │
-├─────────────────────────────────────┤
-│          模型接口层                  │
-│      (与 Qwen 模型通信)              │
-├─────────────────────────────────────┤
-│          安全管理层                  │
-│    (权限控制、沙箱隔离等)            │
-└─────────────────────────────────────┘
-为了更直观地理解整体架构，我们可以用 Mermaid 绘制一个架构图：">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="Qwen Code 实现框架深度解析">
-  <meta property="og:description" content="Qwen Code 实现框架深度解析 引言 Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。
-整体架构 Qwen Code 的整体架构可以分为以下几个主要层次：
-用户接口层：提供命令行交互界面 核心逻辑层：处理用户请求和 AI 模型交互 工具执行层：执行各种本地操作工具 模型接口层：与 Qwen 模型进行通信 安全管理层：确保操作的安全性 ┌─────────────────────────────────────┐ │ 用户接口层 │ │ (CLI 界面) │ ├─────────────────────────────────────┤ │ 核心逻辑层 │ │ (请求处理、响应生成) │ ├─────────────────────────────────────┤ │ 工具执行层 │ │ (文件系统、网络、命令执行等工具) │ ├─────────────────────────────────────┤ │ 模型接口层 │ │ (与 Qwen 模型通信) │ ├─────────────────────────────────────┤ │ 安全管理层 │ │ (权限控制、沙箱隔离等) │ └─────────────────────────────────────┘ 为了更直观地理解整体架构，我们可以用 Mermaid 绘制一个架构图：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-23T15:55:00+08:00">
-    <meta property="article:modified_time" content="2025-07-23T15:55:00+08:00">
-    <meta property="article:tag" content="Qwen Code">
-    <meta property="article:tag" content="架构设计">
-    <meta property="article:tag" content="实现原理">
-    <meta property="article:tag" content="源码解析">
 
 
   <title>
@@ -628,7 +593,7 @@ flowchart TD
 <p>工具执行器负责调用具体工具并处理结果：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/executor.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">ToolExecutor</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tools</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">Tool</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tools</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">Tool</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">tools</span>: <span class="kt">Tool</span><span class="p">[])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tools</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">(</span><span class="nx">tools</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">tool</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">tool</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">tool</span><span class="p">]));</span>
@@ -718,7 +683,7 @@ flowchart TD
 <p>实现细粒度的权限控制机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/security/permission.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">PermissionManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">permissions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">permissions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 默认权限配置
@@ -885,7 +850,7 @@ graph TD
 <p>实现缓存以提高性能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/core/cache.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">CacheManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">cache</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="p">{</span><span class="na">data</span><span class="err">:</span> <span class="na">any</span><span class="p">,</span> <span class="na">timestamp</span><span class="err">:</span> <span class="na">number</span><span class="p">}&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">cache</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="p">{</span><span class="na">data</span><span class="err">:</span> <span class="na">any</span><span class="err">,</span> <span class="na">timestamp</span><span class="err">:</span> <span class="na">number</span><span class="p">}&gt;;</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">ttl</span>: <span class="kt">number</span><span class="p">;</span> <span class="c1">// 缓存过期时间（毫秒）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">(</span><span class="nx">ttl</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 默认5分钟
@@ -947,7 +912,7 @@ graph TD
 <p>支持插件扩展功能：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/plugins/pluginManager.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">PluginManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">plugins</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">Plugin</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">plugins</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">Plugin</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">plugins</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>

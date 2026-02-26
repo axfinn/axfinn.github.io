@@ -9,27 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="DeepChat 架构设计解析：Electron 多平台实现原理
-引言
-在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。
-Electron 在 DeepChat 中的应用
-Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框架，主要原因包括：">
+    content="DeepChat 架构设计解析：Electron 多平台实现原理 引言 在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。 Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="DeepChat 架构设计解析：Electron 多平台实现原理">
-  <meta property="og:description" content="DeepChat 架构设计解析：Electron 多平台实现原理 引言 在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。
-Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框架，主要原因包括：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-31T18:30:00+08:00">
-    <meta property="article:modified_time" content="2025-07-31T18:30:00+08:00">
-    <meta property="article:tag" content="DeepChat">
-    <meta property="article:tag" content="AI">
-    <meta property="article:tag" content="Electron">
-    <meta property="article:tag" content="架构设计">
-    <meta property="article:tag" content="多平台">
+  <meta property="og:title" content="DeepChat 架构设计解析：Electron 多平台实现原理" />
+<meta property="og:description" content="DeepChat 架构设计解析：Electron 多平台实现原理 引言 在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。 Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-31T18:30:00+08:00" />
+<meta property="article:modified_time" content="2025-07-31T18:30:00+08:00" />
+
+
 
 
   <title>

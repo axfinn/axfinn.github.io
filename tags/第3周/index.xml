@@ -4,7 +4,7 @@
     <title>第3周 on jaxiu He</title>
     <link>https://blog.jaxiu.cn/tags/%E7%AC%AC3%E5%91%A8/</link>
     <description>Recent content in 第3周 on jaxiu He</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 25 Feb 2026 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/%E7%AC%AC3%E5%91%A8/index.xml" rel="self" type="application/rss+xml" />
@@ -13,49 +13,49 @@
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d1/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d1/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周一妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周一（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐燕麦粥鸡蛋小番茄&#34;&gt;早餐：燕麦粥+鸡蛋+小番茄&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：燕麦是典型的低GI主食，富含β-葡聚糖。鸡蛋提供优质蛋白质。小番茄富含番茄红素，具有抗氧化作用。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周一（妊娠期糖尿病+肾结石预防） 菜谱 早餐：燕麦粥+鸡蛋+小番茄 营养提示：燕麦是典型的低GI主食，富含β-葡聚糖。鸡蛋提供优质蛋白质。小番茄富含番茄红素，具有抗氧化作用。 详细做法： 燕麦粥：将50克燕麦片放入锅中，加入300毫升清水，大火煮开后转小火煮5-8分钟至粥稠即可。 鸡蛋：水煮蛋或蒸蛋羹均可。 小番茄：洗净后可直接食用。 午餐：清蒸鲈鱼+糙米饭+炒油麦菜 营养提示：鲈鱼富含优质</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周三（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d3/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d3/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周三妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周三（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐玉米糊鸡蛋羹香蕉&#34;&gt;早餐：玉米糊+鸡蛋羹+香蕉&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：玉米糊是低GI粗粮，易于消化吸收。鸡蛋羹细腻滑嫩，适合孕期食用。香蕉富含钾元素。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周三（妊娠期糖尿病+肾结石预防） 菜谱 早餐：玉米糊+鸡蛋羹+香蕉 营养提示：玉米糊是低GI粗粮，易于消化吸收。鸡蛋羹细腻滑嫩，适合孕期食用。香蕉富含钾元素。 详细做法： 玉米糊：玉米粉放入锅中，加入适量清水搅拌均匀，小火煮至糊状即可。 鸡蛋羹：鸡蛋打散，加入1.5倍温水，加少许盐搅拌均匀。蒸锅水开后放入，蒸8-10分钟至凝固。 香蕉：每天1根，选择成熟度适中的。 午餐：白灼虾+糙米饭+西</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周二（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d2/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d2/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周二妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周二（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐全麦面包牛奶苹果&#34;&gt;早餐：全麦面包+牛奶+苹果&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：全麦面包富含膳食纤维。牛奶是钙的重要来源。苹果是低草酸水果，富含果胶和维生素C。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周二（妊娠期糖尿病+肾结石预防） 菜谱 早餐：全麦面包+牛奶+苹果 营养提示：全麦面包富含膳食纤维。牛奶是钙的重要来源。苹果是低草酸水果，富含果胶和维生素C。 详细做法： 全麦面包：放入烤箱烤2-3分钟至表面微脆，可搭配少量黄油。 牛奶：250毫升纯牛奶加热至温热饮用。 苹果：洗净后去皮切块食用。 午餐：番茄牛腩+米饭+炒青菜 营养提示：牛腩富含铁和蛋白质。番茄富含维生素C，有助于铁的吸收。</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周五（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d5/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d5/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周五妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周五（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐小米粥鸡蛋水果&#34;&gt;早餐：小米粥+鸡蛋+水果&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：小米粥易于消化，富含维生素B族。鸡蛋提供优质蛋白质。水果提供维生素和膳食纤维。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周五（妊娠期糖尿病+肾结石预防） 菜谱 早餐：小米粥+鸡蛋+水果 营养提示：小米粥易于消化，富含维生素B族。鸡蛋提供优质蛋白质。水果提供维生素和膳食纤维。 详细做法： 小米粥：小米洗净后放入锅中，加入适量清水，大火煮开后转小火煮20-30分钟至粥稠即可。 鸡蛋：水煮蛋或蒸蛋羹均可。 水果：选择低GI水果，如苹果、梨等。 午餐：清蒸排骨+糙米饭+炒白菜 营养提示：排骨富含钙和蛋白质。糙米是低G</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周六（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d6/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d6/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周六妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周六（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐牛奶全麦饼干蓝莓&#34;&gt;早餐：牛奶+全麦饼干+蓝莓&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：牛奶是孕期重要的钙来源。全麦饼干可作为健康的加餐点心。蓝莓富含花青素，具有抗氧化作用。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周六（妊娠期糖尿病+肾结石预防） 菜谱 早餐：牛奶+全麦饼干+蓝莓 营养提示：牛奶是孕期重要的钙来源。全麦饼干可作为健康的加餐点心。蓝莓富含花青素，具有抗氧化作用。 详细做法： 牛奶：250毫升纯牛奶加热至温热饮用。 全麦饼干：选择无糖全麦饼干，每次2-3片即可。 蓝莓：蓝莓洗净后直接食用，每次50克左右。 午餐：红烧肉（瘦）+米饭+菠菜 营养提示：瘦红肉提供丰富的铁和蛋白质。菠菜富含叶酸，</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周四（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d4/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d4/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周四妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周四（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐豆浆油条少坚果&#34;&gt;早餐：豆浆+油条（少）+坚果&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：自制豆浆富含植物蛋白和钙。油条是传统早餐，但油脂含量较高，需控制用量。坚果富含不饱和脂肪酸。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周四（妊娠期糖尿病+肾结石预防） 菜谱 早餐：豆浆+油条（少）+坚果 营养提示：自制豆浆富含植物蛋白和钙。油条是传统早餐，但油脂含量较高，需控制用量。坚果富含不饱和脂肪酸。 详细做法： 豆浆：黄豆提前浸泡8小时，放入豆浆机打成豆浆。煮沸后小火煮5分钟即可饮用。 油条：购买现成的油条，取少量（约1-2根）食用。 坚果：每天一小把（约15-20克）。 午餐：炒鸡胸肉+米饭+胡萝卜 营养提示：鸡胸</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周日（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d7/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d7/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周日妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周日（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐八宝粥鸡蛋坚果&#34;&gt;早餐：八宝粥+鸡蛋+坚果&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：八宝粥由多种杂粮组成，富含膳食纤维和B族维生素。鸡蛋提供优质蛋白质。坚果富含不饱和脂肪酸。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周日（妊娠期糖尿病+肾结石预防） 菜谱 早餐：八宝粥+鸡蛋+坚果 营养提示：八宝粥由多种杂粮组成，富含膳食纤维和B族维生素。鸡蛋提供优质蛋白质。坚果富含不饱和脂肪酸。 详细做法： 八宝粥：准备红豆、黑豆、糯米、小米、糙米、燕麦、莲子、红枣等食材，提前浸泡4小时，放入电饭煲煮成粥。 鸡蛋：水煮蛋或蒸蛋羹均可。 坚果：每天一小把（约15-20克）。 午餐：炖鸡翅+糙米饭+炒西葫芦 营养提示：鸡翅</description>
     </item>
   </channel>
 </rss>

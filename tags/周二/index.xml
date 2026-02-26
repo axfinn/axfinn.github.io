@@ -4,7 +4,7 @@
     <title>周二 on jaxiu He</title>
     <link>https://blog.jaxiu.cn/tags/%E5%91%A8%E4%BA%8C/</link>
     <description>Recent content in 周二 on jaxiu He</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 25 Feb 2026 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/%E5%91%A8%E4%BA%8C/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w1d2/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w1d2/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第1周-周二-菜谱&#34;&gt;第1周 周二 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐&#34;&gt;早餐&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;主食：全麦面包&lt;/strong&gt; | &lt;strong&gt;蛋白质：牛奶&lt;/strong&gt; | &lt;strong&gt;水果：香蕉&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第1周 周二 菜谱 早餐 主食：全麦面包 | 蛋白质：牛奶 | 水果：香蕉 营养价值： 全麦面包富含膳食纤维和B族维生素，GI值较低，有助于稳定血糖 牛奶是优质钙来源，每250ml含约300mg钙，有助于胎儿骨骼和牙齿发育 香蕉富含钾元素，可补充孕期所需的电解质，缓解疲劳感 详细做法： 全麦面包： 选择无糖全麦面包2片 放入烤箱烤2-3分钟至表面微脆（没有烤箱可用平底锅小火烘烤） 可搭配少量无盐黄油 牛奶： 250m</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第2周 周二（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w2d2/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w2d2/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第2周-周二-菜谱&#34;&gt;第2周 周二 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐&#34;&gt;早餐&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;主食：全麦吐司&lt;/strong&gt; | &lt;strong&gt;饮品：酸奶&lt;/strong&gt; | &lt;strong&gt;水果：蓝莓&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第2周 周二 菜谱 早餐 主食：全麦吐司 | 饮品：酸奶 | 水果：蓝莓 营养价值： 全麦吐司富含膳食纤维和B族维生素，GI值较低 酸奶含有益生菌，有助于肠道健康和消化吸收 蓝莓富含花青素，具有抗氧化作用，是低GI水果 详细做法： 全麦吐司： 全麦吐司2片 放入烤箱烤2-3分钟至表面微脆 可搭配少量无盐黄油 酸奶： 选择无糖原味酸奶200毫升 可直接饮用，或搭配水果食用 蓝莓： 蓝莓洗净后直接食用 每次约50克 午餐（3个菜）</description>
     </item>
   </channel>
 </rss>

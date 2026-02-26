@@ -9,35 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="引言
-在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。
-HTTPS 代理的需求与挑战
-HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：
+    content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。 HTTPS 代理的需求与挑战 HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括： SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者">
 
-SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者直接将加密流量转发给目标服务器。
-SNI 支持：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户端在 SSL/TLS 握手时会通过 SNI 扩展告知服务器其要访问的域名。代理服务器需要根据 SNI 信息选择正确的证书。
-证书管理：代理服务器需要能够管理和加载多个域名的 SSL/TLS 证书。
+  <meta property="og:title" content="NPS 代理实现：HTTPS 代理与 SNI 证书管理" />
+<meta property="og:description" content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。 HTTPS 代理的需求与挑战 HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括： SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-18T17:15:00+08:00" />
+<meta property="article:modified_time" content="2025-07-18T17:15:00+08:00" />
 
-https.go：HTTPS 代理的实现
-https.go 文件定义了 HttpsServer 结构体，它是 NPS 实现 HTTPS 代理的核心。">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0https-%E4%BB%A3%E7%90%86%E4%B8%8E-sni-%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="NPS 代理实现：HTTPS 代理与 SNI 证书管理">
-  <meta property="og:description" content="引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式。本篇文章将深入 NPS 的 HTTPS 代理实现。我们将通过分析 nps/server/proxy/https.go 文件，揭示 NPS 如何处理加密的 HTTPS 流量，特别是其对 SNI（Server Name Indication）的支持和多证书管理机制。
-HTTPS 代理的需求与挑战 HTTPS 代理比普通的 HTTP 代理更为复杂，因为它涉及到 SSL/TLS 加密。主要挑战包括：
-SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户端请求，然后加密转发给目标服务器，或者直接将加密流量转发给目标服务器。 SNI 支持：为了在同一个 IP 地址上托管多个 HTTPS 网站，客户端在 SSL/TLS 握手时会通过 SNI 扩展告知服务器其要访问的域名。代理服务器需要根据 SNI 信息选择正确的证书。 证书管理：代理服务器需要能够管理和加载多个域名的 SSL/TLS 证书。 https.go：HTTPS 代理的实现 https.go 文件定义了 HttpsServer 结构体，它是 NPS 实现 HTTPS 代理的核心。">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-18T17:15:00+08:00">
-    <meta property="article:modified_time" content="2025-07-18T17:15:00+08:00">
-    <meta property="article:tag" content="NPS">
-    <meta property="article:tag" content="HTTPS代理">
-    <meta property="article:tag" content="SNI">
-    <meta property="article:tag" content="SSL/TLS">
-    <meta property="article:tag" content="Go语言">
-    <meta property="article:tag" content="网络安全">
 
 
   <title>
@@ -381,28 +362,28 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 <p><code>HttpsServer</code> 的 <code>Start()</code> 方法负责启动 HTTPS 监听，并为每个传入连接进行 SNI 解析和证书选择：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">https</span> <span class="o">*</span><span class="nx">HttpsServer</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">conn</span><span class="p">.</span><span class="nf">Accept</span><span class="p">(</span><span class="nx">https</span><span class="p">.</span><span class="nx">listener</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span> <span class="o">:=</span> <span class="nf">GetServerNameFromClientHello</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 从 ClientHello 中获取 SNI</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">:=</span> <span class="nf">buildHttpsRequest</span><span class="p">(</span><span class="nx">serverName</span><span class="p">)</span> <span class="c1">// 构建一个模拟的 HTTP 请求</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">file</span><span class="p">.</span><span class="nf">GetDb</span><span class="p">().</span><span class="nf">GetInfoByHost</span><span class="p">(</span><span class="nx">serverName</span><span class="p">,</span> <span class="nx">r</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span> <span class="o">:=</span> <span class="nf">GetServerNameFromClientHello</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 从 ClientHello 中获取 SNI
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">r</span> <span class="o">:=</span> <span class="nf">buildHttpsRequest</span><span class="p">(</span><span class="nx">serverName</span><span class="p">)</span> <span class="c1">// 构建一个模拟的 HTTP 请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">file</span><span class="p">.</span><span class="nf">GetDb</span><span class="p">().</span><span class="nf">GetInfoByHost</span><span class="p">(</span><span class="nx">serverName</span><span class="p">,</span> <span class="nx">r</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;the url %s can&#39;t be parsed!,remote addr %s&#34;</span><span class="p">,</span> <span class="nx">serverName</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;加载客户端本地证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nx">https</span><span class="p">.</span><span class="nf">handleHttps2</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// 使用客户端本地证书</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">https</span><span class="p">.</span><span class="nf">handleHttps2</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">serverName</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// 使用客户端本地证书
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;使用上传证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 判断是路径还是证书内容</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 判断是路径还是证书内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">,</span> <span class="s">&#34;-----BEGIN&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过上传文件加载证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">)</span> <span class="c1">// 使用上传的证书内容</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">CertFilePath</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">KeyFilePath</span><span class="p">)</span> <span class="c1">// 使用上传的证书内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="nx">logs</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;通过路径加载证书&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// 检查证书文件是否存在，并读取内容</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">cert</span><span class="p">),</span> <span class="nb">string</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="c1">// 使用上传的证书文件</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 检查证书文件是否存在，并读取内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nx">https</span><span class="p">.</span><span class="nf">cert</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">rb</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">cert</span><span class="p">),</span> <span class="nb">string</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="c1">// 使用上传的证书文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">})</span>

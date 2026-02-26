@@ -9,48 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="Qwen Code 项目框架详解
-项目概述
-Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。
-项目结构
-qwen-code/
-├── .github/                  # GitHub 相关配置
-│   └── workflows/            # CI/CD 工作流
-├── docs/                     # 项目文档
-│   ├── tools/                # 工具文档
-│   └── ...                   # 其他文档
-├── examples/                 # 使用示例
-├── integration-tests/        # 集成测试
-├── packages/                 # 核心包
-│   ├── cli/                  # CLI 工具
-│   ├── core/                 # 核心功能
-│   └── ...                   # 其他包
-├── scripts/                  # 构建和辅助脚本
-├── tests/                    # 单元测试
-├── .eslintrc.js              # ESLint 配置
-├── .gitignore                # Git 忽略文件
-├── .npmrc                    # npm 配置
-├── Dockerfile                # Docker 配置
-├── Makefile                  # Makefile 脚本
-├── README.md                 # 项目说明
-├── package.json              # 项目配置
-└── tsconfig.json             # TypeScript 配置
-为了更直观地理解项目结构，我们可以用 Mermaid 绘制一个图表：">
+    content="Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore">
 
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="Qwen Code 项目框架详解">
-  <meta property="og:description" content="Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。
-项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore # Git 忽略文件 ├── .npmrc # npm 配置 ├── Dockerfile # Docker 配置 ├── Makefile # Makefile 脚本 ├── README.md # 项目说明 ├── package.json # 项目配置 └── tsconfig.json # TypeScript 配置 为了更直观地理解项目结构，我们可以用 Mermaid 绘制一个图表：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-23T15:50:00+08:00">
-    <meta property="article:modified_time" content="2025-07-23T15:50:00+08:00">
-    <meta property="article:tag" content="Qwen Code">
-    <meta property="article:tag" content="项目结构">
-    <meta property="article:tag" content="架构设计">
-    <meta property="article:tag" content="开发指南">
+  <meta property="og:title" content="Qwen Code 项目框架详解" />
+<meta property="og:description" content="Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-23T15:50:00+08:00" />
+<meta property="article:modified_time" content="2025-07-23T15:50:00+08:00" />
+
+
 
 
   <title>

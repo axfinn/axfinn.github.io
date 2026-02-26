@@ -4,7 +4,7 @@
     <title>周6 on jaxiu He</title>
     <link>https://blog.jaxiu.cn/tags/%E5%91%A86/</link>
     <description>Recent content in 周6 on jaxiu He</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 25 Feb 2026 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/%E5%91%A86/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,21 @@
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w2d6/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w2d6/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第2周-周六妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第2周 周六（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐牛奶鸡蛋全麦面包&#34;&gt;早餐：牛奶+鸡蛋+全麦面包&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：牛奶是孕期重要的钙来源。鸡蛋提供优质蛋白质和胆碱。全麦面包富含膳食纤维，是健康的碳水化合物来源。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第2周 周六（妊娠期糖尿病+肾结石预防） 菜谱 早餐：牛奶+鸡蛋+全麦面包 营养提示：牛奶是孕期重要的钙来源。鸡蛋提供优质蛋白质和胆碱。全麦面包富含膳食纤维，是健康的碳水化合物来源。 详细做法： 牛奶：250毫升纯牛奶加热至温热饮用。 鸡蛋：水煮蛋或煎蛋均可。 全麦面包：选择无糖全麦面包，放入烤箱烤2-3分钟。 午餐：红烧肉（瘦）+米饭+炒菠菜 营养提示：瘦红肉提供丰富的铁和蛋白质。菠菜富含叶酸，但</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第3周 周六（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d6/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w3d6/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第3周-周六妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第3周 周六（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐牛奶全麦饼干蓝莓&#34;&gt;早餐：牛奶+全麦饼干+蓝莓&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：牛奶是孕期重要的钙来源。全麦饼干可作为健康的加餐点心。蓝莓富含花青素，具有抗氧化作用。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第3周 周六（妊娠期糖尿病+肾结石预防） 菜谱 早餐：牛奶+全麦饼干+蓝莓 营养提示：牛奶是孕期重要的钙来源。全麦饼干可作为健康的加餐点心。蓝莓富含花青素，具有抗氧化作用。 详细做法： 牛奶：250毫升纯牛奶加热至温热饮用。 全麦饼干：选择无糖全麦饼干，每次2-3片即可。 蓝莓：蓝莓洗净后直接食用，每次50克左右。 午餐：红烧肉（瘦）+米饭+菠菜 营养提示：瘦红肉提供丰富的铁和蛋白质。菠菜富含叶酸，</description>
     </item>
     <item>
       <title>孕期健康菜谱 - 第4周 周六（妊娠期糖尿病&#43;肾结石预防）</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w4d6/</link>
       <pubDate>Wed, 25 Feb 2026 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-02/pregnancy-recipe-w4d6/</guid>
-      <description>&lt;h2 id=&#34;饮食原则&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h2 id=&#34;饮食原则-1&#34;&gt;饮食原则&lt;/h2&gt;&#xA;&lt;h3 id=&#34;妊娠期糖尿病预防&#34;&gt;妊娠期糖尿病预防&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低 GI 饮食&lt;/strong&gt;：选择低血糖生成指数的食物，如燕麦、糙米、全麦面包&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;高纤维摄入&lt;/strong&gt;：每天摄入足量膳食纤维，有助于延缓血糖上升&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;控制糖分&lt;/strong&gt;：避免甜食、含糖饮料，选择天然水果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;少食多餐&lt;/strong&gt;：每天5-6餐，避免血糖波动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;肾结石预防草酸钙尿酸&#34;&gt;肾结石预防（草酸钙/尿酸）&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;低草酸饮食&lt;/strong&gt;：避免菠菜、苋菜、巧克力、浓茶&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;低嘌呤饮食&lt;/strong&gt;：减少海鲜、动物内脏、浓汤摄入&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;适量补钙&lt;/strong&gt;：每天800-1000mg，钙可以结合草酸减少吸收&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;多喝水&lt;/strong&gt;：每天2000-3000ml，促进结石排出&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;第4周-周六妊娠期糖尿病肾结石预防-菜谱&#34;&gt;第4周 周六（妊娠期糖尿病+肾结石预防） 菜谱&lt;/h2&gt;&#xA;&lt;h3 id=&#34;早餐牛奶鸡蛋全麦面包&#34;&gt;早餐：牛奶+鸡蛋+全麦面包&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;营养提示&lt;/strong&gt;：牛奶是孕期重要的钙来源，每250毫升牛奶约含钙300毫克。鸡蛋提供优质蛋白质和胆碱。全麦面包富含膳食纤维。&lt;/p&gt;</description>
+      <description>饮食原则 {{ partial &amp;ldquo;diet-principles.html&amp;rdquo; . }} 第4周 周六（妊娠期糖尿病+肾结石预防） 菜谱 早餐：牛奶+鸡蛋+全麦面包 营养提示：牛奶是孕期重要的钙来源，每250毫升牛奶约含钙300毫克。鸡蛋提供优质蛋白质和胆碱。全麦面包富含膳食纤维。 详细做法： 牛奶：250毫升纯牛奶加热至温热饮用。 鸡蛋：水煮蛋或煎蛋均可。 全麦面包：选择无糖全麦面包，放入烤箱烤2-3分钟。 午餐：红烧肉（瘦）+米饭+青菜 营养提示：瘦红肉提供丰富的铁和蛋白质。青菜富含</description>
     </item>
   </channel>
 </rss>

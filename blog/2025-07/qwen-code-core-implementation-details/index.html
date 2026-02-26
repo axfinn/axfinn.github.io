@@ -9,51 +9,16 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="Qwen Code 核心代码实现细节深度解读
-引言
-在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。
-CLI 入口点分析
-主程序启动
-CLI 的入口点位于 packages/cli/index.ts：
-#!/usr/bin/env node
+    content="Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。 CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts： #!/usr/bin/env node import &#39;./src/gemini.js&#39;; import { main } from &#39;./src/gemini.js&#39;; // --- Global Entry Point --- main().catch((error) =&gt; { console.error(&#39;An unexpected critical error occurred:&#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情： 导">
 
-import &#39;./src/gemini.js&#39;;
-import { main } from &#39;./src/gemini.js&#39;;
+  <meta property="og:title" content="Qwen Code 核心代码实现细节深度解读" />
+<meta property="og:description" content="Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。 CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts： #!/usr/bin/env node import &#39;./src/gemini.js&#39;; import { main } from &#39;./src/gemini.js&#39;; // --- Global Entry Point --- main().catch((error) =&gt; { console.error(&#39;An unexpected critical error occurred:&#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情： 导" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-23T16:00:00+08:00" />
+<meta property="article:modified_time" content="2025-07-23T16:00:00+08:00" />
 
-// --- Global Entry Point ---
-main().catch((error) =&gt; {
-  console.error(&#39;An unexpected critical error occurred:&#39;);
-  if (error instanceof Error) {
-    console.error(error.stack);
-  } else {
-    console.error(String(error));
-  }
-  process.exit(1);
-});
-这段代码做了几件重要的事情：
 
-导入主模块 gemini.js
-调用 main() 函数启动应用
-实现全局错误处理，确保任何未捕获的异常都能被妥善处理
-
-CLI 启动流程可以用下图表示：">
-
-  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/">
-  <meta property="og:site_name" content="jaxiu He">
-  <meta property="og:title" content="Qwen Code 核心代码实现细节深度解读">
-  <meta property="og:description" content="Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。
-CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts：
-#!/usr/bin/env node import &#39;./src/gemini.js&#39;; import { main } from &#39;./src/gemini.js&#39;; // --- Global Entry Point --- main().catch((error) =&gt; { console.error(&#39;An unexpected critical error occurred:&#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情：
-导入主模块 gemini.js 调用 main() 函数启动应用 实现全局错误处理，确保任何未捕获的异常都能被妥善处理 CLI 启动流程可以用下图表示：">
-  <meta property="og:locale" content="zn_Hans">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="blog">
-    <meta property="article:published_time" content="2025-07-23T16:00:00+08:00">
-    <meta property="article:modified_time" content="2025-07-23T16:00:00+08:00">
-    <meta property="article:tag" content="Qwen Code">
-    <meta property="article:tag" content="源码解析">
-    <meta property="article:tag" content="实现细节">
-    <meta property="article:tag" content="核心代码">
 
 
   <title>
@@ -937,7 +902,7 @@ sequenceDiagram
 <p>Qwen Code 实现了细粒度的权限控制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/security/permissionManager.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">PermissionManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">permissions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">permissions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 默认权限配置
@@ -961,7 +926,7 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 可以根据配置文件动态调整权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">updatePermissions</span><span class="p">(</span><span class="nx">newPermissions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">updatePermissions</span><span class="p">(</span><span class="nx">newPermissions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="err">[]</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">toolName</span><span class="p">,</span> <span class="nx">permissions</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">newPermissions</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">toolName</span><span class="p">,</span> <span class="nx">permissions</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -1010,7 +975,7 @@ sequenceDiagram
 <p>Qwen Code 实现了灵活的工具注册机制：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// packages/core/src/tools/toolRegistry.ts
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">ToolRegistry</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tools</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">Tool</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tools</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">Tool</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="nx">registerTool</span><span class="p">(</span><span class="nx">tool</span>: <span class="kt">Tool</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tools</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">tool</span><span class="p">.</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
