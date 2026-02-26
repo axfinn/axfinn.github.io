@@ -6,13 +6,160 @@
     <description>Recent content in Tags on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 26 Feb 2026 11:05:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Feb 2026 11:25:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
       <link>https://blog.jaxiu.cn/tags/ai/</link>
-      <pubDate>Thu, 26 Feb 2026 11:05:00 +0800</pubDate>
+      <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>对比</title>
+      <link>https://blog.jaxiu.cn/tags/%E5%AF%B9%E6%AF%94/</link>
+      <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E5%AF%B9%E6%AF%94/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>编程工具</title>
+      <link>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>选择指南</title>
+      <link>https://blog.jaxiu.cn/tags/%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IDE</title>
+      <link>https://blog.jaxiu.cn/tags/ide/</link>
+      <pubDate>Thu, 26 Feb 2026 11:24:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/ide/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kiro</title>
+      <link>https://blog.jaxiu.cn/tags/kiro/</link>
+      <pubDate>Thu, 26 Feb 2026 11:24:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/kiro/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>编程助手</title>
+      <link>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</link>
+      <pubDate>Thu, 26 Feb 2026 11:24:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gemini</title>
+      <link>https://blog.jaxiu.cn/tags/gemini/</link>
+      <pubDate>Thu, 26 Feb 2026 11:23:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/gemini/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google</title>
+      <link>https://blog.jaxiu.cn/tags/google/</link>
+      <pubDate>Thu, 26 Feb 2026 11:23:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/google/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI编程</title>
+      <link>https://blog.jaxiu.cn/tags/ai%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Thu, 26 Feb 2026 11:22:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/ai%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MiniMax</title>
+      <link>https://blog.jaxiu.cn/tags/minimax/</link>
+      <pubDate>Thu, 26 Feb 2026 11:22:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/minimax/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>多模态</title>
+      <link>https://blog.jaxiu.cn/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/</link>
+      <pubDate>Thu, 26 Feb 2026 11:22:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GLM</title>
+      <link>https://blog.jaxiu.cn/tags/glm/</link>
+      <pubDate>Thu, 26 Feb 2026 11:21:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/glm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>国产大模型</title>
+      <link>https://blog.jaxiu.cn/tags/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Thu, 26 Feb 2026 11:21:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>智谱AI</title>
+      <link>https://blog.jaxiu.cn/tags/%E6%99%BA%E8%B0%B1ai/</link>
+      <pubDate>Thu, 26 Feb 2026 11:21:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E6%99%BA%E8%B0%B1ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anthropic</title>
+      <link>https://blog.jaxiu.cn/tags/anthropic/</link>
+      <pubDate>Thu, 26 Feb 2026 11:20:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/anthropic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude</title>
+      <link>https://blog.jaxiu.cn/tags/claude/</link>
+      <pubDate>Thu, 26 Feb 2026 11:20:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/claude/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude Code</title>
+      <link>https://blog.jaxiu.cn/tags/claude-code/</link>
+      <pubDate>Thu, 26 Feb 2026 11:20:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/claude-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Codex</title>
+      <link>https://blog.jaxiu.cn/tags/codex/</link>
+      <pubDate>Thu, 26 Feb 2026 11:19:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/codex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GPT</title>
+      <link>https://blog.jaxiu.cn/tags/gpt/</link>
+      <pubDate>Thu, 26 Feb 2026 11:19:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/gpt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAI</title>
+      <link>https://blog.jaxiu.cn/tags/openai/</link>
+      <pubDate>Thu, 26 Feb 2026 11:19:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/openai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>调研</title>
+      <link>https://blog.jaxiu.cn/tags/%E8%B0%83%E7%A0%94/</link>
+      <pubDate>Thu, 26 Feb 2026 11:18:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E8%B0%83%E7%A0%94/</guid>
       <description></description>
     </item>
     <item>
@@ -587,13 +734,6 @@
       <link>https://blog.jaxiu.cn/tags/%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sun, 03 Aug 2025 16:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/%E9%83%A8%E7%BD%B2/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>OpenAI</title>
-      <link>https://blog.jaxiu.cn/tags/openai/</link>
-      <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/tags/openai/</guid>
       <description></description>
     </item>
     <item>
