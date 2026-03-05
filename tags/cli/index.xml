@@ -6,21 +6,24 @@
     <description>Recent content in CLI on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 15:45:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/cli/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jul 2025 15:45:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/cli/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qwen Code CLI 使用详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-cli-usage/</link>
       <pubDate>Wed, 23 Jul 2025 15:45:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-cli-usage/</guid>
       <description>Qwen Code CLI 使用详解 CLI 入门 Qwen Code 是一个功能强大的命令行 AI 工作流工具，为开发者提供了一种全新的与代码交互的方式。通过 CLI，用户可以与 AI 进行对话，执行各种编程任务。 安装 确保您已经安装了 Node.js 20+ 版本，然后通过 npm 安装 Qwen Code： npm install -g @qwen-code/qwen-code 基本使用 安装完成后，您可以通过以下命令启动 Qwen Code： qwen-code 这将启动交互式 CLI 会话，您可以直接与 AI 进行对话。 非交互式使用 您也可以通过管道或重定向将输入传递给 Qwen Code： echo &amp;#34;帮我生成</description>
     </item>
+    
     <item>
       <title>Qwen Code 项目概览</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-overview/</link>
       <pubDate>Wed, 23 Jul 2025 15:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-overview/</guid>
       <description>Qwen Code 项目概览 什么是 Qwen Code？ Qwen Code 是一个基于 Gemini CLI 改造的命令行 AI 工作流工具，专为 Qwen3-Coder 模型优化，具有增强的解析器和工具支持。该项目的主要目标是为开发者提供一个强大的命令行界面，让他们能够利用 AI 的能力来完成各种编程任务。 ┌─────────────────────────────────────┐ │ Qwen Code 架构 │ ├─────────────────────────────────────┤ │ ┌────────</description>
     </item>
+    
   </channel>
 </rss>

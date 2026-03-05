@@ -6,14 +6,15 @@
     <description>Recent content in 工作效率 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 03 Aug 2025 10:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Aug 2025 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>todoIng AI 报告生成系统设计与智能应用</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-ai-report-generation/</link>
       <pubDate>Sun, 03 Aug 2025 10:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-ai-report-generation/</guid>
       <description>todoIng AI 报告生成系统设计与智能应用 在之前的文章中，我们详细介绍了 todoIng 的核心功能，包括任务管理、历史追踪和团队协作。今天，我们将探讨 todoIng 的一大亮点功能——AI 报告生成。通过集成 OpenAI，todoIng 能够自动生成并润色日报、周报和月报，大大减轻了用户的工作负担。 为什么需要 AI 报告生成？ 在现代职场中，定期撰写工作报告是一项常见但耗时的任务。许多人在写报告时面临以下挑战： 时间成本高：整理任务完成情况、总结工作</description>
     </item>
+    
   </channel>
 </rss>

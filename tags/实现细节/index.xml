@@ -6,14 +6,15 @@
     <description>Recent content in 实现细节 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 16:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jul 2025 16:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qwen Code 核心代码实现细节深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</link>
       <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</guid>
       <description>Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。 CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts： #!/usr/bin/env node import &amp;#39;./src/gemini.js&amp;#39;; import { main } from &amp;#39;./src/gemini.js&amp;#39;; // --- Global Entry Point --- main().catch((error) =&amp;gt; { console.error(&amp;#39;An unexpected critical error occurred:&amp;#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情： 导</description>
     </item>
+    
   </channel>
 </rss>

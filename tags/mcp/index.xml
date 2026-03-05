@@ -6,21 +6,24 @@
     <description>Recent content in MCP on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 19:30:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/mcp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 19:30:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/mcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat MCP 支持深度剖析</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-mcp-support/</link>
       <pubDate>Thu, 31 Jul 2025 19:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-mcp-support/</guid>
       <description>DeepChat MCP 支持深度剖析 引言 Model Context Protocol (MCP) 是一种新兴的协议，旨在为 AI 模型提供访问外部资源、执行工具和获取提示的标准方法。DeepChat 作为先进的 AI 聊天平台，深度集成了 MCP 支持，使其能够扩展 AI 的能力，实现代码执行、网络访问等高级功能。本文将深入分析 DeepChat 中 MCP 的实现原理和应用。 MCP 协议概述 什么是 MCP？ Model Context Protocol (MCP) 是一种标准化协议，允许 AI 模型安全地与外部系统交互。它定义了三种核心能力： Resources（资源） - 访问外部数据</description>
     </item>
+    
     <item>
       <title>DeepChat MCP 支持实现详解：打造强大的 AI 工具生态系统</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-mcp-implementation/</link>
       <pubDate>Thu, 31 Jul 2025 18:20:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-mcp-implementation/</guid>
       <description>DeepChat MCP 支持实现详解：打造强大的 AI 工具生态系统 引言 随着大语言模型（LLM）的发展，单纯的文本生成能力已经无法满足复杂应用场景的需求。Model Context Protocol（MCP）作为一种新兴的标准化协议，为 LLM 提供了访问外部工具和资源的能力，极大地扩展了 AI 应用的可能性。DeepChat 作为先进的 AI 聊天平台，对 MCP 协议提供了完整而深入的支持，本文将详细解析 DeepChat 中 MCP 的实现机制。 MCP 协议简介 Model Context Protocol（MCP）是</description>
     </item>
+    
   </channel>
 </rss>

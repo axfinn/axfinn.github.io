@@ -6,14 +6,15 @@
     <description>Recent content in 大模型 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 18 Jul 2025 18:30:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jul 2025 18:30:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>大模型智能体构建：从理论到实践</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%99%BA%E8%83%BD%E4%BD%93%E6%9E%84%E5%BB%BA%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Fri, 18 Jul 2025 18:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%99%BA%E8%83%BD%E4%BD%93%E6%9E%84%E5%BB%BA%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5/</guid>
       <description>引言 随着大型语言模型（LLM）的飞速发展，构建能够自主感知、决策和行动的智能体（Agent）成为了人工智能领域的热点。大模型智能体不仅能够理解复杂的指令，还能通过与环境的交互，完成一系列任务。本文将深入探讨大模型智能体的构建原理、核心组件以及实践中的挑战与机遇。 大模型智能体的核心组件 一个典型的大模型智能体通常包含以下几个核心组件： 感知模块（Perception Module）： 功能：负责从环境中获取</description>
     </item>
+    
   </channel>
 </rss>

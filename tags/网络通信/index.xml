@@ -6,28 +6,33 @@
     <description>Recent content in 网络通信 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 18 Jul 2025 19:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jul 2025 19:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NPS 核心组件：深入剖析 Bridge 模块</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-bridge-%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Fri, 18 Jul 2025 19:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-bridge-%E6%A8%A1%E5%9D%97/</guid>
       <description>引言 在 NPS 的服务端架构中，proxy 模块负责监听公网端口并处理各种协议的流量，而 client 模块则在内网中连接本地服务。那么，当一个公网请求到达 proxy 模块后，它是如何精确地找到对应的内网客户端，并与之建立一条数据通道的呢？答案就是 Bridge 模块。Bridge 是 NPS 服务端的核心枢纽，它负责维护所有客户端的长连接，并在此之上建立控制和数据隧道，是整个 NPS 体系的“交通总指挥”。 Bridge 结构体：通信枢纽的核心 bridge.go 文件首先定义了 Bridge 结构体，它包</description>
     </item>
+    
     <item>
       <title>NPS 客户端核心解析：连接管理与流量转发</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/</link>
       <pubDate>Fri, 18 Jul 2025 17:45:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E8%A7%A3%E6%9E%90%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86%E4%B8%8E%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91/</guid>
       <description>引言 在 NPS 系列文章的前几篇中，我们详细剖析了 NPS 服务端的各个模块和代理实现。本篇文章将转向 NPS 的 客户端（Client） 模块，深入分析 nps/client/client.go 文件。这个文件是 NPS 客户端的“大脑”，负责与服务端建立连接、管理隧道、处理不同类型的流量以及维护客户端的生命周期。理解客户端的运作机制，是掌握 NPS 完整内网穿透流程的关键。 client.go：客户端的“大脑” client.go 文件定义了 TRPClient 结构体，它是 NPS 客户端的核心。它负责客户端的启动、与服务端</description>
     </item>
+    
     <item>
       <title>NPS 代理实现：WebSocket 代理与 HTTP 反向代理</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</link>
       <pubDate>Fri, 18 Jul 2025 17:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</guid>
       <description>引言 在 NPS 系列文章的前几篇中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理、P2P 代理和 UDP 代理）。本篇文章将深入 NPS 的 WebSocket 代理和 HTTP 反向代理实现。我们将通过分析 nps/server/proxy/websocket.go 文件，揭示 NPS 如何处理这两种特殊的 HTTP 流量，实现更灵活的网络穿透。 WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器之间的全双工通信通道，常用于实时应用，如聊天、在线游戏、股票行情等。传统</description>
     </item>
+    
   </channel>
 </rss>

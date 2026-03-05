@@ -5,15 +5,15 @@
     <link>https://blog.jaxiu.cn/tags/ci/cd/</link>
     <description>Recent content in CI/CD on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 18:10:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
+    <language>zn-Hans</language><atom:link href="https://blog.jaxiu.cn/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat 多平台构建实现详解：从代码到发布</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-platform-build/</link>
       <pubDate>Thu, 31 Jul 2025 18:10:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-platform-build/</guid>
       <description>DeepChat 多平台构建实现详解：从代码到发布 引言 在现代软件开发中，跨平台支持已成为许多应用程序的基本要求。DeepChat 作为一个开源的 AI 聊天平台，支持 Windows、macOS 和 Linux 三大主流操作系统。实现这一目标的关键在于其精心设计的构建系统。本文将深入分析 DeepChat 的多平台构建实现机制，包括构建配置、平台特定处理以及自动化发布流程。 构建系统概览 DeepChat 使用 electron-builder 作为其主要的构建工具，配合 electron-vite 进行代码打包和优化。整个构建流程可</description>
     </item>
+    
   </channel>
 </rss>

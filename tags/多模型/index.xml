@@ -6,14 +6,15 @@
     <description>Recent content in 多模型 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 19:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 19:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%A4%9A%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat 多模型支持机制详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-model-support/</link>
       <pubDate>Thu, 31 Jul 2025 19:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-model-support/</guid>
       <description>DeepChat 多模型支持机制详解 引言 在 AI 领域，不同的大语言模型（LLM）都有各自的优势和适用场景。DeepChat 的核心价值之一就是能够统一管理和使用各种不同的 AI 模型，包括云端模型和本地模型。本文将深入分析 DeepChat 的多模型支持机制，探讨其如何实现对众多 AI 模型提供商的统一管理。 统一接口设计与实现 抽象层设计 DeepChat 采用了适配器模式来实现对不同模型提供商的支持。其核心思想是定义一个统一的接口，然后为每个模型提供商实现相应的适配</description>
     </item>
+    
   </channel>
 </rss>

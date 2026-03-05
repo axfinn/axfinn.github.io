@@ -6,70 +6,87 @@
     <description>Recent content in Qwen Code on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 16:10:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/qwen-code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jul 2025 16:10:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/qwen-code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qwen Code 实战应用与总结</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</link>
       <pubDate>Wed, 23 Jul 2025 16:10:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</guid>
       <description>Qwen Code 实战应用与总结 引言 经过前面七篇文章的详细介绍，我们已经全面了解了 Qwen Code 项目的各个方面，从基本概念到核心实现细节。在本文中，我们将通过实际应用案例来展示 Qwen Code 的强大功能，并对整个系列进行总结。 实战应用案例 案例一：快速理解开源项目 假设我们需要快速理解一个复杂的开源项目，比如 Redux。我们可以使用 Qwen Code 来帮助我们： # 启动 Qwen Code qwen-code # 然后输入以下指令： # &amp;#34;请帮我分析 Redux 项目的结构，特别是它的核心概念和实</description>
     </item>
+    
     <item>
       <title>Qwen Code 开发指南</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-development-guide/</link>
       <pubDate>Wed, 23 Jul 2025 16:05:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-development-guide/</guid>
       <description>Qwen Code 开发指南 开发环境设置 系统要求 Node.js 20+：项目需要 Node.js 20 或更高版本 npm 8+：推荐使用 npm 8 或更高版本 Git：用于版本控制 克隆项目 git clone git@github.com:axfinn/qwen-code.git cd qwen-code 安装依赖 npm install 这将安装所有必要的依赖项，包括开发依赖。 项目结构回顾 Qwen Code 采用 monorepo 结构，使用 npm workspaces 管理多个包： qwen-code/ ├── packages/ │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── docs/ # 文档 ├── examples/ # 示例 ├── tests/ # 测试 └── ... 开发工作流 构建项目 # 构建所有包 npm run build # 构建特定包 npm run</description>
     </item>
+    
     <item>
       <title>Qwen Code 核心代码实现细节深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</link>
       <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</guid>
       <description>Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。 CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts： #!/usr/bin/env node import &amp;#39;./src/gemini.js&amp;#39;; import { main } from &amp;#39;./src/gemini.js&amp;#39;; // --- Global Entry Point --- main().catch((error) =&amp;gt; { console.error(&amp;#39;An unexpected critical error occurred:&amp;#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情： 导</description>
     </item>
+    
     <item>
       <title>Qwen Code 实现框架深度解析</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/</link>
       <pubDate>Wed, 23 Jul 2025 15:55:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/</guid>
       <description>Qwen Code 实现框架深度解析 引言 Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。 整体架构 Qwen Code 的整体架构可以分为以下几个主要层次： 用户接口层：提供命令行交互界面 核心逻辑层：处理用户请求和 AI 模型交互 工具执行层：执行各种本地操作工具 模型接口层：与 Qwen 模型进行</description>
     </item>
+    
     <item>
       <title>Qwen Code 项目框架详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</link>
       <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</guid>
       <description>Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore</description>
     </item>
+    
     <item>
       <title>Qwen Code CLI 使用详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-cli-usage/</link>
       <pubDate>Wed, 23 Jul 2025 15:45:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-cli-usage/</guid>
       <description>Qwen Code CLI 使用详解 CLI 入门 Qwen Code 是一个功能强大的命令行 AI 工作流工具，为开发者提供了一种全新的与代码交互的方式。通过 CLI，用户可以与 AI 进行对话，执行各种编程任务。 安装 确保您已经安装了 Node.js 20+ 版本，然后通过 npm 安装 Qwen Code： npm install -g @qwen-code/qwen-code 基本使用 安装完成后，您可以通过以下命令启动 Qwen Code： qwen-code 这将启动交互式 CLI 会话，您可以直接与 AI 进行对话。 非交互式使用 您也可以通过管道或重定向将输入传递给 Qwen Code： echo &amp;#34;帮我生成</description>
     </item>
+    
     <item>
       <title>Qwen Code 工具详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-tools-detailed/</link>
       <pubDate>Wed, 23 Jul 2025 15:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-tools-detailed/</guid>
       <description>Qwen Code 工具详解 工具概览 Qwen Code 提供了一套丰富的工具集，允许 AI 模型与本地环境进行交互、执行命令、访问文件和执行各种操作。这些工具通过确认提示和沙箱机制确保安全性。 工具集的分类可以用下图表示： graph TD A[Qwen Code 工具集] --&gt; B[文件系统工具] A --&gt; C[网络工具] A --&gt; D[其他工具] B --&gt; B1[list_directory] B --&gt; B2[read_file] B --&gt; B3[write_file] B --&gt; B4[glob] B --&gt; B5[search_file_content] B --&gt; B6[replace] C --&gt; C1[google_web_search] C --&gt; C2[web_fetch] D --&gt; D1[save_memory] D --&gt; D2[run_shell_command] D --&gt; D3[MCP 服务器工具] 文件系统工具 Qwen Code 提供了完整的文件系统操作工具： list_direct</description>
     </item>
+    
     <item>
       <title>Qwen Code 项目概览</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-overview/</link>
       <pubDate>Wed, 23 Jul 2025 15:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-overview/</guid>
       <description>Qwen Code 项目概览 什么是 Qwen Code？ Qwen Code 是一个基于 Gemini CLI 改造的命令行 AI 工作流工具，专为 Qwen3-Coder 模型优化，具有增强的解析器和工具支持。该项目的主要目标是为开发者提供一个强大的命令行界面，让他们能够利用 AI 的能力来完成各种编程任务。 ┌─────────────────────────────────────┐ │ Qwen Code 架构 │ ├─────────────────────────────────────┤ │ ┌────────</description>
     </item>
+    
     <item>
       <title>使用Qwen Code快速实现动态背景图功能</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/</link>
       <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/</guid>
       <description>在现代网站设计中，动态背景图已成为提升用户体验的重要元素之一。本文将详细介绍如何使用Qwen Code智能助手快速实现一个功能丰富的动态背景图系统。 需求分析 在开始编码之前，我们需要明确要实现的功能： 背景图片自动轮换（使用外部图片服务） 可配置的轮换间隔时间 可调节的过渡动画时间 手动切换上一张/下一张背景图 控制面板，可展开/收起进行设置 实时状态显示 使用Qwen Code实现过程 1. 项目分析 首先，我们让Qwen</description>
     </item>
+    
   </channel>
 </rss>

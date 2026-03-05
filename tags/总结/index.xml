@@ -6,21 +6,24 @@
     <description>Recent content in 总结 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 22:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 22:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat 系列总结：构建下一代 AI 交互平台的完整解析</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-series-summary/</link>
       <pubDate>Thu, 31 Jul 2025 22:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-series-summary/</guid>
       <description>DeepChat 系列总结：构建下一代 AI 交互平台的完整解析 引言 在过去的一系列文章中，我们深入探讨了 DeepChat 这一开源 AI 聊天平台的各个方面。从项目概览到具体的技术实现，从架构设计到企业级应用，我们全面剖析了这个功能强大的多模型 AI 对话平台。本文将对整个系列进行总结，并展望 AI 交互平台的未来发展趋势。 系列文章回顾 我们一共发布了 8 篇关于 DeepChat 的深度分析文章，涵盖了以下关键主题： 1. 项目概览与核心特性 在第一篇文章中，我们介绍了 DeepChat 的基本概念</description>
     </item>
+    
     <item>
       <title>Qwen Code 实战应用与总结</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</link>
       <pubDate>Wed, 23 Jul 2025 16:10:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</guid>
       <description>Qwen Code 实战应用与总结 引言 经过前面七篇文章的详细介绍，我们已经全面了解了 Qwen Code 项目的各个方面，从基本概念到核心实现细节。在本文中，我们将通过实际应用案例来展示 Qwen Code 的强大功能，并对整个系列进行总结。 实战应用案例 案例一：快速理解开源项目 假设我们需要快速理解一个复杂的开源项目，比如 Redux。我们可以使用 Qwen Code 来帮助我们： # 启动 Qwen Code qwen-code # 然后输入以下指令： # &amp;#34;请帮我分析 Redux 项目的结构，特别是它的核心概念和实</description>
     </item>
+    
   </channel>
 </rss>

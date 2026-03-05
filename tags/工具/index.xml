@@ -6,14 +6,15 @@
     <description>Recent content in 工具 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Tue, 12 Aug 2025 14:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Aug 2025 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>fcopy - 一个全平台剪贴板同步工具</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/fcopy-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Tue, 12 Aug 2025 14:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-08/fcopy-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7/</guid>
       <description>在日常工作中，我们经常需要在不同设备之间复制粘贴文本、图片或文件。虽然有很多商业解决方案，但我还是希望能有一个简单、安全、自托管的解决方案。因此，我开发了 fcopy - 一个全平台剪贴板同步工具。 项目介绍 fcopy 是一个基于 Web 的剪贴板同步工具，支持文本和文件的跨设备同步。它采用现代化的技术栈构建，具有响应式设计，可以在桌面端和移动端使用。 项目的主要特性包括： 📋 文本和文件剪贴板同步 🔐 安全的API密钥认证机制 🖼️ 图片预览</description>
     </item>
+    
   </channel>
 </rss>

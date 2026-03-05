@@ -6,14 +6,15 @@
     <description>Recent content in 对比 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 26 Feb 2026 11:25:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E5%AF%B9%E6%AF%94/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Feb 2026 11:25:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%AF%B9%E6%AF%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI编程工具深度调研系列（八）：终极对比与选择指南</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%AB%E7%BB%88%E6%9E%81%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</link>
       <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%AB%E7%BB%88%E6%9E%81%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</guid>
       <description>AI编程工具深度调研系列（八） 终极对比与选择指南 一、前言 经过前七篇的详细调研，本系列文章已经对六款主流AI编程工具进行了深入分析。本文将对它们进行终极对比，并提供基于不同场景的选择建议。 二、综合能力对比 2.1 核心指标对比表 工具 代码能力 生态完善度 安全性 性价比 易用性 综合评分 OpenAI Codex ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐ ⭐⭐⭐⭐ 9.2 Claude ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐ 9.0 GLM ⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐</description>
     </item>
+    
   </channel>
 </rss>

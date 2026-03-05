@@ -6,14 +6,15 @@
     <description>Recent content in 运维 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hotel 项目：远程服务器部署指南</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/hotel-project-remote-deployment-guide/</link>
       <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/hotel-project-remote-deployment-guide/</guid>
       <description>Hotel 项目：远程服务器部署指南 本文档提供了将 hotel 酒店管理系统部署到远程服务器的详细步骤，主要通过 Docker 进行。 前提条件 在开始之前，请确保您的远程服务器已安装以下工具： Git: 用于克隆项目仓库。 Docker: 用于构建和运行容器化应用程序。 SSH 访问: 用于连接到您的远程服务器。 部署步骤 请按照以下步骤在您的远程服务器上部署 hotel 项目： 1. 连接到您的远程服务器 使用 SSH 连接到您的远程服务器： ssh your_username@your_server_ip 2. 克隆仓库 导航到您希望部署的目录（例如，/opt/ap</description>
     </item>
+    
   </channel>
 </rss>

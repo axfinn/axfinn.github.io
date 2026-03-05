@@ -6,77 +6,96 @@
     <description>Recent content in 架构设计 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sun, 03 Aug 2025 20:00:00 +0800</lastBuildDate>
-    <atom:link href="https://blog.jaxiu.cn/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Aug 2025 20:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>todoIng 架构设计与未来展望</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-architecture-and-future/</link>
       <pubDate>Sun, 03 Aug 2025 20:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-architecture-and-future/</guid>
       <description>todoIng 架构设计与未来展望 在前面的系列文章中，我们详细介绍了 todoIng 项目的各个功能模块和实现细节。今天，我们将从更高的层面来审视整个系统的架构设计，并探讨其未来的发展方向。 整体架构回顾 todoIng 采用现代化的前后端分离架构，这种设计模式为系统带来了诸多优势： 技术栈独立：前后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易于维护和重构 让我</description>
     </item>
+    
     <item>
       <title>todoIng Git 风格历史追踪系统设计与架构</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-git-style-history-tracking/</link>
       <pubDate>Sat, 02 Aug 2025 09:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-git-style-history-tracking/</guid>
       <description>todoIng Git 风格历史追踪系统设计与架构 在前面的文章中，我们介绍了 todoIng 项目的核心模块设计。今天，我们将深入探讨 todoIng 最具特色的功能——Git 风格的任务历史追踪系统。这个功能使得 todoIng 与其他任务管理工具区别开来，为用户提供了前所未有的任务管理体验。 为什么需要任务历史追踪？ 在传统的任务管理工具中，我们只能看到任务的当前状态，而无法了解任务是如何一步步演进的。这导致了以下几个问题： 缺乏上下文：无法了解任务状态变更的原因和背</description>
     </item>
+    
     <item>
       <title>todoIng 核心模块设计与架构</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-core-modules-implementation/</link>
       <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-core-modules-implementation/</guid>
       <description>todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。 项目架构概览 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势： 技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易</description>
     </item>
+    
     <item>
       <title>DeepChat 性能优化与企业级应用</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-performance-enterprise/</link>
       <pubDate>Thu, 31 Jul 2025 21:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-performance-enterprise/</guid>
       <description>DeepChat 性能优化与企业级应用 引言 随着 AI 技术的快速发展，越来越多的企业开始将 AI 工具集成到其工作流程中。DeepChat 作为一个功能强大的开源 AI 聊天平台，不仅适用于个人用户，也具备了企业级应用的潜力。本文将深入探讨 DeepChat 的性能优化策略和企业级应用实践。 架构层面的性能优化 内存管理优化 DeepChat 采用了多种内存管理策略来优化性能： class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; // 1GB private gcInterval: NodeJS.Timeout | null = null; constructor() { this.startMemoryMonitoring(); } // 监控内存使用情况 private startMemoryMonitoring(): void { this.gcInterval = setInterval(() =&amp;gt; { const memoryUsage = process.memoryUsage(); //</description>
     </item>
+    
     <item>
       <title>DeepChat 多窗口多标签架构设计</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/</link>
       <pubDate>Thu, 31 Jul 2025 20:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/</guid>
       <description>DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口+多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。 多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念： 并行处理 - 允许用户同时进行多个独立的对话 上</description>
     </item>
+    
     <item>
       <title>DeepChat 架构设计解析：Electron 多平台实现原理</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/</link>
       <pubDate>Thu, 31 Jul 2025 18:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-architecture-design/</guid>
       <description>DeepChat 架构设计解析：Electron 多平台实现原理 引言 在当今快速发展的 AI 时代，跨平台应用程序的需求日益增长。DeepChat 作为一个支持多种大语言模型的 AI 聊天平台，能够在 Windows、macOS 和 Linux 三大主流操作系统上运行，这得益于其基于 Electron 的架构设计。本文将深入解析 DeepChat 的架构设计，特别是其多平台实现原理。 Electron 在 DeepChat 中的应用 Electron 是一个使用 Web 技术构建跨平台桌面应用程序的开源框架。DeepChat 选择 Electron 作为其基础框</description>
     </item>
+    
     <item>
       <title>DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-cross-platform-implementation/</link>
       <pubDate>Thu, 31 Jul 2025 18:30:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-cross-platform-implementation/</guid>
       <description>DeepChat 跨平台实现机制详解：构建真正跨系统的 Electron 应用 引言 在当今多样化的计算环境中，用户使用着不同操作系统的设备，包括 macOS、Windows 和 Linux。为了让应用程序能够触及更广泛的用户群体，跨平台支持已成为现代桌面应用开发的基本要求。DeepChat 作为一个功能丰富的 AI 聊天平台，成功实现了对三大主流操作系统的支持，为用户提供了统一而优质的使用体验。 本文将深入解析 DeepChat 的跨平台实现机制，从构建系统、平台适</description>
     </item>
+    
     <item>
       <title>DeepChat 多窗口多标签架构深度解析</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs-architecture/</link>
       <pubDate>Thu, 31 Jul 2025 18:15:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs-architecture/</guid>
       <description>DeepChat 多窗口多标签架构深度解析 引言 现代桌面应用程序普遍采用多窗口多标签的设计模式，以提升用户的工作效率和使用体验。DeepChat 作为一个功能丰富的 AI 聊天平台，实现了先进的多窗口多标签架构，支持跨窗口的标签页拖拽、独立会话管理等功能。本文将深入解析 DeepChat 的多窗口多标签架构设计，揭示其背后的技术实现原理。 传统 Electron 多窗口实现 在传统的 Electron 应用中，创建多个窗口通常有两种方式： BrowserWindow 方式 - 每个窗口都是独立的 BrowserWindow 实例 BrowserView 方式 - 在</description>
     </item>
+    
     <item>
       <title>Qwen Code 实现框架深度解析</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/</link>
       <pubDate>Wed, 23 Jul 2025 15:55:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-implementation-framework/</guid>
       <description>Qwen Code 实现框架深度解析 引言 Qwen Code 是一个基于 AI 的命令行工具，它将大型语言模型的能力与本地开发环境相结合。为了实现这一目标，Qwen Code 采用了复杂而精巧的实现框架，涉及多个技术领域。本文将深入解析 Qwen Code 的实现框架，帮助读者理解其内部工作机制。 整体架构 Qwen Code 的整体架构可以分为以下几个主要层次： 用户接口层：提供命令行交互界面 核心逻辑层：处理用户请求和 AI 模型交互 工具执行层：执行各种本地操作工具 模型接口层：与 Qwen 模型进行</description>
     </item>
+    
     <item>
       <title>Qwen Code 项目框架详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</link>
       <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
+      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</guid>
       <description>Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore</description>
     </item>
+    
   </channel>
 </rss>
