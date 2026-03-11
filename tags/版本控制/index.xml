@@ -6,15 +6,14 @@
     <description>Recent content in 版本控制 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git 学习与详细使用指南</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/git-learning-and-usage-guide/</link>
       <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/git-learning-and-usage-guide/</guid>
       <description>Git 学习与详细使用指南 Git 是目前世界上最流行、最先进的分布式版本控制系统。它能够高效地管理项目代码，记录每一次修改，并允许多人协作开发。无论你是个人开发者还是团队成员，掌握 Git 都是一项必备技能。 本文将从 Git 的基本概念入手，逐步深入到常用命令、分支管理、远程协作，并提供一些高级技巧和参考资源，帮助你全面掌握 Git。 1. Git 基础概念 在深入学习 Git 命令之前，理解以下核心概念至关重要： 版本控制系统 (VCS): 记录文件内容变化，以</description>
     </item>
-    
   </channel>
 </rss>

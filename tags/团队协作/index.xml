@@ -6,15 +6,14 @@
     <description>Recent content in 团队协作 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 02 Aug 2025 15:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Aug 2025 15:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>todoIng 团队协作与权限管理架构设计</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-team-collaboration-and-permissions/</link>
       <pubDate>Sat, 02 Aug 2025 15:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-team-collaboration-and-permissions/</guid>
       <description>todoIng 团队协作与权限管理架构设计 在前面的文章中，我们已经介绍了 todoIng 的核心模块和 Git 风格的历史追踪系统。今天我们来探讨 todoIng 的团队协作功能和权限管理系统，这是实现高效团队任务管理的关键。 团队协作的重要性 在现代工作中，很少有任务是完全独立完成的。大多数项目都需要团队成员之间的协作，这就要求任务管理系统具备强大的团队协作功能： 任务分配：能够将任务分配给特定的团队成员 进度共享：团队成员可以实时查看任务进度 沟通协作：在</description>
     </item>
-    
   </channel>
 </rss>

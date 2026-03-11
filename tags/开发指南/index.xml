@@ -6,24 +6,21 @@
     <description>Recent content in 开发指南 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 16:05:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jul 2025 16:05:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qwen Code 开发指南</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-development-guide/</link>
       <pubDate>Wed, 23 Jul 2025 16:05:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-development-guide/</guid>
       <description>Qwen Code 开发指南 开发环境设置 系统要求 Node.js 20+：项目需要 Node.js 20 或更高版本 npm 8+：推荐使用 npm 8 或更高版本 Git：用于版本控制 克隆项目 git clone git@github.com:axfinn/qwen-code.git cd qwen-code 安装依赖 npm install 这将安装所有必要的依赖项，包括开发依赖。 项目结构回顾 Qwen Code 采用 monorepo 结构，使用 npm workspaces 管理多个包： qwen-code/ ├── packages/ │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── docs/ # 文档 ├── examples/ # 示例 ├── tests/ # 测试 └── ... 开发工作流 构建项目 # 构建所有包 npm run build # 构建特定包 npm run</description>
     </item>
-    
     <item>
       <title>Qwen Code 项目框架详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</link>
       <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</guid>
       <description>Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore</description>
     </item>
-    
   </channel>
 </rss>

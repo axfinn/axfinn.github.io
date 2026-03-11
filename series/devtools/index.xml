@@ -6,25 +6,21 @@
     <description>Recent content in DevTools on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Mon, 09 Feb 2026 20:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/series/devtools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Feb 2026 20:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/series/devtools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DevTools 孕期管理模块：全栈实现一个云端孕期工具套件</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/</link>
       <pubDate>Mon, 09 Feb 2026 20:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/devtools-pregnancy-module/</guid>
       <description>DevTools 孕期管理模块：全栈实现一个云端孕期工具套件 在 DevTools 开发者工具平台上新增了一个有温度的功能——孕期管理模块（/yun）。这个模块提供完整的孕期管理工具套件，包括待产包清单、宝宝用品清单、产检时间表、体重记录、胎动计数和孕期知识库，所有数据云端存储、密码保护。 功能概览 graph LR A[&#34;孕期管理 /yun&#34;] --&gt; B[&#34;概览面板&#34;] A --&gt; C[&#34;待产包&#34;] A --&gt; D[&#34;宝宝用品&#34;] A --&gt; E[&#34;产检时间表&#34;] A --&gt; F[&#34;体重记录&#34;] A --&gt; G[&#34;</description>
     </item>
-    
     <item>
       <title>DevTools：从零构建全栈开发者工具站</title>
       <link>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</link>
       <pubDate>Sat, 17 Jan 2026 14:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</guid>
-      <description>&lt;p&gt;开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。&lt;/p&gt;
-&lt;p&gt;本文介绍 &lt;strong&gt;DevTools&lt;/strong&gt; —— 一个功能完整的开发者工具站，包含 16+ 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。&lt;/p&gt;</description>
+      <description>&lt;p&gt;开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。&lt;/p&gt;&#xA;&lt;p&gt;本文介绍 &lt;strong&gt;DevTools&lt;/strong&gt; —— 一个功能完整的开发者工具站，包含 16+ 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

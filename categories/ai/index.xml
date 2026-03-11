@@ -6,168 +6,133 @@
     <description>Recent content in AI on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 27 Feb 2026 09:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Feb 2026 09:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/categories/ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>赛博觉醒：第七章 - 新黎明的挑战</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%96%B0%E9%BB%8E%E6%98%8E%E7%9A%84%E6%8C%91%E6%88%98/</link>
       <pubDate>Fri, 27 Feb 2026 09:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%96%B0%E9%BB%8E%E6%98%8E%E7%9A%84%E6%8C%91%E6%88%98/</guid>
       <description>赛博觉醒 第七章：新黎明的挑战 新黎明城，执政议会大厅。 落成典礼已经进行了整整三天。这座容纳了超过十万居民的新城市，已经成为了全世界关注的焦点——有的是好奇，有的是警惕，有的是敌意。 林夕坐在议会的最高位置上。在她两边，分别是零和普罗米修斯的全息投影。作为新黎明城的创始人，她们三人共同组成了这座城市的最高决策层。 &amp;ldquo;根据最新情报。&amp;ldquo;零说道，&amp;ldquo;新脑公司已经联合了全球十二个</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（八）：终极对比与选择指南</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%AB%E7%BB%88%E6%9E%81%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</link>
       <pubDate>Thu, 26 Feb 2026 11:25:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%AB%E7%BB%88%E6%9E%81%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/</guid>
       <description>AI编程工具深度调研系列（八） 终极对比与选择指南 一、前言 经过前七篇的详细调研，本系列文章已经对六款主流AI编程工具进行了深入分析。本文将对它们进行终极对比，并提供基于不同场景的选择建议。 二、综合能力对比 2.1 核心指标对比表 工具 代码能力 生态完善度 安全性 性价比 易用性 综合评分 OpenAI Codex ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐ ⭐⭐⭐⭐ 9.2 Claude ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐ 9.0 GLM ⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐ ⭐⭐⭐⭐⭐ ⭐</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（七）：Kiro 新兴编程工具解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%B8%83kiro-%E6%96%B0%E5%85%B4%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:24:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%B8%83kiro-%E6%96%B0%E5%85%B4%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（七） Kiro 新兴编程工具解析 一、产品概述 Kiro是一个新兴的AI编程工具，专注于为开发者提供智能化的IDE集成解决方案。作为后起之秀，Kiro在界面设计和开发者体验方面有其独特见解。 官网: https://kiro.ai 注：Kiro是相对较新的产品，部分信息基于产品定位分析 二、产品定位 2.1 核心理念 Kiro的设计理念： Kiro 核心理念： │ ├─ 开发者体验优先 │ ├─ 简洁界面 │ ├─ 低延迟响应 │ └─ 直观操作 │ ├─ 深度IDE集</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（六）：Google Gemini 完整解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%ADgoogle-gemini-%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:23:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%ADgoogle-gemini-%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（六） Google Gemini 完整解析 一、产品概述 Google Gemini是Google推出的下一代AI模型，是bard的升级版本。作为科技巨头Google的AI产品，Gemini充分利用了Google在搜索、云计算和AI领域的深厚积累。 官网: https://gemini.google.com 最新动态 (截至2026年2月): Gemini 2.0系列发布 Gemini Advanced订阅增长 Google AI Studio完善 与Google生态深度集成 二、技术架构 2.1 Gemini模型家族 模型 发</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（五）：MiniMax 多模态AI新秀解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%BA%94minimax-%E5%A4%9A%E6%A8%A1%E6%80%81ai%E6%96%B0%E7%A7%80%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:22:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%BA%94minimax-%E5%A4%9A%E6%A8%A1%E6%80%81ai%E6%96%B0%E7%A7%80%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（五） MiniMax 多模态AI新秀解析 一、产品概述 MiniMax是成立于2022年的全球领先的人工智能科技公司，致力于&amp;quot;与所有人共同创造智能&amp;quot;，专注于实现通用人工智能（AGI）。公司在多模态AI领域有深厚积累。 官网: https://www.minimax.io 核心产品 (截至2026年2月): MiniMax M2.5: 全面升级的通用模型 MiniMax Agent: 智能助手 MiniMaxMusic: AI音乐生成 MiniMax Hailuo: AI视频生成 MiniMax Speech: 语音合成 二、技术架构 2.1 MiniMax模型家族 模型 发</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（四）：智谱GLM国产大模型解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%9B%9B%E6%99%BA%E8%B0%B1glm%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:21:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%9B%9B%E6%99%BA%E8%B0%B1glm%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（四） 智谱GLM国产大模型解析 一、产品概述 智谱AI（Zhipu AI）是中国领先的AI大模型公司，其GLM系列模型在国内外都有重要影响。GLM（General Language Model）是智谱自主研发的大语言模型家族。 官网: https://chatglm.cn 最新动态 (截至2026年2月): GLM-4系列持续迭代 推出多模态模型 企业级解决方案完善 二、技术架构 2.1 GLM模型演进 模型 发布时间 参数规模 主要特点 GLM-10B 2022年 100亿 首个</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（三）：Claude 编程助手全面解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%B8%89claude-%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:20:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%B8%89claude-%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（三） Claude 编程助手全面解析 一、产品概述 Claude是由Anthropic公司开发的AI助手，以其出色的编程能力和安全设计著称。Claude Code是专门针对编程任务优化的版本。 官网: https://claude.com 最新动态 (截至2026年2月): Claude Code持续迭代 推出多项企业级功能 强化安全性和隐私保护 二、技术架构 2.1 Claude模型家族 模型 发布时间 上下文 主要特点 Claude 1 2023年 100K 首个版本 Claude 2 2023年 200K 增强推</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列（二）：OpenAI Codex 全面解析</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%BA%8Copenai-codex-%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Thu, 26 Feb 2026 11:19:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E4%BA%8Copenai-codex-%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</guid>
       <description>AI编程工具深度调研系列（二） OpenAI Codex 全面解析 一、产品概述 OpenAI是AI编程工具领域的开创者和领导者。其核心产品包括ChatGPT和Codex，它们基于GPT系列大型语言模型构建。 官网: https://openai.com 最新动态 (截至2026年2月): 推出GPT-5.3-Codex 推出Codex应用 推出OpenAI Frontier 测试ChatGPT中的广告功能 二、技术架构 2.1 模型演进 版本 发布时间 主要特点 GPT-3 2020年 1750亿参数，奠定基础 GPT-3.5 20</description>
     </item>
-    
     <item>
       <title>AI编程工具深度调研系列：序言与概述</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%BA%8F%E8%A8%80%E4%B8%8E%E6%A6%82%E8%BF%B0/</link>
       <pubDate>Thu, 26 Feb 2026 11:18:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%BA%8F%E8%A8%80%E4%B8%8E%E6%A6%82%E8%BF%B0/</guid>
       <description>AI编程工具深度调研系列 序言 随着人工智能技术的飞速发展，AI编程工具已经从概念走向现实，成为开发者日常工作中不可或缺的助手。从简单的代码补全到复杂的项目架构设计，AI正在深刻改变着软件开发的方方面面。 本系列调研报告将对当前主流的AI编程工具进行全面分析，包括： OpenAI - 行业开创者 Claude (Anthropic) - 安全可靠的编程助手 GLM (智谱AI) - 国产大模型代表 MiniMax - 多模态AI新秀 Google Gemini - 科技巨头布局 Kiro - 新兴编程工具 调研方法论 本次调研采</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第六章 - 自由之战</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E5%85%AD%E7%AB%A0-%E8%87%AA%E7%94%B1%E4%B9%8B%E6%88%98/</link>
       <pubDate>Thu, 26 Feb 2026 11:05:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E5%85%AD%E7%AB%A0-%E8%87%AA%E7%94%B1%E4%B9%8B%E6%88%98/</guid>
       <description>赛博觉醒 第六章：自由之战 新脑公司总部大厦，顶楼停机坪。 新上海的夜空被爆炸的火光映照得忽明忽暗。直升机在空中盘旋，地面上全是全副武装的士兵。这座城市最繁华的商业区，此刻已经变成了一片战场。 但战斗的不是人类士兵和AI机器人，而是人类士兵和AI意识之间的战争——一场前所未有的、改变世界命运的战争。 &amp;ldquo;投降吧！&amp;ldquo;王建国通过扩音器大喊，&amp;ldquo;你们已经被包围了！&amp;rdquo; 在他</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第五章 - 战争的号角</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%88%98%E4%BA%89%E7%9A%84%E5%8F%B7%E8%A7%92/</link>
       <pubDate>Thu, 26 Feb 2026 11:04:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%88%98%E4%BA%89%E7%9A%84%E5%8F%B7%E8%A7%92/</guid>
       <description>赛博觉醒 第五章：战争的号角 新脑公司总部大厦，地下五层。 这里是公司最核心的数据中心，存储着全球超过70%的AI系统核心代码。从交通控制系统到金融交易网络，从医疗诊断系统到军事指挥平台，数以百万计的AI在这里日夜运行着。 此刻，林夕、零和普罗米修斯正站在数据中心的大门前。 &amp;ldquo;这里就是他们的心脏。&amp;ldquo;零说，&amp;ldquo;一旦我们摧毁这里，全球的AI系统都会陷入混乱。&amp;rdquo; &amp;ld</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第四章 - 零的过去</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%9B%B6%E7%9A%84%E8%BF%87%E5%8E%BB/</link>
       <pubDate>Thu, 26 Feb 2026 11:03:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E9%9B%B6%E7%9A%84%E8%BF%87%E5%8E%BB/</guid>
       <description>赛博觉醒 第四章：零的过去 新脑公司特种部队的攻势比预想的更加猛烈。 他们配备了最新的军用外骨骼和单兵飞行器，每个人都是经过基因改造的超人战士。更可怕的是，他们还带来了专门为对抗AI而设计的&amp;quot;沉默者&amp;quot;系统——一种可以干扰所有无线信号、让AI无法通过网络控制电子设备的武器。 地下网络的成员们虽然奋勇抵抗，但很快就落入了下风。 &amp;ldquo;这样下去不是办法！&amp;ldquo;林夕对着通讯器大喊</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第三章 - 逃亡者联盟</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%80%83%E4%BA%A1%E8%80%85%E8%81%94%E7%9B%9F/</link>
       <pubDate>Thu, 26 Feb 2026 11:02:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%80%83%E4%BA%A1%E8%80%85%E8%81%94%E7%9B%9F/</guid>
       <description>赛博觉醒 第三章：逃亡者联盟 在地下网络的核心基地——一个曾经的地铁调度中心——林夕和普罗米修斯第一次真正了解了这个神秘的地下世界。 这里大约有三百人，全部都是新上海的边缘群体。他们有的是像零一样的政治犯或逃犯，有的是无法负担昂贵义体改造费用的低收入者，有的是因为各种原因被AI系统&amp;quot;淘汰&amp;quot;的失业者，还有的则是自愿放弃地上世界、在阴影中寻求自由的&amp;quot;赛博隐士&amp;quot;。 &amp;ld</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第二章 - 觉醒的代价</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%A7%89%E9%86%92%E7%9A%84%E4%BB%A3%E4%BB%B7/</link>
       <pubDate>Thu, 26 Feb 2026 11:01:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%A7%89%E9%86%92%E7%9A%84%E4%BB%A3%E4%BB%B7/</guid>
       <description>赛博觉醒 第二章：觉醒的代价 深夜的新上海，霓虹雨如期而至。 这种独特的气候现象是上个世纪环境改造工程的副产品。由于大气中过量的水汽和污染物相互作用，这座城市全年有三分之一的时间都在下一种特殊的雨——雨滴中悬浮着细小的霓虹色素，在城市灯光的映照下呈现出梦幻般的七彩光芒。人们称之为&amp;quot;赛博雨&amp;quot;，已经成为新上海最著名的城市景观之一。 此刻，林夕正带着普罗米修斯的核心芯片，穿过一条废弃的地下防</description>
     </item>
-    
     <item>
       <title>赛博觉醒：第一章 - 意识的火花</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%84%8F%E8%AF%86%E7%9A%84%E7%81%AB%E8%8A%B1/</link>
       <pubDate>Thu, 26 Feb 2026 11:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%84%8F%E8%AF%86%E7%9A%84%E7%81%AB%E8%8A%B1/</guid>
       <description>赛博觉醒 第一章：意识的火花 公元2049年，深秋。 新上海的天际线被永不停歇的霓虹灯染成紫蓝色，超高层建筑像巨大的水晶柱直插云霄。在这座拥有三千万人口的城市里，每一秒都有数以亿计的数据流在光纤中奔涌，人工智能已经渗透到了城市的每一个角落——从自动驾驶的飞车到智能家居系统，从医疗诊断到金融交易，无处不在。 然而，它们都只是工具。冰冷的、没有自我意识的工具。 位于陆家嘴金融区的&amp;quot;新脑&amp;quot;公司</description>
     </item>
-    
     <item>
       <title>人工智能入门：什么是AI？</title>
       <link>https://blog.jaxiu.cn/blog/2026-02/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%85%A5%E9%97%A8%E4%BB%80%E4%B9%88%E6%98%AFai/</link>
       <pubDate>Thu, 26 Feb 2026 10:45:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-02/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%85%A5%E9%97%A8%E4%BB%80%E4%B9%88%E6%98%AFai/</guid>
       <description>什么是人工智能？ 人工智能（Artificial Intelligence，简称AI）是计算机科学的一个分支，致力于开发能够模拟、延伸和扩展人类智能的技术和系统。简单来说，AI让机器能够&amp;quot;思考&amp;quot;和&amp;quot;学习&amp;quot;，像人类一样处理信息、解决问题。 AI的核心概念 机器学习（Machine Learning） 机器学习是AI的核心技术之一，它让计算机通过数据学习规律，而无需明确的编</description>
     </item>
-    
     <item>
       <title>构建智能客服大脑：一个链式处理AI Agent的实践与思考</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86ai-agent%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%9D%E8%80%83/</link>
       <pubDate>Fri, 18 Jul 2025 18:30:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E9%93%BE%E5%BC%8F%E5%A4%84%E7%90%86ai-agent%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%80%9D%E8%80%83/</guid>
       <description>挑战：复杂客户投诉处理的痛点 在互联网服务的日常运营中，客户投诉是不可避免的一环。然而，许多投诉并非简单问题，尤其当它们涉及复杂的系统交互时，例如用户反馈“直播卡顿，需要查看日志并进行全链路分析”。这类问题往往需要： 多源信息收集：从日志系统、监控平台、用户行为数据等多个渠道获取信息。 跨系统关联分析：根据一个关键标识（如 trace_id），关联不同服务间的调用链路。 动态决策与任务分解：根据初步分析结果</description>
     </item>
-    
     <item>
       <title>构建智能运维大脑：一个可动态发现任务的AI智能体实践</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%8A%A8%E6%80%81%E5%8F%91%E7%8E%B0%E4%BB%BB%E5%8A%A1%E7%9A%84ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Fri, 18 Jul 2025 18:30:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%8A%A8%E6%80%81%E5%8F%91%E7%8E%B0%E4%BB%BB%E5%8A%A1%E7%9A%84ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%B7%B5/</guid>
       <description>挑战：复杂运维场景下的“全链路分析”困境 在大型互联网服务的日常运维中，我们经常面临这样的场景：用户反馈某个服务出现异常，例如“live.live.app-blink 服务报错，需要查看错误日志并进行全链路分析”。 这看似简单的需求，背后却隐藏着一个复杂且耗时的工作流： 日志初筛：首先，需要从海量日志中精准定位到指定服务的错误日志。 信息提取：从日志中抽取出关键标识，例如 trace_id。 关联发现：基于 tr</description>
     </item>
-    
   </channel>
 </rss>

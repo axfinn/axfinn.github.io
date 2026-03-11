@@ -6,24 +6,21 @@
     <description>Recent content in 源码解析 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 30 Jul 2025 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jul 2025 10:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>深入解析NPS项目近期重大更新：从代码层面看技术演进</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
       <pubDate>Wed, 30 Jul 2025 10:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E7%9C%8B%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
       <description>深入解析NPS项目近期重大更新：从代码层面看技术演进 NPS（Network Penetration Suite）作为一个轻量级、高性能、功能强大的内网穿透代理服务器，近期进行了多次重要更新。本文将从源码层面深入剖析这些更新的技术细节和实现原理，帮助读者更好地理解项目的演进过程。 最新版本更新概览 在过去的一个月中，NPS项目发布了多个版本，主要集中在解决客户端和服务端握手过程中的EOF错误、优化多语言支持、改进Docker部</description>
     </item>
-    
     <item>
       <title>Qwen Code 核心代码实现细节深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</link>
       <pubDate>Wed, 23 Jul 2025 16:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-core-implementation-details/</guid>
       <description>Qwen Code 核心代码实现细节深度解读 引言 在前几篇文章中，我们已经对 Qwen Code 的整体架构和实现框架进行了详细分析。现在，我们将深入到代码层面，解读 Qwen Code 的核心实现细节。通过分析关键代码片段，我们可以更好地理解 Qwen Code 的工作原理和设计思想。 CLI 入口点分析 主程序启动 CLI 的入口点位于 packages/cli/index.ts： #!/usr/bin/env node import &amp;#39;./src/gemini.js&amp;#39;; import { main } from &amp;#39;./src/gemini.js&amp;#39;; // --- Global Entry Point --- main().catch((error) =&amp;gt; { console.error(&amp;#39;An unexpected critical error occurred:&amp;#39;); if (error instanceof Error) { console.error(error.stack); } else { console.error(String(error)); } process.exit(1); }); 这段代码做了几件重要的事情： 导</description>
     </item>
-    
   </channel>
 </rss>

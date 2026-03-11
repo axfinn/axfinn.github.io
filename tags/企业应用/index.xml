@@ -6,15 +6,14 @@
     <description>Recent content in 企业应用 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 21:30:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 21:30:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat 性能优化与企业级应用</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-performance-enterprise/</link>
       <pubDate>Thu, 31 Jul 2025 21:30:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-performance-enterprise/</guid>
       <description>DeepChat 性能优化与企业级应用 引言 随着 AI 技术的快速发展，越来越多的企业开始将 AI 工具集成到其工作流程中。DeepChat 作为一个功能强大的开源 AI 聊天平台，不仅适用于个人用户，也具备了企业级应用的潜力。本文将深入探讨 DeepChat 的性能优化策略和企业级应用实践。 架构层面的性能优化 内存管理优化 DeepChat 采用了多种内存管理策略来优化性能： class MemoryOptimizer { private memoryThreshold: number = 1024 * 1024 * 1024; // 1GB private gcInterval: NodeJS.Timeout | null = null; constructor() { this.startMemoryMonitoring(); } // 监控内存使用情况 private startMemoryMonitoring(): void { this.gcInterval = setInterval(() =&amp;gt; { const memoryUsage = process.memoryUsage(); //</description>
     </item>
-    
   </channel>
 </rss>

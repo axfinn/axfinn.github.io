@@ -6,15 +6,14 @@
     <description>Recent content in JWT on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 01 Aug 2025 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Aug 2025 14:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>todoIng 核心模块设计与架构</title>
       <link>https://blog.jaxiu.cn/blog/2025-08/todoing-core-modules-implementation/</link>
       <pubDate>Fri, 01 Aug 2025 14:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-08/todoing-core-modules-implementation/</guid>
       <description>todoIng 核心模块设计与架构 在上一篇文章中，我们介绍了 todoIng 项目的整体概况和主要特性。今天，我们将深入探讨 todoIng 的核心模块设计和系统架构。这些模块是整个系统的基础，为其他高级功能提供了支撑。 项目架构概览 todoIng 采用现代化的前后端分离架构设计，这种架构模式带来了许多优势： 技术栈独立：前端和后端可以使用最适合各自领域的技术栈 开发效率：前后端团队可以并行开发，互不干扰 可扩展性：前后端可以独立扩展和部署 维护性：代码结构清晰，易</description>
     </item>
-    
   </channel>
 </rss>

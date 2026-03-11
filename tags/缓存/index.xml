@@ -6,15 +6,14 @@
     <description>Recent content in 缓存 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Fri, 18 Jul 2025 17:30:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jul 2025 17:30:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NPS 代理实现：HTTP/HTTPS 域名解析与高级功能</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0http/https-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/</link>
       <pubDate>Fri, 18 Jul 2025 17:30:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0http/https-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/</guid>
       <description>引言 在 NPS 系列文章中，我们已经深入探讨了 NPS 的多种代理模式。本篇文章将聚焦于 NPS 的 HTTP/HTTPS 域名解析功能，这是 NPS 实现 Web 服务穿透的核心。我们将通过分析 nps/server/proxy/http.go 文件，揭示 NPS 如何处理 HTTP 和 HTTPS 请求，并实现缓存、认证、动态后端切换等高级功能。 HTTP/HTTPS 域名解析的需求 在实际应用中，我们经常需要将内网的 Web 服务通过域名暴露到公网。这涉及到： 域名到内网 IP 的映射：根据请求的域名，将流量转发到内网中对应的 Web 服务器。 HTTP/HTTPS 协议处理：NPS 需要能够处理标准</description>
     </item>
-    
   </channel>
 </rss>

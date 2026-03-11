@@ -6,15 +6,14 @@
     <description>Recent content in 项目结构 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 23 Jul 2025 15:50:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Jul 2025 15:50:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qwen Code 项目框架详解</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</link>
       <pubDate>Wed, 23 Jul 2025 15:50:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-project-structure/</guid>
       <description>Qwen Code 项目框架详解 项目概述 Qwen Code 采用现代化的软件工程实践，使用 TypeScript 编写，基于 monorepo 结构管理多个包。项目结构清晰，便于维护和扩展。 项目结构 qwen-code/ ├── .github/ # GitHub 相关配置 │ └── workflows/ # CI/CD 工作流 ├── docs/ # 项目文档 │ ├── tools/ # 工具文档 │ └── ... # 其他文档 ├── examples/ # 使用示例 ├── integration-tests/ # 集成测试 ├── packages/ # 核心包 │ ├── cli/ # CLI 工具 │ ├── core/ # 核心功能 │ └── ... # 其他包 ├── scripts/ # 构建和辅助脚本 ├── tests/ # 单元测试 ├── .eslintrc.js # ESLint 配置 ├── .gitignore</description>
     </item>
-    
   </channel>
 </rss>

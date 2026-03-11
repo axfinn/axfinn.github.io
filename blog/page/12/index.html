@@ -532,6 +532,10 @@
 
   
 
+  
+
+  
+
 
 
 
@@ -644,6 +648,15 @@
               <li class="middot"></li>
             
             <li class="py-1">
+              <a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9">
+                <span>技术热点 (4)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/%E6%95%99%E7%A8%8B">
                 <span>教程 (3)</span>
               </a>
@@ -664,15 +677,6 @@
             <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B">
                 <span>技术教程 (2)</span>
-              </a>
-            </li>           
-          
-            
-              <li class="middot"></li>
-            
-            <li class="py-1">
-              <a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9">
-                <span>技术热点 (2)</span>
               </a>
             </li>           
           
@@ -1069,6 +1073,10 @@
 
   
 
+  
+
+  
+
 
 
 
@@ -1089,7 +1097,7 @@
         
         
         
-            <li><a href="https://blog.jaxiu.cn/tags/ai" role="button"><span>ai (31)</span></a></li>
+            <li><a href="https://blog.jaxiu.cn/tags/ai" role="button"><span>ai (33)</span></a></li>
           
         
             <li><a href="https://blog.jaxiu.cn/tags/%E5%81%A5%E5%BA%B7" role="button"><span>健康 (29)</span></a></li>
@@ -1111,6 +1119,9 @@
           
         
             <li><a href="https://blog.jaxiu.cn/tags/deepchat" role="button"><span>deepchat (13)</span></a></li>
+          
+        
+            <li><a href="https://blog.jaxiu.cn/tags/qwen-code" role="button"><span>qwen code (9)</span></a></li>
           
         
             <li><a href="https://blog.jaxiu.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1" role="button"><span>架构设计 (8)</span></a></li>
@@ -1144,9 +1155,6 @@
           
         
             <li><a href="https://blog.jaxiu.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button"><span>内网穿透 (6)</span></a></li>
-          
-        
-            <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE" role="button"><span>开源项目 (6)</span></a></li>
           
         
       </div>
@@ -1206,6 +1214,8 @@
           
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96"><span>博客优化 (2)</span></a></li>
           
+            <li class="py-1"><a href="https://blog.jaxiu.cn/series/qwen-code%E5%AE%9E%E8%B7%B5"><span>Qwen Code实践 (1)</span></a></li>
+          
             <li class="py-1"><a href="https://blog.jaxiu.cn/series/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span>开源项目 (1)</span></a></li>
           
         
@@ -1235,7 +1245,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  115 posts
+                  117 posts
                 </div>
               
             </div>
@@ -1279,6 +1289,142 @@
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0udp-%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">NPS 代理实现：UDP 代理与数据转发</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种 TCP 相关的代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理）和 P2P 代理。本篇文章将聚焦于 NPS 的 UDP 代理实现。我们将通过分析 nps/server/proxy/udp.go 文件，揭示 NPS 如何处理 UDP 流量，实现内网 UDP 服务的穿透。 UDP 代理的需求与挑战 UDP（User Datagram Protocol）是一种无连接的传输协议，常用于对实时性要求较高、允许少量丢包的应用，如 DNS 查询、在线游戏、音视频通话等。由于 UDP 的......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/udp%E4%BB%A3%E7%90%86" role="button">UDP代理 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE" role="button">网络协议 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F" role="button">内网穿透 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0p2p-%E5%8D%8F%E8%AE%AE%E4%B8%8E-udp-%E6%89%93%E6%B4%9E/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">NPS 代理实现：P2P 协议与 UDP 打洞</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>4 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      引言 在 NPS 系列文章中，我们已经探讨了 NPS 的整体架构、服务端核心以及 TCP 隧道、HTTP 代理和 SOCKS5 代理的实现。本篇文章将深入 NPS 的另一个高级代理模式——P2P 代理。我们将通过分析 nps/server/proxy/p2p.go 文件，揭示 NPS 如何利用 UDP 打洞技术，实现客户端之间的直接连接，从而在某些场景下提供更高效、更低延迟的内网穿透服务。 P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行数据中转，这会引入额外的延迟和带宽消耗。P2P（Peer-to-Peer......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/nps" role="button">NPS </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/p2p" role="button">P2P </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/udp%E6%89%93%E6%B4%9E" role="button">UDP打洞 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/go%E8%AF%AD%E8%A8%80" role="button">Go语言 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E7%BD%91%E7%BB%9C%E7%A9%BF%E9%80%8F" role="button">网络穿透 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">

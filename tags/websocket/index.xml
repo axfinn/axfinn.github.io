@@ -6,25 +6,21 @@
     <description>Recent content in WebSocket on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Sat, 17 Jan 2026 14:00:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/websocket/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jan 2026 14:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/websocket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DevTools：从零构建全栈开发者工具站</title>
       <link>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</link>
       <pubDate>Sat, 17 Jan 2026 14:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2026-01/devtools-fullstack-guide/</guid>
-      <description>&lt;p&gt;开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。&lt;/p&gt;
-&lt;p&gt;本文介绍 &lt;strong&gt;DevTools&lt;/strong&gt; —— 一个功能完整的开发者工具站，包含 16+ 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。&lt;/p&gt;</description>
+      <description>&lt;p&gt;开发者日常工作中经常需要各种小工具：格式化 JSON、对比文本差异、转换时间戳、测试正则表达式……与其每次都搜索在线工具，不如自己搭建一个集成平台。&lt;/p&gt;&#xA;&lt;p&gt;本文介绍 &lt;strong&gt;DevTools&lt;/strong&gt; —— 一个功能完整的开发者工具站，包含 16+ 种常用工具，支持实时聊天室和短链服务。我们将深入分析其技术架构和实现细节。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>NPS 代理实现：WebSocket 代理与 HTTP 反向代理</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</link>
       <pubDate>Fri, 18 Jul 2025 17:00:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0websocket-%E4%BB%A3%E7%90%86%E4%B8%8E-http-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</guid>
       <description>引言 在 NPS 系列文章的前几篇中，我们已经探讨了 NPS 的整体架构、服务端核心以及多种代理模式（TCP 隧道、HTTP 代理、SOCKS5 代理、P2P 代理和 UDP 代理）。本篇文章将深入 NPS 的 WebSocket 代理和 HTTP 反向代理实现。我们将通过分析 nps/server/proxy/websocket.go 文件，揭示 NPS 如何处理这两种特殊的 HTTP 流量，实现更灵活的网络穿透。 WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器之间的全双工通信通道，常用于实时应用，如聊天、在线游戏、股票行情等。传统</description>
     </item>
-    
   </channel>
 </rss>

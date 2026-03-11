@@ -6,15 +6,14 @@
     <description>Recent content in UI设计 on jaxiu He</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 31 Jul 2025 20:30:00 +0800</lastBuildDate><atom:link href="https://blog.jaxiu.cn/tags/ui%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Jul 2025 20:30:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/ui%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepChat 多窗口多标签架构设计</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/</link>
       <pubDate>Thu, 31 Jul 2025 20:30:00 +0800</pubDate>
-      
       <guid>https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/</guid>
       <description>DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口+多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。 多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念： 并行处理 - 允许用户同时进行多个独立的对话 上</description>
     </item>
-    
   </channel>
 </rss>
