@@ -2,9 +2,9 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.jaxiu.cn/tags/ai/</loc>
+    <loc>https://blog.jaxiu.cn/blog/2026-03/2026%E5%B9%B43%E6%9C%88%E6%96%B0%E9%97%BB%E5%91%A8%E6%8A%A5%E4%BC%8A%E6%9C%97%E5%B1%80%E5%8A%BF%E4%B8%8E%E5%85%A8%E7%90%83%E8%82%A1%E5%B8%82/</loc>
     
-    <lastmod>2026-03-11T03:47:32+08:00</lastmod>
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
     
     
     
@@ -14,7 +14,7 @@
   <url>
     <loc>https://blog.jaxiu.cn/blog/</loc>
     
-    <lastmod>2026-03-11T03:47:32+08:00</lastmod>
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
     
     
     
@@ -24,7 +24,7 @@
   <url>
     <loc>https://blog.jaxiu.cn/categories/</loc>
     
-    <lastmod>2026-03-11T03:47:32+08:00</lastmod>
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
     
     
     
@@ -34,7 +34,7 @@
   <url>
     <loc>https://blog.jaxiu.cn/</loc>
     
-    <lastmod>2026-03-11T03:47:32+08:00</lastmod>
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
     
     
     
@@ -43,6 +43,66 @@
   
   <url>
     <loc>https://blog.jaxiu.cn/tags/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E4%B8%AD%E7%BE%8E/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E4%BC%8A%E6%9C%97/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/%E5%91%A8%E6%8A%A5/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E6%96%B0%E9%97%BB/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E8%82%A1%E5%B8%82/</loc>
+    
+    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/ai/</loc>
     
     <lastmod>2026-03-11T03:47:32+08:00</lastmod>
     
@@ -3442,39 +3502,9 @@
   </url>
   
   <url>
-    <loc>https://blog.jaxiu.cn/categories/blog/</loc>
-    
-    <lastmod>2025-04-03T17:15:13+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/tags/blog/</loc>
-    
-    <lastmod>2025-04-03T17:15:13+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
     <loc>https://blog.jaxiu.cn/tags/llm/</loc>
     
     <lastmod>2025-07-18T18:30:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/blog/2025-07/one-test/</loc>
-    
-    <lastmod>2025-04-03T17:15:13+08:00</lastmod>
     
     
     
