@@ -9,16 +9,38 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="为博客配置自定义域名可以让网站看起来更专业，也有助于品牌建设。本文将详细介绍如何为基于 Hugo 构建并托管在 GitHub Pages 上的博客配置自定义域名 blog.jaxiu.cn。 一、准备工作 在开始配置之前，您需要： 拥有一个已注册的域名（如 jaxiu.cn） 拥有该域名的管理权限 确保博客已经部署在 GitHub Pages 上 二、配置步骤 1. 修改Hugo配置文件 首先，需要修改博客的配置文件 config.toml，将 baseURL 更新为您的自定义域名： baseURL = &#39;https://blog.jaxiu.cn/&#39; 2. 创建">
+    content="为博客配置自定义域名可以让网站看起来更专业，也有助于品牌建设。本文将详细介绍如何为基于 Hugo 构建并托管在 GitHub Pages 上的博客配置自定义域名 blog.jaxiu.cn。
+一、准备工作
+在开始配置之前，您需要：
 
-  <meta property="og:title" content="为Hugo博客配置自定义域名完整指南" />
-<meta property="og:description" content="为博客配置自定义域名可以让网站看起来更专业，也有助于品牌建设。本文将详细介绍如何为基于 Hugo 构建并托管在 GitHub Pages 上的博客配置自定义域名 blog.jaxiu.cn。 一、准备工作 在开始配置之前，您需要： 拥有一个已注册的域名（如 jaxiu.cn） 拥有该域名的管理权限 确保博客已经部署在 GitHub Pages 上 二、配置步骤 1. 修改Hugo配置文件 首先，需要修改博客的配置文件 config.toml，将 baseURL 更新为您的自定义域名： baseURL = &#39;https://blog.jaxiu.cn/&#39; 2. 创建" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-08/%E4%B8%BAhugo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-08-12T14:45:00+08:00" />
-<meta property="article:modified_time" content="2025-08-12T14:45:00+08:00" />
+拥有一个已注册的域名（如 jaxiu.cn）
+拥有该域名的管理权限
+确保博客已经部署在 GitHub Pages 上
 
+二、配置步骤
+1. 修改Hugo配置文件
+首先，需要修改博客的配置文件 config.toml，将 baseURL 更新为您的自定义域名：
+baseURL = &#39;https://blog.jaxiu.cn/&#39;
+2. 创建CNAME文件
+在 Hugo 项目的 static 目录下创建一个名为 CNAME 的文件（注意没有扩展名），内容为您的自定义域名：">
 
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-08/%E4%B8%BAhugo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="为Hugo博客配置自定义域名完整指南">
+  <meta property="og:description" content="为博客配置自定义域名可以让网站看起来更专业，也有助于品牌建设。本文将详细介绍如何为基于 Hugo 构建并托管在 GitHub Pages 上的博客配置自定义域名 blog.jaxiu.cn。
+一、准备工作 在开始配置之前，您需要：
+拥有一个已注册的域名（如 jaxiu.cn） 拥有该域名的管理权限 确保博客已经部署在 GitHub Pages 上 二、配置步骤 1. 修改Hugo配置文件 首先，需要修改博客的配置文件 config.toml，将 baseURL 更新为您的自定义域名：
+baseURL = &#39;https://blog.jaxiu.cn/&#39; 2. 创建CNAME文件 在 Hugo 项目的 static 目录下创建一个名为 CNAME 的文件（注意没有扩展名），内容为您的自定义域名：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-08-12T14:45:00+08:00">
+    <meta property="article:modified_time" content="2025-08-12T14:45:00+08:00">
+    <meta property="article:tag" content="博客">
+    <meta property="article:tag" content="自定义域名">
+    <meta property="article:tag" content="GitHub Pages">
+    <meta property="article:tag" content="DNS配置">
+      <meta property="og:see_also" content="https://blog.jaxiu.cn/blog/2025-08/hugo%E5%8D%9A%E5%AE%A2%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E5%92%8C%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
 
 
   <title>
@@ -355,24 +377,24 @@
 <h4 id="对于子域名如-blogjaxiucn">对于子域名（如 blog.jaxiu.cn）</h4>
 <p>如果您使用的是子域名（推荐方式），需要添加一条 CNAME 记录：</p>
 <table>
-<thead>
-<tr>
-<th>记录类型</th>
-<th>主机记录</th>
-<th>解析线路</th>
-<th>记录值</th>
-<th>TTL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CNAME</td>
-<td>blog</td>
-<td>默认</td>
-<td>axfinn.github.io.</td>
-<td>600</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>记录类型</th>
+          <th>主机记录</th>
+          <th>解析线路</th>
+          <th>记录值</th>
+          <th>TTL</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CNAME</td>
+          <td>blog</td>
+          <td>默认</td>
+          <td>axfinn.github.io.</td>
+          <td>600</td>
+      </tr>
+  </tbody>
 </table>
 <p>注意：</p>
 <ul>
@@ -383,45 +405,45 @@
 <h4 id="对于根域名如-jaxiucn">对于根域名（如 jaxiu.cn）</h4>
 <p>如果您想直接使用根域名（不推荐），需要添加两条 A 记录：</p>
 <table>
-<thead>
-<tr>
-<th>记录类型</th>
-<th>主机记录</th>
-<th>解析线路</th>
-<th>记录值</th>
-<th>TTL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>@</td>
-<td>默认</td>
-<td>185.199.108.153</td>
-<td>600</td>
-</tr>
-<tr>
-<td>A</td>
-<td>@</td>
-<td>默认</td>
-<td>185.199.109.153</td>
-<td>600</td>
-</tr>
-<tr>
-<td>A</td>
-<td>@</td>
-<td>默认</td>
-<td>185.199.110.153</td>
-<td>600</td>
-</tr>
-<tr>
-<td>A</td>
-<td>@</td>
-<td>默认</td>
-<td>185.199.111.153</td>
-<td>600</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>记录类型</th>
+          <th>主机记录</th>
+          <th>解析线路</th>
+          <th>记录值</th>
+          <th>TTL</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>A</td>
+          <td>@</td>
+          <td>默认</td>
+          <td>185.199.108.153</td>
+          <td>600</td>
+      </tr>
+      <tr>
+          <td>A</td>
+          <td>@</td>
+          <td>默认</td>
+          <td>185.199.109.153</td>
+          <td>600</td>
+      </tr>
+      <tr>
+          <td>A</td>
+          <td>@</td>
+          <td>默认</td>
+          <td>185.199.110.153</td>
+          <td>600</td>
+      </tr>
+      <tr>
+          <td>A</td>
+          <td>@</td>
+          <td>默认</td>
+          <td>185.199.111.153</td>
+          <td>600</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="4-在github仓库中配置自定义域名">4. 在GitHub仓库中配置自定义域名</h3>
 <ol>

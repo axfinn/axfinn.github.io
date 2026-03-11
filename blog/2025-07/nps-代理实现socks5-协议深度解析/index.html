@@ -9,15 +9,26 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="引言 在 NPS 系列文章的前几篇中，我们已经对 NPS 的整体架构、服务端核心以及 TCP 隧道和 HTTP 代理的实现有了初步了解。本篇文章将深入 NPS 的另一个重要代理模式——SOCKS5 代理。我们将通过分析 nps/server/proxy/socks5.go 文件，详细剖析 SOCKS5 协议在 NPS 中的实现细节，包括认证机制、请求处理以及 UDP 转发。 SOCKS5 协议简介 SOCKS5 是一种网络代理协议，它允许客户端通过代理服务器间接访问其他服务器。与 HTTP 代理不同，SOCKS5 是一种更底层的协议，它不关心应用层协议（如 HTTP">
+    content="引言
+在 NPS 系列文章的前几篇中，我们已经对 NPS 的整体架构、服务端核心以及 TCP 隧道和 HTTP 代理的实现有了初步了解。本篇文章将深入 NPS 的另一个重要代理模式——SOCKS5 代理。我们将通过分析 nps/server/proxy/socks5.go 文件，详细剖析 SOCKS5 协议在 NPS 中的实现细节，包括认证机制、请求处理以及 UDP 转发。
+SOCKS5 协议简介
+SOCKS5 是一种网络代理协议，它允许客户端通过代理服务器间接访问其他服务器。与 HTTP 代理不同，SOCKS5 是一种更底层的协议，它不关心应用层协议（如 HTTP、FTP），而是直接转发 TCP 或 UDP 数据包。这使得 SOCKS5 代理更加通用，可以用于各种网络应用。">
 
-  <meta property="og:title" content="NPS 代理实现：SOCKS5 协议深度解析" />
-<meta property="og:description" content="引言 在 NPS 系列文章的前几篇中，我们已经对 NPS 的整体架构、服务端核心以及 TCP 隧道和 HTTP 代理的实现有了初步了解。本篇文章将深入 NPS 的另一个重要代理模式——SOCKS5 代理。我们将通过分析 nps/server/proxy/socks5.go 文件，详细剖析 SOCKS5 协议在 NPS 中的实现细节，包括认证机制、请求处理以及 UDP 转发。 SOCKS5 协议简介 SOCKS5 是一种网络代理协议，它允许客户端通过代理服务器间接访问其他服务器。与 HTTP 代理不同，SOCKS5 是一种更底层的协议，它不关心应用层协议（如 HTTP" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0socks5-%E5%8D%8F%E8%AE%AE%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-18T16:15:00+08:00" />
-<meta property="article:modified_time" content="2025-07-18T16:15:00+08:00" />
-
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0socks5-%E5%8D%8F%E8%AE%AE%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="NPS 代理实现：SOCKS5 协议深度解析">
+  <meta property="og:description" content="引言 在 NPS 系列文章的前几篇中，我们已经对 NPS 的整体架构、服务端核心以及 TCP 隧道和 HTTP 代理的实现有了初步了解。本篇文章将深入 NPS 的另一个重要代理模式——SOCKS5 代理。我们将通过分析 nps/server/proxy/socks5.go 文件，详细剖析 SOCKS5 协议在 NPS 中的实现细节，包括认证机制、请求处理以及 UDP 转发。
+SOCKS5 协议简介 SOCKS5 是一种网络代理协议，它允许客户端通过代理服务器间接访问其他服务器。与 HTTP 代理不同，SOCKS5 是一种更底层的协议，它不关心应用层协议（如 HTTP、FTP），而是直接转发 TCP 或 UDP 数据包。这使得 SOCKS5 代理更加通用，可以用于各种网络应用。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T16:15:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T16:15:00+08:00">
+    <meta property="article:tag" content="Nps">
+    <meta property="article:tag" content="SOCKS5">
+    <meta property="article:tag" content="代理协议">
+    <meta property="article:tag" content="Go语言">
+    <meta property="article:tag" content="网络安全">
 
 
   <title>
@@ -346,30 +357,30 @@
 <p><code>socks5.go</code> 文件定义了 <code>Sock5ModeServer</code> 结构体，它是 NPS 实现 SOCKS5 代理的核心。</p>
 <h3 id="sock5modeserver-结构体"><code>Sock5ModeServer</code> 结构体</h3>
 <p><code>Sock5ModeServer</code> 结构体继承了 <code>BaseServer</code>，并增加了 <code>listener</code> 字段：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Sock5ModeServer</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">BaseServer</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">listener</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Sock5ModeServer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">BaseServer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">listener</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>BaseServer</code>：继承了 <code>base.go</code> 中定义的通用功能，如流量统计、安全检查等。</li>
 <li><code>listener net.Listener</code>：用于监听传入 SOCKS5 连接的网络监听器。</li>
 </ul>
 <p><code>NewSock5ModeServer()</code> 函数用于创建并初始化一个 <code>Sock5ModeServer</code> 实例。</p>
 <h3 id="start-方法启动-socks5-监听"><code>Start()</code> 方法：启动 SOCKS5 监听</h3>
 <p><code>Sock5ModeServer</code> 的 <code>Start()</code> 方法负责启动 TCP 监听，并为每个传入连接调用 <code>handleConn()</code> 方法进行 SOCKS5 协议的协商和处理：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">Sock5ModeServer</span><span class="p">)</span> <span class="nf">Start</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">NewTcpListenerAndProcess</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">ServerIp</span><span class="o">+</span><span class="s">&#34;:&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Port</span><span class="p">),</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">CheckFlowAndConnNum</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;client id %d, task id %d, error %s, when socks5 connection&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;New socks5 connection,client %d,remote address %s&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nf">handleConn</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// 调用 SOCKS5 协议处理函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nf">AddConn</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="o">&amp;</span><span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>与 <code>TunnelModeServer</code> 类似，这里也进行了流量和连接数检查。核心在于调用 <code>s.handleConn(c)</code> 来处理 SOCKS5 协议的握手和请求。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">Sock5ModeServer</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nf">NewTcpListenerAndProcess</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">ServerIp</span><span class="o">+</span><span class="s">&#34;:&#34;</span><span class="o">+</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Port</span><span class="p">),</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">CheckFlowAndConnNum</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;client id %d, task id %d, error %s, when socks5 connection&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">logs</span><span class="p">.</span><span class="nf">Trace</span><span class="p">(</span><span class="s">&#34;New socks5 connection,client %d,remote address %s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Id</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nf">RemoteAddr</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleConn</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="c1">// 调用 SOCKS5 协议处理函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">s</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nf">AddConn</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">s</span><span class="p">.</span><span class="nx">listener</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>与 <code>TunnelModeServer</code> 类似，这里也进行了流量和连接数检查。核心在于调用 <code>s.handleConn(c)</code> 来处理 SOCKS5 协议的握手和请求。</p>
 <h3 id="handleconnsocks5-协议协商与认证"><code>handleConn()</code>：SOCKS5 协议协商与认证</h3>
 <p><code>handleConn()</code> 方法是 SOCKS5 协议处理的入口点，它负责与客户端进行认证方法的协商和实际的认证过程：</p>
 <ol>

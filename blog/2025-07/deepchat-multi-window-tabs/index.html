@@ -9,15 +9,55 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口&#43;多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。 多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念： 并行处理 - 允许用户同时进行多个独立的对话 上">
+    content="DeepChat 多窗口多标签架构设计
+引言
+现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口&#43;多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。
+多窗口多标签架构概述
+设计理念
+DeepChat 的多窗口多标签架构基于以下设计理念：
 
-  <meta property="og:title" content="DeepChat 多窗口多标签架构设计" />
-<meta property="og:description" content="DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口&#43;多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。 多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念： 并行处理 - 允许用户同时进行多个独立的对话 上" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-31T20:30:00+08:00" />
-<meta property="article:modified_time" content="2025-07-31T20:30:00+08:00" />
+并行处理 - 允许用户同时进行多个独立的对话
+上下文隔离 - 每个会话都有独立的上下文，互不干扰
+灵活组织 - 用户可以根据需要组织和管理会话
+资源优化 - 合理管理内存和计算资源
 
+架构图示
+┌─────────────────────────────────────────────────────────────────────┐
+│                        DeepChat 多窗口架构                          │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐  │
+│  │   主窗口         │    │   子窗口A        │    │   子窗口B        │  │
+│  │                 │    │                 │    │                 │  │
+│  │ ┌─────────────┐ │    │ ┌─────────────┐ │    │ ┌─────────────┐ │  │
+│  │ │  标签页1     │ │    │ │  标签页1     │ │    │ │  标签页1     │ │  │
+│  │ ├─────────────┤ │    │ ├─────────────┤ │    │ ├─────────────┤ │  │
+│  │ │  标签页2     │ │    │ │  标签页2     │ │    │ │  标签页2     │ │  │
+│  │ ├─────────────┤ │    │ └─────────────┘ │    │ └─────────────┘ │  │
+│  │ │  标签页3     │ │    │                 │    │                 │  │
+│  │ └─────────────┘ │    │                 │    │                 │  │
+│  └─────────────────┘    └─────────────────┘    └─────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+会话管理机制
+会话数据结构
+DeepChat 中的会话采用如下数据结构：">
+
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-multi-window-tabs/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="DeepChat 多窗口多标签架构设计">
+  <meta property="og:description" content="DeepChat 多窗口多标签架构设计 引言 现代用户在使用 AI 工具时往往需要同时处理多个任务或主题，这就要求应用程序具备良好的多任务处理能力。DeepChat 采用了创新的多窗口&#43;多标签架构，支持跨维度的并行多会话操作，让用户能够像使用浏览器一样使用 AI，提供非阻塞的优秀体验。本文将深入分析这一架构的设计与实现。
+多窗口多标签架构概述 设计理念 DeepChat 的多窗口多标签架构基于以下设计理念：
+并行处理 - 允许用户同时进行多个独立的对话 上下文隔离 - 每个会话都有独立的上下文，互不干扰 灵活组织 - 用户可以根据需要组织和管理会话 资源优化 - 合理管理内存和计算资源 架构图示 ┌─────────────────────────────────────────────────────────────────────┐ │ DeepChat 多窗口架构 │ ├─────────────────────────────────────────────────────────────────────┤ │ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ │ │ │ 主窗口 │ │ 子窗口A │ │ 子窗口B │ │ │ │ │ │ │ │ │ │ │ │ ┌─────────────┐ │ │ ┌─────────────┐ │ │ ┌─────────────┐ │ │ │ │ │ 标签页1 │ │ │ │ 标签页1 │ │ │ │ 标签页1 │ │ │ │ │ ├─────────────┤ │ │ ├─────────────┤ │ │ ├─────────────┤ │ │ │ │ │ 标签页2 │ │ │ │ 标签页2 │ │ │ │ 标签页2 │ │ │ │ │ ├─────────────┤ │ │ └─────────────┘ │ │ └─────────────┘ │ │ │ │ │ 标签页3 │ │ │ │ │ │ │ │ │ └─────────────┘ │ │ │ │ │ │ │ └─────────────────┘ └─────────────────┘ └─────────────────┘ │ └─────────────────────────────────────────────────────────────────────┘ 会话管理机制 会话数据结构 DeepChat 中的会话采用如下数据结构：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-31T20:30:00+08:00">
+    <meta property="article:modified_time" content="2025-07-31T20:30:00+08:00">
+    <meta property="article:tag" content="DeepChat">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="多窗口">
+    <meta property="article:tag" content="多标签">
+    <meta property="article:tag" content="UI设计">
+    <meta property="article:tag" content="架构设计">
 
 
   <title>
@@ -364,15 +404,15 @@
 <p>DeepChat 中的会话采用如下数据结构：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Session</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">string</span><span class="p">;</span>                    <span class="c1">// 会话唯一标识
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>                 <span class="c1">// 会话标题
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">createdAt</span>: <span class="kt">Date</span><span class="p">;</span>              <span class="c1">// 创建时间
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">updatedAt</span>: <span class="kt">Date</span><span class="p">;</span>              <span class="c1">// 最后更新时间
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">messages</span>: <span class="kt">Message</span><span class="p">[];</span>          <span class="c1">// 消息历史
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">modelConfig</span>: <span class="kt">ModelConfig</span><span class="p">;</span>     <span class="c1">// 模型配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tags</span>: <span class="kt">string</span><span class="p">[];</span>               <span class="c1">// 标签
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">windowId</span>: <span class="kt">string</span><span class="p">;</span>             <span class="c1">// 所属窗口ID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">tabIndex</span>: <span class="kt">number</span><span class="p">;</span>             <span class="c1">// 标签页索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">title</span>: <span class="kt">string</span><span class="p">;</span>                 <span class="c1">// 会话标题
+</span></span></span><span class="line"><span class="cl">  <span class="nx">createdAt</span>: <span class="kt">Date</span><span class="p">;</span>              <span class="c1">// 创建时间
+</span></span></span><span class="line"><span class="cl">  <span class="nx">updatedAt</span>: <span class="kt">Date</span><span class="p">;</span>              <span class="c1">// 最后更新时间
+</span></span></span><span class="line"><span class="cl">  <span class="nx">messages</span>: <span class="kt">Message</span><span class="p">[];</span>          <span class="c1">// 消息历史
+</span></span></span><span class="line"><span class="cl">  <span class="nx">modelConfig</span>: <span class="kt">ModelConfig</span><span class="p">;</span>     <span class="c1">// 模型配置
+</span></span></span><span class="line"><span class="cl">  <span class="nx">tags</span>: <span class="kt">string</span><span class="p">[];</span>               <span class="c1">// 标签
+</span></span></span><span class="line"><span class="cl">  <span class="nx">windowId</span>: <span class="kt">string</span><span class="p">;</span>             <span class="c1">// 所属窗口ID
+</span></span></span><span class="line"><span class="cl">  <span class="nx">tabIndex</span>: <span class="kt">number</span><span class="p">;</span>             <span class="c1">// 标签页索引
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">Message</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">string</span><span class="p">;</span>
@@ -384,11 +424,11 @@
 </span></span></code></pre></div><h3 id="会话生命周期管理">会话生命周期管理</h3>
 <p>DeepChat 实现了完整的会话生命周期管理：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">SessionManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">sessions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">Session</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">sessions</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">Session</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">activeSessions</span>: <span class="kt">Set</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 创建新会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">createSession</span><span class="p">(</span><span class="nx">windowId</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">config?</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">Session</span><span class="p">&gt;)</span><span class="o">:</span> <span class="nx">Session</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">createSession</span><span class="p">(</span><span class="nx">windowId</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">config?</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">Session</span><span class="p">&gt;)</span><span class="o">:</span> <span class="nx">Session</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">sessionId</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">generateId</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span>: <span class="kt">Session</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">id</span>: <span class="kt">sessionId</span><span class="p">,</span>
@@ -408,12 +448,12 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Session</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Session</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sessions</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 更新会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">updateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">updates</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">Session</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">updateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">updates</span>: <span class="kt">Partial</span><span class="p">&lt;</span><span class="nt">Session</span><span class="p">&gt;)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sessions</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">session</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">session</span><span class="p">,</span> <span class="nx">updates</span><span class="p">,</span> <span class="p">{</span> <span class="nx">updatedAt</span>: <span class="kt">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">});</span>
@@ -421,18 +461,18 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 删除会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">deleteSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">deleteSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">sessions</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">activeSessions</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 激活会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">activateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">activateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">activeSessions</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 休眠会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">deactivateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">deactivateSession</span><span class="p">(</span><span class="nx">sessionId</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">activeSessions</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">sessionId</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>

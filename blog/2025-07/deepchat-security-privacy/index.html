@@ -9,15 +9,56 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。 安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计： ┌─────────────────────────────────────────────────">
+    content="DeepChat 安全与隐私保护机制
+引言
+在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
+安全架构设计
+整体安全架构
+DeepChat 采用了分层的安全架构设计：
+┌─────────────────────────────────────────────────────────────────────┐
+│                        DeepChat 安全架构                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │                    应用层安全                                   ││
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
+│  │  │ 用户认证     │  │ 权限控制     │  │ 数据加密与隐私保护       │ ││
+│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
+│  └─────────────────────────────────────────────────────────────────┘│
+│                              │                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │                    传输层安全                                   ││
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
+│  │  │ HTTPS/TLS   │  │ 网络代理     │  │ API 密钥安全管理         │ ││
+│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
+│  └─────────────────────────────────────────────────────────────────┘│
+│                              │                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │                    存储层安全                                   ││
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ ││
+│  │  │ 本地存储加密 │  │ 配置文件保护 │  │ 会话数据访问控制         │ ││
+│  │  └─────────────┘  └─────────────┘  └─────────────────────────┘ ││
+│  └─────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────┘
+数据加密机制
+本地数据存储加密
+DeepChat 对本地存储的敏感数据进行加密处理：">
 
-  <meta property="og:title" content="DeepChat 安全与隐私保护机制" />
-<meta property="og:description" content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。 安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计： ┌─────────────────────────────────────────────────" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-31T21:00:00+08:00" />
-<meta property="article:modified_time" content="2025-07-31T21:00:00+08:00" />
-
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/deepchat-security-privacy/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="DeepChat 安全与隐私保护机制">
+  <meta property="og:description" content="DeepChat 安全与隐私保护机制 引言 在当今数字化时代，用户对个人数据的安全和隐私保护越来越关注。作为一个 AI 聊天平台，DeepChat 处理着大量敏感的用户对话数据，因此必须建立完善的安全和隐私保护机制。本文将深入分析 DeepChat 在数据安全、隐私保护和访问控制等方面的实现。
+安全架构设计 整体安全架构 DeepChat 采用了分层的安全架构设计：
+┌─────────────────────────────────────────────────────────────────────┐ │ DeepChat 安全架构 │ ├─────────────────────────────────────────────────────────────────────┤ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 应用层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 用户认证 │ │ 权限控制 │ │ 数据加密与隐私保护 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 传输层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ HTTPS/TLS │ │ 网络代理 │ │ API 密钥安全管理 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ │ │ │ │ ┌─────────────────────────────────────────────────────────────────┐│ │ │ 存储层安全 ││ │ │ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ ││ │ │ │ 本地存储加密 │ │ 配置文件保护 │ │ 会话数据访问控制 │ ││ │ │ └─────────────┘ └─────────────┘ └─────────────────────────┘ ││ │ └─────────────────────────────────────────────────────────────────┘│ └─────────────────────────────────────────────────────────────────────┘ 数据加密机制 本地数据存储加密 DeepChat 对本地存储的敏感数据进行加密处理：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-31T21:00:00+08:00">
+    <meta property="article:modified_time" content="2025-07-31T21:00:00+08:00">
+    <meta property="article:tag" content="DeepChat">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="安全">
+    <meta property="article:tag" content="隐私保护">
+    <meta property="article:tag" content="数据加密">
 
 
   <title>
@@ -372,7 +413,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 加密数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">encrypt</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">iv</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createCipher</span><span class="p">(</span><span class="s1">&#39;aes-256-gcm&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionKey</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">cipher</span><span class="p">.</span><span class="nx">setAAD</span><span class="p">(</span><span class="nx">iv</span><span class="p">);</span>
@@ -390,7 +431,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 解密数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">decrypt</span><span class="p">(</span><span class="nx">encryptedData</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">encrypted</span><span class="p">,</span> <span class="nx">iv</span><span class="p">,</span> <span class="nx">authTag</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">encryptedData</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">decipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createDecipher</span><span class="p">(</span><span class="s1">&#39;aes-256-gcm&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryptionKey</span><span class="p">);</span>
@@ -404,13 +445,13 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取或生成加密密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">getOrGenerateEncryptionKey</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">getOrGenerateEncryptionKey</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 尝试从安全存储中获取密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 生成新的密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">key</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">32</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">key</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">32</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;encryption_key&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -427,13 +468,13 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 保存敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">saveSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">saveSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">value</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">encryptedValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">encryption</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">encryptedValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">encryptedValue</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">encryptedValue</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
@@ -446,7 +487,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 删除敏感配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">removeSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">removeSensitiveConfig</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="sb">`secure_config_</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -457,23 +498,23 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">proxyConfig</span>: <span class="kt">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 设置代理配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">ProxyConfig</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">ProxyConfig</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 配置 HTTP 客户端使用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 配置 WebSocket 连接使用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">setProxy</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 获取当前代理配置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">getProxy</span><span class="p">()</span><span class="o">:</span> <span class="nx">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">getProxy</span><span class="p">()</span><span class="o">:</span> <span class="nx">ProxyConfig</span> <span class="o">|</span> <span class="kc">null</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 禁用代理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">disableProxy</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">disableProxy</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">proxyConfig</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">httpClient</span><span class="p">.</span><span class="nx">disableProxy</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">websocketClient</span><span class="p">.</span><span class="nx">disableProxy</span><span class="p">();</span>
@@ -495,29 +536,29 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 强制使用 HTTPS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;https://&#39;</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;https://&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 验证 SSL 证书
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">httpsAgent</span>: <span class="kt">new</span> <span class="nx">https</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">httpsAgent</span>: <span class="kt">new</span> <span class="nx">https</span><span class="p">.</span><span class="nx">Agent</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">rejectUnauthorized</span>: <span class="kt">true</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 可以指定自定义 CA 证书
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">ca</span>: <span class="kt">this.loadCustomCACertificates</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nx">ca</span>: <span class="kt">this.loadCustomCACertificates</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">      <span class="p">})</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加请求拦截器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">axiosInstance</span><span class="p">.</span><span class="nx">interceptors</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">requestInterceptor</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">requestInterceptor</span><span class="p">(</span><span class="nx">config</span>: <span class="kt">AxiosRequestConfig</span><span class="p">)</span><span class="o">:</span> <span class="nx">AxiosRequestConfig</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 确保使用 HTTPS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Only HTTPS connections are allowed&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加安全头部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">config</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="p">...</span><span class="nx">config</span><span class="p">.</span><span class="nx">headers</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;User-Agent&#39;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getSecureUserAgent</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;X-Content-Type-Options&#39;</span><span class="o">:</span> <span class="s1">&#39;nosniff&#39;</span><span class="p">,</span>
@@ -530,7 +571,7 @@
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">loadCustomCACertificates</span><span class="p">()</span><span class="o">:</span> <span class="nx">Buffer</span><span class="p">[]</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 加载自定义 CA 证书（如果有的话）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">caPaths</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCustomCACertificatePaths</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">caPaths</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getCustomCACertificatePaths</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">caPaths</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">path</span> <span class="o">=&gt;</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -542,7 +583,7 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">token</span>: <span class="kt">string</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 用户登录
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">username</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">username</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/auth/login&#39;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">username</span><span class="p">,</span>
@@ -553,7 +594,7 @@
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 保存认证信息（加密存储）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -563,24 +604,24 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查认证状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">isAuthenticated</span><span class="p">()</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">isAuthenticated</span><span class="p">()</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 尝试从存储中恢复认证信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">storedToken</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">storedToken</span> <span class="o">=</span> <span class="nx">secureStorage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">storedToken</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="nx">storedToken</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 验证令牌有效性
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">validateToken</span><span class="p">(</span><span class="nx">storedToken</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">validateToken</span><span class="p">(</span><span class="nx">storedToken</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 用户登出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">currentUser</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">secureStorage</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">);</span>
@@ -592,7 +633,7 @@
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">validateToken</span><span class="p">(</span><span class="nx">token</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 验证 JWT 令牌或其他类型的令牌
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">try</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">decoded</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">getJWTSecret</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">decoded</span><span class="p">.</span><span class="nx">exp</span> <span class="o">&gt;</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -606,9 +647,9 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">userPermissions</span>: <span class="kt">Set</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查用户是否有特定权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 未启用认证时，默认允许所有权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">AuthenticationManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">AuthenticationManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">().</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -616,7 +657,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 检查多个权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">hasPermissions</span><span class="p">(</span><span class="nx">permissions</span>: <span class="kt">string</span><span class="p">[],</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;AND&#39;</span> <span class="o">|</span> <span class="s1">&#39;OR&#39;</span> <span class="o">=</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">hasPermissions</span><span class="p">(</span><span class="nx">permissions</span>: <span class="kt">string</span><span class="p">[],</span> <span class="nx">operator</span><span class="o">:</span> <span class="s1">&#39;AND&#39;</span> <span class="o">|</span> <span class="s1">&#39;OR&#39;</span> <span class="o">=</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">operator</span> <span class="o">===</span> <span class="s1">&#39;AND&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">permissions</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">p</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">p</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -625,14 +666,14 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 请求权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">async</span> <span class="nx">requestPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">async</span> <span class="nx">requestPermission</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 检查是否已拥有权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasPermission</span><span class="p">(</span><span class="nx">permission</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 显示权限请求对话框
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">granted</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">granted</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">userPermissions</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">permission</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">savePermissions</span><span class="p">();</span>
@@ -643,14 +684,14 @@
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="kr">async</span> <span class="nx">showPermissionDialog</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">boolean</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 在 UI 中显示权限请求对话框
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;show-permission-dialog&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;show-permission-dialog&#39;</span><span class="p">,</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">permission</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">description</span>: <span class="kt">this.getPermissionDescription</span><span class="p">(</span><span class="nx">permission</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">getPermissionDescription</span><span class="p">(</span><span class="nx">permission</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">descriptions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">descriptions</span>: <span class="kt">Record</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;file-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问本地文件系统&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;network-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问网络资源&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;camera-access&#39;</span><span class="o">:</span> <span class="s1">&#39;访问摄像头&#39;</span><span class="p">,</span>
@@ -666,59 +707,59 @@
 <p>DeepChat 提供了隐私模式，可以在屏幕共享或投影时隐藏敏感内容：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">PrivacyModeManager</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">isEnabled</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">originalContent</span>: <span class="kt">WeakMap</span><span class="p">&lt;</span><span class="nt">Element</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">originalContent</span>: <span class="kt">WeakMap</span><span class="p">&lt;</span><span class="nt">Element</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 启用隐私模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">enablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">enablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 隐藏敏感元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">hideSensitiveElements</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">hideSensitiveElements</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 监听新创建的元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">observeDOMChanges</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">observeDOMChanges</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 发送事件通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 禁用隐私模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">disablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">disablePrivacyMode</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">isEnabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 恢复原始内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">restoreSensitiveElements</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">restoreSensitiveElements</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 停止监听 DOM 变化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">stopObservingDOMChanges</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">stopObservingDOMChanges</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 发送事件通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">dispatchPrivacyModeEvent</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">hideSensitiveElements</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 查找所有敏感元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">sensitiveElements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">sensitiveElements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="s1">&#39;.api-key, .password, .sensitive-data, [data-sensitive=&#34;true&#34;]&#39;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nx">sensitiveElements</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 保存原始内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      
 </span></span><span class="line"><span class="cl">      <span class="c1">// 替换为隐藏内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;••••••••&#39;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s1">&#39;••••••••&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;privacy-mode-hidden&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">restoreSensitiveElements</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 恢复所有被隐藏的元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.privacy-mode-hidden&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.privacy-mode-hidden&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">originalContent</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">originalContent</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">originalContent</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">originalContent</span><span class="p">;</span>
@@ -739,7 +780,7 @@
 </span></span></code></pre></div><h3 id="快捷键支持">快捷键支持</h3>
 <p>提供快捷键快速切换隐私模式：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">KeyboardShortcutManager</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">shortcuts</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="err">()</span> <span class="err">=</span><span class="p">&gt;</span> <span class="k">void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">shortcuts</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="err">()</span> <span class="err">=</span><span class="p">&gt;</span> <span class="k">void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">constructor</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">registerDefaultShortcuts</span><span class="p">();</span>
@@ -748,7 +789,7 @@
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">registerDefaultShortcuts</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 注册隐私模式切换快捷键 (Ctrl+Shift+H)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">registerShortcut</span><span class="p">(</span><span class="s1">&#39;Ctrl+Shift+H&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">registerShortcut</span><span class="p">(</span><span class="s1">&#39;Ctrl+Shift+H&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">privacyManager</span> <span class="o">=</span> <span class="nx">PrivacyModeManager</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">privacyManager</span><span class="p">.</span><span class="nx">isEnabled</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">privacyManager</span><span class="p">.</span><span class="nx">disablePrivacyMode</span><span class="p">();</span>
@@ -758,7 +799,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 注册其他快捷键...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">registerShortcut</span><span class="p">(</span><span class="nx">combination</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">shortcuts</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">combination</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">callback</span><span class="p">);</span>
@@ -785,7 +826,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">)</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;meta&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 添加主键
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">[</span><span class="s1">&#39;Control&#39;</span><span class="p">,</span> <span class="s1">&#39;Shift&#39;</span><span class="p">,</span> <span class="s1">&#39;Alt&#39;</span><span class="p">,</span> <span class="s1">&#39;Meta&#39;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">[</span><span class="s1">&#39;Control&#39;</span><span class="p">,</span> <span class="s1">&#39;Shift&#39;</span><span class="p">,</span> <span class="s1">&#39;Alt&#39;</span><span class="p">,</span> <span class="s1">&#39;Meta&#39;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">keys</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
@@ -803,7 +844,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 记录安全事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">logSecurityEvent</span><span class="p">(</span><span class="nx">event</span>: <span class="kt">SecurityEvent</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">logSecurityEvent</span><span class="p">(</span><span class="nx">event</span>: <span class="kt">SecurityEvent</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">logEntry</span>: <span class="kt">LogEntry</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">timestamp</span>: <span class="kt">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">eventType</span>: <span class="kt">event.type</span><span class="p">,</span>
@@ -815,21 +856,21 @@
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 写入日志文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fs</span><span class="p">.</span><span class="nx">appendFileSync</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">fs</span><span class="p">.</span><span class="nx">appendFileSync</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">logFile</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果是高严重性事件，发送通知
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="s1">&#39;high&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">severity</span> <span class="o">===</span> <span class="s1">&#39;high&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// 发送安全警报
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">private</span> <span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span>: <span class="kt">LogEntry</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">sendSecurityAlert</span><span class="p">(</span><span class="nx">logEntry</span>: <span class="kt">LogEntry</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 可以通过邮件、系统通知等方式发送警报
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;security-alert&#39;</span><span class="p">,</span> <span class="nx">logEntry</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">ipcRenderer</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;security-alert&#39;</span><span class="p">,</span> <span class="nx">logEntry</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">

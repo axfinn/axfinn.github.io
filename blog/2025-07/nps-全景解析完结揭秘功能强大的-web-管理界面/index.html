@@ -9,15 +9,28 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="引言 一个工具的强大与否，不仅取决于其核心功能的性能与稳定，也取决于其易用性。NPS 之所以广受欢迎，除了其强大的穿透能力外，一个直观、功能全面的 Web 管理界面功不可没。用户无需编辑复杂的配置文件，只需在浏览器上进行简单的点击操作，就能完成客户端管理、隧道配置、域名绑定等所有操作。在本系列文章的最后一篇，我们将深入 nps/web 目录，揭秘这个基于 Beego 框架构建的 Web 管理界面是如何与 NPS 核心服务无缝集成，为用户提供流畅体验的。">
+    content="引言
+一个工具的强大与否，不仅取决于其核心功能的性能与稳定，也取决于其易用性。NPS 之所以广受欢迎，除了其强大的穿透能力外，一个直观、功能全面的 Web 管理界面功不可没。用户无需编辑复杂的配置文件，只需在浏览器上进行简单的点击操作，就能完成客户端管理、隧道配置、域名绑定等所有操作。在本系列文章的最后一篇，我们将深入 nps/web 目录，揭秘这个基于 Beego 框架构建的 Web 管理界面是如何与 NPS 核心服务无缝集成，为用户提供流畅体验的。
 
-  <meta property="og:title" content="NPS 全景解析（完结）：揭秘功能强大的 Web 管理界面" />
-<meta property="og:description" content="引言 一个工具的强大与否，不仅取决于其核心功能的性能与稳定，也取决于其易用性。NPS 之所以广受欢迎，除了其强大的穿透能力外，一个直观、功能全面的 Web 管理界面功不可没。用户无需编辑复杂的配置文件，只需在浏览器上进行简单的点击操作，就能完成客户端管理、隧道配置、域名绑定等所有操作。在本系列文章的最后一篇，我们将深入 nps/web 目录，揭秘这个基于 Beego 框架构建的 Web 管理界面是如何与 NPS 核心服务无缝集成，为用户提供流畅体验的。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90%E5%AE%8C%E7%BB%93%E6%8F%AD%E7%A7%98%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E7%9A%84-web-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-18T19:15:00+08:00" />
-<meta property="article:modified_time" content="2025-07-18T19:15:00+08:00" />
+技术选型：Beego 框架
+NPS 的 Web 后端采用了 Beego，一个用 Go 语言编写的高性能 Web 框架。Beego 遵循 MVC（Model-View-Controller）设计模式，提供了路由、模板引擎、ORM、Session 管理等一整套 Web 开发所需的功能，这使得开发者可以快速构建起一个功能完善的 Web 应用。">
 
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/nps-%E5%85%A8%E6%99%AF%E8%A7%A3%E6%9E%90%E5%AE%8C%E7%BB%93%E6%8F%AD%E7%A7%98%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E7%9A%84-web-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="NPS 全景解析（完结）：揭秘功能强大的 Web 管理界面">
+  <meta property="og:description" content="引言 一个工具的强大与否，不仅取决于其核心功能的性能与稳定，也取决于其易用性。NPS 之所以广受欢迎，除了其强大的穿透能力外，一个直观、功能全面的 Web 管理界面功不可没。用户无需编辑复杂的配置文件，只需在浏览器上进行简单的点击操作，就能完成客户端管理、隧道配置、域名绑定等所有操作。在本系列文章的最后一篇，我们将深入 nps/web 目录，揭秘这个基于 Beego 框架构建的 Web 管理界面是如何与 NPS 核心服务无缝集成，为用户提供流畅体验的。
+技术选型：Beego 框架 NPS 的 Web 后端采用了 Beego，一个用 Go 语言编写的高性能 Web 框架。Beego 遵循 MVC（Model-View-Controller）设计模式，提供了路由、模板引擎、ORM、Session 管理等一整套 Web 开发所需的功能，这使得开发者可以快速构建起一个功能完善的 Web 应用。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T19:15:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T19:15:00+08:00">
+    <meta property="article:tag" content="Nps">
+    <meta property="article:tag" content="服务端">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="Go语言">
+    <meta property="article:tag" content="Beego">
+    <meta property="article:tag" content="前端">
 
 
   <title>
@@ -344,26 +357,26 @@
 </ul>
 <h2 id="启动流程集成于核心的-web-服务">启动流程：集成于核心的 Web 服务</h2>
 <p>Web 管理界面并非一个独立的服务，而是被紧密集成在 NPS 的主启动流程中。在 <code>server/server.go</code> 的 <code>NewMode()</code> 函数中，当模式为 <code>webServer</code> 时，它会调用 <code>proxy.NewWebServer()</code>。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in server/proxy/tcp.go
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">NewWebServer</span><span class="p">(</span><span class="nx">task</span> <span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span><span class="p">,</span> <span class="nx">bridge</span> <span class="nx">proxy</span><span class="p">.</span><span class="nx">NetBridge</span><span class="p">)</span> <span class="o">*</span><span class="nx">WebServer</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">server</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">WebServer</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">BaseServer</span><span class="p">:</span> <span class="nx">BaseServer</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">task</span><span class="p">:</span>   <span class="nx">task</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">bridge</span><span class="p">:</span> <span class="nx">bridge</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">		<span class="p">},</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 配置 Beego 框架
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">beego</span><span class="p">.</span><span class="nx">BConfig</span><span class="p">.</span><span class="nx">WebConfig</span><span class="p">.</span><span class="nx">ViewsPath</span> <span class="p">=</span> <span class="s">&#34;web/views&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">beego</span><span class="p">.</span><span class="nf">SetStaticPath</span><span class="p">(</span><span class="s">&#34;/static&#34;</span><span class="p">,</span> <span class="s">&#34;web/static&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 注册路由
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">beego</span><span class="p">.</span><span class="nf">Router</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">IndexController</span><span class="p">{},</span> <span class="s">&#34;get:Index&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">beego</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">WebPort</span><span class="p">))</span> <span class="c1">// 启动 Beego 应用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">server</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>NewWebServer</code> 负责配置并启动 Beego 应用。它设置了视图和静态文件的路径，注册了所有的路由规则，并最终调用 <code>beego.Run()</code> 在指定的 Web 端口（默认为 8080）上启动 HTTP 服务。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// in server/proxy/tcp.go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">NewWebServer</span><span class="p">(</span><span class="nx">task</span><span class="w"> </span><span class="o">*</span><span class="nx">file</span><span class="p">.</span><span class="nx">Tunnel</span><span class="p">,</span><span class="w"> </span><span class="nx">bridge</span><span class="w"> </span><span class="nx">proxy</span><span class="p">.</span><span class="nx">NetBridge</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">WebServer</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">server</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">WebServer</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">BaseServer</span><span class="p">:</span><span class="w"> </span><span class="nx">BaseServer</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="nx">task</span><span class="p">:</span><span class="w">   </span><span class="nx">task</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="nx">bridge</span><span class="p">:</span><span class="w"> </span><span class="nx">bridge</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 配置 Beego 框架</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">beego</span><span class="p">.</span><span class="nx">BConfig</span><span class="p">.</span><span class="nx">WebConfig</span><span class="p">.</span><span class="nx">ViewsPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;web/views&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">beego</span><span class="p">.</span><span class="nf">SetStaticPath</span><span class="p">(</span><span class="s">&#34;/static&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;web/static&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 注册路由</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">beego</span><span class="p">.</span><span class="nf">Router</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">IndexController</span><span class="p">{},</span><span class="w"> </span><span class="s">&#34;get:Index&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">beego</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nx">WebPort</span><span class="p">))</span><span class="w"> </span><span class="c1">// 启动 Beego 应用</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nx">server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>NewWebServer</code> 负责配置并启动 Beego 应用。它设置了视图和静态文件的路径，注册了所有的路由规则，并最终调用 <code>beego.Run()</code> 在指定的 Web 端口（默认为 8080）上启动 HTTP 服务。</p>
 <h2 id="控制器-controllers连接前端与后端的桥梁">控制器 (<code>controllers</code>)：连接前端与后端的桥梁</h2>
 <p>控制器是 Web 界面的业务逻辑核心。每个控制器负责处理一类相关的请求。</p>
 <h3 id="indexcontroller登录与仪表盘"><code>IndexController</code>：登录与仪表盘</h3>

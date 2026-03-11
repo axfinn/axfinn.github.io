@@ -4,7 +4,7 @@
     <title>Tags on jaxiu He</title>
     <link>https://blog.jaxiu.cn/tags/</link>
     <description>Recent content in Tags on jaxiu He</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zn-Hans</language>
     <lastBuildDate>Wed, 11 Mar 2026 03:47:32 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -13,13 +13,6 @@
       <link>https://blog.jaxiu.cn/tags/ai/</link>
       <pubDate>Wed, 11 Mar 2026 03:47:32 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/ai/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>大模型</title>
-      <link>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Wed, 11 Mar 2026 03:47:32 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid>
       <description></description>
     </item>
     <item>
@@ -37,10 +30,73 @@
       <description></description>
     </item>
     <item>
+      <title>治理</title>
+      <link>https://blog.jaxiu.cn/tags/%E6%B2%BB%E7%90%86/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:32 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E6%B2%BB%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>研究</title>
+      <link>https://blog.jaxiu.cn/tags/%E7%A0%94%E7%A9%B6/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:32 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E7%A0%94%E7%A9%B6/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>科技新闻</title>
       <link>https://blog.jaxiu.cn/tags/%E7%A7%91%E6%8A%80%E6%96%B0%E9%97%BB/</link>
       <pubDate>Wed, 11 Mar 2026 03:47:32 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/%E7%A7%91%E6%8A%80%E6%96%B0%E9%97%BB/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Adobe</title>
+      <link>https://blog.jaxiu.cn/tags/adobe/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/adobe/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deepfake</title>
+      <link>https://blog.jaxiu.cn/tags/deepfake/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/deepfake/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gemini</title>
+      <link>https://blog.jaxiu.cn/tags/gemini/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/gemini/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google Workspace</title>
+      <link>https://blog.jaxiu.cn/tags/google-workspace/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/google-workspace/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Photoshop</title>
+      <link>https://blog.jaxiu.cn/tags/photoshop/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/photoshop/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>YouTube</title>
+      <link>https://blog.jaxiu.cn/tags/youtube/</link>
+      <pubDate>Wed, 11 Mar 2026 03:47:12 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/youtube/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>大模型</title>
+      <link>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 09 Mar 2026 03:21:52 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid>
       <description></description>
     </item>
     <item>
@@ -132,13 +188,6 @@
       <link>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</link>
       <pubDate>Thu, 26 Feb 2026 11:24:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Gemini</title>
-      <link>https://blog.jaxiu.cn/tags/gemini/</link>
-      <pubDate>Thu, 26 Feb 2026 11:23:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/tags/gemini/</guid>
       <description></description>
     </item>
     <item>
@@ -1073,7 +1122,7 @@
       <description></description>
     </item>
     <item>
-      <title>NPS</title>
+      <title>Nps</title>
       <link>https://blog.jaxiu.cn/tags/nps/</link>
       <pubDate>Wed, 30 Jul 2025 10:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/tags/nps/</guid>

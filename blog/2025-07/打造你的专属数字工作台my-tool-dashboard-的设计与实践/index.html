@@ -9,15 +9,31 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="挑战：散乱的数字工具与低效的工作流 在数字化的今天，我们每个人都离不开各种在线工具：文档协作、代码托管、设计资源、数据分析……然而，随着工具数量的增长，我们常常面临以下痛点： 工具分散：常用的工具散落在浏览器收藏夹、各种笔记应用中，查找和访问效率低下。 界面单调：传统的导航页或浏览器主页功能单一，缺乏个性化和互动性，无法激发使用兴趣。 缺乏统一管理：难以集中管理和快速切换不同类别的工具，导致工作流碎片化。">
+    content="挑战：散乱的数字工具与低效的工作流
+在数字化的今天，我们每个人都离不开各种在线工具：文档协作、代码托管、设计资源、数据分析……然而，随着工具数量的增长，我们常常面临以下痛点：
 
-  <meta property="og:title" content="打造你的专属数字工作台：My Tool Dashboard 的设计与实践" />
-<meta property="og:description" content="挑战：散乱的数字工具与低效的工作流 在数字化的今天，我们每个人都离不开各种在线工具：文档协作、代码托管、设计资源、数据分析……然而，随着工具数量的增长，我们常常面临以下痛点： 工具分散：常用的工具散落在浏览器收藏夹、各种笔记应用中，查找和访问效率低下。 界面单调：传统的导航页或浏览器主页功能单一，缺乏个性化和互动性，无法激发使用兴趣。 缺乏统一管理：难以集中管理和快速切换不同类别的工具，导致工作流碎片化。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%95%B0%E5%AD%97%E5%B7%A5%E4%BD%9C%E5%8F%B0my-tool-dashboard-%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-18T18:30:00+08:00" />
-<meta property="article:modified_time" content="2025-07-18T18:30:00+08:00" />
+工具分散：常用的工具散落在浏览器收藏夹、各种笔记应用中，查找和访问效率低下。
+界面单调：传统的导航页或浏览器主页功能单一，缺乏个性化和互动性，无法激发使用兴趣。
+缺乏统一管理：难以集中管理和快速切换不同类别的工具，导致工作流碎片化。
+隐私与定制化不足：许多在线工具导航页无法满足个人对界面、功能和数据隐私的深度定制需求。
 
+为了解决这些问题，我们构思并实现了一个高度可定制的个人工具导航页——My Tool Dashboard。">
+
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2025-07/%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E4%B8%93%E5%B1%9E%E6%95%B0%E5%AD%97%E5%B7%A5%E4%BD%9C%E5%8F%B0my-tool-dashboard-%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="打造你的专属数字工作台：My Tool Dashboard 的设计与实践">
+  <meta property="og:description" content="挑战：散乱的数字工具与低效的工作流 在数字化的今天，我们每个人都离不开各种在线工具：文档协作、代码托管、设计资源、数据分析……然而，随着工具数量的增长，我们常常面临以下痛点：
+工具分散：常用的工具散落在浏览器收藏夹、各种笔记应用中，查找和访问效率低下。 界面单调：传统的导航页或浏览器主页功能单一，缺乏个性化和互动性，无法激发使用兴趣。 缺乏统一管理：难以集中管理和快速切换不同类别的工具，导致工作流碎片化。 隐私与定制化不足：许多在线工具导航页无法满足个人对界面、功能和数据隐私的深度定制需求。 为了解决这些问题，我们构思并实现了一个高度可定制的个人工具导航页——My Tool Dashboard。">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-18T18:30:00+08:00">
+    <meta property="article:modified_time" content="2025-07-18T18:30:00+08:00">
+    <meta property="article:tag" content="Vue3">
+    <meta property="article:tag" content="工具导航">
+    <meta property="article:tag" content="个性化">
+    <meta property="article:tag" content="前端开发">
+    <meta property="article:tag" content="效率">
 
 
   <title>

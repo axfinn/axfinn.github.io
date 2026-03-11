@@ -9,15 +9,100 @@
   
   <meta name="author" content="jaxiu He">
   <meta name="description"
-    content="AI编程工具深度调研系列（六） Google Gemini 完整解析 一、产品概述 Google Gemini是Google推出的下一代AI模型，是bard的升级版本。作为科技巨头Google的AI产品，Gemini充分利用了Google在搜索、云计算和AI领域的深厚积累。 官网: https://gemini.google.com 最新动态 (截至2026年2月): Gemini 2.0系列发布 Gemini Advanced订阅增长 Google AI Studio完善 与Google生态深度集成 二、技术架构 2.1 Gemini模型家族 模型 发">
+    content="AI编程工具深度调研系列（六）
+Google Gemini 完整解析
+一、产品概述
+Google Gemini是Google推出的下一代AI模型，是bard的升级版本。作为科技巨头Google的AI产品，Gemini充分利用了Google在搜索、云计算和AI领域的深厚积累。
+官网: https://gemini.google.com
+最新动态 (截至2026年2月):
 
-  <meta property="og:title" content="AI编程工具深度调研系列（六）：Google Gemini 完整解析" />
-<meta property="og:description" content="AI编程工具深度调研系列（六） Google Gemini 完整解析 一、产品概述 Google Gemini是Google推出的下一代AI模型，是bard的升级版本。作为科技巨头Google的AI产品，Gemini充分利用了Google在搜索、云计算和AI领域的深厚积累。 官网: https://gemini.google.com 最新动态 (截至2026年2月): Gemini 2.0系列发布 Gemini Advanced订阅增长 Google AI Studio完善 与Google生态深度集成 二、技术架构 2.1 Gemini模型家族 模型 发" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%ADgoogle-gemini-%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2026-02-26T11:23:00+08:00" />
-<meta property="article:modified_time" content="2026-02-26T11:23:00+08:00" />
+Gemini 2.0系列发布
+Gemini Advanced订阅增长
+Google AI Studio完善
+与Google生态深度集成
 
+二、技术架构
+2.1 Gemini模型家族
+
+  
+      
+          模型
+          发布时间
+          主要特点
+      
+  
+  
+      
+          Gemini Pro
+          2023年12月
+          基础版本
+      
+      
+          Gemini Ultra
+          2024年2月
+          最强版本
+      
+      
+          Gemini Nano
+          2024年
+          端侧部署
+      
+      
+          Gemini 1.5 Pro
+          2024年
+          1M上下文
+      
+      
+          Gemini 2.0
+          2025年
+          最新版本
+      
+  
+
+2.2 技术特点
+ Google Gemini 核心技术：
+ │
+ ├─ 多模态原生的
+ │  ├─ 文本理解
+ │  ├─ 图像理解
+ │  ├─ 视频理解
+ │  ├─ 音频理解
+ │  └─ 代码理解
+ │
+ ├─ 超长上下文
+ │  ├─ 128K token (标准)
+ │  └─ 2M token (Gemini 1.5)
+ │
+ ├─ 工具使用
+ │  ├─ Google Search
+ │  ├─ 代码执行
+ │  └─ 第三方API
+ │
+ └─ 推理能力
+    ├─ Chain of Thought
+    ├─ 自我纠错
+    └─ 复杂问题分解
+三、核心功能
+3.1 编程能力
+根据官方基准测试，Gemini的表现：">
+
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2026-02/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%B0%83%E7%A0%94%E7%B3%BB%E5%88%97%E5%85%ADgoogle-gemini-%E5%AE%8C%E6%95%B4%E8%A7%A3%E6%9E%90/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="AI编程工具深度调研系列（六）：Google Gemini 完整解析">
+  <meta property="og:description" content="AI编程工具深度调研系列（六） Google Gemini 完整解析 一、产品概述 Google Gemini是Google推出的下一代AI模型，是bard的升级版本。作为科技巨头Google的AI产品，Gemini充分利用了Google在搜索、云计算和AI领域的深厚积累。
+官网: https://gemini.google.com
+最新动态 (截至2026年2月):
+Gemini 2.0系列发布 Gemini Advanced订阅增长 Google AI Studio完善 与Google生态深度集成 二、技术架构 2.1 Gemini模型家族 模型 发布时间 主要特点 Gemini Pro 2023年12月 基础版本 Gemini Ultra 2024年2月 最强版本 Gemini Nano 2024年 端侧部署 Gemini 1.5 Pro 2024年 1M上下文 Gemini 2.0 2025年 最新版本 2.2 技术特点 Google Gemini 核心技术： │ ├─ 多模态原生的 │ ├─ 文本理解 │ ├─ 图像理解 │ ├─ 视频理解 │ ├─ 音频理解 │ └─ 代码理解 │ ├─ 超长上下文 │ ├─ 128K token (标准) │ └─ 2M token (Gemini 1.5) │ ├─ 工具使用 │ ├─ Google Search │ ├─ 代码执行 │ └─ 第三方API │ └─ 推理能力 ├─ Chain of Thought ├─ 自我纠错 └─ 复杂问题分解 三、核心功能 3.1 编程能力 根据官方基准测试，Gemini的表现：">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2026-02-26T11:23:00+08:00">
+    <meta property="article:modified_time" content="2026-02-26T11:23:00+08:00">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="编程工具">
+    <meta property="article:tag" content="Google">
+    <meta property="article:tag" content="Gemini">
+    <meta property="article:tag" content="编程助手">
 
 
   <title>
@@ -348,40 +433,40 @@
 <h3 id="二技术架构">二、技术架构</h3>
 <h4 id="21-gemini模型家族">2.1 Gemini模型家族</h4>
 <table>
-<thead>
-<tr>
-<th>模型</th>
-<th>发布时间</th>
-<th>主要特点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gemini Pro</td>
-<td>2023年12月</td>
-<td>基础版本</td>
-</tr>
-<tr>
-<td>Gemini Ultra</td>
-<td>2024年2月</td>
-<td>最强版本</td>
-</tr>
-<tr>
-<td>Gemini Nano</td>
-<td>2024年</td>
-<td>端侧部署</td>
-</tr>
-<tr>
-<td>Gemini 1.5 Pro</td>
-<td>2024年</td>
-<td>1M上下文</td>
-</tr>
-<tr>
-<td>Gemini 2.0</td>
-<td>2025年</td>
-<td>最新版本</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>发布时间</th>
+          <th>主要特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gemini Pro</td>
+          <td>2023年12月</td>
+          <td>基础版本</td>
+      </tr>
+      <tr>
+          <td>Gemini Ultra</td>
+          <td>2024年2月</td>
+          <td>最强版本</td>
+      </tr>
+      <tr>
+          <td>Gemini Nano</td>
+          <td>2024年</td>
+          <td>端侧部署</td>
+      </tr>
+      <tr>
+          <td>Gemini 1.5 Pro</td>
+          <td>2024年</td>
+          <td>1M上下文</td>
+      </tr>
+      <tr>
+          <td>Gemini 2.0</td>
+          <td>2025年</td>
+          <td>最新版本</td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="22-技术特点">2.2 技术特点</h4>
 <pre tabindex="0"><code> Google Gemini 核心技术：
@@ -410,40 +495,40 @@
 <h4 id="31-编程能力">3.1 编程能力</h4>
 <p>根据官方基准测试，Gemini的表现：</p>
 <table>
-<thead>
-<tr>
-<th>基准测试</th>
-<th>Gemini Ultra</th>
-<th>GPT-4</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HumanEval</td>
-<td>71.2%</td>
-<td>67.0%</td>
-<td>代码生成</td>
-</tr>
-<tr>
-<td>MBPP</td>
-<td>72.5%</td>
-<td>67.6%</td>
-<td>基础编程</td>
-</tr>
-<tr>
-<td>APPS</td>
-<td>58.3%</td>
-<td>55.2%</td>
-<td>问题解决</td>
-</tr>
-<tr>
-<td>RepoBench</td>
-<td>62.1%</td>
-<td>58.3%</td>
-<td>代码库理解</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>基准测试</th>
+          <th>Gemini Ultra</th>
+          <th>GPT-4</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HumanEval</td>
+          <td>71.2%</td>
+          <td>67.0%</td>
+          <td>代码生成</td>
+      </tr>
+      <tr>
+          <td>MBPP</td>
+          <td>72.5%</td>
+          <td>67.6%</td>
+          <td>基础编程</td>
+      </tr>
+      <tr>
+          <td>APPS</td>
+          <td>58.3%</td>
+          <td>55.2%</td>
+          <td>问题解决</td>
+      </tr>
+      <tr>
+          <td>RepoBench</td>
+          <td>62.1%</td>
+          <td>58.3%</td>
+          <td>代码库理解</td>
+      </tr>
+  </tbody>
 </table>
 <p><em>数据来源: Google官方技术报告 [1]</em></p>
 <h4 id="32-编程语言支持">3.2 编程语言支持</h4>
@@ -483,57 +568,57 @@
 <h3 id="四产品体系">四、产品体系</h3>
 <h4 id="41-消费者产品">4.1 消费者产品</h4>
 <table>
-<thead>
-<tr>
-<th>产品</th>
-<th>说明</th>
-<th>链接</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gemini (Bard)</td>
-<td>Web版对话</td>
-<td>gemini.google.com</td>
-</tr>
-<tr>
-<td>Gemini Advanced</td>
-<td>高级版</td>
-<td>订阅服务</td>
-</tr>
-<tr>
-<td>Gemini App</td>
-<td>移动应用</td>
-<td>iOS/Android</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>产品</th>
+          <th>说明</th>
+          <th>链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gemini (Bard)</td>
+          <td>Web版对话</td>
+          <td>gemini.google.com</td>
+      </tr>
+      <tr>
+          <td>Gemini Advanced</td>
+          <td>高级版</td>
+          <td>订阅服务</td>
+      </tr>
+      <tr>
+          <td>Gemini App</td>
+          <td>移动应用</td>
+          <td>iOS/Android</td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="42-开发者产品">4.2 开发者产品</h4>
 <table>
-<thead>
-<tr>
-<th>产品</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Google AI Studio</td>
-<td>在线开发环境</td>
-</tr>
-<tr>
-<td>Gemini API</td>
-<td>API接口</td>
-</tr>
-<tr>
-<td>Vertex AI</td>
-<td>企业级平台</td>
-</tr>
-<tr>
-<td>Colab</td>
-<td>云端 notebooks</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>产品</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Google AI Studio</td>
+          <td>在线开发环境</td>
+      </tr>
+      <tr>
+          <td>Gemini API</td>
+          <td>API接口</td>
+      </tr>
+      <tr>
+          <td>Vertex AI</td>
+          <td>企业级平台</td>
+      </tr>
+      <tr>
+          <td>Colab</td>
+          <td>云端 notebooks</td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="43-集成产品">4.3 集成产品</h4>
 <ul>
@@ -599,52 +684,52 @@
 <h3 id="七定价策略">七、定价策略</h3>
 <h4 id="71-消费者定价">7.1 消费者定价</h4>
 <table>
-<thead>
-<tr>
-<th>计划</th>
-<th>价格</th>
-<th>特性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gemini Free</td>
-<td>$0</td>
-<td>基础版</td>
-</tr>
-<tr>
-<td>Gemini Advanced</td>
-<td>$19.99/月</td>
-<td>Ultra模型</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>计划</th>
+          <th>价格</th>
+          <th>特性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gemini Free</td>
+          <td>$0</td>
+          <td>基础版</td>
+      </tr>
+      <tr>
+          <td>Gemini Advanced</td>
+          <td>$19.99/月</td>
+          <td>Ultra模型</td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="72-api定价">7.2 API定价</h4>
 <table>
-<thead>
-<tr>
-<th>模型</th>
-<th>输入</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gemini Pro</td>
-<td>$0.5/1M</td>
-<td>$1.5/1M</td>
-</tr>
-<tr>
-<td>Gemini Ultra</td>
-<td>$3.5/1M</td>
-<td>$10.5/1M</td>
-</tr>
-<tr>
-<td>Gemini Nano</td>
-<td>免费</td>
-<td>端侧</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>模型</th>
+          <th>输入</th>
+          <th>输出</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gemini Pro</td>
+          <td>$0.5/1M</td>
+          <td>$1.5/1M</td>
+      </tr>
+      <tr>
+          <td>Gemini Ultra</td>
+          <td>$3.5/1M</td>
+          <td>$10.5/1M</td>
+      </tr>
+      <tr>
+          <td>Gemini Nano</td>
+          <td>免费</td>
+          <td>端侧</td>
+      </tr>
+  </tbody>
 </table>
 <p><em>数据来源: Google AI Studio [2]</em></p>
 <h4 id="73-vertex-ai企业定价">7.3 Vertex AI企业定价</h4>
