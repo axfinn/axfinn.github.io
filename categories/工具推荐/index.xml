@@ -9,11 +9,11 @@
     <lastBuildDate>Thu, 05 Mar 2026 07:52:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>我开发了一个超实用的开发者工具箱</title>
-      <link>https://blog.jaxiu.cn/blog/2026-03/%E6%88%91%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%B6%85%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1/</link>
+      <title>做了这款开发者工具箱后，我发现了这个领域的这些秘密</title>
+      <link>https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/</link>
       <pubDate>Thu, 05 Mar 2026 07:52:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2026-03/%E6%88%91%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E4%B8%AA%E8%B6%85%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1/</guid>
-      <description>&lt;p&gt;作为一名开发者，日常工作中有太多琐碎但必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，甚至有些还要付费才能使用。&lt;/p&gt;&#xA;&lt;p&gt;于是我干脆自己动手，花了些时间做了一个&lt;strong&gt;开发者工具箱&lt;/strong&gt;——现在它已经基本成型了，今天来给大家介绍一下！&lt;/p&gt;&#xA;&lt;h2 id=&#34;-在线体验&#34;&gt;🌐 在线体验&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;在线地址&lt;/strong&gt;：https://t.jaxiu.cn&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;：https://github.com/axfinn/devtools&lt;/p&gt;&#xA;&lt;h2 id=&#34;-核心功能一览&#34;&gt;🎯 核心功能一览&lt;/h2&gt;&#xA;&lt;p&gt;这个工具箱目前包含 &lt;strong&gt;20+&lt;/strong&gt; 实用工具，涵盖了开发过程中的各种场景：&lt;/p&gt;</description>
+      <guid>https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;为什么几乎每个开发者都在抱怨&amp;quot;找不到合适的工具&amp;quot;，但市面上已经有几十款类似产品？这个领域到底缺什么？&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;作为一名开发者，日常工作中有一大堆看似简单却必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，有些还充斥着广告，甚至有些功能还要付费。&lt;/p&gt;&#xA;&lt;p&gt;我干脆自己动手做了一个开发者工具箱（https://t.jaxiu.cn）。但真正做完之后，我才发现这个领域远比想象中更有趣——&lt;strong&gt;为什么已经有这么多工具箱，大家仍然不满意？&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

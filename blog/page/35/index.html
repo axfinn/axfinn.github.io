@@ -539,6 +539,10 @@
 
   
 
+  
+
+  
+
 
 
 
@@ -714,8 +718,26 @@
               <li class="middot"></li>
             
             <li class="py-1">
+              <a href="https://blog.jaxiu.cn/categories/blog">
+                <span>Blog (1)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
               <a href="https://blog.jaxiu.cn/categories/devops">
                 <span>Devops (1)</span>
+              </a>
+            </li>           
+          
+            
+              <li class="middot"></li>
+            
+            <li class="py-1">
+              <a href="https://blog.jaxiu.cn/categories/%E5%81%A5%E5%BA%B7%E6%8C%87%E5%8D%97">
+                <span>健康指南 (1)</span>
               </a>
             </li>           
           
@@ -854,6 +876,10 @@
 
     
           
+
+  
+
+  
 
   
 
@@ -1259,7 +1285,7 @@
               
                 <div class="px-2 middot"></div>
                 <div>
-                  118 posts
+                  120 posts
                 </div>
               
             </div>
@@ -1303,6 +1329,79 @@
       </li>
     </ul>
             </div>
+
+            
+                <div class="post-wrapper white-bg post-card">
+  
+  <a href="https://blog.jaxiu.cn/blog/2025-07/%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4%E5%A4%A7%E8%84%91%E4%B8%80%E4%B8%AA%E5%8F%AF%E5%8A%A8%E6%80%81%E5%8F%91%E7%8E%B0%E4%BB%BB%E5%8A%A1%E7%9A%84ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%AE%9E%E8%B7%B5/">
+    <div class="post-header text-center">
+      <div class="px-4 post-heading">构建智能运维大脑：一个可动态发现任务的AI智能体实践</div>
+      <ul class="post-meta li-x mt-1">
+        
+          <li>Jul 18, 2025</li>
+        
+    
+        
+          <li class="middot"></li>
+          <li>6 minutes read</li>
+        
+      </ul>
+    </div>
+    
+
+    
+      挑战：复杂运维场景下的“全链路分析”困境 在大型互联网服务的日常运维中，我们经常面临这样的场景：用户反馈某个服务出现异常，例如“live.live.app-blink 服务报错，需要查看错误日志并进行全链路分析”。
+这看似简单的需求，背后却隐藏着一个复杂且耗时的工作流：
+日志初筛：首先，需要从海量日志中精准定位到指定服务的错误日志。 信息提取：从日志中抽取出关键标识，例如 trace_id。 关联发现：基于 trace_id，需要进一步查询所有相关的上游和下游服务。 任务分解：为每个关联服务生成新的日志查询或指标分析任务。 并行执行：同时执行这些分散的任务。 结果聚合：将所有任务的结果汇总，形成一份完整的全链路分析报告。 这个过程不仅需要人工介入大量查询和判断，而且效率低下，容易出错。为了解决这一痛点，我们构思并实现了一个链式处理AI智能体，旨在将这一复杂流程自动化、智能化。
+......
+    
+  </a>
+
+  
+  
+  <div class="post-meta li-x mt-2 div-x">
+    <div>
+      
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
+        
+          <li><a href="https://blog.jaxiu.cn/categories/ai"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> AI </a></li>
+        
+          <li><a href="https://blog.jaxiu.cn/categories/%E8%BF%90%E7%BB%B4"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 运维 </a></li>
+        
+      
+      
+    </div>
+   
+    <div>
+      
+        
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93" role="button">AI智能体 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4" role="button">智能运维 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E4%BB%BB%E5%8A%A1%E7%BC%96%E6%8E%92" role="button">任务编排 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1" role="button">系统设计 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E8%87%AA%E5%8A%A8%E5%8C%96" role="button">自动化 </a></li>
+      
+    
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+</div>
 
             
                 <div class="post-wrapper white-bg post-card">
@@ -1440,73 +1539,6 @@
       
     
       <li><a href="https://blog.jaxiu.cn/tags/%E6%95%88%E7%8E%87" role="button">效率 </a></li>
-      
-    
-  </div>
-</div>
-      
-    </div>
-  </div>
-
-</div>
-
-            
-                <div class="post-wrapper white-bg post-card">
-  
-  <a href="https://blog.jaxiu.cn/blog/2025-07/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%99%BA%E8%83%BD%E4%BD%93%E6%9E%84%E5%BB%BA%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5/">
-    <div class="post-header text-center">
-      <div class="px-4 post-heading">大模型智能体构建：从理论到实践</div>
-      <ul class="post-meta li-x mt-1">
-        
-          <li>Jul 18, 2025</li>
-        
-    
-        
-          <li class="middot"></li>
-          <li>7 minutes read</li>
-        
-      </ul>
-    </div>
-    
-
-    
-      引言 随着大型语言模型（LLM）的飞速发展，构建能够自主感知、决策和行动的智能体（Agent）成为了人工智能领域的热点。大模型智能体不仅能够理解复杂的指令，还能通过与环境的交互，完成一系列任务。本文将深入探讨大模型智能体的构建原理、核心组件以及实践中的挑战与机遇。
-大模型智能体的核心组件 一个典型的大模型智能体通常包含以下几个核心组件：
-感知模块（Perception Module）：
-功能：负责从环境中获取信息，并将其转化为LLM可以理解的格式。这是智能体与外部世界交互的第一步。 输入模态：可以处理多种模态的数据，包括但不限于： 文本：网页内容、文档、聊天记录、数据库查询结果等。 图像/视频：通过图像识别、OCR（光学字符识别）、视频分析模型提取视觉信息。 音频：通过语音识别（ASR）将语音转化为文本。 结构化数据：如JSON、XML、CSV等，需要解析并转化为自然语言描述或LLM可理解的格式。 关键技术：数据预处理、特征提取、多模态信息融合、特定领域的解析器。 规划模块（Planning Module）：
-......
-    
-  </a>
-
-  
-  
-  <div class="post-meta li-x mt-2 div-x">
-    <div>
-      
-        
-          <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
-        
-      
-      
-    </div>
-   
-    <div>
-      
-        
-<div class="li-x div-x post-meta">
-  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
-  <div class="tags-sm">
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B" role="button">大模型 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/%E6%99%BA%E8%83%BD%E4%BD%93" role="button">智能体 </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/llm" role="button">LLM </a></li>
-      
-    
-      <li><a href="https://blog.jaxiu.cn/tags/ai" role="button">AI </a></li>
       
     
   </div>

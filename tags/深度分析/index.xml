@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>深度分析 on jaxiu He</title>
+    <link>https://blog.jaxiu.cn/tags/%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 深度分析 on jaxiu He</description>
+    <generator>Hugo</generator>
+    <language>zn-Hans</language>
+    <lastBuildDate>Thu, 05 Mar 2026 07:52:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.jaxiu.cn/tags/%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>做了这款开发者工具箱后，我发现了这个领域的这些秘密</title>
+      <link>https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/</link>
+      <pubDate>Thu, 05 Mar 2026 07:52:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;为什么几乎每个开发者都在抱怨&amp;quot;找不到合适的工具&amp;quot;，但市面上已经有几十款类似产品？这个领域到底缺什么？&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;&#xA;&lt;p&gt;作为一名开发者，日常工作中有一大堆看似简单却必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，有些还充斥着广告，甚至有些功能还要付费。&lt;/p&gt;&#xA;&lt;p&gt;我干脆自己动手做了一个开发者工具箱（https://t.jaxiu.cn）。但真正做完之后，我才发现这个领域远比想象中更有趣——&lt;strong&gt;为什么已经有这么多工具箱，大家仍然不满意？&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

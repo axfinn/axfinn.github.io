@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zn-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  
+  <meta name="author" content="jaxiu He">
+  <meta name="description"
+    content="
+为什么几乎每个开发者都在抱怨&quot;找不到合适的工具&quot;，但市面上已经有几十款类似产品？这个领域到底缺什么？
+
+写在前面
+作为一名开发者，日常工作中有一大堆看似简单却必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，有些还充斥着广告，甚至有些功能还要付费。
+我干脆自己动手做了一个开发者工具箱（https://t.jaxiu.cn）。但真正做完之后，我才发现这个领域远比想象中更有趣——为什么已经有这么多工具箱，大家仍然不满意？">
+
+  <meta property="og:url" content="https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/">
+  <meta property="og:site_name" content="jaxiu He">
+  <meta property="og:title" content="做了这款开发者工具箱后，我发现了这个领域的这些秘密">
+  <meta property="og:description" content="为什么几乎每个开发者都在抱怨&#34;找不到合适的工具&#34;，但市面上已经有几十款类似产品？这个领域到底缺什么？
+写在前面 作为一名开发者，日常工作中有一大堆看似简单却必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，有些还充斥着广告，甚至有些功能还要付费。
+我干脆自己动手做了一个开发者工具箱（https://t.jaxiu.cn）。但真正做完之后，我才发现这个领域远比想象中更有趣——为什么已经有这么多工具箱，大家仍然不满意？">
+  <meta property="og:locale" content="zn_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2026-03-05T07:52:00+08:00">
+    <meta property="article:modified_time" content="2026-03-05T07:52:00+08:00">
+    <meta property="article:tag" content="DevTools">
+    <meta property="article:tag" content="开发者工具">
+    <meta property="article:tag" content="工具箱">
+    <meta property="article:tag" content="开源">
+    <meta property="article:tag" content="深度分析">
+
+
+  <title>
+    
+     做了这款开发者工具箱后，我发现了这个领域的这些秘密 | jaxiu He 
+    
+  </title>
+
+  <link rel="canonical" href="https://blog.jaxiu.cn/blog/2026-03/%E5%81%9A%E4%BA%86%E8%BF%99%E6%AC%BE%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%90%8E%E6%88%91%E5%8F%91%E7%8E%B0%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%86%E5%9F%9F%E7%9A%84%E8%BF%99%E4%BA%9B%E7%A7%98%E5%AF%86/">
+
+  
+  
+
+  
+  
+  
+  <meta name="baidu-site-verification" content="your-baidu-verify-code" />
+  
+
+  
+  
+  <meta name="google-site-verification" content="your-google-verify-code" />
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://blog.jaxiu.cn/css/font.css" rel="stylesheet">
+
+  
+  <link href="https://blog.jaxiu.cn/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/vendors/mdb/style.min.css" rel="stylesheet">
+  <link href="https://blog.jaxiu.cn/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"  href="https://blog.jaxiu.cn/img/logo.png" >
+
+
+  
+  
+
+  <style type="text/css">
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
+  </style>
+
+
+  
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+  
+  <link rel="stylesheet" href="https://blog.jaxiu.cn/css/vendors/highlight/github-gist.css">
+  
+
+  
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  
+  
+
+  
+  <link href="https://blog.jaxiu.cn/css/holiday-effects.css" rel="stylesheet">
+  <script src="https://blog.jaxiu.cn/js/holiday-effects.js"></script>
+
+  
+  <script src="https://blog.jaxiu.cn/js/dynamic-bg.js"></script>
+  <link href="https://blog.jaxiu.cn/css/dynamic-bg-control.css" rel="stylesheet">
+
+</head>
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+        
+        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+            
+            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
+                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
+            
+            <strong> jaxiu He</strong>
+        </a>
+
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+                </li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
+                </li>
+
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
+                </li>
+
+                
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+ 
+      
+
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;">
+  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+    
+
+    
+    <div class="carousel-item active">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides/raw_1515691746.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+          
+          
+          
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+    
+
+    
+    <div class="carousel-item">
+      <div class="view"
+        style="background-image: url('https://blog.jaxiu.cn/img/header-slides//raw_1515847341.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+        
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+
+
+        </div>
+        
+
+      </div>
+    </div>
+    
+    
+    
+
+
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://blog.jaxiu.cn/">
+          
+          <img class="pull-right avatar avatar-md" src="https://blog.jaxiu.cn/img/logo.png" alt="">
+          
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://blog.jaxiu.cn/">
+          <h1 class="mb-2 h1" style="font-weight: 300;">
+            <strong>jaxiu He</strong>
+          </h1>
+        </a>
+
+
+        
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+          
+          <a href="//github.com/axfinn" target="_blank" rel="noopener"><i class="fab fa-github pr-1"
+              aria-hidden="true"></i></a>
+          
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+
+          
+          <a href="mailto:521very@email.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+          
+
+          
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://blog.jaxiu.cn/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 工具推荐 </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">做了这款开发者工具箱后，我发现了这个领域的这些秘密</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Mar 5, 2026</li>
+    
+
+    
+      <li class="middot"></li>
+      <li>4 minutes read</li>
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <blockquote>
+<p>为什么几乎每个开发者都在抱怨&quot;找不到合适的工具&quot;，但市面上已经有几十款类似产品？这个领域到底缺什么？</p>
+</blockquote>
+<h2 id="写在前面">写在前面</h2>
+<p>作为一名开发者，日常工作中有一大堆看似简单却必不可少的小工具：JSON 格式化、URL 编解码、正则测试、Diff 对比……每次都要打开不同的网站，有些还充斥着广告，甚至有些功能还要付费。</p>
+<p>我干脆自己动手做了一个开发者工具箱（https://t.jaxiu.cn）。但真正做完之后，我才发现这个领域远比想象中更有趣——<strong>为什么已经有这么多工具箱，大家仍然不满意？</strong></p>
+<p>这篇文章不只是一篇产品介绍，更是我做这个项目过程中的一些深度思考。</p>
+<hr>
+<h2 id="-在线体验">🎯 在线体验</h2>
+<p><strong>在线地址</strong>：https://t.jaxiu.cn</p>
+<p><strong>GitHub</strong>：https://github.com/axfinn/devtools</p>
+<hr>
+<h2 id="竞品分析大家都在做什么">竞品分析：大家都在做什么？</h2>
+<p>在开发之前，我调研了市面上主要的开发者工具箱，这里是核心发现：</p>
+<h3 id="1-即时工具箱-jisuxiangcom--国内标杆">1. 即时工具箱 (jisuxiang.com) — 国内标杆</h3>
+<p><strong>基本情况</strong>：GitHub 3.9k Stars，完全免费</p>
+<p><strong>核心功能</strong>：</p>
+<ul>
+<li>JSON 系列：格式化、压缩、校验、编辑器、转 XML/CSV/YAML</li>
+<li>网络工具：HTTP 请求测试、IP 查询</li>
+<li>编码加密：Base64、URL、Unicode、MD5/SHA、AES/DES、JWT</li>
+<li>日期时间：时间戳转换、日期计算、时区转换、Cron 表达式</li>
+<li>图像工具：图片压缩、二维码、水印、ICO 转换</li>
+<li>PDF 处理：转换、合并、切割、压缩</li>
+</ul>
+<p><strong>特点</strong>：功能全面，国内生态适配好</p>
+<hr>
+<h3 id="2-devutils--国外精品">2. DevUtils — 国外精品</h3>
+<p><strong>基本情况</strong>：47+ 工具，付费产品（$29），macOS 原生应用</p>
+<p><strong>核心差异点</strong>：</p>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>其他工具箱</th>
+          <th>DevUtils</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>工作模式</td>
+          <td>在线网站</td>
+          <td><strong>完全离线</strong></td>
+      </tr>
+      <tr>
+          <td>智能检测</td>
+          <td>无</td>
+          <td><strong>剪贴板内容自动识别工具</strong></td>
+      </tr>
+      <tr>
+          <td>系统集成</td>
+          <td>无</td>
+          <td><strong>Alfred、Raycast、Terminal</strong></td>
+      </tr>
+      <tr>
+          <td>UI 体验</td>
+          <td>Web 界面</td>
+          <td><strong>原生 Native UI</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>关键洞察</strong>：DevUtils 的核心竞争力不是&quot;功能更多&quot;，而是**&ldquo;数据不出本地&rdquo;** + <strong>&ldquo;极致的使用体验&rdquo;</strong>。这戳中了很多开发者的痛点——没人喜欢把敏感数据粘贴到在线工具上。</p>
+<hr>
+<h2 id="用户的真正痛点在哪里">用户的真正痛点在哪里？</h2>
+<p>通过这次调研和实际开发，我发现了几个被忽视的用户需求：</p>
+<h3 id="1--数据安全--被低估的刚需">1. 🔒 数据安全 — 被低估的刚需</h3>
+<p>DevUtils 的&quot;离线模式&quot;卖得最好，这说明<strong>开发者对数据隐私的关注远超预期</strong>。</p>
+<p>我们习惯性地认为&quot;在线工具方便&quot;，但仔细想想：</p>
+<ul>
+<li>调试 API 时粘贴的 JSON 可能包含 token</li>
+<li>测试正则时可能输入敏感信息</li>
+<li>转换文件时上传的资料可能涉密</li>
+</ul>
+<p><strong>这才是我决定做本地部署版本的原因。</strong></p>
+<h3 id="2--效率--不是功能多而是找得到">2. ⚡ 效率 — 不是&quot;功能多&quot;而是&quot;找得到&quot;</h3>
+<p>调研中发现一个有趣的现象：很多工具箱功能很多，但用户真正常用的就那 5-10 个。</p>
+<p>问题不在于功能少，而在于：</p>
+<ul>
+<li>入口太深，找不到</li>
+<li>每次都要重新搜索</li>
+<li>跨场景切换成本高</li>
+</ul>
+<p><strong>解决方案：智能搜索 + 常用收藏 + 快捷键</strong></p>
+<h3 id="3--协作--一个人的工具箱">3. 🔗 协作 — 一个人的工具箱</h3>
+<p>大多数工具箱是&quot;单人模式&quot;，但开发工作往往需要：</p>
+<ul>
+<li>分享一个 JSON Schema 给同事</li>
+<li>共享一个 Mock API 给前端</li>
+<li>发送一段加密内容给运维</li>
+</ul>
+<p><strong>所以我加入了共享功能：Markdown 分享、聊天室、共享粘贴板。</strong></p>
+<h3 id="4--移动端--被遗忘的场景">4. 📱 移动端 — 被遗忘的场景</h3>
+<p>几乎没有工具箱考虑移动端体验。但现实是：</p>
+<ul>
+<li>地铁上改个 JSON 配置</li>
+<li>现场查个时间戳</li>
+<li>扫码看个接口文档</li>
+</ul>
+<p><strong>响应式设计 + PWA 是基本要求。</strong></p>
+<hr>
+<h2 id="我的差异化策略">我的差异化策略</h2>
+<p>基于以上分析，这个工具箱我做了一些不同的尝试：</p>
+<h3 id="1-安全优先">1. 安全优先</h3>
+<ul>
+<li>所有数据可本地部署</li>
+<li>敏感操作有密码保护</li>
+<li>访问次数/时间限制</li>
+<li>自动清理过期数据</li>
+</ul>
+<h3 id="2-中文场景优化">2. 中文场景优化</h3>
+<p>很多国外工具对中文支持不好：</p>
+<ul>
+<li>中文正则测试</li>
+<li>中文文本处理（去空格、排序）</li>
+<li>IP/DNS 查询显示中文地理位置</li>
+<li>中文菜谱、孕期管理等生活工具</li>
+</ul>
+<h3 id="3-实用生活类工具">3. 实用生活类工具</h3>
+<p>这是很多竞品忽略的差异化点：</p>
+<ul>
+<li>孕期管理（孕周计算、产检提醒）</li>
+<li>血糖监测</li>
+<li>每日菜谱</li>
+<li>生活记账</li>
+</ul>
+<p><strong>工具箱不只是工作，也是生活。</strong></p>
+<h3 id="4-开放生态">4. 开放生态</h3>
+<ul>
+<li>开源（MIT 协议）</li>
+<li>Docker 一键部署</li>
+<li>欢迎 PR 和 Issue</li>
+</ul>
+<hr>
+<h2 id="技术架构">技术架构</h2>
+<table>
+  <thead>
+      <tr>
+          <th>层级</th>
+          <th>技术选型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>前端</td>
+          <td>Vue 3 + Vite + Element Plus + TailwindCSS</td>
+      </tr>
+      <tr>
+          <td>后端</td>
+          <td>Go Gin + SQLite</td>
+      </tr>
+      <tr>
+          <td>OCR</td>
+          <td>Python FastAPI + RapidOCR + OpenCV</td>
+      </tr>
+      <tr>
+          <td>部署</td>
+          <td>Docker + Docker Compose</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="部署方式">部署方式</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 克隆项目</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/axfinn/devtools.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> devtools
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 一键启动</span>
+</span></span><span class="line"><span class="cl">docker-compose up -d
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问</span>
+</span></span><span class="line"><span class="cl">open http://localhost:8082
+</span></span></code></pre></div><hr>
+<h2 id="后续计划">后续计划</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 智能检测剪贴板内容（DevUtils 的核心功能）</li>
+<li><input disabled="" type="checkbox"> PWA 离线支持</li>
+<li><input disabled="" type="checkbox"> 更多协作功能（实时共同编辑）</li>
+<li><input disabled="" type="checkbox"> 插件系统（允许用户自定义工具）</li>
+<li><input disabled="" type="checkbox"> 移动端原生应用</li>
+</ul>
+<hr>
+<h2 id="写到最后">写到最后</h2>
+<p>做这个工具箱的过程中，我最大的收获是：<strong>做一个&quot; Me Too &ldquo;产品没有意义，必须找到真实的痛点。</strong></p>
+<p>功能多不代表好，找到用户的核心场景并做到极致，才是真正的产品思维。</p>
+<p>如果你也对这个领域有兴趣，欢迎一起交流。觉得有用的话，点个 Star 支持一下 ⭐</p>
+<p>也欢迎提 Issue 和 PR，共同完善这个工具箱！</p>
+<hr>
+<p><em>本文是对比了即时工具箱、DevUtils 等竞品后的深度分析，希望对你了解这个领域有所帮助。</em></p>
+
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://blog.jaxiu.cn/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://blog.jaxiu.cn/tags/devtools" role="button">devtools </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7" role="button">开发者工具 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%B7%A5%E5%85%B7%E7%AE%B1" role="button">工具箱 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E5%BC%80%E6%BA%90" role="button">开源 </a></li>
+      
+    
+      <li><a href="https://blog.jaxiu.cn/tags/%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90" role="button">深度分析 </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://blog.jaxiu.cn/blog/2026-02/%E8%B5%9B%E5%8D%9A%E8%A7%89%E9%86%92%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%96%B0%E9%BB%8E%E6%98%8E%E7%9A%84%E6%8C%91%E6%88%98/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>赛博觉醒：第七章 - 新黎明的挑战</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://blog.jaxiu.cn/blog/2026-03/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B403%E6%9C%8806%E6%97%A5/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>每日技术热点 - 2026年03月06日</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+    <a href="//github.com/axfinn " target="_blank" rel="noopener"><i class="fab fa-github mr-3"
+        aria-hidden="true"></i></a>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+    <a href="mailto:521very@email.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span> 2016 - 2026 &copy; | Theme <a href='https://github.com/orianna-zzo/AllinOne'
+        target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a> </span>
+  </div>
+  
+
+</footer>
+
+    
+
+
+
+
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
+
+
+
+
+<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body);
+  });
+</script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+  </body>
+</html>
