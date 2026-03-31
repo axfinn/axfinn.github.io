@@ -62,10 +62,6 @@
 
   
   
-  
-  <link href="https://blog.jaxiu.cn/tags/index.xml" rel="alternate" type="application/rss+xml" title="jaxiu He" />
-  
-  
 
   <style type="text/css">
     @media (min-width: 800px) and (max-width: 850px) {
@@ -117,52 +113,78 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
+      
+      <a class="navbar-brand" href="https://blog.jaxiu.cn/">
+          
+        <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
         
-        <a class="navbar-brand" href="https://blog.jaxiu.cn/">
-            
-            <img class="avatar" src="https://blog.jaxiu.cn/img/logo.png"
-                style="width: 40px!important;height: auto;" class="d-inline-block align-top" alt="">
-            
-            <strong> jaxiu He</strong>
-        </a>
+        <strong> jaxiu He</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
+          </li>
+          
+            <li class="nav-item ">
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/" >博客  </a>
+            </li>
+
+          
+            <li class="nav-item ">
+              <a class="nav-link" href="https://blog.jaxiu.cn/moment/" >动态  </a>
+            </li>
+
+          
+            <li class="nav-item ">
+              <a class="nav-link" href="https://blog.jaxiu.cn/blog/prenatal-stories/" >胎教故事  </a>
+            </li>
+
+          
+            <li class="nav-item ">
+              <a class="nav-link" href="https://blog.jaxiu.cn/about/" >关于  </a>
+            </li>
+
+          
+        </ul>
 
         
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-search"></i> 搜索
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-3" aria-labelledby="searchDropdown" style="min-width: 300px; max-width: 400px;">
+              <form class="search-form" onsubmit="return false;">
+                <div class="input-group">
+                  <input type="text" id="search-query" class="form-control" placeholder="搜索文章标题或内容..." autocomplete="off">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('search-query').focus();">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <ul id="search-results" class="list-unstyled mt-2 mb-0" style="max-height: 400px; overflow-y: auto;"></ul>
+            </div>
+          </li>
+        </ul>
 
-            
-            <ul class="navbar-nav mr-auto ">
-                <li class="nav-item ">
-                    <a class="nav-link" href="https://blog.jaxiu.cn/">Home</a>
-                </li>
-                
-                <li class="nav-item ">
-                    <a class="nav-link" href="https://blog.jaxiu.cn/blog/">博客  </a>
-                </li>
-
-                
-                <li class="nav-item ">
-                    <a class="nav-link" href="https://blog.jaxiu.cn/moment/">动态  </a>
-                </li>
-
-                
-                <li class="nav-item ">
-                    <a class="nav-link" href="https://blog.jaxiu.cn/about/">关于  </a>
-                </li>
-
-                
-            </ul>
-
-        </div>
+      </div>
 
     </div>
-</nav>
- 
+  </nav>
+   
       
 
 
@@ -272,10 +294,6 @@
           
 
           
-          
-          <a href="https://blog.jaxiu.cn/tags/index.xml"><i class="fas fa-rss pr-1" aria-hidden="true"></i></a>
-          
-          
 
 
         </div>
@@ -322,7 +340,7 @@
 
 
 
-  
+
 
       </div>
       
@@ -346,6 +364,51 @@
 
             <li class="post-item">
               
+              <a href="ai"><span>ai</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%AD%95%E6%9C%9F"><span>孕期</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%81%A5%E5%BA%B7"><span>健康</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%83%B9%E9%A5%AA"><span>烹饪</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%8F%9C%E8%B0%B1"><span>菜谱</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="nps"><span>nps</span></a>
               
               
@@ -356,15 +419,6 @@
             <li class="post-item">
               
               <a href="go%E8%AF%AD%E8%A8%80"><span>go语言</span></a>
-              
-              
-            </li>
-            
-          
-
-            <li class="post-item">
-              
-              <a href="ai"><span>ai</span></a>
               
               
             </li>
@@ -391,6 +445,24 @@
 
             <li class="post-item">
               
+              <a href="%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span>大模型</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%83%8E%E6%95%99%E6%95%85%E4%BA%8B"><span>胎教故事</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span>架构设计</span></a>
               
               
@@ -400,7 +472,61 @@
 
             <li class="post-item">
               
+              <a href="%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7"><span>编程工具</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="ai%E6%97%A5%E6%8A%A5"><span>ai日报</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="todoing"><span>todoing</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%B0%8F%E8%AF%B4"><span>小说</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%A7%91%E5%B9%BB"><span>科幻</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%B5%9B%E5%8D%9A%E6%9C%8B%E5%85%8B"><span>赛博朋克</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="morning"><span>morning</span></a>
               
               
             </li>
@@ -419,6 +545,15 @@
             <li class="post-item">
               
               <a href="%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span>开源项目</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5"><span>每日简报</span></a>
               
               
             </li>
@@ -454,7 +589,25 @@
 
             <li class="post-item">
               
+              <a href="openai"><span>openai</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span>开发工具</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9"><span>技术热点</span></a>
               
               
             </li>
@@ -481,7 +634,52 @@
 
             <li class="post-item">
               
+              <a href="%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB"><span>深度解读</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%A7%91%E6%8A%80"><span>科技</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%A7%91%E6%8A%80%E6%96%B0%E9%97%BB"><span>科技新闻</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="gemini"><span>gemini</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="git"><span>git</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="minimax"><span>minimax</span></a>
               
               
             </li>
@@ -526,6 +724,24 @@
 
             <li class="post-item">
               
+              <a href="%E5%91%A85"><span>周5</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%91%A86"><span>周6</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%A4%9A%E5%B9%B3%E5%8F%B0"><span>多平台</span></a>
               
               
@@ -535,7 +751,25 @@
 
             <li class="post-item">
               
+              <a href="%E5%AE%89%E5%85%A8"><span>安全</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%AE%A2%E6%88%B7%E7%AB%AF"><span>客户端</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%96%B0%E8%83%BD%E6%BA%90%E7%94%B5%E5%8A%A8%E8%BD%A6"><span>新能源电动车</span></a>
               
               
             </li>
@@ -571,7 +805,43 @@
 
             <li class="post-item">
               
+              <a href="afternoon"><span>afternoon</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="a%E8%82%A1"><span>a股</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="claude"><span>claude</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="cli"><span>cli</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="devtools"><span>devtools</span></a>
               
               
             </li>
@@ -589,7 +859,25 @@
 
             <li class="post-item">
               
+              <a href="glm"><span>glm</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="hugo"><span>hugo</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="kiro"><span>kiro</span></a>
               
               
             </li>
@@ -697,15 +985,6 @@
 
             <li class="post-item">
               
-              <a href="%E5%81%A5%E5%BA%B7"><span>健康</span></a>
-              
-              
-            </li>
-            
-          
-
-            <li class="post-item">
-              
               <a href="%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91"><span>全栈开发</span></a>
               
               
@@ -742,6 +1021,42 @@
 
             <li class="post-item">
               
+              <a href="%E5%91%A81"><span>周1</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%91%A82"><span>周2</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%91%A83"><span>周3</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%91%A84"><span>周4</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%A4%9A%E6%A0%87%E7%AD%BE"><span>多标签</span></a>
               
               
@@ -760,7 +1075,52 @@
 
             <li class="post-item">
               
-              <a href="%E5%AE%89%E5%85%A8"><span>安全</span></a>
+              <a href="%E5%AD%95%E6%99%9A%E6%9C%9F"><span>孕晚期</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%AD%95%E6%9C%9F%E5%81%A5%E5%BA%B7"><span>孕期健康</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%AD%95%E6%9C%9F%E9%A3%9F%E8%B0%B1"><span>孕期食谱</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%B0%8F%E7%B1%B3su7"><span>小米su7</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%B0%8F%E7%B1%B3%E6%B1%BD%E8%BD%A6"><span>小米汽车</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%B8%82%E5%9C%BA%E5%88%86%E6%9E%90"><span>市场分析</span></a>
               
               
             </li>
@@ -779,6 +1139,51 @@
             <li class="post-item">
               
               <a href="%E6%80%BB%E7%BB%93"><span>总结</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%83%B3%E8%B1%A1%E4%B8%8E%E6%A2%A6%E6%83%B3"><span>想象与梦想</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94"><span>技术对比</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%8A%95%E8%B5%84"><span>投资</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%96%B0%E9%97%BB%E6%B1%87%E6%80%BB"><span>新闻汇总</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%99%BA%E8%83%BD%E4%BD%93"><span>智能体</span></a>
               
               
             </li>
@@ -823,6 +1228,15 @@
 
             <li class="post-item">
               
+              <a href="%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B"><span>编程助手</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8"><span>网络安全</span></a>
               
               
@@ -833,6 +1247,24 @@
             <li class="post-item">
               
               <a href="%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7"><span>网络工具</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%82%A1%E5%B8%82"><span>股市</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%B0%B7%E6%AD%8C"><span>谷歌</span></a>
               
               
             </li>
@@ -868,7 +1300,43 @@
 
             <li class="post-item">
               
+              <a href="2026%E6%AC%BE"><span>2026款</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="adobe"><span>adobe</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="ai-agent"><span>ai agent</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="ai%E5%85%A5%E9%97%A8"><span>ai入门</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="ai%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span>ai大模型</span></a>
               
               
             </li>
@@ -895,6 +1363,24 @@
 
             <li class="post-item">
               
+              <a href="ai%E7%BC%96%E7%A8%8B"><span>ai编程</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="anthropic"><span>anthropic</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="api%E9%9B%86%E6%88%90"><span>api集成</span></a>
               
               
@@ -905,15 +1391,6 @@
             <li class="post-item">
               
               <a href="beego"><span>beego</span></a>
-              
-              
-            </li>
-            
-          
-
-            <li class="post-item">
-              
-              <a href="blog"><span>blog</span></a>
               
               
             </li>
@@ -949,7 +1426,7 @@
 
             <li class="post-item">
               
-              <a href="devops"><span>devops</span></a>
+              <a href="claude-code"><span>claude code</span></a>
               
               
             </li>
@@ -958,7 +1435,25 @@
 
             <li class="post-item">
               
-              <a href="devtools"><span>devtools</span></a>
+              <a href="codex"><span>codex</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="deepfake"><span>deepfake</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="devops"><span>devops</span></a>
               
               
             </li>
@@ -985,6 +1480,15 @@
 
             <li class="post-item">
               
+              <a href="evening"><span>evening</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="flask"><span>flask</span></a>
               
               
@@ -994,7 +1498,52 @@
 
             <li class="post-item">
               
+              <a href="github"><span>github</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="glm-5"><span>glm-5</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="go"><span>go</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="google"><span>google</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="google-workspace"><span>google workspace</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="gpt"><span>gpt</span></a>
               
               
             </li>
@@ -1040,6 +1589,15 @@
             <li class="post-item">
               
               <a href="http%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span>http反向代理</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="ide"><span>ide</span></a>
               
               
             </li>
@@ -1102,7 +1660,7 @@
 
             <li class="post-item">
               
-              <a href="openai"><span>openai</span></a>
+              <a href="photoshop"><span>photoshop</span></a>
               
               
             </li>
@@ -1246,6 +1804,15 @@
 
             <li class="post-item">
               
+              <a href="youtube"><span>youtube</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF"><span>个人成长</span></a>
               
               
@@ -1256,6 +1823,24 @@
             <li class="post-item">
               
               <a href="%E4%B8%AA%E6%80%A7%E5%8C%96"><span>个性化</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E4%B8%AD%E4%B8%9C%E5%B1%80%E5%8A%BF"><span>中东局势</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E4%B8%AD%E7%BE%8E"><span>中美</span></a>
               
               
             </li>
@@ -1291,6 +1876,15 @@
 
             <li class="post-item">
               
+              <a href="%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span>人工智能</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E4%BB%A3%E7%90%86%E5%8D%8F%E8%AE%AE"><span>代理协议</span></a>
               
               
@@ -1318,6 +1912,15 @@
 
             <li class="post-item">
               
+              <a href="%E4%BC%8A%E6%9C%97"><span>伊朗</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97"><span>使用指南</span></a>
               
               
@@ -1336,7 +1939,34 @@
 
             <li class="post-item">
               
+              <a href="%E5%81%A5%E5%BA%B7%E6%8C%87%E5%8D%97"><span>健康指南</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5"><span>健康检查</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%81%A5%E5%BA%B7%E7%AE%A1%E7%90%86"><span>健康管理</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%85%A8%E7%90%83%E8%82%A1%E5%B8%82"><span>全球股市</span></a>
               
               
             </li>
@@ -1390,6 +2020,24 @@
 
             <li class="post-item">
               
+              <a href="%E5%8B%87%E6%95%A2%E4%B8%8E%E5%B0%9D%E8%AF%95"><span>勇敢与尝试</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%8B%A4%E5%8A%B3%E4%B8%8E%E5%96%84%E8%89%AF"><span>勤劳与善良</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%8D%9A%E5%AE%A2"><span>博客</span></a>
               
               
@@ -1435,7 +2083,25 @@
 
             <li class="post-item">
               
-              <a href="%E5%91%A8%E4%B8%80"><span>周一</span></a>
+              <a href="%E5%8F%91%E5%B8%83%E8%A7%A3%E6%9E%90"><span>发布解析</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%90%AC%E5%8A%9B%E4%BF%9D%E6%8A%A4"><span>听力保护</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%91%A8%E6%8A%A5"><span>周报</span></a>
               
               
             </li>
@@ -1462,7 +2128,34 @@
 
             <li class="post-item">
               
+              <a href="%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span>国产大模型</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%9B%BD%E9%99%85%E5%85%B3%E7%B3%BB"><span>国际关系</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%9D%90%E6%9C%88%E5%AD%90"><span>坐月子</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%9D%9A%E6%8C%81%E4%B8%8E%E6%88%90%E9%95%BF"><span>坚持与成长</span></a>
               
               
             </li>
@@ -1489,6 +2182,15 @@
 
             <li class="post-item">
               
+              <a href="%E5%A4%9A%E6%A8%A1%E6%80%81"><span>多模态</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span>多路复用</span></a>
               
               
@@ -1507,7 +2209,7 @@
 
             <li class="post-item">
               
-              <a href="%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span>大模型</span></a>
+              <a href="%E5%A6%8A%E5%A8%A0%E6%9C%9F%E7%B3%96%E5%B0%BF%E7%97%85"><span>妊娠期糖尿病</span></a>
               
               
             </li>
@@ -1534,16 +2236,7 @@
 
             <li class="post-item">
               
-              <a href="%E5%AD%95%E6%99%9A%E6%9C%9F"><span>孕晚期</span></a>
-              
-              
-            </li>
-            
-          
-
-            <li class="post-item">
-              
-              <a href="%E5%AD%95%E6%9C%9F"><span>孕期</span></a>
+              <a href="%E5%AD%95%E6%9C%9F%E7%97%87%E7%8A%B6"><span>孕期症状</span></a>
               
               
             </li>
@@ -1588,6 +2281,24 @@
 
             <li class="post-item">
               
+              <a href="%E5%AF%B9%E6%AF%94"><span>对比</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%B0%8F%E7%B1%B3yu7"><span>小米yu7</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87"><span>工作效率</span></a>
               
               
@@ -1615,6 +2326,15 @@
 
             <li class="post-item">
               
+              <a href="%E5%B7%A5%E5%85%B7%E7%AE%B1"><span>工具箱</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8"><span>工具调用</span></a>
               
               
@@ -1634,6 +2354,24 @@
             <li class="post-item">
               
               <a href="%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93"><span>年终总结</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7"><span>开发者工具</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E5%BC%80%E6%BA%90"><span>开源</span></a>
               
               
             </li>
@@ -1687,7 +2425,25 @@
 
             <li class="post-item">
               
+              <a href="%E6%8A%80%E6%9C%AF%E5%91%A8%E6%8A%A5"><span>技术周报</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6"><span>技术深度</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90"><span>技术解析</span></a>
               
               
             </li>
@@ -1706,6 +2462,15 @@
             <li class="post-item">
               
               <a href="%E6%8C%81%E4%B9%85%E5%8C%96"><span>持久化</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%8E%A5%E7%BA%B3%E4%B8%8E%E5%8C%85%E5%AE%B9"><span>接纳与包容</span></a>
               
               
             </li>
@@ -1777,7 +2542,34 @@
 
             <li class="post-item">
               
-              <a href="%E6%99%BA%E8%83%BD%E4%BD%93"><span>智能体</span></a>
+              <a href="%E6%96%B0%E9%97%BB"><span>新闻</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%97%B6%E4%BA%8B%E5%88%86%E6%9E%90"><span>时事分析</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%99%BA%E6%85%A7%E4%B8%8E%E8%80%90%E5%BF%83"><span>智慧与耐心</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%99%BA%E8%B0%B1ai"><span>智谱ai</span></a>
               
               
             </li>
@@ -1796,6 +2588,15 @@
             <li class="post-item">
               
               <a href="%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95"><span>未来发展</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span>机器学习</span></a>
               
               
             </li>
@@ -1831,7 +2632,25 @@
 
             <li class="post-item">
               
+              <a href="%E6%AD%8C%E6%9B%B2%E7%89%88"><span>歌曲版</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E6%AF%8D%E4%B9%B3%E5%96%82%E5%85%BB"><span>母乳喂养</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E6%B2%BB%E7%90%86"><span>治理</span></a>
               
               
             </li>
@@ -1858,7 +2677,7 @@
 
             <li class="post-item">
               
-              <a href="%E7%83%B9%E9%A5%AA"><span>烹饪</span></a>
+              <a href="%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span>深度学习</span></a>
               
               
             </li>
@@ -1876,7 +2695,43 @@
 
             <li class="post-item">
               
+              <a href="%E7%88%B6%E7%88%B1%E4%B8%8E%E5%AE%88%E6%8A%A4"><span>父爱与守护</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span>版本控制</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%89%B9%E6%96%AF%E6%8B%89model-3"><span>特斯拉model 3</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%8E%AF%E4%BF%9D"><span>环保</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%8F%8D%E6%83%9C%E4%B8%8E%E6%84%9F%E6%81%A9"><span>珍惜与感恩</span></a>
               
               
             </li>
@@ -1894,6 +2749,15 @@
 
             <li class="post-item">
               
+              <a href="%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86"><span>生活常识</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E7%99%BE%E5%BA%A6"><span>百度</span></a>
               
               
@@ -1903,7 +2767,25 @@
 
             <li class="post-item">
               
-              <a href="%E7%AC%AC1%E5%91%A8"><span>第1周</span></a>
+              <a href="%E7%A0%94%E7%A9%B6"><span>研究</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%A1%AC%E4%BB%B6"><span>硬件</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%A4%BE%E4%BC%9A%E6%B0%91%E7%94%9F"><span>社会民生</span></a>
               
               
             </li>
@@ -1913,6 +2795,15 @@
             <li class="post-item">
               
               <a href="%E7%B3%96%E8%80%90%E9%87%8F"><span>糖耐量</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%BA%AF%E7%94%B5suv"><span>纯电suv</span></a>
               
               
             </li>
@@ -1957,6 +2848,51 @@
 
             <li class="post-item">
               
+              <a href="%E7%BE%8E%E8%81%94%E5%82%A8"><span>美联储</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E7%BE%8E%E8%82%A1"><span>美股</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%80%B3%E9%B8%A3"><span>耳鸣</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%82%A1%E5%B8%82%E6%9A%B4%E8%B7%8C"><span>股市暴跌</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3"><span>脑机接口</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E8%87%AA%E5%8A%A8%E5%8C%96"><span>自动化</span></a>
               
               
@@ -1975,7 +2911,7 @@
 
             <li class="post-item">
               
-              <a href="%E8%8F%9C%E8%B0%B1"><span>菜谱</span></a>
+              <a href="%E8%90%A5%E5%85%BB"><span>营养</span></a>
               
               
             </li>
@@ -1984,7 +2920,7 @@
 
             <li class="post-item">
               
-              <a href="%E8%90%A5%E5%85%BB"><span>营养</span></a>
+              <a href="%E8%A1%80%E7%B3%96%E6%8E%A7%E5%88%B6"><span>血糖控制</span></a>
               
               
             </li>
@@ -2002,7 +2938,7 @@
 
             <li class="post-item">
               
-              <a href="%E8%B0%B7%E6%AD%8C"><span>谷歌</span></a>
+              <a href="%E8%B0%83%E7%A0%94"><span>调研</span></a>
               
               
             </li>
@@ -2012,6 +2948,24 @@
             <li class="post-item">
               
               <a href="%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97"><span>贡献指南</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%B4%A2%E7%BB%8F%E8%A7%82%E5%AF%9F"><span>财经观察</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E8%B4%AD%E8%BD%A6%E6%8C%87%E5%8D%97"><span>购车指南</span></a>
               
               
             </li>
@@ -2038,7 +2992,25 @@
 
             <li class="post-item">
               
+              <a href="%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97"><span>选择指南</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
               <a href="%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span>配置管理</span></a>
+              
+              
+            </li>
+            
+          
+
+            <li class="post-item">
+              
+              <a href="%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97"><span>量子计算</span></a>
               
               
             </li>
@@ -2098,10 +3070,6 @@
     
 
     
-    
-    <a href="https://blog.jaxiu.cn/tags/index.xml"><i class="fas fa-rss mr-3" aria-hidden="true"></i></a>
-    
-    
 
     
 
@@ -2124,37 +3092,37 @@
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery-3.3.1.min.js"></script>
-
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
 
 
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/popper.min.js"></script>
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/holder.min.js"></script>
-<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/vendors/mdb/mdb.min.js"></script>
 
 <script type="text/javascript" src="https://blog.jaxiu.cn/js/main.js"></script>
+<script type="text/javascript" src="https://blog.jaxiu.cn/js/search.js"></script>
 
 
 
 
-<script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script src="https://blog.jaxiu.cn/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 
 
 
 
-<script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
-<script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://blog.jaxiu.cn/js/vendors/katex/contrib/auto-render.min.js"></script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body);
-  });
-</script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
 
 
 
