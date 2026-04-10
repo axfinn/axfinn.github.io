@@ -6,8 +6,15 @@
     <description>Recent content in 周报 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/categories/%E5%91%A8%E6%8A%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>arXiv 精读 | 2026年4月10日：LLM推理、智能体与安全六大前沿论文</title>
+      <link>https://blog.jaxiu.cn/blog/2026-04/papers-weekly-20260410/</link>
+      <pubDate>Fri, 10 Apr 2026 09:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-04/papers-weekly-20260410/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;本文整理自 2026 年 4 月 10 日 arXiv cs.AI / cs.LG 分类发布的最新论文，筛选标准为：知名机构出品、具有明确创新贡献、以及对行业具有参考价值。每篇论文均附有中文深度解读与原文链接。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-今日论文速览&#34;&gt;📖 今日论文速览&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;#&lt;/th&gt;&#xA;          &lt;th&gt;论文标题&lt;/th&gt;&#xA;          &lt;th&gt;领域&lt;/th&gt;&#xA;          &lt;th&gt;关键词&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;1&lt;/td&gt;&#xA;          &lt;td&gt;SUPERNOVA&lt;/td&gt;&#xA;          &lt;td&gt;LLM推理&lt;/td&gt;&#xA;          &lt;td&gt;强化学习、自然指令、通用推理&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;2&lt;/td&gt;&#xA;          &lt;td&gt;SAVeR&lt;/td&gt;&#xA;          &lt;td&gt;LLM智能体&lt;/td&gt;&#xA;          &lt;td&gt;自我审计、忠实推理、信念验证&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;3&lt;/td&gt;&#xA;          &lt;td&gt;SkillClaw&lt;/td&gt;&#xA;          &lt;td&gt;AI智能体&lt;/td&gt;&#xA;          &lt;td&gt;技能进化、多用户协同、集体学习&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;4&lt;/td&gt;&#xA;          &lt;td&gt;KnowU-Bench&lt;/td&gt;&#xA;          &lt;td&gt;移动智能体&lt;/td&gt;&#xA;          &lt;td&gt;个性化评估、偏好推断、混合评估&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;5&lt;/td&gt;&#xA;          &lt;td&gt;Ads in AI Chatbots&lt;/td&gt;&#xA;          &lt;td&gt;AI伦理&lt;/td&gt;&#xA;          &lt;td&gt;利益冲突、广告影响、用户福利&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;6&lt;/td&gt;&#xA;          &lt;td&gt;Awakening the Sleeping Agent&lt;/td&gt;&#xA;          &lt;td&gt;定理证明&lt;/td&gt;&#xA;          &lt;td&gt;工具调用、领域专化、能力恢复&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;论文一supernova--用强化学习和自然指令激发llm通用推理能力&#34;&gt;论文一：SUPERNOVA — 用强化学习和自然指令激发LLM通用推理能力&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;原文链接&lt;/strong&gt;：&lt;a href=&#34;https://arxiv.org/abs/2604.08477&#34;&gt;arXiv:2604.08477&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>2026年3月新闻周报：伊朗局势与全球股市</title>
       <link>https://blog.jaxiu.cn/blog/2026-03/2026%E5%B9%B43%E6%9C%88%E6%96%B0%E9%97%BB%E5%91%A8%E6%8A%A5%E4%BC%8A%E6%9C%97%E5%B1%80%E5%8A%BF%E4%B8%8E%E5%85%A8%E7%90%83%E8%82%A1%E5%B8%82/</link>

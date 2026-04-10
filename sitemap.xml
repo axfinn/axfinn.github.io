@@ -2,9 +2,69 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.jaxiu.cn/tags/ai/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/ai%E7%A0%94%E7%A9%B6/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/arxiv/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/blog/2026-04/papers-weekly-20260410/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
     <loc>https://blog.jaxiu.cn/blog/</loc>
     
-    <lastmod>2026-04-11T09:00:00+08:00</lastmod>
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
     
     
     
@@ -14,7 +74,7 @@
   <url>
     <loc>https://blog.jaxiu.cn/</loc>
     
-    <lastmod>2026-04-11T09:00:00+08:00</lastmod>
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
     
     
     
@@ -22,9 +82,79 @@
   </url>
   
   <url>
-    <loc>https://blog.jaxiu.cn/tags/ai/</loc>
+    <loc>https://blog.jaxiu.cn/tags/llm%E6%8E%A8%E7%90%86/</loc>
     
-    <lastmod>2026-04-07T09:00:00+08:00</lastmod>
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/%E5%91%A8%E6%8A%A5/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E8%AF%BB/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/categories/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
+    
+    
+    
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.jaxiu.cn/tags/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/</loc>
+    
+    <lastmod>2026-04-10T09:00:00+08:00</lastmod>
     
     
     
@@ -42,37 +172,7 @@
   </url>
   
   <url>
-    <loc>https://blog.jaxiu.cn/categories/</loc>
-    
-    <lastmod>2026-04-07T09:00:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/tags/</loc>
-    
-    <lastmod>2026-04-07T09:00:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
     <loc>https://blog.jaxiu.cn/categories/%E5%8E%9F%E5%88%9B%E6%AD%8C%E6%9B%B2/</loc>
-    
-    <lastmod>2026-04-07T09:00:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
     
     <lastmod>2026-04-07T09:00:00+08:00</lastmod>
     
@@ -133,16 +233,6 @@
   
   <url>
     <loc>https://blog.jaxiu.cn/tags/%E6%AF%8F%E6%97%A5%E7%AE%80%E6%8A%A5/</loc>
-    
-    <lastmod>2026-04-07T09:00:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/tags/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E8%AF%BB/</loc>
     
     <lastmod>2026-04-07T09:00:00+08:00</lastmod>
     
@@ -1393,16 +1483,6 @@
   
   <url>
     <loc>https://blog.jaxiu.cn/tags/%E4%BC%8A%E6%9C%97/</loc>
-    
-    <lastmod>2026-03-11T00:00:00+00:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/categories/%E5%91%A8%E6%8A%A5/</loc>
     
     <lastmod>2026-03-11T00:00:00+00:00</lastmod>
     
@@ -4493,16 +4573,6 @@
   
   <url>
     <loc>https://blog.jaxiu.cn/tags/ai-agent/</loc>
-    
-    <lastmod>2025-07-18T18:30:00+08:00</lastmod>
-    
-    
-    
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.jaxiu.cn/tags/ai%E6%99%BA%E8%83%BD%E4%BD%93/</loc>
     
     <lastmod>2025-07-18T18:30:00+08:00</lastmod>
     
