@@ -72,13 +72,6 @@
       <description>&lt;h2 id=&#34;-ai--大模型群雄逐鹿技术边界持续突破&#34;&gt;🤖 AI &amp;amp; 大模型：群雄逐鹿，技术边界持续突破&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本章节聚焦近期 AI 领域的重大进展，从 GPT 系列到开源模型，从技术突破到商业落地，全方位梳理 AI 产业的发展脉络。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;一大模型竞争格局闭源与开源的攻守战&#34;&gt;一、大模型竞争格局：闭源与开源的攻守战&lt;/h3&gt;&#xA;&lt;p&gt;过去一年，大模型领域的竞争已经从单纯的能力比拼，演变为一场关于生态、定价和开源策略的综合较量。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;OpenAI&lt;/strong&gt; 持续领跑闭源阵营。GPT-4o 的发布标志着多模态能力进入新阶段——模型不仅能够理解和生成文本，还能处理图像、音频和视频，实现了真正的&amp;quot;看听说写&amp;quot;一体化。更重要的是，OpenAI 通过 API 定价的持续下调（GPT-4o Mini 的价格已降至每百万 token 2 美元以下），正在努力打破&amp;quot;大模型太贵用不起&amp;quot;的魔咒，让 AI 应用开发进入寻常百姓家。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>每日技术热点 | 04月07日：AI领域最新动态与深度解读</title>
-      <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-07/</link>
-      <pubDate>Tue, 07 Apr 2026 09:00:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-07/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;think&gt;&#xA;用户需要我撰写一篇5000字以上的深度AI科技日报，涵盖10个板块。让我仔细分析任务要求：&#xA;&lt;ol&gt;&#xA;&lt;li&gt;今日要点（60秒速读）- 5条新闻，每条不超过40字&lt;/li&gt;&#xA;&lt;li&gt;AI &amp;amp; 大模型进展 - 4-6条，每条200字以上深度解读&lt;/li&gt;&#xA;&lt;li&gt;工具 &amp;amp; 产品发布 - 3-4条，包含产品名、核心功能、意义&lt;/li&gt;&#xA;&lt;li&gt;创业 &amp;amp; 投资动态 - 3-4条，包含金额、投资方、业务方向&lt;/li&gt;&#xA;&lt;li&gt;技术深度解读（2500字以上）- 选最重要的一条新闻写深度分析&lt;/li&gt;&#xA;&lt;li&gt;国外科技动态（HN热门）- 5条HN热门讨论，每条150字解读&lt;/li&gt;&#xA;&lt;li&gt;多领域扫描 - 2-3个不同领域的短分析&lt;/li&gt;&#xA;&lt;li&gt;一句话新闻速递 - 15条，每条不超过25字&lt;/li&gt;&#xA;&lt;li&gt;本周数据回顾表格&lt;/li&gt;&#xA;&lt;li&gt;参考来源板块&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;从提供的数据中，我需要筛选和整合相关信息：&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>每日技术热点 | 04月06日：AI领域最新动态与深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-06/</link>
       <pubDate>Tue, 07 Apr 2026 03:00:00 +0800</pubDate>
@@ -1155,6 +1148,13 @@
       <pubDate>Fri, 18 Jul 2025 15:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2025-07/nps-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%88%A9%E5%99%A8/</guid>
       <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在现代网络环境中，内网穿透技术扮演着越来越重要的角色。无论是进行本地开发调试、远程访问内网资源，还是搭建个人服务，内网穿透都能提供极大的便利。今天，我们将深入剖析一个功能强大、性能卓越的内网穿透代理服务器项目——NPS。&lt;/p&gt;&#xA;&lt;h2 id=&#34;什么是-nps&#34;&gt;什么是 NPS？&lt;/h2&gt;&#xA;&lt;p&gt;NPS 是一款轻量级、高性能、功能强大的&lt;strong&gt;内网穿透&lt;/strong&gt;代理服务器。它旨在帮助用户轻松实现内网资源的外部访问，打破网络边界的限制。NPS 不仅仅是一个简单的端口转发工具，它更是一个集多种代理协议、Web 管理界面和丰富扩展功能于一体的综合性解决方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://blog.jaxiu.cn/blog/1-01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/1-01/</guid>
+      <description>&lt;think&gt;&#xA;用户需要我撰写一篇深度AI科技日报，字数要求≥10000字。这是一个非常详细的新闻报道任务，需要涵盖多个板块：&#xA;&lt;ol&gt;&#xA;&lt;li&gt;今日要点（60秒速读）- 5条，每条≤40字&lt;/li&gt;&#xA;&lt;li&gt;AI &amp;amp; 大模型进展 - 4-6条，每条≥200字深度解读&lt;/li&gt;&#xA;&lt;li&gt;工具 &amp;amp; 产品发布 - 3-4条&lt;/li&gt;&#xA;&lt;li&gt;创业 &amp;amp; 投资动态 - 3-4条&lt;/li&gt;&#xA;&lt;li&gt;技术深度解读 - ≥2500字&lt;/li&gt;&#xA;&lt;li&gt;国外科技动态 - 5条HN热门，每条≥150字&lt;/li&gt;&#xA;&lt;li&gt;多领域扫描 - 2-3个领域&lt;/li&gt;&#xA;&lt;li&gt;一句话新闻速递 - 15条，每条≤25字&lt;/li&gt;&#xA;&lt;li&gt;本周数据回顾表格&lt;/li&gt;&#xA;&lt;li&gt;参考来源&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;我需要根据提供的36kr和HN新闻素材来撰写这些内容。让我仔细阅读每个素材，然后组织内容。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
