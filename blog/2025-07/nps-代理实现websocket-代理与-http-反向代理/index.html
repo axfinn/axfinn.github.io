@@ -387,7 +387,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">proxy</span><span class="w">                 </span><span class="o">*</span><span class="nx">ReverseProxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">responseHeaderTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>proxy *ReverseProxy</code>：指向实际处理请求的 <code>ReverseProxy</code> 实例。</li>
 <li><code>responseHeaderTimeout time.Duration</code>：后端响应头的超时时间。</li>
@@ -408,7 +408,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">ReverseProxy</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">*</span><span class="nx">httputil</span><span class="p">.</span><span class="nx">ReverseProxy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">WebSocketDialContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>*httputil.ReverseProxy</code>：嵌入了标准库的反向代理，继承了其大部分功能。</li>
 <li><code>WebSocketDialContext func(...)</code>：一个自定义的函数，用于在 WebSocket 升级时建立与后端服务的连接。</li>
@@ -469,7 +469,7 @@ WebSocket 与 HTTP 反向代理的需求 WebSocket：提供客户端和服务器
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nf">pipe</span><span class="p">(</span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">outCount</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">wait</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span><span class="w"> </span><span class="c1">// 等待两个 goroutine 完成</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li>它启动两个 goroutine，分别负责从一个连接读取数据并写入另一个连接，实现双向数据流。</li>
 <li><code>goroutine.CopyBuffer()</code> 是一个自定义的拷贝函数，它在拷贝数据的同时，还会进行流量统计。</li>

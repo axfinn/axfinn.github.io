@@ -392,12 +392,12 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">p2pPort</span><span class="w">  </span><span class="kt">int</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">p2p</span><span class="w">      </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">p2p</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">listener</span><span class="w"> </span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPConn</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">type</span><span class="w"> </span><span class="nx">p2p</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">p2p</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">visitorAddr</span><span class="w">  </span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">providerAddr</span><span class="w"> </span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">UDPAddr</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>BaseServer</code>：继承了 <code>base.go</code> 中定义的通用功能。</li>
 <li><code>p2pPort int</code>：P2P 服务监听的 UDP 端口。</li>
@@ -426,7 +426,7 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleP2P</span><span class="p">(</span><span class="nx">addr</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">]))</span><span class="w"> </span><span class="c1">// 为每个 UDP 数据包启动一个 goroutine 处理</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li>NPS 会在指定的 <code>p2pPort</code> 上监听 UDP 连接。</li>
 <li>每个接收到的 UDP 数据包都会在一个新的 goroutine 中由 <code>handleP2P()</code> 函数处理，以实现并发处理。</li>
@@ -464,7 +464,7 @@ P2P 代理的优势与挑战 传统的内网穿透通常依赖于服务器进行
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 如果是提供者 (Provider)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">v</span><span class="p">.</span><span class="nx">providerAddr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="c1">// 记录提供者的 UDP 地址</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p><strong>UDP 打洞原理：</strong></p>
 <ol>
 <li><strong>客户端连接 P2P 服务器</strong>：当两个内网客户端（一个作为 <code>visitor</code>，一个作为 <code>provider</code>）都想建立 P2P 连接时，它们会首先向 NPS 的 P2P 服务器发送 UDP 数据包，并附带一个共享的“密码”和自己的角色。</li>

@@ -389,7 +389,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">cnf</span><span class="w">            </span><span class="o">*</span><span class="nx">config</span><span class="p">.</span><span class="nx">Config</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">disconnectTime</span><span class="w"> </span><span class="kt">int</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">once</span><span class="w">           </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>svrAddr string</code>：NPS 服务端的地址。</li>
 <li><code>bridgeConnType string</code>：与服务端连接的桥接类型（例如 TCP、KCP 等）。</li>
@@ -408,7 +408,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 <p><code>TRPClient</code> 的 <code>Start()</code> 方法是客户端的入口点，它负责建立与服务端的连接并启动各项服务：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">TRPClient</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">CloseClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">// 全局变量，控制客户端关闭</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">retry</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">retry</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">CloseClient</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
@@ -433,7 +433,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">NowStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 客户端状态设置为已连接</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleMain</span><span class="p">()</span><span class="w"> </span><span class="c1">// 处理主控制连接的指令</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><strong>连接重试机制</strong>：客户端会尝试连接服务端，如果失败则等待 5 秒后重试，直到连接成功。</li>
 <li><strong>主控制连接 (<code>signal</code>)</strong>：通过 <code>NewConn()</code> 函数建立与服务端的主控制连接，用于发送心跳、接收服务端指令等。</li>
@@ -457,7 +457,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">// 循环结束，关闭客户端</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p>目前 <code>handleMain()</code> 中只处理了 <code>common.NEW_UDP_CONN</code> 类型的指令，这表明服务端可以通过主控制连接通知客户端建立新的 UDP 连接。</p>
 <h3 id="newchan建立多路复用隧道"><code>newChan()</code>：建立多路复用隧道</h3>
 <p><code>newChan()</code> 方法负责建立与服务端的多路复用隧道，并接受来自服务端的逻辑连接：</p>
@@ -477,7 +477,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nf">handleChan</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span><span class="w"> </span><span class="c1">// 处理逻辑连接</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><strong><code>NewConn()</code></strong>：再次调用 <code>NewConn()</code> 建立一个类型为 <code>common.WORK_CHAN</code> 的连接，作为多路复用隧道的底层连接。</li>
 <li><strong><code>nps_mux.NewMux()</code></strong>：使用 <code>nps_mux</code> 库将底层连接封装为多路复用器。</li>
@@ -514,7 +514,7 @@ TRPClient 结构体 TRPClient 结构体包含了客户端运行所需的所有�
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// ... PROXY Protocol 处理 ...</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nx">conn</span><span class="p">.</span><span class="nf">CopyWaitGroup</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span><span class="w"> </span><span class="nx">targetConn</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Crypt</span><span class="p">,</span><span class="w"> </span><span class="nx">lk</span><span class="p">.</span><span class="nx">Compress</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="c1">// 数据拷贝</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><strong><code>conn.NewConn(src).GetLinkInfo()</code></strong>：从逻辑连接 (<code>src</code>) 中读取服务端发送的 <code>LinkInfo</code>，其中包含了目标地址、连接类型、加密/压缩等信息。</li>
 <li><strong>HTTP 代理处理</strong>：如果 <code>lk.ConnType</code> 是 &ldquo;http&rdquo;，则会进入专门的 HTTP 请求处理逻辑，包括读取 HTTP 请求、转发给本地目标、读取响应并写回。</li>

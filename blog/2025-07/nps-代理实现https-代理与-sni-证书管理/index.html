@@ -395,7 +395,7 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">listener</span><span class="w">         </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">httpsListenerMap</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">hostIdCertMap</span><span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>httpServer</code>：继承了处理 HTTP 请求的通用逻辑。</li>
 <li><code>listener net.Listener</code>：用于监听传入 HTTPS 连接的网络监听器。</li>
@@ -433,7 +433,7 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">})</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p><strong>核心流程：</strong></p>
 <ol>
 <li><strong>获取 SNI</strong>：<code>GetServerNameFromClientHello(c)</code> 是一个关键函数，它通过读取客户端发送的 SSL/TLS <code>ClientHello</code> 消息，从中解析出 SNI 域名 (<code>serverName</code>) 和原始的字节流 (<code>rb</code>)。</li>
@@ -451,7 +451,7 @@ SSL/TLS 握手：代理服务器需要参与 SSL/TLS 握手过程，解密客户
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">HttpsListener</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">acceptConn</span><span class="w">     </span><span class="kd">chan</span><span class="w"> </span><span class="o">*</span><span class="nx">conn</span><span class="p">.</span><span class="nx">Conn</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">parentListener</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
 <li><code>acceptConn chan *conn.Conn</code>：一个通道，用于接收来自 <code>HttpsServer</code> 的连接。</li>
 <li><code>parentListener net.Listener</code>：底层的 TCP 监听器。</li>
