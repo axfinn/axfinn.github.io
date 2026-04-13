@@ -6,15 +6,8 @@
     <description>Recent content in 技术热点 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Mon, 13 Apr 2026 14:59:56 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 14:59:13 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>每日技术热点 - 2026年04月10日</title>
-      <link>https://blog.jaxiu.cn/blog/2026-04/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B404%E6%9C%8810%E6%97%A5/</link>
-      <pubDate>Mon, 13 Apr 2026 14:59:56 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2026-04/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B404%E6%9C%8810%E6%97%A5/</guid>
-      <description>&lt;h2 id=&#34;-ai--大模型群雄逐鹿技术边界持续突破&#34;&gt;🤖 AI &amp;amp; 大模型：群雄逐鹿，技术边界持续突破&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本章节聚焦近期 AI 领域的重大进展，从 GPT 系列到开源模型，从技术突破到商业落地，全方位梳理 AI 产业的发展脉络。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;一大模型竞争格局闭源与开源的攻守战&#34;&gt;一、大模型竞争格局：闭源与开源的攻守战&lt;/h3&gt;&#xA;&lt;p&gt;过去一年，大模型领域的竞争已经从单纯的能力比拼，演变为一场关于生态、定价和开源策略的综合较量。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;OpenAI&lt;/strong&gt; 持续领跑闭源阵营。GPT-4o 的发布标志着多模态能力进入新阶段——模型不仅能够理解和生成文本，还能处理图像、音频和视频，实现了真正的&amp;quot;看听说写&amp;quot;一体化。更重要的是，OpenAI 通过 API 定价的持续下调（GPT-4o Mini 的价格已降至每百万 token 2 美元以下），正在努力打破&amp;quot;大模型太贵用不起&amp;quot;的魔咒，让 AI 应用开发进入寻常百姓家。&lt;/p&gt;</description>
-    </item>
     <item>
       <title>每日技术热点 - 2026年04月09日</title>
       <link>https://blog.jaxiu.cn/blog/2026-04/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B404%E6%9C%8809%E6%97%A5/</link>
@@ -42,6 +35,13 @@
       <pubDate>Mon, 13 Apr 2026 09:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-06/</guid>
       <description>&lt;audio id=&#34;newsAudio&#34; controls style=&#34;width:100%;max-width:700px;margin:16px 0;border-radius:12px;&#34;&gt;&#xA;  &lt;source src=&#34;https://blog.jaxiu.cn/audio/song_2026-04-06.mp3&#34; type=&#34;audio/mpeg&#34;&gt;&#xA;  您的浏览器不支持音频播放&#xA;&lt;/audio&gt;&#xA;&gt; 🎧 **4月6日 科技日报主题曲，配合歌词阅读效果更佳**&#xA;&lt;hr&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;think&gt;&#xA;好的，我需要根据用户提供的36氪新闻内容，为4月6日编写一个科技媒体编辑的板块，使用Markdown格式，包括四个部分：&#xA;1. 今日要点（5条，每条≤40字）&#xA;2. AI &amp; 大模型进展（4条，含标题+来源+200字解读）&#xA;3. 工具 &amp; 产品发布（3条，含产品名+功能+意义+链接）&#xA;4. 创业 &amp; 投资动态（3条，含金额+投资方+业务+链接）&#xA;&lt;p&gt;首先，我需要从提供的新闻中提取关键信息，并按照要求组织内容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>每日技术热点 - 2026年04月10日</title>
+      <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-10/</link>
+      <pubDate>Fri, 10 Apr 2026 09:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-10/</guid>
+      <description>&lt;h2 id=&#34;-ai--大模型群雄逐鹿技术边界持续突破&#34;&gt;🤖 AI &amp;amp; 大模型：群雄逐鹿，技术边界持续突破&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本章节聚焦近期 AI 领域的重大进展，从 GPT 系列到开源模型，从技术突破到商业落地，全方位梳理 AI 产业的发展脉络。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;一大模型竞争格局闭源与开源的攻守战&#34;&gt;一、大模型竞争格局：闭源与开源的攻守战&lt;/h3&gt;&#xA;&lt;p&gt;过去一年，大模型领域的竞争已经从单纯的能力比拼，演变为一场关于生态、定价和开源策略的综合较量。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;OpenAI&lt;/strong&gt; 持续领跑闭源阵营。GPT-4o 的发布标志着多模态能力进入新阶段——模型不仅能够理解和生成文本，还能处理图像、音频和视频，实现了真正的&amp;quot;看听说写&amp;quot;一体化。更重要的是，OpenAI 通过 API 定价的持续下调（GPT-4o Mini 的价格已降至每百万 token 2 美元以下），正在努力打破&amp;quot;大模型太贵用不起&amp;quot;的魔咒，让 AI 应用开发进入寻常百姓家。&lt;/p&gt;</description>
     </item>
     <item>
       <title>每日技术热点 | 04月07日：AI领域最新动态与深度解读</title>
