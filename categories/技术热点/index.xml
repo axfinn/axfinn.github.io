@@ -6,21 +6,21 @@
     <description>Recent content in 技术热点 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Thu, 16 Apr 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>每日技术热点 | 04月16日：AI领域最新动态与深度解读</title>
+      <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-16/</link>
+      <pubDate>Fri, 17 Apr 2026 09:00:00 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-16/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;think&gt;&#xA;The user wants a comprehensive AI tech daily report in Chinese (Simplified) for April 16, with at least 5000 Chinese characters, covering 10 sections, each with specific requirements:&#xA;&lt;ol&gt;&#xA;&lt;li&gt;今日要点 (5 news items, each ≤40 characters)&lt;/li&gt;&#xA;&lt;li&gt;AI &amp;amp; 大模型进展 (4-6 items, each with title, source link, and 200+ characters deep analysis)&lt;/li&gt;&#xA;&lt;li&gt;工具 &amp;amp; 产品发布 (3-4 items, each with product name, core functions, significance, source link)&lt;/li&gt;&#xA;&lt;li&gt;创业 &amp;amp; 投资动态 (3-4 items, each with amount, investors, business direction, source link)&lt;/li&gt;&#xA;&lt;li&gt;技术深度解读 (2500+ characters, pick the most important news, deep technical analysis with unique insights)&lt;/li&gt;&#xA;&lt;li&gt;国外科技动态 (HN热门) (5 items from Hacker News, each with link + 150 characters interpretation)&lt;/li&gt;&#xA;&lt;li&gt;多领域扫描 (2-3 short analyses from political, economic, social, cultural angles)&lt;/li&gt;&#xA;&lt;li&gt;一句话新闻速递 (15 items, each ≤25 characters, covering various fields)&lt;/li&gt;&#xA;&lt;li&gt;本周数据回顾表格&lt;/li&gt;&#xA;&lt;li&gt;参考来源板块 (all 36kr and HN links listed)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Important constraints:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>每日技术热点 | 04月15日：AI领域最新动态与深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-15/</link>
       <pubDate>Thu, 16 Apr 2026 09:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-15/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;think&gt;&#xA;The user wants a long (&gt;=5000 Chinese characters) deep AI technology daily report for April 15, with specific sections and requirements. The user gave data: news from 36kr and HackerNews. I need to produce a structured markdown document that includes:&#xA;&lt;ol&gt;&#xA;&lt;li&gt;今日要点（60秒速读） - 5 news items, each &amp;lt;= 40 characters&lt;/li&gt;&#xA;&lt;li&gt;AI &amp;amp; 大模型进展 - 4-6 items, each with title, source link, and &amp;gt;200 Chinese characters analysis.&lt;/li&gt;&#xA;&lt;li&gt;工具 &amp;amp; 产品发布 - 3-4 items, each with product name, core function, significance, source link.&lt;/li&gt;&#xA;&lt;li&gt;创业 &amp;amp; 投资动态 - 3-4 items, each with amount, investors, business direction, source link.&lt;/li&gt;&#xA;&lt;li&gt;技术深度解读（2500+ characters） - pick most important news, deep technical analysis, &amp;gt;2500 characters.&lt;/li&gt;&#xA;&lt;li&gt;国外科技动态（HN热门） - 5 items from HackerNews, each with link + &amp;gt;150 characters analysis.&lt;/li&gt;&#xA;&lt;li&gt;多领域扫描 - 2-3 short analyses from political, economic, social, cultural perspectives.&lt;/li&gt;&#xA;&lt;li&gt;一句话新闻速递 - 15 items, each &amp;lt;=25 characters, covering different domains.&lt;/li&gt;&#xA;&lt;li&gt;本周数据回顾表格 - a table summarizing some data.&lt;/li&gt;&#xA;&lt;li&gt;参考来源板块 - list all 36kr and HN links.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Constraints: No repeated content; each paragraph must contain new info. Each news must include source link. Must be &amp;gt;=5000 Chinese characters. Output only markdown, no extra explanation.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>每日技术热点 | 04月16日：AI领域最新动态与深度解读</title>
-      <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-16/</link>
-      <pubDate>Thu, 16 Apr 2026 09:00:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-16/</guid>
-      <description>&lt;audio id=&#34;newsAudio&#34; controls style=&#34;width:100%;max-width:700px;margin:16px 0;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);&#34;&gt;&#xA;  &lt;source src=&#34;https://t.jaxiu.cn/api/paste/files/2692084bf6e663686c3e9b4e59f4076b.mp3&#34; type=&#34;audio/mpeg&#34;&gt;&#xA;  您的浏览器不支持音频播放&#xA;&lt;/audio&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;🎧 &lt;strong&gt;配套原创歌曲&lt;/strong&gt; — 《算力觉醒》04月16日科技日报主题曲，边听边看效果更佳&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;think&gt;&#xA;Let me craft a comprehensive AI tech daily report for April 16, based on the provided data. I need to write 5000+ words, covering all 10 sections as specified.&#xA;&lt;p&gt;Let me organize the content based on the 36kr news provided:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;王子杰逝世 (丝芭、久游网创始人)&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;一线城市房地产企稳&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;攀峰智能融资&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Snap裁员1000人&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;粗门融资&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;娲宝科技宠物智能项圈&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;许家印案一审&lt;/p&gt;</description>
     </item>
     <item>
       <title>每日技术热点 | 04月14日：AI领域最新动态与深度解读</title>
