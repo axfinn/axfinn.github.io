@@ -128,6 +128,13 @@
       <description>&lt;audio id=&#34;newsAudio&#34; controls style=&#34;width:100%;max-width:700px;margin:16px 0;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);&#34;&gt;&#xA;  &lt;source src=&#34;https://blog.jaxiu.cn/audio/ai-news-song-2026-04-03.mp3&#34; type=&#34;audio/mpeg&#34;&gt;&#xA;  您的浏览器不支持音频播放&#xA;&lt;/audio&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;🎧 &lt;strong&gt;配套原创歌曲&lt;/strong&gt; — 04月03日 科技日报主题曲，边听边看效果更佳&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;每天整理当日技术领域重要新闻，带你快速掌握行业动态。数据来源：36kr、Hacker News。配合歌曲阅读效果更佳 🎵&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;-今日要点60秒速读&#34;&gt;✅ 今日要点（60秒速读）&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;泡泡玛特，风光不再？&lt;/li&gt;&#xA;&lt;li&gt;阅文“AI拟真人大讲堂”：好故事才是AI时代的未来&lt;/li&gt;&#xA;&lt;li&gt;叽伴：用「共同经历」重新定义AI社交&lt;/li&gt;&#xA;&lt;li&gt;AI开发者请就位！第二届“数龙杯”新增智能体赛道，你的“龙虾”准备好了吗？&lt;/li&gt;&#xA;&lt;li&gt;8点1氪丨张雪回应陈光标赠1300万元劳斯莱斯；与辉同行曾带货优思益，销售额超千万；马斯克回应OpenAI股票在二级市场遇冷&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-ai--大模型进展&#34;&gt;🤖 AI &amp;amp; 大模型进展&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-泡泡玛特风光不再&#34;&gt;1. 泡泡玛特，风光不再？&lt;/h3&gt;&#xA;&lt;p&gt;来源：https://36kr.com/p/3750711532569350?f=rss&lt;/p&gt;</description>
     </item>
     <item>
+      <title>每日技术热点 - 2026年04月02日</title>
+      <link>https://blog.jaxiu.cn/blog/2026-04/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B404%E6%9C%8802%E6%97%A5/</link>
+      <pubDate>Fri, 03 Apr 2026 06:35:21 +0800</pubDate>
+      <guid>https://blog.jaxiu.cn/blog/2026-04/%E6%AF%8F%E6%97%A5%E6%8A%80%E6%9C%AF%E7%83%AD%E7%82%B9-2026%E5%B9%B404%E6%9C%8802%E6%97%A5/</guid>
+      <description>&lt;h2 id=&#34;-ai--大模型群雄逐鹿技术边界持续突破&#34;&gt;🤖 AI &amp;amp; 大模型：群雄逐鹿，技术边界持续突破&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;本章节聚焦近期 AI 领域的重大进展，从 GPT 系列到开源模型，从技术突破到商业落地，全方位梳理 AI 产业的发展脉络。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;一大模型竞争格局闭源与开源的攻守战&#34;&gt;一、大模型竞争格局：闭源与开源的攻守战&lt;/h3&gt;&#xA;&lt;p&gt;过去一年，大模型领域的竞争已经从单纯的能力比拼，演变为一场关于生态、定价和开源策略的综合较量。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;OpenAI&lt;/strong&gt; 持续领跑闭源阵营。GPT-4o 的发布标志着多模态能力进入新阶段——模型不仅能够理解和生成文本，还能处理图像、音频和视频，实现了真正的&amp;quot;看听说写&amp;quot;一体化。更重要的是，OpenAI 通过 API 定价的持续下调（GPT-4o Mini 的价格已降至每百万 token 2 美元以下），正在努力打破&amp;quot;大模型太贵用不起&amp;quot;的魔咒，让 AI 应用开发进入寻常百姓家。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>每日技术热点 | 04月01日：AI领域最新动态与深度解读</title>
       <link>https://blog.jaxiu.cn/blog/2026-04/daily-tech-2026-04-01/</link>
       <pubDate>Wed, 01 Apr 2026 09:00:00 +0800</pubDate>
