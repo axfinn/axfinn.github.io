@@ -1,4 +1,3 @@
-
 /* .container-fluid {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -1169,4 +1168,120 @@ toc-nav  scrollspy
   color: #333;
   color: #666 !important;
   font-style: normal;
+}
+
+/* Custom styles for search dropdown integration */
+.form-inline .dropdown-wrapper {
+    position: relative;
+}
+
+.form-inline .dropdown-menu {
+    position: absolute;
+    top: 100%; /* 定位在输入框正下方 */
+    left: 50%; /* 居中 */
+    transform: translateX(-50%); /* 居中 */
+    z-index: 1000; /* 确保在其他内容之上 */
+    /* display: none; /* 由 JS 控制显示/隐藏 */
+    float: none; /* 覆盖 Bootstrap 的浮动 */
+    width: 300px; /* 调整宽度 */
+    padding: 0; /* 移除默认内边距 */
+    margin: 0; /* 移除默认外边距 */
+    border-top-left-radius: 0; /* 移除顶部圆角 */
+    border-top-right-radius: 0; /* 移除顶部圆角 */
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12); /* 保留细微阴影 */
+}
+
+/* 搜索结果列表项的样式 */
+.form-inline .dropdown-menu li {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #eee; /* 列表项之间的分隔线 */
+}
+
+.form-inline .dropdown-menu li:last-child {
+    border-bottom: none; /* 最后一个列表项没有分隔线 */
+}
+
+.form-inline .dropdown-menu li a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+}
+
+.form-inline .dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+}
+
+/* Pet styles */
+#blog-pet {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    cursor: grab;
+    z-index: 9999;
+    transition: left 0.5s ease-out, top 0.5s ease-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#blog-pet.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#pet-toggle-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1; /* Always visible for debugging */
+    transition: opacity 0.3s ease-in-out;
+}
+
+#blog-pet:hover #pet-toggle-button {
+    opacity: 1; /* Show on hover */
+}
+
+#blog-pet {
+    transition: left 0.5s ease-out, top 0.5s ease-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#pet-speech-bubble {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8);
+    transform-origin: bottom center;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    pointer-events: none; /* Allow clicks to pass through */
+    bottom: 100%; /* Position above the pet */
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    margin-bottom: 10px; /* Space between pet and bubble */
+    z-index: 9998;
+}
+
+#pet-speech-bubble::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #333;
 }
