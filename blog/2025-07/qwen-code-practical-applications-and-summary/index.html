@@ -356,7 +356,7 @@ Qwen Code 会执行以下操作：
       
         <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://blog.jaxiu.cn/categories/%E6%95%99%E7%A8%8B"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 教程 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 应用案例 </a></li>
       
     
     
@@ -460,9 +460,9 @@ Qwen Code 会执行以下操作：
 </span></span></code></pre></div><h3 id="技巧三与-cicd-集成">技巧三：与 CI/CD 集成</h3>
 <p>将 Qwen Code 集成到 CI/CD 流程中：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># .github/workflows/code-review.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Code Review</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">pull_request]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Code Review</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">pull_request]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">jobs</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">review</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">

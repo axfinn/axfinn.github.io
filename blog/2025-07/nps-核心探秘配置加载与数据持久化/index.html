@@ -341,7 +341,7 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
       
         <li><a href="https://blog.jaxiu.cn/categories/%E6%8A%80%E6%9C%AF"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 技术 </a></li>
       
-        <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目 </a></li>
+        <li><a href="https://blog.jaxiu.cn/categories/%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> 项目分析 </a></li>
       
     
     
@@ -372,17 +372,17 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 <p><code>nps/file</code> 目录的核心是 <code>file.go</code> 文件，它定义了 NPS 的数据模型和所有数据操作的接口。NPS 并未采用传统的关系型数据库或 NoSQL 数据库，而是选择使用 JSON 文件作为其数据存储后端，这使得 NPS 非常轻量、易于部署和迁移。</p>
 <h3 id="核心结构jsondb">核心结构：<code>JsonDb</code></h3>
 <p><code>JsonDb</code> 结构体是 NPS 在内存中的数据缓存，所有运行时的配置信息都存储在这里。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">JsonDb</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Clients</span>       <span class="p">[]</span><span class="o">*</span><span class="nx">Client</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Hosts</span>         <span class="p">[]</span><span class="o">*</span><span class="nx">Host</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Tasks</span>         <span class="p">[]</span><span class="o">*</span><span class="nx">Tunnel</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Flow</span>          <span class="o">*</span><span class="nx">flow</span><span class="p">.</span><span class="nx">Flow</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">BlackIpList</span>   <span class="p">[]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Store</span>         <span class="o">*</span><span class="nx">store</span><span class="p">.</span><span class="nx">Store</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Secret</span>        <span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">JsonDb</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Clients</span><span class="w">       </span><span class="p">[]</span><span class="o">*</span><span class="nx">Client</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Hosts</span><span class="w">         </span><span class="p">[]</span><span class="o">*</span><span class="nx">Host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Tasks</span><span class="w">         </span><span class="p">[]</span><span class="o">*</span><span class="nx">Tunnel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Flow</span><span class="w">          </span><span class="o">*</span><span class="nx">flow</span><span class="p">.</span><span class="nx">Flow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">BlackIpList</span><span class="w">   </span><span class="p">[]</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Store</span><span class="w">         </span><span class="o">*</span><span class="nx">store</span><span class="p">.</span><span class="nx">Store</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Secret</span><span class="w">        </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>Clients</code>, <code>Hosts</code>, <code>Tasks</code>: 分别是存储客户端、域名主机和隧道任务的切片。</li>
 <li><code>Flow</code>: 全局流量统计。</li>
 <li><code>BlackIpList</code>: 全局 IP 黑名单。</li>
@@ -397,20 +397,20 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 </ul>
 <h3 id="初始化与加载newjsondb">初始化与加载：<code>NewJsonDb()</code></h3>
 <p>NPS 服务启动时，会调用 <code>NewJsonDb()</code> 来初始化数据中枢。这个函数负责从磁盘上的 JSON 文件中读取数据，并将其加载到内存的 <code>JsonDb</code> 实例中。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewJsonDb</span><span class="p">()</span> <span class="o">*</span><span class="nx">JsonDb</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">db</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">JsonDb</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 加载客户端、主机、任务等配置</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;clients.json&#34;</span><span class="p">)),</span> <span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;hosts.json&#34;</span><span class="p">)),</span> <span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Hosts</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">db</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>GetContentFromFile()</code> 负责读取文件内容，然后 <code>json.Unmarshal</code> 将 JSON 字节流反序列化为对应的 Go 结构体切片，完成了数据的加载。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">NewJsonDb</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">JsonDb</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">JsonDb</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 加载客户端、主机、任务等配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;clients.json&#34;</span><span class="p">)),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nf">GetContentFromFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;hosts.json&#34;</span><span class="p">)),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">db</span><span class="p">.</span><span class="nx">Hosts</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="nx">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>GetContentFromFile()</code> 负责读取文件内容，然后 <code>json.Unmarshal</code> 将 JSON 字节流反序列化为对应的 Go 结构体切片，完成了数据的加载。</p>
 <h3 id="数据访问接口">数据访问接口</h3>
 <p><code>JsonDb</code> 提供了一套丰富的 API 方法，供 NPS 的其他模块安全地访问和操作数据。这些方法都通过加锁来保证并发安全。</p>
 <ul>
@@ -436,17 +436,17 @@ file.go：NPS 的数据中枢 nps/file 目录的核心是 file.go 文件，它�
 <p>这些方法构成了 NPS 内部的数据访问层，将核心逻辑与底层的文件读写解耦。</p>
 <h3 id="数据持久化save">数据持久化：<code>Save()</code></h3>
 <p>当通过 Web 界面修改配置后，如何将内存中的变更写回磁盘呢？答案是 <code>Save()</code> 方法。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">JsonDb</span><span class="p">)</span> <span class="nf">Save</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">db</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">db</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 将客户端、主机、任务等数据序列化为 JSON</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span> <span class="s">&#34;conf&#34;</span><span class="p">,</span> <span class="s">&#34;clients.json&#34;</span><span class="p">),</span> <span class="nx">clients</span><span class="p">,</span> <span class="mo">0666</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>Save()</code> 方法的逻辑与 <code>NewJsonDb()</code> 相反：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">JsonDb</span><span class="p">)</span><span class="w"> </span><span class="nf">Save</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">db</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">defer</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// 将客户端、主机、任务等数据序列化为 JSON</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">clients</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">Clients</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">ioutil</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">common</span><span class="p">.</span><span class="nf">GetRunPath</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;conf&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;clients.json&#34;</span><span class="p">),</span><span class="w"> </span><span class="nx">clients</span><span class="p">,</span><span class="w"> </span><span class="mo">0666</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// ...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><code>Save()</code> 方法的逻辑与 <code>NewJsonDb()</code> 相反：</p>
 <ol>
 <li><strong>加锁</strong>: 获取写锁，防止在写入文件时数据被其他 goroutine 修改。</li>
 <li><strong>序列化</strong>: 使用 <code>json.Marshal</code> 将内存中的 <code>db.Clients</code>, <code>db.Hosts</code> 等切片序列化为 JSON 格式的字节流。</li>

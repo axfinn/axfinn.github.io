@@ -6,50 +6,8 @@
     <description>Recent content in 教程 on jaxiu He</description>
     <generator>Hugo</generator>
     <language>zn-Hans</language>
-    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Jul 2025 11:00:00 +0800</lastBuildDate>
     <atom:link href="https://blog.jaxiu.cn/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>GLM-5 vs MiniMax-M2.7：中国两大顶级大模型深度对比</title>
-      <link>https://blog.jaxiu.cn/blog/2026-03/glm-5-vs-minimax-m2.7%E4%B8%AD%E5%9B%BD%E4%B8%A4%E5%A4%A7%E9%A1%B6%E7%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/</link>
-      <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2026-03/glm-5-vs-minimax-m2.7%E4%B8%AD%E5%9B%BD%E4%B8%A4%E5%A4%A7%E9%A1%B6%E7%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94/</guid>
-      <description>全面对比智谱 AI 的 GLM-5 和 MiniMax 的 M2.7，从技术架构、性能评测、应用场景、成本分析等多个维度深入分析，为你的模型选型提供决策参考。</description>
-    </item>
-    <item>
-      <title>为Hugo博客配置自定义域名完整指南</title>
-      <link>https://blog.jaxiu.cn/blog/2025-08/%E4%B8%BAhugo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
-      <pubDate>Tue, 12 Aug 2025 14:45:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-08/%E4%B8%BAhugo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
-      <description>&lt;p&gt;为博客配置自定义域名可以让网站看起来更专业，也有助于品牌建设。本文将详细介绍如何为基于 Hugo 构建并托管在 GitHub Pages 上的博客配置自定义域名 blog.jaxiu.cn。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一准备工作&#34;&gt;一、准备工作&lt;/h2&gt;&#xA;&lt;p&gt;在开始配置之前，您需要：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;拥有一个已注册的域名（如 jaxiu.cn）&lt;/li&gt;&#xA;&lt;li&gt;拥有该域名的管理权限&lt;/li&gt;&#xA;&lt;li&gt;确保博客已经部署在 GitHub Pages 上&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;二配置步骤&#34;&gt;二、配置步骤&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-修改hugo配置文件&#34;&gt;1. 修改Hugo配置文件&lt;/h3&gt;&#xA;&lt;p&gt;首先，需要修改博客的配置文件 &lt;code&gt;config.toml&lt;/code&gt;，将 baseURL 更新为您的自定义域名：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;baseURL&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://blog.jaxiu.cn/&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-创建cname文件&#34;&gt;2. 创建CNAME文件&lt;/h3&gt;&#xA;&lt;p&gt;在 Hugo 项目的 &lt;code&gt;static&lt;/code&gt; 目录下创建一个名为 &lt;code&gt;CNAME&lt;/code&gt; 的文件（注意没有扩展名），内容为您的自定义域名：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Hugo博客接入百度和谷歌搜索引擎完整指南</title>
-      <link>https://blog.jaxiu.cn/blog/2025-08/hugo%E5%8D%9A%E5%AE%A2%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E5%92%8C%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
-      <pubDate>Tue, 12 Aug 2025 14:30:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-08/hugo%E5%8D%9A%E5%AE%A2%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E5%92%8C%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
-      <description>&lt;p&gt;为了让更多人通过搜索引擎找到我们的博客内容，我们需要将博客网站提交到各大搜索引擎平台。本文将详细介绍如何将 Hugo 博客接入百度和谷歌搜索引擎。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一准备工作&#34;&gt;一、准备工作&lt;/h2&gt;&#xA;&lt;p&gt;在开始之前，我们需要完成以下准备工作：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;确保博客网站已经上线并可以正常访问&lt;/li&gt;&#xA;&lt;li&gt;准备好网站的验证代码（后续步骤会说明如何获取）&lt;/li&gt;&#xA;&lt;li&gt;确保网站有良好的内容结构和导航&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：如果您使用了自定义域名（如 blog.jaxiu.cn），请确保在搜索引擎平台中使用自定义域名而不是 GitHub Pages 的默认域名（username.github.io）进行验证和提交。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>NPS项目近期重要更新解析</title>
-      <link>https://blog.jaxiu.cn/blog/2025-07/nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E8%A6%81%E6%9B%B4%E6%96%B0%E8%A7%A3%E6%9E%90/</link>
-      <pubDate>Wed, 30 Jul 2025 10:00:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-07/nps%E9%A1%B9%E7%9B%AE%E8%BF%91%E6%9C%9F%E9%87%8D%E8%A6%81%E6%9B%B4%E6%96%B0%E8%A7%A3%E6%9E%90/</guid>
-      <description>&lt;h2 id=&#34;nps项目近期重要更新解析&#34;&gt;NPS项目近期重要更新解析&lt;/h2&gt;&#xA;&lt;p&gt;NPS（Network Penetration Suite）是一个轻量级、高性能、功能强大的内网穿透代理服务器，支持TCP、UDP、HTTP、HTTPS等协议。近期该项目进行了多次重要更新，本文将为您详细解析这些更新内容。&lt;/p&gt;&#xA;&lt;h2 id=&#34;最新版本概览&#34;&gt;最新版本概览&lt;/h2&gt;&#xA;&lt;p&gt;在过去的一个月中，NPS项目发布了多个版本，从v0.26.37到最新的v0.26.63，主要集中在稳定性提升、错误修复和用户体验改进等方面。&lt;/p&gt;&#xA;&lt;h3 id=&#34;核心版本更新&#34;&gt;核心版本更新&lt;/h3&gt;&#xA;&lt;h4 id=&#34;v02663---关键错误修复&#34;&gt;v0.26.63 - 关键错误修复&lt;/h4&gt;&#xA;&lt;p&gt;最新发布的v0.26.63版本重点解决了客户端和服务端握手过程中出现的EOF错误问题。这个问题可能导致连接不稳定或连接失败，特别是在网络环境较差的情况下。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Qwen Code 实战应用与总结</title>
-      <link>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</link>
-      <pubDate>Wed, 23 Jul 2025 16:10:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-07/qwen-code-practical-applications-and-summary/</guid>
-      <description>&lt;h1 id=&#34;qwen-code-实战应用与总结&#34;&gt;Qwen Code 实战应用与总结&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;经过前面七篇文章的详细介绍，我们已经全面了解了 Qwen Code 项目的各个方面，从基本概念到核心实现细节。在本文中，我们将通过实际应用案例来展示 Qwen Code 的强大功能，并对整个系列进行总结。&lt;/p&gt;&#xA;&lt;h2 id=&#34;实战应用案例&#34;&gt;实战应用案例&lt;/h2&gt;&#xA;&lt;h3 id=&#34;案例一快速理解开源项目&#34;&gt;案例一：快速理解开源项目&lt;/h3&gt;&#xA;&lt;p&gt;假设我们需要快速理解一个复杂的开源项目，比如 Redux。我们可以使用 Qwen Code 来帮助我们：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 启动 Qwen Code&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;qwen-code&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 然后输入以下指令：&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# &amp;#34;请帮我分析 Redux 项目的结构，特别是它的核心概念和实现原理&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Qwen Code 会执行以下操作：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;使用 &lt;code&gt;list_directory&lt;/code&gt; 工具查看项目结构&lt;/li&gt;&#xA;&lt;li&gt;使用 &lt;code&gt;read_file&lt;/code&gt; 工具读取关键文件（如 README.md、核心源文件）&lt;/li&gt;&#xA;&lt;li&gt;使用 &lt;code&gt;search_file_content&lt;/code&gt; 工具搜索特定概念的实现&lt;/li&gt;&#xA;&lt;li&gt;综合分析后给出详细的解释&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;案例二自动化代码审查&#34;&gt;案例二：自动化代码审查&lt;/h3&gt;&#xA;&lt;p&gt;我们可以使用 Qwen Code 来自动化代码审查流程：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>使用Qwen Code快速实现动态背景图功能</title>
-      <link>https://blog.jaxiu.cn/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/</link>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-07/%E4%BD%BF%E7%94%A8qwen-code%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF%E5%9B%BE%E5%8A%9F%E8%83%BD/</guid>
-      <description>&lt;p&gt;在现代网站设计中，动态背景图已成为提升用户体验的重要元素之一。本文将详细介绍如何使用Qwen Code智能助手快速实现一个功能丰富的动态背景图系统。&lt;/p&gt;&#xA;&lt;h2 id=&#34;需求分析&#34;&gt;需求分析&lt;/h2&gt;&#xA;&lt;p&gt;在开始编码之前，我们需要明确要实现的功能：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;背景图片自动轮换（使用外部图片服务）&lt;/li&gt;&#xA;&lt;li&gt;可配置的轮换间隔时间&lt;/li&gt;&#xA;&lt;li&gt;可调节的过渡动画时间&lt;/li&gt;&#xA;&lt;li&gt;手动切换上一张/下一张背景图&lt;/li&gt;&#xA;&lt;li&gt;控制面板，可展开/收起进行设置&lt;/li&gt;&#xA;&lt;li&gt;实时状态显示&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;使用qwen-code实现过程&#34;&gt;使用Qwen Code实现过程&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-项目分析&#34;&gt;1. 项目分析&lt;/h3&gt;&#xA;&lt;p&gt;首先，我们让Qwen Code分析项目结构，了解Hugo网站的组织方式：&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Git 学习与详细使用指南</title>
       <link>https://blog.jaxiu.cn/blog/2025-07/git-learning-and-usage-guide/</link>
@@ -70,20 +28,6 @@
       <pubDate>Sat, 19 Jul 2025 11:00:00 +0800</pubDate>
       <guid>https://blog.jaxiu.cn/blog/2025-07/flask-sqlite-hotel-system-tutorial/</guid>
       <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;对于许多编程初学者来说，理论知识和实际项目之间总有一道鸿沟。今天，我将带领大家跨越这道鸿沟，通过一个真实的项目——&lt;code&gt;hotel&lt;/code&gt; 轻量级酒店管理系统，来学习如何将技术应用到实践中。&lt;/p&gt;&#xA;&lt;p&gt;这个项目非常适合初学者，它功能完整、代码清晰，并且覆盖了 Web 开发的方方面面：从后端逻辑、数据库设计，到前端页面渲染和用户交互。最棒的是，它还支持 Docker 一键部署！&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;项目地址&lt;/strong&gt;: &lt;a href=&#34;git@github.com:axfinn/hotel.git&#34;&gt;git@github.com:axfinn/hotel.git&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我将从环境搭建开始，详细剖析前后端代码，让你不仅能看懂，更能学会如何构建一个属于自己的 Web 应用。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>从零到一：使用 Hugo 和 GitHub Pages 搭建个人博客</title>
-      <link>https://blog.jaxiu.cn/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E4%BD%BF%E7%94%A8-hugo-%E5%92%8C-github-pages-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Sat, 19 Jul 2025 00:00:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-07/%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%E4%BD%BF%E7%94%A8-hugo-%E5%92%8C-github-pages-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
-      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;&#xA;&lt;p&gt;拥有一个个人博客是分享知识、记录学习和展示作品的绝佳方式。本文将详细介绍如何使用强大的静态网站生成器 Hugo 和免费的 GitHub Pages 服务，从零开始搭建一个属于你自己的、功能完善且高度可定制的个人博客。&lt;/p&gt;&#xA;&lt;h2 id=&#34;为什么选择-hugo-和-github-pages&#34;&gt;为什么选择 Hugo 和 GitHub Pages？&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Hugo&lt;/strong&gt;: Go 语言编写的静态网站生成器，以其惊人的构建速度和灵活性而闻名。它拥有丰富的主题和强大的功能，让你可以专注于内容创作。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;: GitHub 提供的免费静态网站托管服务。它与 Git 无缝集成，非常适合托管个人博客、项目文档等。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;&#xA;&lt;p&gt;在开始之前，请确保你的电脑上已经安装了以下软件：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>大模型智能体构建：从理论到实践</title>
-      <link>https://blog.jaxiu.cn/blog/2025-07/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%99%BA%E8%83%BD%E4%BD%93%E6%9E%84%E5%BB%BA%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5/</link>
-      <pubDate>Fri, 18 Jul 2025 18:30:00 +0800</pubDate>
-      <guid>https://blog.jaxiu.cn/blog/2025-07/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%99%BA%E8%83%BD%E4%BD%93%E6%9E%84%E5%BB%BA%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5/</guid>
-      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;随着大型语言模型（LLM）的飞速发展，构建能够自主感知、决策和行动的智能体（Agent）成为了人工智能领域的热点。大模型智能体不仅能够理解复杂的指令，还能通过与环境的交互，完成一系列任务。本文将深入探讨大模型智能体的构建原理、核心组件以及实践中的挑战与机遇。&lt;/p&gt;&#xA;&lt;h2 id=&#34;大模型智能体的核心组件&#34;&gt;大模型智能体的核心组件&lt;/h2&gt;&#xA;&lt;p&gt;一个典型的大模型智能体通常包含以下几个核心组件：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;感知模块（Perception Module）&lt;/strong&gt;：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：负责从环境中获取信息，并将其转化为LLM可以理解的格式。这是智能体与外部世界交互的第一步。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;输入模态&lt;/strong&gt;：可以处理多种模态的数据，包括但不限于：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;文本&lt;/strong&gt;：网页内容、文档、聊天记录、数据库查询结果等。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;图像/视频&lt;/strong&gt;：通过图像识别、OCR（光学字符识别）、视频分析模型提取视觉信息。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;音频&lt;/strong&gt;：通过语音识别（ASR）将语音转化为文本。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;结构化数据&lt;/strong&gt;：如JSON、XML、CSV等，需要解析并转化为自然语言描述或LLM可理解的格式。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;关键技术&lt;/strong&gt;：数据预处理、特征提取、多模态信息融合、特定领域的解析器。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;规划模块（Planning Module）&lt;/strong&gt;：&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
